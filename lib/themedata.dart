@@ -7,6 +7,13 @@ TextStyle mTextStyle14() {
     color: Colors.white,
   );
 }
+TextStyle mTextStyle16() {
+  return TextStyle(
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    color: Colors.white,
+  );
+}
 
 TextStyle mTextStyle20() {
   return TextStyle(

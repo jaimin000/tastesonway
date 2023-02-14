@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './screens/dashboard.dart';
+import './screens/createtextmenu1.dart';
 
 void main() => runApp(new MyApp());
 
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new Dashboard(),
+      home: new CreateTextMenu1(),
     );
   }
 }
