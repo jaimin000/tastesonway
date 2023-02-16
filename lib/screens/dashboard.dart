@@ -14,9 +14,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(105, 111, 130, 1),
+      backgroundColor: backgroundColor(),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(105, 111, 130, 1),
+        backgroundColor: backgroundColor(),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -46,12 +46,14 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       body: Container(
-        margin: EdgeInsets.all(5),
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
+              SizedBox(
+                height: 15,
+              ),
               SizedBox(
                   height: 100,
                   child: ListView(
@@ -165,14 +167,15 @@ class _DashboardState extends State<Dashboard> {
               TextField(
                 cursorColor: Colors.grey,
                 decoration: InputDecoration(
-                    fillColor: Color.fromRGBO(37, 40, 48, 1),
+                    fillColor: inputColor(),
                     filled: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none),
                     hintText: 'Find Your Dishes',
                     hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                    suffixIcon: Image.asset('./assets/images/Filter.png')),
+                    suffixIcon:
+                        Image.asset('./assets/images/dashboard/Filter.png')),
               ),
               SizedBox(
                 height: 25,
@@ -188,7 +191,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 5,
                       ),
                       Image.asset(
-                        './assets/images/Arrow - Right.png',
+                        './assets/images/dashboard/Arrow - Right.png',
                         height: 20,
                       ),
                     ],
@@ -215,10 +218,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png'),
                               Text(
                                 'Orders',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -235,10 +238,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png'),
                               Text(
                                 'Orders',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -255,10 +258,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png'),
                               Text(
                                 'Orders',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -275,10 +278,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png'),
                               Text(
                                 'Orders',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -300,7 +303,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 5,
                       ),
                       Image.asset(
-                        './assets/images/Arrow - Right.png',
+                        './assets/images/dashboard/Arrow - Right.png',
                         height: 20,
                       ),
                     ],
@@ -326,7 +329,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Rectangle 39389.png'),
+                                './assets/images/dashboard/Rectangle 39389.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -352,7 +355,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Rectangle 39389.png'),
+                                './assets/images/dashboard/Rectangle 39389.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -390,10 +393,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('0', style: cTextStyle40()),
+                              Text('0', style: cTextStyle36()),
                               Text(
                                 'Your Menus',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -410,10 +413,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle40()),
+                              Text('2', style: cTextStyle36()),
                               Text(
                                 'Menu Items',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -430,10 +433,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle40()),
+                              Text('2', style: cTextStyle36()),
                               Text(
                                 'Menu Items',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -455,7 +458,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 5,
                       ),
                       Image.asset(
-                        './assets/images/Arrow - Right.png',
+                        './assets/images/dashboard/Arrow - Right.png',
                         height: 20,
                       ),
                     ],
@@ -481,7 +484,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Frame 48095724.png'),
+                                './assets/images/dashboard/Frame 48095724.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -507,7 +510,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Frame 48095724.png'),
+                                './assets/images/dashboard/Frame 48095724.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -545,10 +548,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('0', style: cTextStyle40()),
+                              Text('0', style: cTextStyle36()),
                               Text(
                                 'Today',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -565,10 +568,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle40()),
+                              Text('2', style: cTextStyle36()),
                               Text(
                                 'Yesterday',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -585,10 +588,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle40()),
+                              Text('2', style: cTextStyle36()),
                               Text(
                                 'Yesterday',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -610,7 +613,7 @@ class _DashboardState extends State<Dashboard> {
                         width: 5,
                       ),
                       Image.asset(
-                        './assets/images/Arrow - Right.png',
+                        './assets/images/dashboard/Arrow - Right.png',
                         height: 20,
                       ),
                     ],
@@ -636,7 +639,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Rectangle 39389-1.png'),
+                                './assets/images/dashboard/Rectangle 39389-1.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -665,7 +668,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                                './assets/images/Rectangle 39389-1.png'),
+                                './assets/images/dashboard/Rectangle 39389-1.png'),
                             fit: BoxFit.fill,
                             alignment: Alignment.topCenter,
                           ),
@@ -703,10 +706,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹100', style: cTextStyle40()),
+                              Text('₹100', style: cTextStyle36()),
                               Text(
                                 'This Week',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                               )
                             ],
                           )),
@@ -723,10 +726,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹200', style: cTextStyle40()),
+                              Text('₹200', style: cTextStyle36()),
                               Text(
                                 'This Month',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                                 overflow: TextOverflow.ellipsis,
                               )
                             ],
@@ -744,10 +747,10 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹200', style: cTextStyle40()),
+                              Text('₹200', style: cTextStyle36()),
                               Text(
                                 'Last Month',
-                                style: cTextStyle16(),
+                                style: cTextStyle18(),
                                 overflow: TextOverflow.ellipsis,
                               )
                             ],
@@ -760,59 +763,6 @@ class _DashboardState extends State<Dashboard> {
                 height: 25,
               ),
             ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(50, 54, 64, 1),
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
-            )
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-            child: GNav(
-              rippleColor: Colors.grey[300]!,
-
-              gap: 8,
-              activeColor: Color.fromRGBO(255, 114, 105, 1),
-              iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Color.fromRGBO(105, 111, 130, 1),
-              color: Color.fromRGBO(142, 148, 164, 1),
-              tabs: [
-                GButton(
-                  icon: Icons.home,
-                  // text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.favorite,
-                  // text: 'Likes',
-                ),
-                GButton(
-                  icon: Icons.search,
-                  // text: 'Search',
-                ),
-                GButton(
-                  icon: Icons.person,
-                  // text: 'Profile',
-                ),
-              ],
-              // selectedIndex: _selectedIndex,
-              // onTabChange: (index) {
-              //   setState(() {
-              //     _selectedIndex = index;
-              //   });
-              // },
-            ),
           ),
         ),
       ),
