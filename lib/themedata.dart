@@ -52,6 +52,15 @@ TextStyle cTextStyle18() {
   );
 }
 
+TextStyle cTextStyle16() {
+  return TextStyle(
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(142, 148, 164, 1),
+  );
+}
+
 TextStyle cTextStyle12() {
   return TextStyle(
     fontSize: 12,

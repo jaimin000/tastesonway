@@ -555,9 +555,10 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
         backgroundColor: backgroundColor(),
         leading: IconButton(
           onPressed: () {
-            setState(() {
-              step != 0 ? step-- : null;
-            });
+            Navigator.pop(context);
+            // setState(() {
+            //   step != 0 ? step-- : null;
+            // });
           },
           icon: Icon(Icons.arrow_back_ios_new),
         ),

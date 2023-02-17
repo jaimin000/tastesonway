@@ -50,8 +50,8 @@ class Profile extends StatelessWidget {
                     ),
                     Positioned(
                       child: Container(
-                        width: 1037.91,
-                        height: MediaQuery.of(context).size.height,
+                        width: 1003.91,
+                        height: 1037.91,
                         decoration: BoxDecoration(
                           color: Color.fromRGBO(39, 42, 50, 1),
                           shape: BoxShape.circle,
@@ -136,8 +136,9 @@ class Profile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 400,
+            height: 1150,
             child: GridView.count(
+              physics: NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(20),
               crossAxisCount: 2,
               mainAxisSpacing: 10,
@@ -160,7 +161,93 @@ class Profile extends StatelessWidget {
                           Text(
                             'Create Discount Coupon',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
+                          )
+                        ],
+                      )),
+                ),
+                Card(
+                  shadowColor: Colors.black,
+                  color: Color.fromRGBO(53, 56, 66, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: SizedBox(
+                      width: 140,
+                      height: 90,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset('./assets/images/profile/Website.png'),
+                          Text(
+                            'My Website',
+                            textAlign: TextAlign.center,
+                            style: cTextStyle16(),
+                          )
+                        ],
+                      )),
+                ),
+                Card(
+                  shadowColor: Colors.black,
+                  color: Color.fromRGBO(53, 56, 66, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: SizedBox(
+                      width: 140,
+                      height: 90,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset('./assets/images/profile/Fssai.png'),
+                          Text(
+                            'Fssai Registration',
+                            textAlign: TextAlign.center,
+                            style: cTextStyle16(),
+                          )
+                        ],
+                      )),
+                ),
+                Card(
+                  shadowColor: Colors.black,
+                  color: Color.fromRGBO(53, 56, 66, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: SizedBox(
+                      width: 140,
+                      height: 90,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                              './assets/images/profile/Bank Details.png'),
+                          Text(
+                            'Bank Details',
+                            textAlign: TextAlign.center,
+                            style: cTextStyle16(),
+                          )
+                        ],
+                      )),
+                ),
+                Card(
+                  shadowColor: Colors.black,
+                  color: Color.fromRGBO(53, 56, 66, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: SizedBox(
+                      width: 140,
+                      height: 90,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                              './assets/images/profile/Your Orders.png'),
+                          Text(
+                            'Your Orders',
+                            textAlign: TextAlign.center,
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -181,7 +268,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'Menu Items',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -203,7 +290,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'My Menu Design',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -225,7 +312,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'Video Tutorials',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -247,7 +334,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'Share Tastes On Way',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -268,7 +355,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'Contact Us',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -289,7 +376,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'FAQ',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
@@ -310,7 +397,7 @@ class Profile extends StatelessWidget {
                           Text(
                             'Settings',
                             textAlign: TextAlign.center,
-                            style: cTextStyle18(),
+                            style: cTextStyle16(),
                           )
                         ],
                       )),
