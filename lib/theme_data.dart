@@ -70,9 +70,43 @@ TextStyle cTextStyle12() {
   );
 }
 
-TextStyle cardTextStyle18() {
+TextStyle cTextStyle14() {
+  return TextStyle(
+    fontSize: 14,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(142, 148, 164, 1),
+  );
+}
+
+TextStyle cardTextStyle20() {
   return TextStyle(
     fontSize: 20,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(255, 114, 105, 1),
+  );
+}
+
+TextStyle cardTextStyle18() {
+  return TextStyle(
+    fontSize: 18,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(255, 114, 105, 1),
+  );
+}
+TextStyle cardTextStyle16() {
+  return TextStyle(
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(255, 114, 105, 1),
+  );
+}
+TextStyle cardTextStyle12() {
+  return TextStyle(
+    fontSize: 12,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(255, 114, 105, 1),
@@ -86,7 +120,12 @@ TextStyle cardTitleStyle20() {
     color: Color.fromRGBO(53, 56, 66, 1),
   );
 }
-
+TextStyle cardTitleStyle14() {
+  return TextStyle(
+    fontSize: 14,
+    color: Color.fromRGBO(53, 56, 66, 1),
+  );
+}
 TextStyle inputTextStyle16() {
   return TextStyle(
     fontFamily: 'Poppins',

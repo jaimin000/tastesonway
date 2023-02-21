@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/addnewitem.dart';
-import 'package:tastesonway/screens/createimagemenu.dart';
-import 'package:tastesonway/screens/createtextmenu.dart';
-import 'package:tastesonway/screens/yourmenus.dart';
+import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
+import 'package:tastesonway/screens/menu/add_new_item.dart';
+import 'package:tastesonway/screens/menu/create_image_menu.dart';
+import 'package:tastesonway/screens/menu/create_text_menu.dart';
+import 'package:tastesonway/screens/menu/your_menus.dart';
+import 'package:tastesonway/screens/profile.dart';
 import 'dart:core';
-import '../themedata.dart';
+import '../theme_data.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Dashboard extends StatefulWidget {
@@ -43,9 +45,18 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             ),
-            CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Profile()),
+                );
+              },
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
+              ),
             ),
           ],
         ),
@@ -63,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
+                      padding: const EdgeInsets.only(left: 10.0),
                       child: Column(
                         children: [
                           CircleAvatar(
@@ -171,7 +182,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
                 style: TextStyle(color: Colors.white), //<-- SEE HERE
                 cursorColor: Colors.grey,
@@ -191,7 +202,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -217,7 +228,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 100,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -309,7 +320,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -344,7 +355,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 130,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -377,7 +388,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("Create New\n Text Menu",
-                                  style: cardTextStyle18()),
+                                  style: cardTextStyle20()),
                             ),
                           ),
                         ), //
@@ -412,7 +423,7 @@ class _DashboardState extends State<Dashboard> {
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("Create New\n Image Menu",
-                                  style: cardTextStyle18()),
+                                  style: cardTextStyle20()),
                             ),
                           ),
                         ), //
@@ -428,7 +439,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 100,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -500,7 +511,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -526,7 +537,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 130,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -551,7 +562,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Text("View Your\n Orders",
-                                style: cardTextStyle18()),
+                                style: cardTextStyle20()),
                           ),
                         ),
                       ), //
@@ -577,7 +588,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Align(
                             alignment: Alignment.centerRight,
                             child: Text("View Your\n Orders",
-                                style: cardTextStyle18()),
+                                style: cardTextStyle20()),
                           ),
                         ),
                       ), //
@@ -592,7 +603,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 100,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -669,17 +680,26 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Earning Summary", style: mTextStyle20()),
-                  Row(
-                    children: [
-                      Text("All", style: mTextStyle14()),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Image.asset(
-                        './assets/images/dashboard/Arrow - Right.png',
-                        height: 20,
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const EarningSummary()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Text("All", style: mTextStyle14()),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Image.asset(
+                          './assets/images/dashboard/Arrow - Right.png',
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -687,69 +707,78 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 25,
             ),
-            SizedBox(
-              height: 130,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Card(
-                      color: Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const EarningSummary()),
+                );
+              },
+              child: SizedBox(
+                height: 130,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Card(
+                        color: Color.fromRGBO(53, 56, 66, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Container(
+                          width: 330,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  './assets/images/dashboard/Rectangle 39389-1.png'),
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topCenter,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("View Earning\n Summary",
+                                  style: cardTextStyle20()),
+                            ),
+                          ),
+                        ), //
                       ),
-                      child: Container(
-                        width: 330,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                './assets/images/dashboard/Rectangle 39389-1.png'),
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topCenter,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("View Earning\n Summary",
-                                style: cardTextStyle18()),
-                          ),
-                        ),
-                      ), //
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Card(
-                      color: Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+                      SizedBox(
+                        width: 5,
                       ),
-                      child: Container(
-                        width: 330,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                './assets/images/dashboard/Rectangle 39389-1.png'),
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topCenter,
-                          ),
+                      Card(
+                        color: Color.fromRGBO(53, 56, 66, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("View Earning\n Summary",
-                                style: cardTextStyle18()),
+                        child: Container(
+                          width: 330,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  './assets/images/dashboard/Rectangle 39389-1.png'),
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topCenter,
+                            ),
                           ),
-                        ),
-                      ), //
-                    ),
-                  ],
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("View Earning\n Summary",
+                                  style: cardTextStyle20()),
+                            ),
+                          ),
+                        ), //
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -759,7 +788,7 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 100,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../themedata.dart';
+import '../../theme_data.dart';
 
-class AddNewItem extends StatefulWidget {
-  const AddNewItem({Key? key}) : super(key: key);
+class EditItem extends StatefulWidget {
+  const EditItem({Key? key}) : super(key: key);
 
   @override
-  State<AddNewItem> createState() => _AddNewItemState();
+  State<EditItem> createState() => _EditItemState();
 }
 
-class _AddNewItemState extends State<AddNewItem> {
+class _EditItemState extends State<EditItem> {
   bool _switchValue = false;
   int step = 1;
 
@@ -30,9 +30,15 @@ class _AddNewItemState extends State<AddNewItem> {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         title: Text(
-          'Add New Item',
+          'Edit Item',
           style: cardTitleStyle20(),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.delete),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -70,7 +76,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: 100,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -99,7 +105,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: 100,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -128,7 +134,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: 100,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -154,7 +160,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: SizedBox(
-                height: 630,
+                height: 640,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   margin: EdgeInsets.all(8),
@@ -182,6 +188,8 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -202,6 +210,8 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -222,6 +232,8 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             suffixIcon: Icon(
@@ -285,6 +297,8 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 90,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+
                           minLines: 3,
                           maxLines: 5,
                           cursorColor: Colors.white,
@@ -318,6 +332,9 @@ class _AddNewItemState extends State<AddNewItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
+                              style:
+                                  TextStyle(color: Colors.white), //<-- SEE HERE
+
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -335,6 +352,9 @@ class _AddNewItemState extends State<AddNewItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.3,
                             child: TextField(
+                              style:
+                                  TextStyle(color: Colors.white), //<-- SEE HERE
+
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -356,11 +376,11 @@ class _AddNewItemState extends State<AddNewItem> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromRGBO(37, 40, 48, 1),
                               ),
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "+",
-                                textAlign: TextAlign.center,
-                                style: inputTextStyle16(),
+                              child: Center(
+                                child: Text(
+                                  "+",
+                                  style: inputTextStyle16(),
+                                ),
                               ),
                             ),
                           ),

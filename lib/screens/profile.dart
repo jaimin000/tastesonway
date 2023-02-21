@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/themedata.dart';
+import 'package:tastesonway/screens/discount/create_discount_coupon.dart';
+import 'package:tastesonway/screens/discount/discount.dart';
+import 'package:tastesonway/screens/menu/your_menus.dart';
+import 'package:tastesonway/theme_data.dart';
+
+import 'bank/banking_details.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -12,7 +17,9 @@ class Profile extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         actions: [
@@ -77,13 +84,17 @@ class Profile extends StatelessWidget {
           SizedBox(
             height: 35,
           ),
-          Text(
-            'Shania Fraser (ENG)',
-            textAlign: TextAlign.center,
-            style: mTextStyle20(),
+          Container(
+            color: Color.fromRGBO(39, 42, 50, 1),
+            child: Text(
+              'Shania Fraser (ENG)',
+              textAlign: TextAlign.center,
+              style: mTextStyle20(),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          Container(
+            color: Color.fromRGBO(39, 42, 50, 1),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
               textAlign: TextAlign.center,
@@ -92,6 +103,7 @@ class Profile extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(10),
+            color: Color.fromRGBO(39, 42, 50, 1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -135,8 +147,9 @@ class Profile extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            height: 1150,
+          Container(
+            //height: 1150,
+            color: Color.fromRGBO(39, 42, 50, 1),
             child: GridView.count(
               physics: NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(20),
@@ -145,26 +158,34 @@ class Profile extends StatelessWidget {
               crossAxisSpacing: 10,
               shrinkWrap: true,
               children: [
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CreateDiscountCoupon()));
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('./assets/images/profile/Coupon.png'),
+                            Text(
+                              'Create Discount Coupon',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('./assets/images/profile/Coupon.png'),
-                          Text(
-                            'Create Discount Coupon',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
                 Card(
                   shadowColor: Colors.black,
@@ -208,27 +229,36 @@ class Profile extends StatelessWidget {
                         ],
                       )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BankingDetails()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                                './assets/images/profile/Bank Details.png'),
+                            Text(
+                              'Bank Details',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                              './assets/images/profile/Bank Details.png'),
-                          Text(
-                            'Bank Details',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
                 Card(
                   shadowColor: Colors.black,
@@ -252,26 +282,35 @@ class Profile extends StatelessWidget {
                         ],
                       )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const YourMenus()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('./assets/images/profile/Menu Items.png'),
+                            Text(
+                              'Menu Items',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('./assets/images/profile/Menu Items.png'),
-                          Text(
-                            'Menu Items',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
                 Card(
                   shadowColor: Colors.black,
