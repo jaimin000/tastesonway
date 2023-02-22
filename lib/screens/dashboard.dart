@@ -5,6 +5,7 @@ import 'package:tastesonway/screens/menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/create_image_menu.dart';
 import 'package:tastesonway/screens/menu/create_text_menu.dart';
 import 'package:tastesonway/screens/menu/your_menus.dart';
+import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile.dart';
 import 'dart:core';
 import '../theme_data.dart';
@@ -202,7 +203,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -320,7 +321,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -510,25 +511,34 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(
               height: 25,
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Your Orders", style: mTextStyle20()),
-                  Row(
-                    children: [
-                      Text("All", style: mTextStyle14()),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Image.asset(
-                        './assets/images/dashboard/Arrow - Right.png',
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                ],
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReceivedOrders()),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Your Orders", style: mTextStyle20()),
+                    Row(
+                      children: [
+                        Text("All", style: mTextStyle14()),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Image.asset(
+                          './assets/images/dashboard/Arrow - Right.png',
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -675,7 +685,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

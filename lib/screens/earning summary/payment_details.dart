@@ -30,7 +30,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     shadowColor: Colors.black,
                     color: Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Container(
                       height: 70,
@@ -40,6 +40,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Order Received',style: mTextStyle16(),),
                               Text('1 Order',style: cTextStyle16(),),
@@ -47,6 +48,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
                             children: [
                               Text('Order Amount',style: mTextStyle16(),),
                               Text('₹ 50',style: cTextStyle16(),),
@@ -76,6 +79,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                               child: Text(
                             '5th Dec 2022',
                             style: TextStyle(
+                              fontSize: 12,
                                 fontFamily: 'Poppins', color: orangeColor()),
                             textAlign: TextAlign.center,
                           )),
@@ -85,7 +89,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -95,7 +99,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       shadowColor: Colors.black,
                       color: Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
@@ -105,6 +109,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Received',style: mTextStyle16(),),
                                 Text('1 Order',style: cTextStyle16(),),
@@ -112,6 +118,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Amount',style: mTextStyle16(),),
                                 Text('₹ 50',style: cTextStyle16(),),
@@ -133,7 +141,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
-                              style: TextStyle(
+                              style: TextStyle(fontSize: 12,
                                   fontFamily: 'Poppins', color: orangeColor()),
                               textAlign: TextAlign.center,
                             )),
@@ -142,7 +150,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -152,7 +160,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       shadowColor: Colors.black,
                       color: Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
@@ -162,6 +170,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Received',style: mTextStyle16(),),
                                 Text('1 Order',style: cTextStyle16(),),
@@ -169,6 +179,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Amount',style: mTextStyle16(),),
                                 Text('₹ 50',style: cTextStyle16(),),
@@ -190,7 +202,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
-                              style: TextStyle(
+                              style: TextStyle(fontSize: 12,
                                   fontFamily: 'Poppins', color: orangeColor()),
                               textAlign: TextAlign.center,
                             )),
@@ -221,7 +233,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       shadowColor: Colors.black,
                       color: Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
@@ -231,6 +243,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Received',style: mTextStyle16(),),
                                 Text('1 Order',style: cTextStyle16(),),
@@ -238,6 +252,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Amount',style: mTextStyle16(),),
                                 Text('₹ 50',style: cTextStyle16(),),
@@ -259,7 +275,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
-                              style: TextStyle(
+                              style: TextStyle(fontSize: 12,
                                   fontFamily: 'Poppins', color: orangeColor()),
                               textAlign: TextAlign.center,
                             )),
@@ -268,7 +284,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -278,7 +294,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       shadowColor: Colors.black,
                       color: Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
@@ -288,6 +304,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Received',style: mTextStyle16(),),
                                 Text('1 Order',style: cTextStyle16(),),
@@ -295,6 +313,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Amount',style: mTextStyle16(),),
                                 Text('₹ 50',style: cTextStyle16(),),
@@ -316,7 +336,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
-                              style: TextStyle(
+                              style: TextStyle(fontSize: 12,
                                   fontFamily: 'Poppins', color: orangeColor()),
                               textAlign: TextAlign.center,
                             )),
@@ -325,7 +345,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Stack(
                 overflow: Overflow.visible,
                 children: [
@@ -335,7 +355,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       shadowColor: Colors.black,
                       color: Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
@@ -345,6 +365,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Received',style: mTextStyle16(),),
                                 Text('1 Order',style: cTextStyle16(),),
@@ -352,6 +374,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
                               children: [
                                 Text('Order Amount',style: mTextStyle16(),),
                                 Text('₹ 50',style: cTextStyle16(),),
@@ -373,7 +397,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
-                              style: TextStyle(
+                              style: TextStyle(fontSize: 12,
                                   fontFamily: 'Poppins', color: orangeColor()),
                               textAlign: TextAlign.center,
                             )),

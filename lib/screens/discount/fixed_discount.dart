@@ -52,9 +52,12 @@ class FixedDiscount extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        'Basic Details',
-                        style: mTextStyle18(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        child: Text(
+                          'Basic Details',
+                          style: mTextStyle18(),
+                        ),
                       ),
 
                       SizedBox(
@@ -64,6 +67,7 @@ class FixedDiscount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -84,6 +88,7 @@ class FixedDiscount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             suffixIcon: Icon(Icons.arrow_drop_down,color: orangeColor(),),
@@ -105,6 +110,7 @@ class FixedDiscount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -126,6 +132,7 @@ class FixedDiscount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -145,6 +152,7 @@ class FixedDiscount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -162,21 +170,25 @@ class FixedDiscount extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        'Set Start & End Date',
-                        style: mTextStyle18(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        child: Text(
+                          'Set Start & End Date',
+                          style: mTextStyle18(),
+                        ),
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 10,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -194,6 +206,7 @@ class FixedDiscount extends StatelessWidget {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),

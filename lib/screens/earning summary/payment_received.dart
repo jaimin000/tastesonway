@@ -47,9 +47,12 @@ class PaymentReceived extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        'Basic Details',
-                        style: mTextStyle18(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          'Basic Details',
+                          style: mTextStyle18(),
+                        ),
                       ),
                       SizedBox(height: 20),
                       SizedBox(
@@ -64,7 +67,7 @@ class PaymentReceived extends StatelessWidget {
                             height: 30,
                             margin: EdgeInsets.all(10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
                                   child: Text(

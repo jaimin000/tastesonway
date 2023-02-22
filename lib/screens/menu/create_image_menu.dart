@@ -424,10 +424,10 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
             padding: const EdgeInsets.symmetric(horizontal:10.0),
             child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width,
+              // width: MediaQuery.of(context).size.width,
               child: Container(
                 color: backgroundColor(),
-                child: Image.asset('./assets/images/imagemenu/frame.png'),
+                child: Image.asset('./assets/images/imagemenu/frame.png',),
               ),
             ),
           ),
@@ -435,22 +435,25 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+            padding: const EdgeInsets.only(left: 15.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Themes", style: mTextStyle20()),
-                Row(
-                  children: [
-                    Text("All", style: mTextStyle14()),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      './assets/images/Arrow - Right.png',
-                      height: 20,
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(right:10.0),
+                  child: Row(
+                    children: [
+                      Text("All", style: mTextStyle14()),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset(
+                        './assets/images/Arrow - Right.png',
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -638,7 +641,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
             height: 25,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Text(
               "Create Image Menu",
               style: mTextStyle20(),

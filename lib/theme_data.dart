@@ -12,6 +12,7 @@ TextStyle mTextStyle16() {
   return TextStyle(
     fontSize: 16,
     fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
     color: Colors.white,
   );
 }
@@ -124,6 +125,14 @@ TextStyle cardTitleStyle14() {
   return TextStyle(
     fontSize: 14,
     color: Color.fromRGBO(53, 56, 66, 1),
+  );
+}
+TextStyle inputTextStyle18() {
+  return TextStyle(
+    fontFamily: 'Poppins',
+    color: Color.fromRGBO(100, 107, 125, 1),
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
   );
 }
 TextStyle inputTextStyle16() {

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:tastesonway/screens/contactus.dart';
 import 'package:tastesonway/screens/discount/create_discount_coupon.dart';
-import 'package:tastesonway/screens/discount/discount.dart';
-import 'package:tastesonway/screens/menu/your_menus.dart';
+import 'package:tastesonway/screens/faq.dart';
+import 'package:tastesonway/screens/menu/menu_items.dart';
+import 'package:tastesonway/screens/menu/my_menu_design.dart';
+import 'package:tastesonway/screens/orders/received_orders.dart';
+import 'package:tastesonway/screens/setting.dart';
 import 'package:tastesonway/theme_data.dart';
+import 'tutorials.dart';
 
 import 'bank/banking_details.dart';
 
@@ -18,7 +23,7 @@ class Profile extends StatelessWidget {
         backgroundColor: backgroundColor(),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.popUntil(context,(route)=>route.isFirst);
           },
           icon: Icon(Icons.arrow_back_ios_new),
         ),
@@ -260,34 +265,43 @@ class Profile extends StatelessWidget {
                         )),
                   ),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReceivedOrders()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                                './assets/images/profile/Your Orders.png'),
+                            Text(
+                              'Your Orders',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                              './assets/images/profile/Your Orders.png'),
-                          Text(
-                            'Your Orders',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
                 GestureDetector(
                   onTap: (){
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const YourMenus()),
+                          builder: (context) => const MenuItems()),
                     );
                   },
                   child: Card(
@@ -312,49 +326,67 @@ class Profile extends StatelessWidget {
                         )),
                   ),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MenuDesign()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                                './assets/images/profile/My Menu Design.png'),
+                            Text(
+                              'My Menu Design',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                              './assets/images/profile/My Menu Design.png'),
-                          Text(
-                            'My Menu Design',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Tutorials()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                                './assets/images/profile/VideoTutorials.png'),
+                            Text(
+                              'Video Tutorials',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset(
-                              './assets/images/profile/VideoTutorials.png'),
-                          Text(
-                            'Video Tutorials',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
                 Card(
                   shadowColor: Colors.black,
@@ -378,68 +410,95 @@ class Profile extends StatelessWidget {
                         ],
                       )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ContactUs()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('./assets/images/profile/Contact Us.png'),
+                            Text(
+                              'Contact Us',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('./assets/images/profile/Contact Us.png'),
-                          Text(
-                            'Contact Us',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FAQ()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('./assets/images/profile/FAQ.png'),
+                            Text(
+                              'FAQ',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('./assets/images/profile/FAQ.png'),
-                          Text(
-                            'FAQ',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Setting()),
+                    );
+                  },
+                  child: Card(
+                    shadowColor: Colors.black,
+                    color: Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 140,
+                        height: 90,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('./assets/images/profile/Settings.png'),
+                            Text(
+                              'Settings',
+                              textAlign: TextAlign.center,
+                              style: cTextStyle16(),
+                            )
+                          ],
+                        )),
                   ),
-                  child: SizedBox(
-                      width: 140,
-                      height: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('./assets/images/profile/Settings.png'),
-                          Text(
-                            'Settings',
-                            textAlign: TextAlign.center,
-                            style: cTextStyle16(),
-                          )
-                        ],
-                      )),
                 ),
               ],
             ),

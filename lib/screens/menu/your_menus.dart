@@ -212,7 +212,7 @@ class _YourMenusState extends State<YourMenus> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -422,7 +422,7 @@ class _YourMenusState extends State<YourMenus> {
         backgroundColor: backgroundColor(),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.popUntil(context,(route)=>route.isFirst);
             // setState(() {
             //   step != 0 ? step-- : null;
             // });

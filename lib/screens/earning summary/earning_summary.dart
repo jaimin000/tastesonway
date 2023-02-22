@@ -31,11 +31,14 @@ class _EarningSummaryState extends State<EarningSummary> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  'Total Earning This Week',
-                  style: mTextStyle18(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    'Total Earning This Week',
+                    style: mTextStyle18(),
+                  ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -85,7 +88,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                           width:100,
                           child: Card(
                             color: Color.fromRGBO(105, 111, 130, 1),
-                            child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                           ),
                         ),
                       ),
@@ -94,7 +97,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -136,7 +139,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -144,7 +147,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -187,7 +190,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -195,7 +198,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -245,7 +248,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
 
               ],
             ),
@@ -269,11 +272,73 @@ class _EarningSummaryState extends State<EarningSummary> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  'Total Earning This Month',
-                  style: mTextStyle18(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    'Total Earning This Month',
+                    style: mTextStyle18(),
+                  ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
+                Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: Color.fromRGBO(37, 40, 48, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          height: 70,
+                          margin: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment:MainAxisAlignment.spaceAround,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  'Includes both Received and Pending Payment',
+                                  style: cTextStyle16(),
+                                  overflow: TextOverflow.clip,
+                                ),
+                              ),
+                              Text(
+                                '₹ 200',
+                                style: cardTextStyle18(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom:-10,
+                      right:110,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PaymentDetails()),
+                          );
+                        },
+                        child: SizedBox(
+                          height:30,
+                          width:100,
+                          child: Card(
+                            color: Color.fromRGBO(105, 111, 130, 1),
+                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+
+                ),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -315,7 +380,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -323,57 +388,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
-                Stack(
-                  overflow: Overflow.visible,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom:-10,
-                      right:110,
-                      child: SizedBox(
-                        height:30,
-                        width:100,
-                        child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
-                        ),
-                      ),
-                    ),
-
-                  ],
-
-                ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -416,7 +431,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -424,7 +439,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -474,7 +489,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
 
               ],
             ),
@@ -498,11 +513,73 @@ class _EarningSummaryState extends State<EarningSummary> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  'Total Earning Total',
-                  style: mTextStyle18(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    'Total Earning Total',
+                    style: mTextStyle18(),
+                  ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
+                Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: Color.fromRGBO(37, 40, 48, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          height: 70,
+                          margin: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment:MainAxisAlignment.spaceAround,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  'Includes both Received and Pending Payment',
+                                  style: cTextStyle16(),
+                                  overflow: TextOverflow.clip,
+                                ),
+                              ),
+                              Text(
+                                '₹ 200',
+                                style: cardTextStyle18(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom:-10,
+                      right:110,
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PaymentDetails()),
+                          );
+                        },
+                        child: SizedBox(
+                          height:30,
+                          width:100,
+                          child: Card(
+                            color: Color.fromRGBO(105, 111, 130, 1),
+                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+
+                ),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -544,7 +621,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -552,57 +629,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
-                Stack(
-                  overflow: Overflow.visible,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom:-10,
-                      right:110,
-                      child: SizedBox(
-                        height:30,
-                        width:100,
-                        child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
-                        ),
-                      ),
-                    ),
-
-                  ],
-
-                ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -645,7 +672,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
                         ),
                       ),
                     ),
@@ -653,7 +680,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -703,7 +730,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 25),
 
               ],
             ),
@@ -719,7 +746,7 @@ class _EarningSummaryState extends State<EarningSummary> {
         backgroundColor: backgroundColor(),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.popUntil(context,(route)=>route.isFirst);
             // setState(() {
             //   step != 0 ? step-- : null;
             // });

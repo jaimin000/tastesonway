@@ -35,12 +35,18 @@ class ChoosePromo extends StatelessWidget {
             SizedBox(
               height: 25,
             ),
-            Text(
-              "Outlet Promos",
-              style: mTextStyle20(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                "Outlet Promos",
+                style: mTextStyle20(),
+              ),
             ),
             SizedBox(height: 5,),
-            Text("These Promos will run all on items in your outlet",style: cardTitleStyle14(),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text("These Promos will run all on items in your outlet",style: cardTitleStyle14(),),
+            ),
             SizedBox(height:25),
             GestureDetector(
               onTap: (){

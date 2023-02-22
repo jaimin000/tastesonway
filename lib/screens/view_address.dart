@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/theme_data.dart';
 
-class Discount extends StatelessWidget {
-  const Discount({Key? key}) : super(key: key);
+class ViewAddress extends StatelessWidget {
+  const ViewAddress({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,15 @@ class Discount extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_new),
         ),
         title: Text(
-          'Discount',
+          'View Address',
           style: cardTitleStyle20(),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.edit),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -53,7 +59,7 @@ class Discount extends StatelessWidget {
                         height: 15,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
                           'Basic Details',
                           style: mTextStyle18(),
@@ -67,7 +73,6 @@ class Discount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -76,7 +81,7 @@ class Discount extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Name',
+                            hintText: 'Your Location',
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -88,17 +93,15 @@ class Discount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.arrow_drop_down,color: orangeColor(),),
                             contentPadding: EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Value',
+                            hintText: 'Kitchen Owner Name',
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -110,7 +113,6 @@ class Discount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -120,7 +122,7 @@ class Discount extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Valid Per User',
+                            hintText: 'Address',
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -132,7 +134,6 @@ class Discount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -142,7 +143,7 @@ class Discount extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Total No User',
+                            hintText: 'Landmark',
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -152,7 +153,6 @@ class Discount extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
@@ -162,68 +162,12 @@ class Discount extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Minimum Order Value',
+                            hintText: 'Pin Code',
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                        child: Text(
-                          'Set Start & End Date',
-                          style: mTextStyle18(),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '24th Nov 2022',
-                                hintStyle: inputTextStyle16(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '30th Nov 2022',
-                                hintStyle: inputTextStyle16(),
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10,),
                       SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
@@ -240,6 +184,83 @@ class Discount extends StatelessWidget {
                                   style: mTextStyle14(),
                                 ),
                               ))),
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Text(
+                          'Address Type',
+                          style: mTextStyle18(),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Card(
+                            shadowColor: Colors.black,
+                            color: orangeColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: SizedBox(
+                              width: 80,
+                              height: 35,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Home',
+                                    style: mTextStyle16(),
+                                  )),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Card(
+                            shadowColor: Colors.black,
+                            color: Color.fromRGBO(53, 56, 66, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: SizedBox(
+                              width: 80,
+                              height: 35,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Office',
+                                    style: mTextStyle16(),
+                                  )),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Card(
+                            shadowColor: Colors.black,
+                            color: Color.fromRGBO(53, 56, 66, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            child: SizedBox(
+                              width: 80,
+                              height: 35,
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Other',
+                                    style: mTextStyle16(),
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 10,
                       ),

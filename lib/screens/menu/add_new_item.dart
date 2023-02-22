@@ -182,6 +182,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -202,6 +203,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -222,6 +224,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             suffixIcon: Icon(
@@ -285,6 +288,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         height: 90,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white),
                           minLines: 3,
                           maxLines: 5,
                           cursorColor: Colors.white,
@@ -318,6 +322,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -335,6 +340,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.3,
                             child: TextField(
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
