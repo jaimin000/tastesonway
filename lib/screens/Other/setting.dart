@@ -38,7 +38,7 @@ class _SettingState extends State<Setting> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 50,
+              height: 60,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(

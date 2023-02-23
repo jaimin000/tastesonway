@@ -64,6 +64,7 @@ class UPIDetails extends StatelessWidget {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
+                          style: TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),

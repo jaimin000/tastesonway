@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/theme_data.dart';
+import 'dart:async';
 
-class Discount extends StatelessWidget {
+
+class Discount extends StatefulWidget {
   const Discount({Key? key}) : super(key: key);
+
+  @override
+  State<Discount> createState() => _DiscountState();
+}
+
+class _DiscountState extends State<Discount> {
+  DateTime selectedDate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +53,6 @@ class Discount extends StatelessWidget {
             SizedBox(
               height: 25,
             ),
-
             Card(
               shadowColor: Colors.black,
               color: cardColor(),
@@ -87,19 +107,23 @@ class Discount extends StatelessWidget {
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white),
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.arrow_drop_down,color: orangeColor(),),
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Value',
-                            hintStyle: inputTextStyle16(),
+                        child:
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(37, 40, 48, 1),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Enter Coupon Value',
+                                  textAlign: TextAlign.left,
+                                  style: inputTextStyle16(),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -184,42 +208,53 @@ class Discount extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '24th Nov 2022',
-                                hintStyle: inputTextStyle16(),
+                          GestureDetector(
+                            onTap: (){
+                              _selectDate(context);
+                            },
+                            child: SizedBox(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(37, 40, 48, 1),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '25th Nov 2022',
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
+                                ),
+                                ),
                               ),
-                            ),
                           ),
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '30th Nov 2022',
-                                hintStyle: inputTextStyle16(),
+                          GestureDetector(
+                            onTap: (){
+                              _selectDate(context);
+                            },
+                            child: SizedBox(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(37, 40, 48, 1),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '30th Nov 2022',
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
+                                ),
+                                ),
                               ),
-                            ),
                           ),
+
 
                         ],
                       ),

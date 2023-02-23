@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tastesonway/screens/menu/add_new_item.dart';
+import 'package:tastesonway/screens/menu/edit_item.dart';
 import '../../theme_data.dart';
 
 class CreateImageMenu extends StatefulWidget {
@@ -108,22 +110,29 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                          shadowColor: Colors.black,
-                          color: orangeColor(),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Proceed',
-                              style: mTextStyle14(),
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        step = 1;
+                      });
+                    },
+                    child: SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: Card(
+                            shadowColor: Colors.black,
+                            color: orangeColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                          ))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Proceed',
+                                style: mTextStyle14(),
+                              ),
+                            ))),
+                  ),
                   SizedBox(height: 10),
                 ],
               ),
@@ -157,21 +166,30 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                         'Dishes in the menu',
                         style: mTextStyle18(),
                       ),
-                      Card(
-                        shadowColor: Colors.black,
-                        color: orangeColor(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          height: 35,
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Add New',
-                                style: mTextStyle14(),
-                              )),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddNewItem()),
+                          );
+                        },
+                        child: Card(
+                          shadowColor: Colors.black,
+                          color: orangeColor(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: SizedBox(
+                            width: 100,
+                            height: 35,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Add New',
+                                  style: mTextStyle14(),
+                                )),
+                          ),
                         ),
                       ),
                     ],
@@ -393,21 +411,28 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  SizedBox(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: orangeColor(),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Proceed',
-                            style: mTextStyle14(),
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        step = 2;
+                      });
+                    },
+                    child: SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: orangeColor(),
                           ),
-                        ),
-                      )),
+                          child: Center(
+                            child: Text(
+                              'Proceed',
+                              style: mTextStyle14(),
+                            ),
+                          ),
+                        )),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -653,7 +678,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
@@ -682,9 +707,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -711,9 +734,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -740,9 +761,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+
               ],
             ),
           ),

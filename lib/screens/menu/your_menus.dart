@@ -325,9 +325,9 @@ class _YourMenusState extends State<YourMenus> {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.53,
-            width: MediaQuery.of(context).size.width,
+            //width: MediaQuery.of(context).size.width,
             child: GridView.count(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(15),
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               children: [
@@ -462,7 +462,7 @@ class _YourMenusState extends State<YourMenus> {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.3,
+                        width: MediaQuery.of(context).size.width / 2.2,
                         height: 45,
                         child: Align(
                             alignment: Alignment.center,
@@ -488,7 +488,7 @@ class _YourMenusState extends State<YourMenus> {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.3,
+                        width: MediaQuery.of(context).size.width / 2.2,
                         height: 45,
                         child: Align(
                             alignment: Alignment.center,

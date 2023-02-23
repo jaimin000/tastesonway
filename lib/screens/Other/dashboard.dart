@@ -4,9 +4,11 @@ import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/create_image_menu.dart';
 import 'package:tastesonway/screens/menu/create_text_menu.dart';
+import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/your_menus.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/Other/profile.dart';
+import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
 import '../../theme_data.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -233,25 +235,63 @@ class _DashboardState extends State<Dashboard> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const YourOrders()),
+                        );
+                      },
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: Color.fromRGBO(53, 56, 66, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: SizedBox(
+                            width: 150,
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset('./assets/images/dashboard/food.png'),
+                                Text(
+                                  'Orders',
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
                       ),
-                      child: SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Image.asset('./assets/images/dashboard/food.png'),
-                              Text(
-                                'Orders',
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const YourMenus()),
+                        );
+                      },
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: Color.fromRGBO(53, 56, 66, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: SizedBox(
+                            width: 150,
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset('./assets/images/dashboard/menu.png'),
+                                Text(
+                                  'Menus',
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -267,27 +307,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Image.asset('./assets/images/dashboard/food.png'),
                               Text(
-                                'Orders',
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Image.asset('./assets/images/dashboard/food.png'),
-                              Text(
-                                'Orders',
+                                'Others',
                                 style: cTextStyle18(),
                               )
                             ],
@@ -525,17 +545,26 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Your Orders", style: mTextStyle20()),
-                    Row(
-                      children: [
-                        Text("All", style: mTextStyle14()),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Image.asset(
-                          './assets/images/dashboard/Arrow - Right.png',
-                          height: 20,
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const YourOrders()),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          Text("All", style: mTextStyle14()),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Image.asset(
+                            './assets/images/dashboard/Arrow - Right.png',
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -556,52 +585,70 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: Container(
-                        width: 300,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                './assets/images/dashboard/Frame 48095724.png'),
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topCenter,
+                      child: GestureDetector(onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const YourOrders()),
+                        );
+                      },
+
+                        child: Container(
+                          width: 300,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  './assets/images/dashboard/Frame 48095724.png'),
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topCenter,
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("View Your\n Orders",
-                                style: cardTextStyle20()),
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("View Your\n Orders",
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //
                     ),
-                    Card(
-                      color: Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ReceivedOrders()),
+                        );
+                      },
+                      child: Card(
+                        color: Color.fromRGBO(53, 56, 66, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Container(
+                          width: 300,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  './assets/images/dashboard/Frame 48095724.png'),
+                              fit: BoxFit.fill,
+                              alignment: Alignment.topCenter,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Text("View Received\n Orders",
+                                  style: cardTextStyle20()),
+                            ),
+                          ),
+                        ), //
                       ),
-                      child: Container(
-                        width: 300,
-                        height: 130,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                './assets/images/dashboard/Frame 48095724.png'),
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topCenter,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Text("View Your\n Orders",
-                                style: cardTextStyle20()),
-                          ),
-                        ),
-                      ), //
                     ),
                   ],
                 ),
