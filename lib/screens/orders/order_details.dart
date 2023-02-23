@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/profile.dart';
+import 'package:tastesonway/screens/Other/profile.dart';
 import '../../theme_data.dart';
 
 class OrderDetails extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/setting.dart';
+import 'package:tastesonway/screens/Other/setting.dart';
 import 'package:tastesonway/theme_data.dart';
-import './screens/dashboard.dart';
+import 'screens/Other/dashboard.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
-import 'screens/profile.dart';
+import 'screens/Other/profile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

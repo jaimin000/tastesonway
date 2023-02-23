@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/contactus.dart';
+import 'package:tastesonway/screens/Other/contactus.dart';
 import 'package:tastesonway/screens/discount/create_discount_coupon.dart';
-import 'package:tastesonway/screens/faq.dart';
+import 'package:tastesonway/screens/Other/faq.dart';
 import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
-import 'package:tastesonway/screens/setting.dart';
+import 'package:tastesonway/screens/Other/setting.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'tutorials.dart';
 
-import 'bank/banking_details.dart';
+import '../bank/banking_details.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);

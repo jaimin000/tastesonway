@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/view_address.dart';
+import 'package:tastesonway/screens/Other/review_history.dart';
+import 'package:tastesonway/screens/Other/view_address.dart';
+import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'package:tastesonway/theme_data.dart';
 
 class Setting extends StatefulWidget {
@@ -104,21 +106,30 @@ class _SettingState extends State<Setting> {
             SizedBox(
               height: 15,
             ),
-            SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all( 15.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Your Orders',
-                      style: inputTextStyle16(),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const YourOrders()),
+                );
+              },
+              child: SizedBox(
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(37, 40, 48, 1),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all( 15.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Your Orders',
+                        style: inputTextStyle16(),
+                      ),
                     ),
                   ),
                 ),
@@ -127,21 +138,30 @@ class _SettingState extends State<Setting> {
             SizedBox(
               height: 15,
             ),
-            SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all( 15.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Review History',
-                      style: inputTextStyle16(),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ReviewHistory()),
+                );
+              },
+              child: SizedBox(
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(37, 40, 48, 1),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all( 15.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Review History',
+                        style: inputTextStyle16(),
+                      ),
                     ),
                   ),
                 ),

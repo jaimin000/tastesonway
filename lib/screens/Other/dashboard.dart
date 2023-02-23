@@ -6,9 +6,9 @@ import 'package:tastesonway/screens/menu/create_image_menu.dart';
 import 'package:tastesonway/screens/menu/create_text_menu.dart';
 import 'package:tastesonway/screens/menu/your_menus.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
-import 'package:tastesonway/screens/profile.dart';
+import 'package:tastesonway/screens/Other/profile.dart';
 import 'dart:core';
-import '../theme_data.dart';
+import '../../theme_data.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Dashboard extends StatefulWidget {
