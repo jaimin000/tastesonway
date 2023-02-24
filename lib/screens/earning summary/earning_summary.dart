@@ -25,8 +25,8 @@ class _EarningSummaryState extends State<EarningSummary> {
 
           width: MediaQuery.of(context).size.width,
           child: Container(
-            margin: EdgeInsets.all(8),
-            padding: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -38,7 +38,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     style: mTextStyle18(),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Stack(
                   overflow: Overflow.visible,
                   children: [
@@ -46,7 +46,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),

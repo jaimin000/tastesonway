@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 TextStyle mTextStyle14() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 14,
     fontFamily: 'Poppins',
     color: Colors.white,
@@ -9,7 +9,7 @@ TextStyle mTextStyle14() {
 }
 
 TextStyle mTextStyle16() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 16,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -18,7 +18,7 @@ TextStyle mTextStyle16() {
 }
 
 TextStyle mTextStyle18() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 18,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -27,7 +27,7 @@ TextStyle mTextStyle18() {
 }
 
 TextStyle mTextStyle20() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 20,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -36,7 +36,7 @@ TextStyle mTextStyle20() {
 }
 
 TextStyle cTextStyle36() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 36,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -45,7 +45,7 @@ TextStyle cTextStyle36() {
 }
 
 TextStyle cTextStyle18() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 18,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -54,7 +54,7 @@ TextStyle cTextStyle18() {
 }
 
 TextStyle cTextStyle16() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 16,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ TextStyle cTextStyle16() {
 }
 
 TextStyle cTextStyle12() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 12,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ TextStyle cTextStyle12() {
 }
 
 TextStyle cTextStyle14() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 14,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ TextStyle cTextStyle14() {
 }
 
 TextStyle cardTextStyle20() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 20,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ TextStyle cardTextStyle20() {
 }
 
 TextStyle cardTextStyle18() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 18,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ TextStyle cardTextStyle18() {
   );
 }
 TextStyle cardTextStyle16() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 16,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ TextStyle cardTextStyle16() {
   );
 }
 TextStyle cardTextStyle12() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 12,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
@@ -115,20 +115,20 @@ TextStyle cardTextStyle12() {
 }
 
 TextStyle cardTitleStyle20() {
-  return TextStyle(
+  return const TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 20,
     color: Color.fromRGBO(53, 56, 66, 1),
   );
 }
 TextStyle cardTitleStyle14() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 14,
     color: Color.fromRGBO(53, 56, 66, 1),
   );
 }
 TextStyle inputTextStyle18() {
-  return TextStyle(
+  return const TextStyle(
     fontFamily: 'Poppins',
     color: Color.fromRGBO(100, 107, 125, 1),
     fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ TextStyle inputTextStyle18() {
   );
 }
 TextStyle inputTextStyle16() {
-  return TextStyle(
+  return const TextStyle(
     fontFamily: 'Poppins',
     color: Color.fromRGBO(100, 107, 125, 1),
     fontSize: 16,
@@ -144,21 +144,21 @@ TextStyle inputTextStyle16() {
 }
 
 Color backgroundColor() {
-  return Color.fromRGBO(105, 111, 130, 1);
+  return const Color.fromRGBO(105, 111, 130, 1);
 }
 
 Color orangeColor() {
-  return Color.fromRGBO(255, 114, 105, 1);
+  return const Color.fromRGBO(255, 114, 105, 1);
 }
 
 Color cardColor() {
-  return Color.fromRGBO(64, 68, 81, 1);
+  return const Color.fromRGBO(64, 68, 81, 1);
 }
 
 Color inputColor() {
-  return Color.fromRGBO(37, 40, 48, 1);
+  return const Color.fromRGBO(37, 40, 48, 1);
 }
 
 Color fontColor() {
-  return Color.fromRGBO(142, 148, 164, 1);
+  return const Color.fromRGBO(142, 148, 164, 1);
 }

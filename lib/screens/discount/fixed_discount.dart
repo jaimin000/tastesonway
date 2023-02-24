@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/theme_data.dart';
 
-class FixedDiscount extends StatelessWidget {
+class FixedDiscount extends StatefulWidget {
   const FixedDiscount({Key? key}) : super(key: key);
 
+  @override
+  State<FixedDiscount> createState() => _FixedDiscountState();
+}
+
+class _FixedDiscountState extends State<FixedDiscount> {
+  String dropdownvalue = 'Item 1';
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,19 +100,40 @@ class FixedDiscount extends StatelessWidget {
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white),
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(Icons.arrow_drop_down,color: orangeColor(),),
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Value',
-                            hintStyle: inputTextStyle16(),
+                        child:
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(37, 40, 48, 1),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Enter Coupon Value',
+                                  textAlign: TextAlign.left,
+                                  style: inputTextStyle16(),
+                                ),
+                                DropdownButton(
+                                  underline: SizedBox(),
+                                  value: dropdownvalue,
+                                  icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(255, 114, 105, 1),),
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items,style: inputTextStyle16(),),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -24,6 +24,14 @@ class _DiscountState extends State<Discount> {
       });
     }
   }
+  String dropdownvalue = 'Item 1';
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +124,29 @@ class _DiscountState extends State<Discount> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Enter Coupon Value',
                                   textAlign: TextAlign.left,
                                   style: inputTextStyle16(),
+                                ),
+                                DropdownButton(
+
+                                  underline: SizedBox(),
+                                  value: dropdownvalue,
+                                  icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(255, 114, 105, 1),),
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items,style: inputTextStyle16(),),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                  },
                                 ),
                               ],
                             ),

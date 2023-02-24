@@ -1,4 +1,4 @@
-package com.example.tastesonway
+package com.example.tasteonway
 
 import io.flutter.embedding.android.FlutterActivity
 
