@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/menu/add_new_item.dart';
 import '../../theme_data.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CreateTextMenu extends StatefulWidget {
   const CreateTextMenu({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class CreateTextMenu extends StatefulWidget {
 }
 
 class _CreateTextMenuState extends State<CreateTextMenu> {
-  bool _checkValue = true;
+  bool _check1 = false;
+  bool _check2 = false;
+  bool _checkAll = false;
   bool _switchValue = true;
   int step = 0;
 
@@ -199,10 +202,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                 ),
                 SizedBox(
                   height: 50,
-                  width: MediaQuery.of(context).size.width,
                   child: TextField(
                     style: TextStyle(color: Colors.white), //<-- SEE HERE
-
                     cursorColor: Colors.white,
                     decoration: InputDecoration(
                       suffixIcon: Icon(
@@ -223,186 +224,189 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                 SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: inputColor(),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Checkbox(
-                                value: _checkValue,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    _checkValue = value ?? false;
-                                  });
-                                  Colors.black;
-                                },
-                                focusColor: orangeColor(),
-                                fillColor:
-                                    MaterialStateProperty.all(orangeColor()),
-                                side: BorderSide(
-                                  color: orangeColor(),
-                                ),
+                Card(
+                  shadowColor: Colors.black,
+                  color: inputColor(),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(5),
+                        padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Checkbox(
+                              value: _checkAll,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _checkAll = value ?? false;
+                                  _check1 = value ?? false;
+                                  _check2 = value ?? false;
+                                });
+                                Colors.black;
+                              },
+                              focusColor: orangeColor(),
+                              fillColor:
+                                  MaterialStateProperty.all(orangeColor()),
+                              side: BorderSide(
+                                color: orangeColor(),
                               ),
-                              Text(
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width*0.5,
+                              child: Text(
                                 'Select All',
                                 style: inputTextStyle16(),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Divider(
-                            color: Colors.white,
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Divider(
+                          color: Colors.white,
                         ),
-                        SizedBox(
-                          height: 70,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Checkbox(
-                                value: _checkValue,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    _checkValue = value ?? false;
-                                  });
-                                  checkColor:
-                                  Colors.black;
-                                },
-                                focusColor: orangeColor(),
-                                fillColor:
-                                    MaterialStateProperty.all(orangeColor()),
-                                side: BorderSide(
-                                  color: orangeColor(),
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: _check1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _check1 = value ?? false;
+                                });
+                                checkColor:
+                                Colors.black;
+                              },
+                              focusColor: orangeColor(),
+                              fillColor:
+                                  MaterialStateProperty.all(orangeColor()),
+                              side: BorderSide(
+                                color: orangeColor(),
+                              ),
+                            ),
+                            Text(
+                              'Masala Tea \n ₹ 50',
+                              style: inputTextStyle16(),
+                            ),
+                            Stack(
+                              overflow: Overflow.visible,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset(
+                                    './assets/images/tea.jpg',
+                                    height: 60,
+                                    width: 65,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Masala Tea \n ₹ 50',
-                                style: inputTextStyle16(),
-                              ),
-                              Stack(
-                                overflow: Overflow.visible,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image.asset(
-                                      './assets/images/tea.jpg',
-                                      height: 60,
-                                      width: 65,
-                                      fit: BoxFit.fill,
+                                Positioned(
+                                  top: 45,
+                                  right: 10,
+                                  child: Card(
+                                    shadowColor: Colors.black,
+                                    color: orangeColor(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5.0),
+                                    ),
+                                    child: SizedBox(
+                                      width: 40,
+                                      height: 20,
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Edit',
+                                            style: mTextStyle14(),
+                                          )),
                                     ),
                                   ),
-                                  Positioned(
-                                    top: 45,
-                                    right: 10,
-                                    child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: 40,
-                                        height: 20,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Edit',
-                                              style: mTextStyle14(),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 70,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Checkbox(
-                                value: _checkValue,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    _checkValue = value ?? false;
-                                  });
-                                  checkColor:
-                                  Colors.black;
-                                },
-                                focusColor: orangeColor(),
-                                fillColor:
-                                    MaterialStateProperty.all(orangeColor()),
-                                side: BorderSide(
-                                  color: orangeColor(),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Checkbox(
+                              value: _check2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  _check2 = value ?? false;
+                                });
+                                checkColor:
+                                Colors.black;
+                              },
+                              focusColor: orangeColor(),
+                              fillColor:
+                                  MaterialStateProperty.all(orangeColor()),
+                              side: BorderSide(
+                                color: orangeColor(),
                               ),
-                              Text(
-                                'Special Tea \n ₹ 80',
-                                style: inputTextStyle16(),
-                              ),
-                              Stack(
-                                overflow: Overflow.visible,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image.asset(
-                                      './assets/images/tea.jpg',
-                                      height: 60,
-                                      width: 65,
-                                      fit: BoxFit.fill,
+                            ),
+                            Text(
+                              'Special Tea \n ₹ 80',
+                              style: inputTextStyle16(),
+                            ),
+                            Stack(
+                              overflow: Overflow.visible,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset(
+                                    './assets/images/tea.jpg',
+                                    height: 60,
+                                    width: 65,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 45,
+                                  right: 10,
+                                  child: Card(
+                                    shadowColor: Colors.black,
+                                    color: orangeColor(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5.0),
+                                    ),
+                                    child: SizedBox(
+                                      width: 40,
+                                      height: 20,
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Edit',
+                                            style: mTextStyle14(),
+                                          )),
                                     ),
                                   ),
-                                  Positioned(
-                                    top: 45,
-                                    right: 10,
-                                    child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: 40,
-                                        height: 20,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Edit',
-                                              style: mTextStyle14(),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 10),
@@ -574,36 +578,41 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
           SizedBox(
             height: 10,
           ),
-          SizedBox(
-            height: 60,
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              shadowColor: Colors.black,
-              color: orangeColor(),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      './assets/images/whatsapp.png',
-                      width: 24,
-                      height: 24,
-                      color: Colors.white,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 15,
+          GestureDetector(
+            onTap: () async {
+              await Share.share("This is my Menu");
+            },
+            child: SizedBox(
+              height: 60,
+              width: MediaQuery.of(context).size.width,
+              child: Card(
+                shadowColor: Colors.black,
+                color: orangeColor(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        './assets/images/whatsapp.png',
+                        width: 24,
+                        height: 24,
+                        color: Colors.white,
                       ),
-                      child: Text(
-                        'Whatsapp',
-                        style: mTextStyle14(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
+                        child: Text(
+                          'Whatsapp',
+                          style: mTextStyle14(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -617,15 +626,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-            // setState(() {
-            //   step != 0 ? step-- : null;
-            // });
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
+
         title: Text(
           'Create New Text Menu',
           style: cardTitleStyle20(),

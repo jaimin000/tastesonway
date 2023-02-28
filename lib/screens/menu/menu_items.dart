@@ -542,12 +542,7 @@ class _MenuItemsState extends State<MenuItems> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
+
         title: Text(
           'List of Items',
           style: cardTitleStyle20(),

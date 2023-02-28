@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/Other/setting.dart';
+import 'package:tastesonway/screens/login%20-%20signup/login.dart';
+import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/theme_data.dart';
-import 'screens/Other/dashboard.dart';
+import 'screens/dashboard/dashboard.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
-import 'screens/Other/profile.dart';
+import 'screens/profile/profile.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +25,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Taste On Way",
-        theme:ThemeData.dark(),
-        home: const Home(),
+        theme:ThemeData(
+          brightness: Brightness.dark,
+          accentColor: orangeColor(),
+          fontFamily: 'Poppins',
+        ),
+
+        home: Login(),
         );
   }
 }

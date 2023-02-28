@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 TextStyle mTextStyle14() {
   return const TextStyle(
     fontSize: 14,
-    fontFamily: 'Poppins',
     color: Colors.white,
   );
 }
@@ -11,7 +10,6 @@ TextStyle mTextStyle14() {
 TextStyle mTextStyle16() {
   return const TextStyle(
     fontSize: 16,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
@@ -20,7 +18,6 @@ TextStyle mTextStyle16() {
 TextStyle mTextStyle18() {
   return const TextStyle(
     fontSize: 18,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
@@ -29,7 +26,6 @@ TextStyle mTextStyle18() {
 TextStyle mTextStyle20() {
   return const TextStyle(
     fontSize: 20,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
@@ -38,7 +34,6 @@ TextStyle mTextStyle20() {
 TextStyle cTextStyle36() {
   return const TextStyle(
     fontSize: 36,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(142, 148, 164, 1),
   );
@@ -47,7 +42,6 @@ TextStyle cTextStyle36() {
 TextStyle cTextStyle18() {
   return const TextStyle(
     fontSize: 18,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(142, 148, 164, 1),
   );
@@ -56,7 +50,6 @@ TextStyle cTextStyle18() {
 TextStyle cTextStyle16() {
   return const TextStyle(
     fontSize: 16,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(142, 148, 164, 1),
   );
@@ -65,7 +58,6 @@ TextStyle cTextStyle16() {
 TextStyle cTextStyle12() {
   return const TextStyle(
     fontSize: 12,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(142, 148, 164, 1),
   );
@@ -74,7 +66,6 @@ TextStyle cTextStyle12() {
 TextStyle cTextStyle14() {
   return const TextStyle(
     fontSize: 14,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(142, 148, 164, 1),
   );
@@ -83,7 +74,6 @@ TextStyle cTextStyle14() {
 TextStyle cardTextStyle20() {
   return const TextStyle(
     fontSize: 20,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(255, 114, 105, 1),
   );
@@ -92,7 +82,6 @@ TextStyle cardTextStyle20() {
 TextStyle cardTextStyle18() {
   return const TextStyle(
     fontSize: 18,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(255, 114, 105, 1),
   );
@@ -100,7 +89,6 @@ TextStyle cardTextStyle18() {
 TextStyle cardTextStyle16() {
   return const TextStyle(
     fontSize: 16,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(255, 114, 105, 1),
   );
@@ -108,7 +96,6 @@ TextStyle cardTextStyle16() {
 TextStyle cardTextStyle12() {
   return const TextStyle(
     fontSize: 12,
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     color: Color.fromRGBO(255, 114, 105, 1),
   );
@@ -129,7 +116,6 @@ TextStyle cardTitleStyle14() {
 }
 TextStyle inputTextStyle18() {
   return const TextStyle(
-    fontFamily: 'Poppins',
     color: Color.fromRGBO(100, 107, 125, 1),
     fontWeight: FontWeight.bold,
     fontSize: 18,
@@ -137,7 +123,6 @@ TextStyle inputTextStyle18() {
 }
 TextStyle inputTextStyle16() {
   return const TextStyle(
-    fontFamily: 'Poppins',
     color: Color.fromRGBO(100, 107, 125, 1),
     fontSize: 16,
   );

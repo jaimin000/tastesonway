@@ -22,13 +22,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
 
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
         title: Text(
           'Delivery Promo',
           style: cardTitleStyle20(),

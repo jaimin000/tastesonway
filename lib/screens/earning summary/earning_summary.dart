@@ -744,15 +744,7 @@ class _EarningSummaryState extends State<EarningSummary> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.popUntil(context,(route)=>route.isFirst);
-            // setState(() {
-            //   step != 0 ? step-- : null;
-            // });
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
+
         title: Text(
           'Earning Summary',
           style: cardTitleStyle20(),

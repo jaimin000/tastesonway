@@ -20,15 +20,7 @@ class _AddNewItemState extends State<AddNewItem> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-            // setState(() {
-            //   step != 0 ? step-- : null;
-            // });
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
+
         title: Text(
           'Add New Item',
           style: cardTitleStyle20(),

@@ -819,12 +819,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
+
         title: Text(
           'Received Orders',
           style: cardTitleStyle20(),

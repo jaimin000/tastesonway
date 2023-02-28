@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/Other/profile.dart';
+import 'package:tastesonway/screens/profile/profile.dart';
 import '../../theme_data.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -753,12 +753,6 @@ class _OrderDetailsState extends State<OrderDetails> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
         title: Text(
           'Order Details',
           style: cardTitleStyle20(),

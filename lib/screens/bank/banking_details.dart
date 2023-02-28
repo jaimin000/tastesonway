@@ -13,13 +13,7 @@ class BankingDetails extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
 
-          },
-          icon: Icon(Icons.arrow_back_ios_new),
-        ),
         title: Text(
           'Bank Details',
           style: cardTitleStyle20(),
