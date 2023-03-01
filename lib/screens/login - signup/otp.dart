@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:tastesonway/main.dart';
 import 'package:tastesonway/theme_data.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
-class Signup extends StatefulWidget {
+class Otp extends StatefulWidget {
   @override
-  State<Signup> createState() => _SignupState();
+  State<Otp> createState() => _OtpState();
 }
 
-class _SignupState extends State<Signup> {
+class _OtpState extends State<Otp> {
   final _formKey = GlobalKey<FormState>();
-
+  late String otpCode;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _SignupState extends State<Signup> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Sign Up',
+          'Enter Otp',
           style: cardTitleStyle20(),
         ),
       ),
@@ -31,7 +32,7 @@ class _SignupState extends State<Signup> {
             SizedBox(
               height: 230,
               width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/images/mobile.png'),
+              child: Image.asset('assets/images/otp.png'),
             ),
             SizedBox(
               height: 40,
@@ -55,31 +56,33 @@ class _SignupState extends State<Signup> {
                         SizedBox(
                           height: 15,
                         ),
-                        IntlPhoneField(
-                          initialCountryCode: 'IN',
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Phone Number',
-                            hintStyle: inputTextStyle16(),
+                        PinCodeTextField(
+                          appContext: context,
+                          length: 6,
+                          obscureText: false,
+                          animationType: AnimationType.fade,
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.box,
+                            borderRadius: BorderRadius.circular(5),
+                            fieldHeight: 50,
+                            fieldWidth: 40,
+                            activeFillColor: Colors.white,
                           ),
-                          onChanged: (phone) {
-                            print(phone.completeNumber);
-                          },
-                          onCountryChanged: (country) {
-                            print('Country changed to: ' + country.name);
+                          onChanged: (value) {
+                            setState(() {
+                              otpCode = value;
+                            });
                           },
                         ),
                         SizedBox(
                           height: 15,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()),
+                            );
                           },
                           child: SizedBox(
                               height: 50,
@@ -97,39 +100,6 @@ class _SignupState extends State<Signup> {
                                       style: mTextStyle16(),
                                     ),
                                   ))),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                './assets/images/google.png',
-                                height: 28,
-                                width: 28,
-                              ),
-                              Image.asset(
-                                './assets/images/facebook.png',
-                                height: 30,
-                                width: 30,
-                              ),
-                              Image.asset(
-                                './assets/images/apple.png',
-                                height: 30,
-                                width: 30,
-                                color: Colors.white,
-                              ),
-                              Image.asset(
-                                './assets/images/email.png',
-                                height: 30,
-                                width: 30,
-                              ),
-                            ],
-                          ),
                         ),
                         SizedBox(
                           height: 20,

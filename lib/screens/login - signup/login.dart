@@ -140,7 +140,7 @@ class Login extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                               // The form is valid, perform the login operation here
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Signup()),
                               );

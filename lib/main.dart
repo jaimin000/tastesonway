@@ -8,8 +8,7 @@ import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

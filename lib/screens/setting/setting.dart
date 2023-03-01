@@ -167,11 +167,8 @@ class _SettingState extends State<Setting> {
             ),
             GestureDetector(
               onTap: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Login()),
-                );
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil( CupertinoPageRoute(builder: (context) => Login()), (route) => false);
+
               },
               child: SizedBox(
                 height: 60,

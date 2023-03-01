@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "823346082634",
+    "project_id": "tastesonway-51bec",
+    "storage_bucket": "tastesonway-51bec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823346082634:android:73fc3e2ec96a55967607b3",
+        "android_client_info": {
+          "package_name": "com.example.tasteonway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823346082634-4ve94ko8hhcj6adnuq1js2lur31ni2nf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhaIPpQoSUbSjq_4z0I0vovMTCVOOu-3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823346082634-4ve94ko8hhcj6adnuq1js2lur31ni2nf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "823346082634-m2asrbhn03n5jiq575odd3fltgkek68j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.testing.tastesonway"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
