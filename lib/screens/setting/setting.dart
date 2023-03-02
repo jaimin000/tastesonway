@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/login%20-%20signup/login.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'package:tastesonway/theme_data.dart';
+
+import '../signup/signup.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -166,11 +169,17 @@ class _SettingState extends State<Setting> {
               height: 15,
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Login()),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil( CupertinoPageRoute(builder: (context) => Signup()), (route) => false);
+                Fluttertoast.showToast(
+                  msg: "You are logged out successfully",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
                 );
               },
               child: SizedBox(
