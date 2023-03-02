@@ -250,8 +250,8 @@ class _SignupState extends State<Signup> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
+            backgroundColor: Colors.white,
+            textColor: orangeColor(),
             fontSize: 16.0,
           );
           Navigator.pushReplacement(
