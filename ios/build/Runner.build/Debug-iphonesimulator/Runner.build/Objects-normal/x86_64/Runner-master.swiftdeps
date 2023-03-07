@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "f192df854d5b1c2c579ffbaa33b04cee23d7afb47039edc945bf64149a80cedc"
-build_start_time: [1677744043, 183773994]
-build_end_time: [1677744048, 718688964]
+options: "281484223a5db01299878a21f248f8b18de67a4ce3e49125ce42e81d1421c972"
+build_start_time: [1678174734, 227398872]
+build_end_time: [1678174737, 47122001]
 inputs:
   "/Users/mac/Desktop/work/tastesonway/ios/Runner/AppDelegate.swift": [1676437310, 534562110]

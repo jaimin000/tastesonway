@@ -46,6 +46,8 @@ dependencies:
   firebase_auth: ^3.4.2
   firebase_core: ^1.24.0
   fluttertoast: ^8.2.1
+  internet_connection_checker: any
+  connectivity_plus: any
 
 
 dev_dependencies:

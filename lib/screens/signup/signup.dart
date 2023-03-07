@@ -1,12 +1,16 @@
+import 'dart:async';
 import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -24,6 +28,26 @@ class _SignupState extends State<Signup> {
   late String otpCode;
   late String phoneCode = "91";
   bool isLoading = false;
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+            (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +57,7 @@ class _SignupState extends State<Signup> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          otpVisibility? 'Enter OTP' : 'Sign Up',
+          otpVisibility? 'Enter OTP' : 'Quick Login / Register',
           style: cardTitleStyle20(),
         ),
       ),
@@ -42,9 +66,10 @@ class _SignupState extends State<Signup> {
           children: [
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
-                    height: 40,
+                    height: 50,
                   ),
                   SizedBox(
                     height: 230,
@@ -52,7 +77,7 @@ class _SignupState extends State<Signup> {
                     child: otpVisibility ? Image.asset('assets/images/otp.png') :Image.asset('assets/images/mobile.png'),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 50,
                   ),
                   Container(
                     padding: EdgeInsets.all(8.0),
@@ -75,6 +100,8 @@ class _SignupState extends State<Signup> {
                               ),
                               otpVisibility?
                               PinCodeTextField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 appContext: context,
                                 length: 6,
                                 obscureText: false,
@@ -91,6 +118,9 @@ class _SignupState extends State<Signup> {
                                   setState(() {
                                     otpCode = value;
                                   });
+                                  if(value.length == 6){
+                                    verifyOTP();
+                                  }
                                 },
                               ):IntlPhoneField(
                                 initialCountryCode: 'IN',
@@ -104,12 +134,12 @@ class _SignupState extends State<Signup> {
                                   hintText: 'Phone Number',
                                   hintStyle: inputTextStyle16(),
                                 ),
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 controller: phoneController,
                                 onCountryChanged: (country) {
                                   phoneCode = country.dialCode;
                                 },
                               ),
-
                               GestureDetector(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()){
@@ -121,7 +151,7 @@ class _SignupState extends State<Signup> {
                                   }
                                 },
                                 child: SizedBox(
-                                    height: 50,
+                                    height: 55,
                                     width: MediaQuery.of(context).size.width,
                                     child: Card(
                                         shadowColor: Colors.black,
@@ -132,48 +162,47 @@ class _SignupState extends State<Signup> {
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            otpVisibility ? "Verify" : "Login",
+                                            otpVisibility ? "Verify" : "Send OTP",
                                             style: mTextStyle16(),
                                           ),
                                         ))),
                               ),
-
                               SizedBox(
-                                height: 20,
+                                height: 15,
                               ),
-                              !otpVisibility ? SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      './assets/images/google.png',
-                                      height: 28,
-                                      width: 28,
-                                    ),
-                                    Image.asset(
-                                      './assets/images/facebook.png',
-                                      height: 30,
-                                      width: 30,
-                                    ),
-                                    Image.asset(
-                                      './assets/images/apple.png',
-                                      height: 30,
-                                      width: 30,
-                                      color: Colors.white,
-                                    ),
-                                    Image.asset(
-                                      './assets/images/email.png',
-                                      height: 30,
-                                      width: 30,
-                                    ),
-                                  ],
-                                ),
-                              ) : SizedBox(),
-                              SizedBox(
-                                height: 20,
-                              ),
+                              // !otpVisibility ? SizedBox(
+                              //   width: MediaQuery.of(context).size.width,
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              //     crossAxisAlignment: CrossAxisAlignment.center,
+                              //     children: [
+                              //       Image.asset(
+                              //         './assets/images/google.png',
+                              //         height: 28,
+                              //         width: 28,
+                              //       ),
+                              //       Image.asset(
+                              //         './assets/images/facebook.png',
+                              //         height: 30,
+                              //         width: 30,
+                              //       ),
+                              //       Image.asset(
+                              //         './assets/images/apple.png',
+                              //         height: 30,
+                              //         width: 30,
+                              //         color: Colors.white,
+                              //       ),
+                              //       Image.asset(
+                              //         './assets/images/email.png',
+                              //         height: 30,
+                              //         width: 30,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ) : SizedBox(),
+                              // SizedBox(
+                              //   height: 15,
+                              // ),
                             ],
                           ),
                         ),
@@ -278,4 +307,26 @@ class _SignupState extends State<Signup> {
 
     );
   }
+  showDialogBox() => showCupertinoDialog<String>(
+    context: context,
+    builder: (BuildContext context) => CupertinoAlertDialog(
+      title: const Text('No Connection'),
+      content: const Text('Please check your internet connectivity'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () async {
+            Navigator.pop(context, 'Cancel');
+            setState(() => isAlertSet = false);
+            isDeviceConnected =
+            await InternetConnectionChecker().hasConnection;
+            if (!isDeviceConnected && isAlertSet == false) {
+              showDialogBox();
+              setState(() => isAlertSet = true);
+            }
+          },
+          child: const Text('OK'),
+        ),
+      ],
+    ),
+  );
 }

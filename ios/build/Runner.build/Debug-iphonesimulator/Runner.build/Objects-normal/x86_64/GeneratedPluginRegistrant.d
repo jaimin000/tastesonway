@@ -19,6 +19,10 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/Flutter.framework/Headers/Flutter.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Headers/ConnectivityPlusPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Headers/connectivity_plus-Swift.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Headers/connectivity_plus-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTFirebaseAuthPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseCore/FirebaseCore.framework/Modules/module.modulemap \
