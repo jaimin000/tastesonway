@@ -1,6 +1,11 @@
+import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tastesonway/screens/no%20internet/nointernet.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/screens/signup/signup.dart';
 import 'package:tastesonway/theme_data.dart';
@@ -8,6 +13,8 @@ import 'screens/dashboard/dashboard.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +26,30 @@ void main() async{
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    getValidationData();
+    super.initState();
+  }
+
+  String? isUser;
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedUser = sharedPreferences.getString('user');
+     setState(() {
+      isUser = obtainedUser.toString();
+     });
+    print(isUser);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +61,46 @@ class MyApp extends StatelessWidget {
           accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
-
-        home: Signup(),
+        home: isUser == "null" ? Signup() : Home(),
         );
   }
 }
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
-
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
+    late StreamSubscription subscription;
+    bool isDeviceConnected = false;
+    bool isAlertSet = false;
+
+    @override
+    void initState() {
+      getConnectivity();
+      super.initState();
+    }
+
+    getConnectivity() =>
+        subscription = Connectivity().onConnectivityChanged.listen(
+              (ConnectivityResult result) async {
+            isDeviceConnected = await InternetConnectionChecker().hasConnection;
+            if (!isDeviceConnected && isAlertSet == false) {
+              showDialogBox();
+              NoInternetScreen();
+              setState(() => isAlertSet = true);
+            }
+          },
+        );
+    @override
+    void dispose() {
+      subscription.cancel();
+      super.dispose();
+    }
+    @override
+    Widget build(BuildContext context) {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           backgroundColor: const Color.fromRGBO(50, 54, 64, 1),
@@ -83,4 +136,26 @@ class _HomeState extends State<Home> {
           return Container();
         });
   }
+    showDialogBox() => showCupertinoDialog<String>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: const Text('No Connection'),
+        content: const Text('Please check your internet connectivity'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context, 'Cancel');
+              setState(() => isAlertSet = false);
+              isDeviceConnected =
+              await InternetConnectionChecker().hasConnection;
+              if (!isDeviceConnected && isAlertSet == false) {
+                showDialogBox();
+                setState(() => isAlertSet = true);
+              }
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
 }

@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -48,6 +50,12 @@ class _SignupState extends State<Signup> {
           }
         },
       );
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -257,6 +265,9 @@ class _SignupState extends State<Signup> {
     );
   }
   void verifyOTP() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString('user', phoneController.text);
+
     setState(() {
       isLoading = true;
     });

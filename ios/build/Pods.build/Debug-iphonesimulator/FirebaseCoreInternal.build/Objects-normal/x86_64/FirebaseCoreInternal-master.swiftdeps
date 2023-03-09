@@ -1,25 +1,25 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "383118e4b50eba802f56fe322815f2d4e9bc8d5dc7a4f461f83aba58edc124cb"
-build_start_time: [1678175410, 354635000]
-build_end_time: [1678175411, 673028945]
+build_start_time: [1678347430, 755048036]
+build_end_time: [1678347431, 952354907]
 inputs:
-  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift": [1678174115, 51051139]
+  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift": [1678347417, 418460845]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
-  : [1678174115, 51564693]
+  : [1678347417, 419155597]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
-  : [1678174115, 51841259]
+  : [1678347417, 419509410]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
-  : [1678174115, 51983356]
+  : [1678347417, 419687271]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
-  : [1678174115, 52248001]
+  : [1678347417, 419993877]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
-  : [1678174115, 51273107]
-  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift": [1678174115, 50863742]
+  : [1678347417, 418650627]
+  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift": [1678347417, 418220996]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
-  : [1678174115, 52377223]
+  : [1678347417, 420137166]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
-  : [1678174115, 52113056]
+  : [1678347417, 419846534]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
-  : [1678174115, 51401615]
+  : [1678347417, 418982028]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
-  : [1678174115, 51703929]
+  : [1678347417, 419339656]

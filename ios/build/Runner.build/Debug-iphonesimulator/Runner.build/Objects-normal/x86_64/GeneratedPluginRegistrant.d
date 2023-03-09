@@ -85,6 +85,9 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/FLTSharePlusPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/share_plus-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Headers/shared_preferences_foundation-Swift.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Headers/shared_preferences_foundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FLTURLLauncherPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/url_launcher_ios-umbrella.h \
