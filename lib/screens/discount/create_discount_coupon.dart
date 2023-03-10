@@ -132,7 +132,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         Text("You can use this ode on first order ",style: cTextStyle14(),),
                         Text("Valid from today till 26th Nov 2022",style: cTextStyle14(),),
                         SizedBox(height:10),
-                        SizedBox(height: 45,
+                        SizedBox(height: 35,
                             width:double.infinity,
                             child: Card(child: Center(
                               child: Text("In Review",
@@ -175,7 +175,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         Text("You can use this ode on first order ",style: cTextStyle14(),),
                         Text("Valid from today till 26th Nov 2022",style: cTextStyle14(),),
                         SizedBox(height:10),
-                        SizedBox(height: 45,
+                        SizedBox(height: 35,
                           width:double.infinity,
                           child: Card(child: Center(
                             child: Text("In Review",
@@ -218,7 +218,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         Text("You can use this ode on first order ",style: cTextStyle14(),),
                         Text("Valid from today till 26th Nov 2022",style: cTextStyle14(),),
                         SizedBox(height:10),
-                        SizedBox(height: 45,
+                        SizedBox(height: 35,
                           width:double.infinity,
                           child: Card(child: Center(
                             child: Text("In Review",

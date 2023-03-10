@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/create_image_menu.dart';
@@ -50,11 +51,10 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const Profile()),
+                  MaterialPageRoute(builder: (context) => const Profile()),
                 );
               },
               child: CircleAvatar(
@@ -73,115 +73,9 @@ class _DashboardState extends State<Dashboard> {
               height: 15,
             ),
             SizedBox(
-                height: 100,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 38,
-                            backgroundColor: Colors.orange,
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                              radius: 35,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text("Chef 1", style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 38,
-                          backgroundColor: Colors.orange,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                            radius: 35,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Chef 1", style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 38,
-                          backgroundColor: Colors.orange,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                            radius: 35,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Chef 1", style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 38,
-                          backgroundColor: Colors.orange,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                            radius: 35,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Chef 1", style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 38,
-                          backgroundColor: Colors.orange,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                            radius: 35,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Text("Chef 1", style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                  ],
-                )),
+              height: 100,
+              child: Stories(),
+            ),
             SizedBox(
               height: 25,
             ),
@@ -237,7 +131,7 @@ class _DashboardState extends State<Dashboard> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -256,7 +150,8 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset('./assets/images/dashboard/food.png'),
+                                Image.asset(
+                                    './assets/images/dashboard/food.png'),
                                 Text(
                                   'Orders',
                                   style: cTextStyle18(),
@@ -266,7 +161,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -285,7 +180,8 @@ class _DashboardState extends State<Dashboard> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset('./assets/images/dashboard/menu.png'),
+                                Image.asset(
+                                    './assets/images/dashboard/menu.png'),
                                 Text(
                                   'Menus',
                                   style: cTextStyle18(),
@@ -512,11 +408,10 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => ReceivedOrders()),
+                  MaterialPageRoute(builder: (context) => ReceivedOrders()),
                 );
               },
               child: Container(
@@ -526,7 +421,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Text("Your Orders", style: mTextStyle20()),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -565,14 +460,14 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: GestureDetector(onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const YourOrders()),
-                        );
-                      },
-
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const YourOrders()),
+                          );
+                        },
                         child: Container(
                           width: 300,
                           height: 130,
@@ -596,7 +491,7 @@ class _DashboardState extends State<Dashboard> {
                       ), //
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -718,7 +613,7 @@ class _DashboardState extends State<Dashboard> {
                 children: [
                   Text("Earning Summary", style: mTextStyle20()),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -745,7 +640,7 @@ class _DashboardState extends State<Dashboard> {
               height: 25,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(

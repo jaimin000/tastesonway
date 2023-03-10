@@ -585,9 +585,9 @@ class _MenuItemsState extends State<MenuItems> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                // SizedBox(
+                //   width: 5,
+                // ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -614,9 +614,9 @@ class _MenuItemsState extends State<MenuItems> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                // SizedBox(
+                //   width: 5,
+                // ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
@@ -643,9 +643,9 @@ class _MenuItemsState extends State<MenuItems> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
+                // SizedBox(
+                //   width: 5,
+                // ),
               ],
             ),
             SizedBox(

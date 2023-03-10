@@ -14,7 +14,6 @@ class ChoosePromo extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-
         title: Text(
           'Choose Promo',
           style: cardTitleStyle20(),

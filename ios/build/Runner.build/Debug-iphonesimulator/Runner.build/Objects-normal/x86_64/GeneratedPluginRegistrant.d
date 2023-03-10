@@ -82,15 +82,37 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Headers/FluttertoastPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Headers/fluttertoast-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTPHPickerSaveImageToPathOperation.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerPhotoAssetUtil.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerMetaDataUtil.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerImageUtil.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerPlugin_Test.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/image_picker_ios-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/FLTPathProviderPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/path_provider_ios-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/FLTSharePlusPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/share_plus-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Headers/shared_preferences_foundation-Swift.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Headers/shared_preferences_foundation-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqflitePlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteOperation.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/sqflite-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FLTURLLauncherPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/url_launcher_ios-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Headers/FLTVideoPlayerPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Headers/AVAssetTrackUtils.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Headers/video_player_avfoundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTWebViewFlutterPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTCookieManager_Test.h \
