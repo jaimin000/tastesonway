@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "dc3111aa913cbac9d49529fb760f8a0d487ee33fb8c71e6a3ee9fbbc0c16c9ef"
-build_start_time: [1678437713, 775014877]
-build_end_time: [1678437714, 576366901]
+build_start_time: [1678709177, 139724969]
+build_end_time: [1678709177, 584892034]
 inputs:
   "/Users/mac/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.9/ios/Classes/ConnectivityProvider.swift": [1678081625, 309279918]
   "/Users/mac/.pub-cache/hosted/pub.dartlang.org/connectivity_plus-2.3.9/ios/Classes/PathMonitorConnectivityProvider.swift": [1678081625, 305582284]

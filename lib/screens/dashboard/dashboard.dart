@@ -58,7 +58,8 @@ class _DashboardState extends State<Dashboard> {
                 );
               },
               child: CircleAvatar(
-                backgroundImage: NetworkImage(
+                backgroundImage:
+                NetworkImage(
                     'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
               ),
             ),
@@ -73,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
               height: 15,
             ),
             SizedBox(
-              height: 100,
+              height: 105,
               child: Stories(),
             ),
             SizedBox(

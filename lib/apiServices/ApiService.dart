@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 
-var token;
+var tokenvalue;
 
-void fetchData() async {
+Future<String> getToken() async {
   const url =
       "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
 
@@ -22,50 +20,6 @@ void fetchData() async {
     "country_code": "91"
   });
   final json = jsonDecode(tokenResponse.body);
-  print(json['data'][0]['token']);
-  token = json['data'][0]['token'];
+  tokenvalue = (json['data'][0]['token']).toString();
+  return tokenvalue;
 }
-
-//create story
-// late File _image;
-//
-// Future<void> _pickImage(ImageSource source) async {
-//
-//   final XFile? pickedFile = await ImagePicker().pickImage(source: source);
-//   // final File? imagefile = File(_image!.path);
-//   if (pickedFile != null) {
-//     final String filePath = pickedFile.path;
-//     setState(() {
-//       _image = File(filePath);
-//     });
-//   }
-// }
-//
-// void CreateStory() async {
-//   try {
-//     await fetchData();
-//     await _pickImage(ImageSource.gallery);
-//     const url = "http://192.168.1.26:24/api/owners/create-story";
-//     final request = http.MultipartRequest(
-//       'POST',
-//       Uri.parse(url),
-//     );
-//     request.headers[HttpHeaders.authorizationHeader] =
-//     'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTkyLjE2OC4xLjI2OjI0L2FwaS91c2Vycy9raXRjaGVuLW93bmVyLWxvZ2luLXJlZ2lzdHJhdGlvbiIsImlhdCI6MTY3ODM1MTc1MSwiZXhwIjoxNjc4NTY3NzUxLCJuYmYiOjE2NzgzNTE3NTEsImp0aSI6IlNka0VESElQc0lXamF6c2wiLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.OlWI0SSbXUFhflMtr-leznZLzDe38wcz0gEKXju4zZs';
-//     request.fields['type'] = '1';
-//     // request.fields['name'] = 'my_story_name';
-//
-//     request.files.add(
-//       await http.MultipartFile.fromPath(
-//         'name',
-//         _image.path,
-//       ),
-//     );
-//     final response = await request.send();
-//     final responseData = await response.stream.bytesToString();
-//     final json = jsonDecode(responseData);
-//     print(json);
-//   } catch (e) {
-//     print(e);
-//   }
-// }
