@@ -21,5 +21,6 @@ Future<String> getToken() async {
   });
   final json = jsonDecode(tokenResponse.body);
   tokenvalue = (json['data'][0]['token']).toString();
+  //print(tokenvalue);
   return tokenvalue;
 }

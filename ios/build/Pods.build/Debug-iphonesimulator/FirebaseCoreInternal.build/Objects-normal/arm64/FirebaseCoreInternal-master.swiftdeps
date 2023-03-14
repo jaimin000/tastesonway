@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "8252f5f0054a68cc656264e098a6d3882545b5a25d41dc1beb61e17a5ba89e66"
-build_start_time: [1678709178, 268186092]
-build_end_time: [1678709180, 237548828]
+build_start_time: [1678711536, 878181934]
+build_end_time: [1678711536, 936172962]
 inputs:
   "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift": [1678709167, 488463401]
   ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"

@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'apiServices/ApiService.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

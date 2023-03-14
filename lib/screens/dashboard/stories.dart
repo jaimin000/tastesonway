@@ -81,8 +81,8 @@ class _StoriesState extends State<Stories> {
 
   @override
   void initState() {
-    super.initState();
     fetchData();
+    super.initState();
   }
 
   @override
@@ -91,7 +91,7 @@ class _StoriesState extends State<Stories> {
           future: fetchData(),
           builder: (context, snapshot) {
             return ListView.builder(
-              itemCount: data.length + 1,
+              itemCount: data.length+1,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 //create story
@@ -148,6 +148,8 @@ class _StoriesState extends State<Stories> {
                 }
                 //get story
                 else {
+                  final reversedIndex = data.length - index + 1;
+                  //return Text("this is last");
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: Column(
@@ -158,7 +160,7 @@ class _StoriesState extends State<Stories> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ViewStories(data[index -1]['name'],data[index -1]['id'])),
+                                    ViewStories(data[reversedIndex -1]['name'],data[reversedIndex -1]['id'])),
                           );
                         },
                         child: CircleAvatar(
@@ -166,7 +168,7 @@ class _StoriesState extends State<Stories> {
                           backgroundColor: orangeColor(),
                           child: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(data[index-1]['name'], scale: 0.5),
+                                NetworkImage(data[reversedIndex-1]['name'], scale: 0.5),
                             radius: 35,
                           ),
                         ),
@@ -174,11 +176,12 @@ class _StoriesState extends State<Stories> {
                       SizedBox(
                         height: 2,
                       ),
-                      Text(data[index-1]['id'].toString(),
+                      Text(data[reversedIndex-1]['id'].toString(),
                           style: TextStyle(color: Colors.white)),
                     ],
                   ),
-                );}
+                );
+                }
               },
             );
           },
