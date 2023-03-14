@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/ApiService.dart';
 import 'package:tastesonway/screens/dashboard/view%20stories.dart';
 import 'package:tastesonway/theme_data.dart';
-
 
 class Stories extends StatefulWidget {
   const Stories({Key? key}) : super(key: key);
@@ -20,12 +18,13 @@ class _StoriesState extends State<Stories> {
 
   //create story
   late File _image;
+  late File _video;
 
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: source,
-      imageQuality: 50,
+      imageQuality: 70,
       maxWidth: 800,
       maxHeight: 800,
     );
@@ -34,10 +33,21 @@ class _StoriesState extends State<Stories> {
     });
   }
 
+  Future<void> _pickVideo(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickVideo(
+      source: await source,
+      maxDuration: Duration(seconds: 15),
+    );
+    setState(() {
+      _video = File(pickedFile!.path);
+    });
+  }
+
   void createStory() async {
     String token = await getToken();
     try {
-      await _pickImage(ImageSource.camera);
+      await _pickVideo(ImageSource.camera);
 
       const url = "http://192.168.1.26:24/api/owners/create-story";
       final request = http.MultipartRequest(
@@ -45,11 +55,11 @@ class _StoriesState extends State<Stories> {
         Uri.parse(url),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
-      request.fields['type'] = '1';
+      request.fields['type'] = '2';
       request.files.add(
         await http.MultipartFile.fromPath(
           'name',
-          _image.path,
+          _video.path,
         ),
       );
       final response = await request.send();
@@ -61,7 +71,7 @@ class _StoriesState extends State<Stories> {
     }
   }
 
-  //get story
+  // get story_view
   List<dynamic> data = [];
   Future fetchData() async {
     String token = await getToken();
@@ -160,7 +170,12 @@ class _StoriesState extends State<Stories> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ViewStories(data[reversedIndex -1]['name'],data[reversedIndex -1]['id'])),
+                                    ViewStories(
+                                        data[reversedIndex -1]['name'],
+                                        data[reversedIndex -1]['id'],
+                                        data[reversedIndex -1]['media_type']
+                                    ),
+                            ),
                           );
                         },
                         child: CircleAvatar(
@@ -177,7 +192,7 @@ class _StoriesState extends State<Stories> {
                         height: 2,
                       ),
                       Text(data[reversedIndex-1]['id'].toString(),
-                          style: TextStyle(color: Colors.white)),
+                          style: TextStyle(color: Colors.white),),
                     ],
                   ),
                 );
