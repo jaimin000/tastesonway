@@ -42,8 +42,8 @@ class _ViewStoriesState extends State<ViewStories> {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      Navigator.pop(context);
       print("Story Deleted Successfully");
+      Navigator.pop(context);
     } else {
       print(widget.id);
       print('Request failed with status: ${response.statusCode}.');

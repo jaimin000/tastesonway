@@ -1,6 +1,0 @@
-version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "345eb7d607385edd0d3c04b0560686c98cb5c49e4a3e6e8294e1a601b3802120"
-build_start_time: [1678880019, 255134105]
-build_end_time: [1678880019, 271916866]
-inputs:
-  "/Users/mac/Desktop/work/tastesonway/ios/Pods/ReachabilitySwift/Sources/Reachability.swift": !private [1678880003, 530106306]

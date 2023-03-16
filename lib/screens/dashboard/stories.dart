@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/ApiService.dart';
 import 'package:tastesonway/screens/dashboard/view%20stories.dart';
 import 'package:tastesonway/theme_data.dart';
+import 'package:video_compress/video_compress.dart';
 
 class Stories extends StatefulWidget {
   const Stories({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _StoriesState extends State<Stories> {
   //create story
   late File _image;
   late File _video;
+
 
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
@@ -55,26 +57,20 @@ class _StoriesState extends State<Stories> {
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
               backgroundColor: Colors.white,
-              textColor: orangeColor(),
+              textColor: Colors.orange,
               fontSize: 16.0,
             );
           });
         } else {
-          // Display an error message if the video size is too large
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('Error',style: cardTextStyle16(),),
-              content: Text(
-                  'The selected video is too large. Please choose a video that is less than or equal to 3MB.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('OK',style: cardTextStyle16(),),
-                ),
-              ],
-            ),
+          // Compress the video before storing it in _video
+          final compressedVideo = await VideoCompress.compressVideo(
+            video.path,
+            quality: VideoQuality.LowQuality,
           );
+          final processedVideo = File(compressedVideo!.path.toString());
+          setState(() {
+            _video = processedVideo;
+          });
         }
       }
     } catch (e) {
@@ -86,7 +82,6 @@ class _StoriesState extends State<Stories> {
     String token = await getToken();
     try {
       await _pickImage(ImageSource.camera);
-
       const url = "http://192.168.1.26:24/api/owners/create-story";
       final request = http.MultipartRequest(
         'POST',
@@ -104,15 +99,156 @@ class _StoriesState extends State<Stories> {
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);
       print(json);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            backgroundColor: cardColor(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            content: SizedBox(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 50.0,
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Story uploaded successfully',
+                    style: mTextStyle14(),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
     } catch (e) {
       print(e);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            backgroundColor: cardColor(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            content: SizedBox(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Error uploading image',
+                    style: mTextStyle14(),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
     }
   }
 
-  void createVideoStory() async {
+  void createVideoStory() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: cardColor(),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          content: SizedBox(
+            height: 100,
+            child: FutureBuilder(
+              future: uploadVideo(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    Future.delayed(Duration(seconds: 3), () {
+                      Navigator.pop(context);
+                    });
+                    return Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Error uploading video',
+                            style: mTextStyle14(),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            'Please upload video up to 15 sec',
+                            style: mTextStyle14(),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    Future.delayed(Duration(seconds: 3), () {
+                      Navigator.pop(context);
+                    });
+                    return Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                            size: 50.0,
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            'Video uploaded successfully',
+                            style: mTextStyle14(),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                } else {
+                  return Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(
+                          color: orangeColor(),
+                          strokeWidth: 3.0,
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          'Uploading video...',
+                          style: mTextStyle14(),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<String> uploadVideo() async {
     String token = await getToken();
     try {
-      await _pickVideo(ImageSource.gallery);
+      await _pickVideo(ImageSource.camera);
 
       const url = "http://192.168.1.26:24/api/owners/create-story";
       final request = http.MultipartRequest(
@@ -132,10 +268,10 @@ class _StoriesState extends State<Stories> {
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);
       print(json);
-      print("Video Uploaded successfully");
+      return "Video uploaded successfully";
     } catch (e) {
       print(e);
-      print("Error uploading video");
+      throw "Error uploading video";
     }
   }
 
