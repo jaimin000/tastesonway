@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/ApiService.dart';
@@ -15,7 +16,6 @@ class Stories extends StatefulWidget {
 }
 
 class _StoriesState extends State<Stories> {
-
   //create story
   late File _image;
   late File _video;
@@ -34,20 +34,85 @@ class _StoriesState extends State<Stories> {
   }
 
   Future<void> _pickVideo(ImageSource source) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickVideo(
-      source: await source,
-      maxDuration: Duration(seconds: 15),
-    );
-    setState(() {
-      _video = File(pickedFile!.path);
-    });
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickVideo(
+        source: source,
+        maxDuration: Duration(seconds: 15),
+      );
+      if (pickedFile != null) {
+        final video = File(pickedFile.path);
+        final videoSize = await video.length();
+        // Check if the video size is less than or equal to 3MB (3 * 1024 * 1024 bytes)
+        if (videoSize <= 3 * 1024 * 1024) {
+          setState(() {
+            _video = video;
+          });
+          Future.delayed(Duration(seconds: 3), () {
+            Fluttertoast.showToast(
+              msg: "Story Added Successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.white,
+              textColor: orangeColor(),
+              fontSize: 16.0,
+            );
+          });
+        } else {
+          // Display an error message if the video size is too large
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Error',style: cardTextStyle16(),),
+              content: Text(
+                  'The selected video is too large. Please choose a video that is less than or equal to 3MB.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('OK',style: cardTextStyle16(),),
+                ),
+              ],
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('Error uploading video: $e');
+    }
   }
 
-  void createStory() async {
+  void createImgStory() async {
     String token = await getToken();
     try {
-      await _pickVideo(ImageSource.camera);
+      await _pickImage(ImageSource.camera);
+
+      const url = "http://192.168.1.26:24/api/owners/create-story";
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(url),
+      );
+      request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+      request.fields['type'] = '1';
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'name',
+          _image.path,
+        ),
+      );
+      final response = await request.send();
+      final responseData = await response.stream.bytesToString();
+      final json = jsonDecode(responseData);
+      print(json);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void createVideoStory() async {
+    String token = await getToken();
+    try {
+      await _pickVideo(ImageSource.gallery);
 
       const url = "http://192.168.1.26:24/api/owners/create-story";
       final request = http.MultipartRequest(
@@ -62,12 +127,15 @@ class _StoriesState extends State<Stories> {
           _video.path,
         ),
       );
+
       final response = await request.send();
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);
       print(json);
+      print("Video Uploaded successfully");
     } catch (e) {
       print(e);
+      print("Error uploading video");
     }
   }
 
@@ -97,109 +165,177 @@ class _StoriesState extends State<Stories> {
 
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
-          future: fetchData(),
-          builder: (context, snapshot) {
-            return ListView.builder(
-              itemCount: data.length+1,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                //create story
-                if (index == 0){
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      height: 100,
-                      child: Column(
-                        children: [
-                          InkWell(
-                            onTap: createStory,
-                            child: Stack(
-                              children: [
-                                CircleAvatar(
-                                  radius: 38,
-                                  backgroundColor: orangeColor(),
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
-                                    radius: 35,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    width: 28,
-                                    height: 28,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: orangeColor(),
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text('Create Story', style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                //get story
-                else {
-                  final reversedIndex = data.length - index + 1;
-                  //return Text("this is last");
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+    return FutureBuilder(
+      future: fetchData(),
+      builder: (context, snapshot) {
+        return ListView.builder(
+          itemCount: data.length + 1,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            //create story
+            if (index == 0) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: SizedBox(
+                  height: 100,
                   child: Column(
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ViewStories(
-                                        data[reversedIndex -1]['name'],
-                                        data[reversedIndex -1]['id'],
-                                        data[reversedIndex -1]['media_type']
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                height: 160,
+                                decoration: BoxDecoration(
+                                  color: cardColor(),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    Container(
+                                      height: 5,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[400],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                     ),
-                            ),
+                                    SizedBox(height: 20),
+                                    ListTile(
+                                      leading: Icon(
+                                        Icons.photo_library,
+                                        color: orangeColor(),
+                                      ),
+                                      title: Text(
+                                        'Upload Photo',
+                                        style: cTextStyle16(),
+                                      ),
+                                      onTap: () {
+                                        // TODO: Implement photo selection logic
+                                        createImgStory();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(
+                                        Icons.videocam,
+                                        color: orangeColor(),
+                                      ),
+                                      title: Text(
+                                        'Upload Video',
+                                        style: cTextStyle16(),
+                                      ),
+                                      onTap: () {
+                                        // TODO: Implement video selection logic
+                                        createVideoStory();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           );
                         },
-                        child: CircleAvatar(
-                          radius: 38,
-                          backgroundColor: orangeColor(),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(data[reversedIndex-1]['name'], scale: 0.5),
-                            radius: 35,
-                          ),
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 38,
+                              backgroundColor: orangeColor(),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
+                                radius: 35,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                width: 28,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: orangeColor(),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 2,
                       ),
-                      Text(data[reversedIndex-1]['id'].toString(),
-                          style: TextStyle(color: Colors.white),),
+                      Text(
+                        'Create Story',
+                        style: mTextStyle14(),
+                      ),
                     ],
                   ),
-                );
-                }
-              },
-            );
+                ),
+              );
+            }
+            //get story
+            else {
+              final reversedIndex = data.length - index + 1;
+              //return Text("this is last");
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ViewStories(
+                                data[reversedIndex - 1]['name'],
+                                data[reversedIndex - 1]['id'],
+                                data[reversedIndex - 1]['media_type']),
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 38,
+                        backgroundColor: orangeColor(),
+                        child: CircleAvatar(
+                          backgroundImage: data[reversedIndex - 1]
+                                      ['media_type'] ==
+                                  "Photos"
+                              ? NetworkImage(data[reversedIndex - 1]['name'],
+                                  scale: 0.5)
+                              : NetworkImage(
+                                  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bW9kZWxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'),
+                          radius: 35,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      data[reversedIndex - 1]['id'].toString(),
+                      style: mTextStyle14(),
+                    ),
+                  ],
+                ),
+              );
+            }
           },
         );
+      },
+    );
   }
 }
