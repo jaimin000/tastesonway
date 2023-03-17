@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../theme_data.dart';
+import '../../../theme_data.dart';
 
-class EditItem extends StatefulWidget {
-  const EditItem({Key? key}) : super(key: key);
+class AddNewItem extends StatefulWidget {
+  const AddNewItem({Key? key}) : super(key: key);
 
   @override
-  State<EditItem> createState() => _EditItemState();
+  State<AddNewItem> createState() => _AddNewItemState();
 }
 
-class _EditItemState extends State<EditItem> {
+class _AddNewItemState extends State<AddNewItem> {
   bool _switchValue = false;
   int step = 1;
 
@@ -22,15 +22,9 @@ class _EditItemState extends State<EditItem> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Edit Item',
+          'Add New Item',
           style: cardTitleStyle20(),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.delete),
-          ),
-        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -68,7 +62,7 @@ class _EditItemState extends State<EditItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
+                      width: 100,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -97,7 +91,7 @@ class _EditItemState extends State<EditItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
+                      width: 100,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -126,7 +120,7 @@ class _EditItemState extends State<EditItem> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
+                      width: 100,
                       height: 45,
                       child: Align(
                           alignment: Alignment.center,
@@ -152,7 +146,7 @@ class _EditItemState extends State<EditItem> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: SizedBox(
-                height: 640,
+                height: 630,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   margin: EdgeInsets.all(8),
@@ -180,8 +174,7 @@ class _EditItemState extends State<EditItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -202,8 +195,7 @@ class _EditItemState extends State<EditItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
@@ -224,8 +216,7 @@ class _EditItemState extends State<EditItem> {
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
+                          style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             suffixIcon: Icon(
@@ -289,8 +280,7 @@ class _EditItemState extends State<EditItem> {
                         height: 90,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
+                          style: TextStyle(color: Colors.white),
                           minLines: 3,
                           maxLines: 5,
                           cursorColor: Colors.white,
@@ -324,9 +314,7 @@ class _EditItemState extends State<EditItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
-                              style:
-                                  TextStyle(color: Colors.white), //<-- SEE HERE
-
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -344,9 +332,7 @@ class _EditItemState extends State<EditItem> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.3,
                             child: TextField(
-                              style:
-                                  TextStyle(color: Colors.white), //<-- SEE HERE
-
+                              style: TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(10.0),
@@ -368,11 +354,11 @@ class _EditItemState extends State<EditItem> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromRGBO(37, 40, 48, 1),
                               ),
-                              child: Center(
-                                child: Text(
-                                  "+",
-                                  style: inputTextStyle16(),
-                                ),
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                "+",
+                                textAlign: TextAlign.center,
+                                style: inputTextStyle16(),
                               ),
                             ),
                           ),

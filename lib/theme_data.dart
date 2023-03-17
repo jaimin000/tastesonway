@@ -128,6 +128,13 @@ TextStyle inputTextStyle16() {
   );
 }
 
+TextStyle inputTextStyle14() {
+  return const TextStyle(
+    color: Color.fromRGBO(100, 107, 125, 1),
+    fontSize: 14,
+  );
+}
+
 Color backgroundColor() {
   return const Color.fromRGBO(105, 111, 130, 1);
 }

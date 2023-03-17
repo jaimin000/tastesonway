@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
-        home: isUser == "null" ? Signup() : Home(),
+        home: isUser == "null" ? Signup() : Home()
         );
   }
 }

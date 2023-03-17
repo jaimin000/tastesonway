@@ -246,7 +246,7 @@ class _StoriesState extends State<Stories> {
   }
 
   Future<String> uploadVideo() async {
-    String token = await getToken();
+        String token = await getToken();
     try {
       await _pickVideo(ImageSource.camera);
 
