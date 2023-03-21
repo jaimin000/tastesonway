@@ -237,7 +237,6 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                       value: _checkAll,
                                       onChanged: (bool? value) {
                                         setState(() {
-                                          _checkAll = value ?? false;
                                           _check1 = value ?? false;
                                         });
                                         Colors.black;
@@ -283,9 +282,10 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                   return Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: Column(
-                                      children: menuData
-                                          .map(
-                                            (item) => SizedBox(
+                                      children:
+                                      menuData.map(
+                                            (item) =>
+                                                SizedBox(
                                           height: 80,
                                           child: Row(
                                             mainAxisAlignment:

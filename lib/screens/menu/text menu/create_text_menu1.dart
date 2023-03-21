@@ -6,6 +6,9 @@ import '../../../apiServices/ApiService.dart';
 import '../../../theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+
+import 'menuIdController.dart';
 
 class CreateTextMenu extends StatefulWidget {
   CreateTextMenu({Key? key}) : super(key: key);
@@ -16,9 +19,13 @@ class CreateTextMenu extends StatefulWidget {
 class _CreateTextMenuState extends State<CreateTextMenu> {
   bool isPermanentMenu = true;
   late String menuItemName;
-  late String menuId;
+  late int menuId;
   final _formKey = GlobalKey<FormState>();
   DateTime menuExpiryDate = DateTime.now();
+  bool _isLoading = false;
+  late int apiId;
+   int type = 1;
+  final menuIdController = Get.put(MenuIdController());
 
   Future getMenuId() async {
     String token = await getToken();
@@ -28,15 +35,15 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         "is_menu_completed": "1",
         "is_permanent_menu": "1",
         "menu_review_status": "1",
-        "name": "menuItemName",
-         "type": "1"
+        "name": "$menuItemName",
+         "type": "$type"
       };
     try {
       final response = await http.post(url, headers: headers, body: body);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         menuId = json['data']['id'];
-        print(menuId);
+        return menuId;
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -58,11 +65,6 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
       });
     }
   }
-  @override
-  void initState() {
-    getMenuId();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +78,13 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
           style: cardTitleStyle20(),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body:_isLoading ?
+      Center(
+        child: CircularProgressIndicator(
+          color: orangeColor(),
+        ),
+      ) : SingleChildScrollView(
+        child:  Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,7 +262,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           isPermanentMenu = value ?? false;
-                                          isPermanentMenu == true ;
+                                          isPermanentMenu == true ? type = 1 : type = 0;
+                                          print(type);
                                         });
                                       }),
                                 ),
@@ -300,7 +308,14 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                               onTap: () async{
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
-                                  await getMenuId;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  menuIdController.menuId  = await getMenuId();
+                                  // print(apiId);
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

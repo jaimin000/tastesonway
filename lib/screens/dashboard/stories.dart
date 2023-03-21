@@ -122,7 +122,7 @@ class _StoriesState extends State<Stories> {
                   ),
                   SizedBox(height: 10.0),
                   Text(
-                    'Story uploaded successfully',
+                    'Story Uploaded Successfully',
                     style: mTextStyle14(),
                   ),
                 ],
