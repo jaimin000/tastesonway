@@ -31,6 +31,7 @@ class _AddNewItemState extends State<AddNewItem> {
   List toppingPrice = [];
   List toppingName=[];
   bool _isLoading = false;
+  bool _imageSelected = false;
 
   Widget topping(){
     return Column(
@@ -118,6 +119,7 @@ class _AddNewItemState extends State<AddNewItem> {
     );
     setState(() {
       _image = File(pickedFile!.path);
+      _imageSelected = true;
       print(_image);
     });
   }
@@ -129,11 +131,14 @@ class _AddNewItemState extends State<AddNewItem> {
     try {
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.1.26:24/api/v2/create-or-update-menu-item'),
+        Uri.parse(
+            // 'http://192.168.1.26:24/api/v2/create-or-update-menu-item'),
+          'https://dev-api.tastesonway.com/api/v2/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';
       request.fields['name'] = '$name';
+      request.fields['description']='$description';
       request.fields['category_id'] = '1';
       request.fields['amount'] = '$price';
       request.fields['type'] = '$type';
@@ -252,79 +257,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 style: mTextStyle20(),
               ),
             ),
-            SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Card(
-                  shadowColor: Colors.black,
-                  color: step == 0
-                      ? orangeColor()
-                      : Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.28,
-                    height: 45,
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Step 1',
-                          style: mTextStyle16(),
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: step == 1
-                      ? orangeColor()
-                      : Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.28,
-                    height: 45,
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Step 2',
-                          style: mTextStyle16(),
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Card(
-                  shadowColor: Colors.black,
-                  color: step == 2
-                      ? orangeColor()
-                      : Color.fromRGBO(53, 56, 66, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.28,
-                    height: 45,
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Step 3',
-                          style: mTextStyle16(),
-                        )),
-                  ),
-                ),
 
-              ],
-            ),
             SizedBox(
               height: 25,
             ),
@@ -439,8 +372,9 @@ class _AddNewItemState extends State<AddNewItem> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'Upload Image',
+                                      _imageSelected ? 'image.jpg' : 'Select Image',
                                       textAlign: TextAlign.center,
+                                      overflow: TextOverflow.clip,
                                       style: inputTextStyle16(),
                                     ),
                                   ),

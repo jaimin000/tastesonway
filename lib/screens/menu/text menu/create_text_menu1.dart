@@ -29,7 +29,9 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
 
   Future getMenuId() async {
     String token = await getToken();
-    final url = Uri.parse('http://192.168.1.26:24/api/v2/create-or-update-menu');
+    final url = Uri.parse(
+        // 'http://192.168.1.26:24/api/v2/create-or-update-menu');
+      "https://dev-api.tastesonway.com/api/v2/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
     final body= {
         "is_menu_completed": "1",

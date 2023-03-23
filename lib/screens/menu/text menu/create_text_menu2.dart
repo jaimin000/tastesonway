@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tastesonway/models/MenuItemModel.dart';
 import 'package:tastesonway/screens/menu/text%20menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu3.dart';
+import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
 import '../../../apiServices/ApiService.dart';
 import '../../../theme_data.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:tastesonway/theme_data.dart';
 
 class CreateTextMenu2 extends StatefulWidget {
   CreateTextMenu2({Key? key}) : super(key: key);
@@ -15,24 +17,51 @@ class CreateTextMenu2 extends StatefulWidget {
 }
 
 class _CreateTextMenu2State extends State<CreateTextMenu2> {
-  bool _check1 = false;
   bool _checkAll = false;
   bool isPermanentMenu = true;
-  List<dynamic> menuData = [];
+  bool isLoading = false;
+  List<MenuItemModel> menuItemList = [];
+  late List<dynamic> menuData = [];
+
   Future<void> getMenu() async {
     String token = await getToken();
     int ownerId = await getOwnerId();
+    setState(() {
+      isLoading = true;
+    });
     final response = await http.post(
-      Uri.parse('http://192.168.1.26:24/api/v2/get-menu-item'),
+      Uri.parse(
+          // 'http://192.168.1.26:24/api/v2/get-menu-item'),
+          'https://dev-api.tastesonway.com/api/v2/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
     if (response.statusCode == 200) {
+      setState(() {
+        isLoading = false;
+      });
       final json = jsonDecode(response.body);
       menuData = json['data'][1]['data'];
+      for (int i = 0; i < menuData.length; i++) {
+        menuItemList.add(MenuItemModel(
+          id: menuData[i]['id'],
+          menu_id: menuData[i]['menu_id'],
+          name: menuData[i]['name'],
+          price: menuData[i]['amount'],
+          image: menuData[i]['picture'],
+          description: menuData[i]['description']
+        ));
+      }
+      setState(() {});
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
+  }
+
+  @override
+  void initState() {
+    getMenu();
+    super.initState();
   }
 
   @override
@@ -72,8 +101,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                 children: [
                   Card(
                     shadowColor: Colors.black,
-                    color:
-                        Color.fromRGBO(53, 56, 66, 1),
+                    color: Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -93,9 +121,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color:
-                         orangeColor(),
-
+                    color: orangeColor(),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -199,7 +225,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                         SizedBox(
                           height: 50,
                           child: TextField(
-                            style: TextStyle(color: Colors.white), //<-- SEE HERE
+                            style:
+                                TextStyle(color: Colors.white), //<-- SEE HERE
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
                               suffixIcon: Icon(
@@ -231,25 +258,40 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Checkbox(
                                       value: _checkAll,
                                       onChanged: (bool? value) {
                                         setState(() {
-                                          _check1 = value ?? false;
+                                          _checkAll = value ?? false;
                                         });
+                                        if (_checkAll == true) {
+                                          for (int i = 0;
+                                              i < menuItemList.length;
+                                              i++) {
+                                            menuItemList[i].isChecked = true;
+                                          }
+                                        } else {
+                                          for (int i = 0;
+                                              i < menuItemList.length;
+                                              i++) {
+                                            menuItemList[i].isChecked = false;
+                                          }
+                                        }
                                         Colors.black;
                                       },
                                       focusColor: orangeColor(),
-                                      fillColor:
-                                      MaterialStateProperty.all(orangeColor()),
+                                      fillColor: MaterialStateProperty.all(
+                                          orangeColor()),
                                       side: BorderSide(
                                         color: orangeColor(),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width * 0.5,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
                                       child: Text(
                                         'Select All',
                                         style: inputTextStyle16(),
@@ -258,83 +300,81 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15.0),
                                 child: Divider(
                                   color: Colors.white,
                                 ),
                               ),
-                              FutureBuilder(
-                                future: getMenu(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      height: 100,
+                              isLoading
+                                  ? const SizedBox(
+                                      height: 200,
                                       child: Center(
-                                        child: CircularProgressIndicator(color: orangeColor(),strokeWidth: 2),
-                                      ),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  return Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Column(
-                                      children:
-                                      menuData.map(
-                                            (item) =>
-                                                SizedBox(
+                                          child: CircularProgressIndicator(color: Colors.red,)))
+                                  : ListView.builder(
+                                      itemCount: menuItemList.length,
+                                      shrinkWrap: true,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return SizedBox(
                                           height: 80,
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                                MainAxisAlignment.spaceAround,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Checkbox(
-                                                value: _check1,
+                                                value: menuItemList[index]
+                                                    .isChecked,
                                                 onChanged: (bool? value) {
                                                   setState(() {
-                                                    _check1 = value ?? false;
+                                                    menuItemList[index]
+                                                            .isChecked =
+                                                        value ?? false;
                                                   });
                                                   checkColor:
                                                   Colors.black;
                                                 },
                                                 focusColor: orangeColor(),
                                                 fillColor:
-                                                MaterialStateProperty.all(
-                                                    orangeColor()),
+                                                    MaterialStateProperty.all(
+                                                        orangeColor()),
                                                 side: BorderSide(
                                                   color: orangeColor(),
                                                 ),
                                               ),
                                               SizedBox(
                                                 width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                        .size
+                                                        .width *
                                                     0.5,
                                                 child: Column(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                      MainAxisAlignment.center,
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     FittedBox(
                                                       fit: BoxFit.fitWidth,
                                                       child: Text(
-                                                        item['name'],
-                                                        overflow: TextOverflow.clip,
-                                                        style: inputTextStyle14(),
+                                                        menuItemList[index]
+                                                            .name,
+                                                        overflow:
+                                                            TextOverflow.clip,
+                                                        style:
+                                                            inputTextStyle14(),
                                                       ),
                                                     ),
                                                     FittedBox(
                                                       fit: BoxFit.fitWidth,
                                                       child: Text(
-                                                        "₹ ${item['amount']}",
-                                                        overflow: TextOverflow.clip,
-                                                        style: inputTextStyle14(),
+                                                        "₹ ${menuItemList[index].price}",
+                                                        overflow:
+                                                            TextOverflow.clip,
+                                                        style:
+                                                            inputTextStyle14(),
                                                       ),
                                                     ),
                                                   ],
@@ -345,45 +385,68 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                 children: [
                                                   ClipRRect(
                                                     borderRadius:
-                                                    BorderRadius.circular(15),
+                                                        BorderRadius.circular(
+                                                            15),
                                                     child: Image.network(
-                                                      item['picture'],
+                                                      menuItemList[index].image,
                                                       height: 60,
                                                       width: 65,
                                                       fit: BoxFit.fill,
-                                                      errorBuilder: (BuildContext
-                                                      context,
-                                                          Object exception,
-                                                          StackTrace? stackTrace) {
+                                                      errorBuilder:
+                                                          (BuildContext context,
+                                                              Object exception,
+                                                              StackTrace?
+                                                                  stackTrace) {
                                                         return Image.asset(
                                                           'assets/images/tea.jpg',
                                                           height: 60,
                                                           width: 65,
-                                                          fit: BoxFit.fill,);
+                                                          fit: BoxFit.fill,
+                                                        );
                                                       },
                                                     ),
                                                   ),
                                                   Positioned(
                                                     top: 45,
                                                     right: 10,
-                                                    child: Card(
-                                                      shadowColor: Colors.black,
-                                                      color: orangeColor(),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                        BorderRadius.circular(
-                                                            5.0),
-                                                      ),
-                                                      child: SizedBox(
-                                                        width: 40,
-                                                        height: 20,
-                                                        child: Align(
-                                                            alignment:
-                                                            Alignment.center,
-                                                            child: Text(
-                                                              'Edit',
-                                                              style: mTextStyle14(),
-                                                            )),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (context) => EditItem(
+                                                                    id: menuItemList[index].id,
+                                                                    menu_id: menuItemList[index].menu_id,
+                                                                    name:menuItemList[index].name,
+                                                                  price:menuItemList[index].price,
+                                                                  image:menuItemList[index].image,
+                                                                  description:menuItemList[index].description
+                                                                ),),);
+                                                      },
+                                                      child: Card(
+                                                        shadowColor:
+                                                            Colors.black,
+                                                        color: orangeColor(),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                        ),
+                                                        child: SizedBox(
+                                                          width: 40,
+                                                          height: 20,
+                                                          child: Align(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              child: Text(
+                                                                'Edit',
+                                                                style:
+                                                                    mTextStyle14(),
+                                                              )),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -391,13 +454,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      )
-                                          .toList(),
-                                    ),
-                                  );
-                                },
-                              ),
+                                        );
+                                      }),
                               SizedBox(
                                 height: 10,
                               ),
@@ -407,7 +465,10 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                         SizedBox(height: 10),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => CreateTextMenu3()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateTextMenu3()));
                           },
                           child: SizedBox(
                               height: 45,
@@ -433,7 +494,6 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 10,
               ),

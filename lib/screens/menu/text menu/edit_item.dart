@@ -1,18 +1,246 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tastesonway/apiServices/ApiService.dart';
 import '../../../theme_data.dart';
+import 'create_text_menu2.dart';
+import 'package:http/http.dart' as http;
+
 
 class EditItem extends StatefulWidget {
-  const EditItem({Key? key}) : super(key: key);
+  final int id;
+  final int menu_id;
+  final String name;
+  final String description;
+  final String image;
+  final int price;
+
+  EditItem({required this.id,
+    required this.menu_id,
+    required this.name,
+    required this.price,
+    required this.image,
+    required this.description});
 
   @override
   State<EditItem> createState() => _EditItemState();
 }
 
 class _EditItemState extends State<EditItem> {
-  bool _switchValue = false;
-  int step = 1;
 
+  bool _switchValue = true;
+  int step = 1;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController pricecontroller = TextEditingController();
+  final TextEditingController descriptioncontroller = TextEditingController();
+  int type = 1;
+  late File _image;
+  List toppingPrice = [];
+  List toppingName=[];
+  bool _isLoading = false;
+
+  Widget topping(){
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: TextFormField(
+                controller: namecontroller,
+                style: TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  fillColor: inputColor(),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  hintText: 'Name',
+                  hintStyle: inputTextStyle16(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Name for the topping item';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  toppingName.add(value);
+                  print(toppingName);
+                },
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: TextFormField(
+                controller: pricecontroller,
+                style: TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10.0),
+                  fillColor: inputColor(),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  hintText: 'Price',
+                  hintStyle: inputTextStyle16(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Price for the topping item';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  toppingPrice.add(value);
+                  print(toppingPrice);
+                },
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height:10),
+      ],
+    );
+  }
+
+  List<Widget>Toppings = [];
+  void addToppingWidget(){
+    setState(() {
+      Toppings.add(topping());
+    });
+  }
+
+  //getting menu id from getx
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: source,
+      imageQuality: 70,
+      maxWidth: 800,
+      maxHeight: 800,
+    );
+    setState(() {
+      _image = File(pickedFile!.path);
+      print(_image);
+    });
+  }
+  var menuId;
+
+  //api call
+  Future UpdateMenuItem() async {
+    String token = await getToken();
+    try {
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+          // 'http://192.168.1.26:24/api/v2/create-or-update-menu-item'),
+            'https://dev-api.tastesonway.com/api/v2/create-or-update-menu-item'),
+      );
+      request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+      request.fields['menu_id'] = '${widget.menu_id}';
+      request.fields['name'] = '${namecontroller.text}';
+      request.fields['category_id'] = '1';
+      request.fields['amount'] = '${pricecontroller.text}';
+      request.fields['description'] = '${descriptioncontroller.text}';
+      request.fields['type'] = '$type';
+      request.fields['id'] = '${widget.id}';
+      for (int i = 0; i < toppingName.length; i++) {
+        request.fields['ingridients[$i][name]'] = '${toppingName[i]}';
+        request.fields['ingridients[$i][price]'] = '${toppingPrice[i]}';
+      }
+      print(pricecontroller.text);
+      print(namecontroller.text);
+      print(descriptioncontroller.text);
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'picture',
+          _image.path,
+          // widget.image,
+        ),
+      );
+      final response = await request.send();
+      final responseData = await response.stream.bytesToString();
+      final json = jsonDecode(responseData);
+      print(responseData);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            backgroundColor: cardColor(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            content: SizedBox(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 50.0,
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Menu Item Added Successfully',
+                    style: mTextStyle14(),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(seconds: 3), () {
+            Navigator.of(context).pop(true);
+          });
+          return AlertDialog(
+            backgroundColor: cardColor(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            content: SizedBox(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Error Creating Menu Item !',
+                    style: mTextStyle14(),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    namecontroller.text = widget.name;
+    pricecontroller.text = widget.price.toString();
+    descriptioncontroller.text = widget.description;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,20 +248,18 @@ class _EditItemState extends State<EditItem> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-
         title: Text(
           'Edit Item',
           style: cardTitleStyle20(),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.delete),
-          ),
-        ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+      body:_isLoading ?
+      Center(
+        child: CircularProgressIndicator(
+          color: orangeColor(),
+        ),
+      ) : Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
             SizedBox(
@@ -42,106 +268,11 @@ class _EditItemState extends State<EditItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "Create Text Menu",
+                "Edit Text Menu",
                 style: mTextStyle20(),
               ),
             ),
-            SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      step = 0;
-                    });
-                  },
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: step == 0
-                        ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Step 1',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      step = 1;
-                    });
-                  },
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: step == 1
-                        ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Step 2',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      step = 2;
-                    });
-                  },
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: step == 2
-                        ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.28,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Step 3',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-              ],
-            ),
+
             SizedBox(
               height: 25,
             ),
@@ -152,253 +283,268 @@ class _EditItemState extends State<EditItem> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: SizedBox(
-                height: 640,
+                // height: 630,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   margin: EdgeInsets.all(8),
                   padding: EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'Basic Details',
-                        style: mTextStyle18(),
-                      ),
-                      SizedBox(height: 15),
-                      Text(
-                        'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                        style: cTextStyle12(),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Name Of Menu Item',
-                            hintStyle: inputTextStyle16(),
-                          ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'Basic Details',
+                          style: mTextStyle18(),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Price Per Serving',
-                            hintStyle: inputTextStyle16(),
-                          ),
+                        SizedBox(height: 15),
+                        Text(
+                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
+                          style: cTextStyle12(),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            suffixIcon: Icon(
-                              Icons.ios_share,
-                              color: orangeColor(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                          // height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            controller: namecontroller,
+                            style: TextStyle(color: Colors.white),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'Name Of Menu Item',
+                              hintStyle: inputTextStyle16(),
                             ),
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Upload Image',
-                            hintStyle: inputTextStyle16(),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a name for the menu item';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromRGBO(37, 40, 48, 1),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Type Of Dish Veg',
-                                  textAlign: TextAlign.center,
-                                  style: inputTextStyle16(),
-                                ),
-                              ),
-                              Transform.scale(
-                                scale: 0.8,
-                                child: CupertinoSwitch(
-                                    thumbColor: Colors.black,
-                                    activeColor: Colors.green,
-                                    value: _switchValue,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        _switchValue = value ?? false;
-                                      });
-                                    }),
-                              ),
-                            ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          // height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            controller: pricecontroller,
+                            style: TextStyle(color: Colors.white),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'Price Per Serving',
+                              hintStyle: inputTextStyle16(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter price for the menu item';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 90,
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
-
-                          minLines: 3,
-                          maxLines: 5,
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Add Dish Description',
-                            hintStyle: inputTextStyle16(),
-                          ),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'Extra Toppings',
-                        style: mTextStyle18(),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style:
-                                  TextStyle(color: Colors.white), //<-- SEE HERE
-
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: 'Name',
-                                hintStyle: inputTextStyle16(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            child: TextField(
-                              style:
-                                  TextStyle(color: Colors.white), //<-- SEE HERE
-
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: 'Price',
-                                hintStyle: inputTextStyle16(),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color.fromRGBO(37, 40, 48, 1),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "+",
-                                  style: inputTextStyle16(),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      SizedBox(
+                        SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
-                          child: Card(
-                              shadowColor: Colors.black,
-                              color: orangeColor(),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(37, 40, 48, 1),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: InkWell(
+                              onTap: (){
+                                _pickImage(ImageSource.gallery);
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'image.png',
+                                      textAlign: TextAlign.center,
+                                      style: inputTextStyle16(),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Icon(
+                                      Icons.ios_share,
+                                      color: orangeColor(),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Proceed',
-                                  style: mTextStyle14(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(37, 40, 48, 1),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Type Of Dish Veg',
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
                                 ),
-                              ))),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                                Transform.scale(
+                                  scale: 0.8,
+                                  child: CupertinoSwitch(
+                                      thumbColor: Colors.black,
+                                      activeColor: Colors.green,
+                                      value: _switchValue,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          _switchValue = value ?? false;
+                                          _switchValue?type = 1:type=0;
+                                          print(type);
+                                        });
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 90,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            controller: descriptioncontroller,
+                            style: TextStyle(color: Colors.white),
+                            minLines: 3,
+                            maxLines: 5,
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'Add Dish Description',
+                              hintStyle: inputTextStyle16(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter description for the menu item';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Add Toppings',
+                              style: mTextStyle18(),
+                            ),
+                            InkWell(
+                              onTap: addToppingWidget,
+                              child: SizedBox(
+                                height: 30,
+                                width: 30,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color.fromRGBO(37, 40, 48, 1),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "+",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: Toppings.length * 70,
+                          child: ListView.builder(
+                              itemCount:Toppings.length,
+                              itemBuilder:(context,index){
+                                return Toppings[index];
+                              }),
+                        ),
+                        SizedBox(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: InkWell(
+                              onTap: ()async{
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState?.save();
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await UpdateMenuItem();
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CreateTextMenu2()),);
+                                }
+                              },
+                              child: Card(
+                                  shadowColor: Colors.black,
+                                  color: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Proceed',
+                                      style: mTextStyle14(),
+                                    ),
+                                  )),
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ),
