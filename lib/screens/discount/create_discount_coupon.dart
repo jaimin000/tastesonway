@@ -40,7 +40,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     Container(
                       width: 312.58,

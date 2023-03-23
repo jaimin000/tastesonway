@@ -75,6 +75,8 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Headers/FLTFirebasePlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Headers/FLTFirebaseCorePlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Headers/firebase_core-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/CustomPigeonHeader.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTPhoneNumberVerificationStreamHandler.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTIdTokenChannelStreamHandler.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTAuthStateChannelStreamHandler.h \
@@ -91,10 +93,9 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/messages.g.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/FLTImagePickerPlugin_Test.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/image_picker_ios/image_picker_ios.framework/Headers/image_picker_ios-umbrella.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/FLTPathProviderPlugin.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Modules/module.modulemap \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/messages.g.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_ios/path_provider_ios.framework/Headers/path_provider_ios-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-Swift.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/FLTSharePlusPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/share_plus-umbrella.h \
@@ -103,11 +104,11 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/shared_preferences_foundation/shared_preferences_foundation.framework/Headers/shared_preferences_foundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqflitePlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteImport.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteOperation.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteDatabase.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteCursor.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/sqflite-umbrella.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FLTURLLauncherPlugin.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Modules/module.modulemap \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/url_launcher_ios-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Headers/VideoCompressPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Headers/video_compress-Swift.h \
@@ -119,15 +120,12 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_player_avfoundation/video_player_avfoundation.framework/Headers/video_player_avfoundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTWebViewFlutterPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Modules/module.modulemap \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTCookieManager_Test.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FlutterWebView_Test.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/JavaScriptChannelHandler.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FlutterWebView.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFInstanceManager_Test.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFWebsiteDataStoreHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFWebViewHostApi.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFWebViewConfigurationHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFUserContentControllerHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFUIViewHostApi.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFWebViewConfigurationHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFUIDelegateHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFScrollViewHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFScriptMessageHandlerHostApi.h \
@@ -138,7 +136,4 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFHTTPCookieStoreHostApi.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFGeneratedWebKitApis.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FWFDataConverters.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTWKProgressionDelegate.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTWKNavigationDelegate.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/FLTCookieManager.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/webview_flutter_wkwebview/webview_flutter_wkwebview.framework/Headers/webview-umbrella.h

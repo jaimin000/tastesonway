@@ -49,14 +49,14 @@ class UPIDetails extends StatelessWidget {
                         style: mTextStyle18(),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),

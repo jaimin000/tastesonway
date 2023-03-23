@@ -8,7 +8,6 @@ import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
 import '../../../apiServices/ApiService.dart';
 import '../../../theme_data.dart';
 import 'package:http/http.dart' as http;
-import 'package:tastesonway/theme_data.dart';
 
 class CreateTextMenu2 extends StatefulWidget {
   CreateTextMenu2({Key? key}) : super(key: key);
@@ -49,10 +48,15 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
           name: menuData[i]['name'],
           price: menuData[i]['amount'],
           image: menuData[i]['picture'],
-          description: menuData[i]['description']
+          description: menuData[i]['description'] ?? "",
+        //     for (int j = 0; i < menuData[i]['item_ingridient'].length; j++) {
+        // toppingName: menuData[i]['item_ingridient'][j]['name'] ?? "",
+        // toppingPrice: menuData[i]['item_ingridient'][j]['price'] ?? "",
+        // }
         ));
       }
-      setState(() {});
+      setState(() {
+      });
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -60,8 +64,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
 
   @override
   void initState() {
-    getMenu();
     super.initState();
+      getMenu();
   }
 
   @override
@@ -188,7 +192,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const AddNewItem()),
@@ -312,150 +316,156 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                       height: 200,
                                       child: Center(
                                           child: CircularProgressIndicator(color: Colors.red,)))
-                                  : ListView.builder(
-                                      itemCount: menuItemList.length,
-                                      shrinkWrap: true,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return SizedBox(
-                                          height: 80,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Checkbox(
-                                                value: menuItemList[index]
-                                                    .isChecked,
-                                                onChanged: (bool? value) {
-                                                  setState(() {
-                                                    menuItemList[index]
-                                                            .isChecked =
-                                                        value ?? false;
-                                                  });
-                                                  checkColor:
-                                                  Colors.black;
-                                                },
-                                                focusColor: orangeColor(),
-                                                fillColor:
-                                                    MaterialStateProperty.all(
-                                                        orangeColor()),
-                                                side: BorderSide(
-                                                  color: orangeColor(),
+                                  : SizedBox(
+                                height: 400,
+                                    child: ListView.builder(
+                                        itemCount: menuItemList.length,
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return SizedBox(
+                                            height: 80,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Checkbox(
+                                                  value: menuItemList[index]
+                                                      .isChecked,
+                                                  onChanged: (bool? value) {
+                                                    setState(() {
+                                                      menuItemList[index]
+                                                              .isChecked =
+                                                          value ?? false;
+                                                    });
+                                                    checkColor:
+                                                    Colors.black;
+                                                  },
+                                                  focusColor: orangeColor(),
+                                                  fillColor:
+                                                      MaterialStateProperty.all(
+                                                          orangeColor()),
+                                                  side: BorderSide(
+                                                    color: orangeColor(),
+                                                  ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.5,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    FittedBox(
-                                                      fit: BoxFit.fitWidth,
-                                                      child: Text(
-                                                        menuItemList[index]
-                                                            .name,
-                                                        overflow:
-                                                            TextOverflow.clip,
-                                                        style:
-                                                            inputTextStyle14(),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      FittedBox(
+                                                        fit: BoxFit.fitWidth,
+                                                        child: Text(
+                                                          menuItemList[index]
+                                                              .name,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              inputTextStyle14(),
+                                                        ),
+                                                      ),
+                                                      FittedBox(
+                                                        fit: BoxFit.fitWidth,
+                                                        child: Text(
+                                                          "₹ ${menuItemList[index].price}",
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              inputTextStyle14(),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Stack(
+                                                  clipBehavior: Clip.none, children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      child: Image.network(
+                                                        menuItemList[index].image,
+                                                        height: 60,
+                                                        width: 65,
+                                                        fit: BoxFit.fill,
+                                                        errorBuilder:
+                                                            (BuildContext context,
+                                                                Object exception,
+                                                                StackTrace?
+                                                                    stackTrace) {
+                                                          return Image.asset(
+                                                            'assets/images/tea.jpg',
+                                                            height: 60,
+                                                            width: 65,
+                                                            fit: BoxFit.fill,
+                                                          );
+                                                        },
                                                       ),
                                                     ),
-                                                    FittedBox(
-                                                      fit: BoxFit.fitWidth,
-                                                      child: Text(
-                                                        "₹ ${menuItemList[index].price}",
-                                                        overflow:
-                                                            TextOverflow.clip,
-                                                        style:
-                                                            inputTextStyle14(),
+                                                    Positioned(
+                                                      top: 45,
+                                                      right: 10,
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                         // final result = await
+                                                         Navigator.pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) => EditItem(
+                                                                      id: menuItemList[index].id,
+                                                                      menu_id: menuItemList[index].menu_id,
+                                                                      name:menuItemList[index].name,
+                                                                    price:menuItemList[index].price,
+                                                                    description:menuItemList[index].description
+                                                                  ),),);
+                                                         // print("result $result");
+                                                         // if(result == "true"){
+                                                         //   getMenu();
+                                                         // }
+                                                        },
+                                                        child: Card(
+                                                          shadowColor:
+                                                              Colors.black,
+                                                          color: orangeColor(),
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0),
+                                                          ),
+                                                          child: SizedBox(
+                                                            width: 40,
+                                                            height: 20,
+                                                            child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                child: Text(
+                                                                  'Edit',
+                                                                  style:
+                                                                      mTextStyle14(),
+                                                                )),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              Stack(
-                                                overflow: Overflow.visible,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                    child: Image.network(
-                                                      menuItemList[index].image,
-                                                      height: 60,
-                                                      width: 65,
-                                                      fit: BoxFit.fill,
-                                                      errorBuilder:
-                                                          (BuildContext context,
-                                                              Object exception,
-                                                              StackTrace?
-                                                                  stackTrace) {
-                                                        return Image.asset(
-                                                          'assets/images/tea.jpg',
-                                                          height: 60,
-                                                          width: 65,
-                                                          fit: BoxFit.fill,
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    top: 45,
-                                                    right: 10,
-                                                    child: InkWell(
-                                                      onTap: () {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) => EditItem(
-                                                                    id: menuItemList[index].id,
-                                                                    menu_id: menuItemList[index].menu_id,
-                                                                    name:menuItemList[index].name,
-                                                                  price:menuItemList[index].price,
-                                                                  image:menuItemList[index].image,
-                                                                  description:menuItemList[index].description
-                                                                ),),);
-                                                      },
-                                                      child: Card(
-                                                        shadowColor:
-                                                            Colors.black,
-                                                        color: orangeColor(),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                        ),
-                                                        child: SizedBox(
-                                                          width: 40,
-                                                          height: 20,
-                                                          child: Align(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              child: Text(
-                                                                'Edit',
-                                                                style:
-                                                                    mTextStyle14(),
-                                                              )),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }),
+                                              ],
+                                            ),
+                                          );
+                                        }),
+                                  ),
                               SizedBox(
                                 height: 10,
                               ),

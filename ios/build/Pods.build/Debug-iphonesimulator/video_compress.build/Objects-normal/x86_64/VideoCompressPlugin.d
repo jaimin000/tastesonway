@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_compress-3.1.2/ios/Classes/VideoCompressPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/video_compress-3.1.2/ios/Classes/VideoCompressPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/video_compress.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/video_compress/video_compress-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_compress-3.1.2/ios/Classes/VideoCompressPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/video_compress-3.1.2/ios/Classes/VideoCompressPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \

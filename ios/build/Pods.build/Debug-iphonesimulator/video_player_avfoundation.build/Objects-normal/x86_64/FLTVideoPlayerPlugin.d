@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.8/ios/Classes/FLTVideoPlayerPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.4.2/ios/Classes/FLTVideoPlayerPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/video_player_avfoundation.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/video_player_avfoundation/video_player_avfoundation-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.8/ios/Classes/FLTVideoPlayerPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.4.2/ios/Classes/FLTVideoPlayerPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
@@ -20,5 +20,5 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.8/ios/Classes/AVAssetTrackUtils.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/video_player_avfoundation-2.3.8/ios/Classes/messages.g.h
+  /Users/mac/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.4.2/ios/Classes/AVAssetTrackUtils.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.4.2/ios/Classes/messages.g.h

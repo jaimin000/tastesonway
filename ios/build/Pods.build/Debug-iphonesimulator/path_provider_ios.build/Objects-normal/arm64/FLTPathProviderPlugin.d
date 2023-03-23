@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/ios/Classes/FLTPathProviderPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/path_provider_ios-2.0.11/ios/Classes/FLTPathProviderPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/path_provider_ios.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/path_provider_ios/path_provider_ios-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/ios/Classes/FLTPathProviderPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/path_provider_ios-2.0.11/ios/Classes/FLTPathProviderPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
@@ -20,4 +20,4 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/ios/Classes/messages.g.h
+  /Users/mac/.pub-cache/hosted/pub.dev/path_provider_ios-2.0.11/ios/Classes/messages.g.h

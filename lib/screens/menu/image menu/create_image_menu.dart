@@ -298,8 +298,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                                   style: inputTextStyle16(),
                                 ),
                                 Stack(
-                                  overflow: Overflow.visible,
-                                  children: [
+                                  clipBehavior: Clip.none, children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: Image.asset(
@@ -365,8 +364,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                                   style: inputTextStyle16(),
                                 ),
                                 Stack(
-                                  overflow: Overflow.visible,
-                                  children: [
+                                  clipBehavior: Clip.none, children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: Image.asset(

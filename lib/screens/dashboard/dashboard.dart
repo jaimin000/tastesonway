@@ -791,7 +791,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
           ],

@@ -40,7 +40,7 @@ class _StoriesState extends State<Stories> {
       final picker = ImagePicker();
       final pickedFile = await picker.pickVideo(
         source: source,
-        maxDuration: Duration(seconds: 15),
+        maxDuration: const Duration(seconds: 15),
       );
       if (pickedFile != null) {
         final video = File(pickedFile.path);
@@ -50,7 +50,7 @@ class _StoriesState extends State<Stories> {
           setState(() {
             _video = video;
           });
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Fluttertoast.showToast(
               msg: "Story Added Successfully",
               toastLength: Toast.LENGTH_SHORT,
@@ -115,12 +115,12 @@ class _StoriesState extends State<Stories> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.check_circle,
                     color: Colors.green,
                     size: 50.0,
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Text(
                     'Story Uploaded Successfully',
                     style: mTextStyle14(),

@@ -14,14 +14,12 @@ class EditItem extends StatefulWidget {
   final int menu_id;
   final String name;
   final String description;
-  final String image;
   final int price;
 
   EditItem({required this.id,
     required this.menu_id,
     required this.name,
     required this.price,
-    required this.image,
     required this.description});
 
   @override
@@ -41,6 +39,7 @@ class _EditItemState extends State<EditItem> {
   List toppingPrice = [];
   List toppingName=[];
   bool _isLoading = false;
+  bool _imageEdit = false;
 
   Widget topping(){
     return Column(
@@ -130,6 +129,7 @@ class _EditItemState extends State<EditItem> {
     );
     setState(() {
       _image = File(pickedFile!.path);
+      _imageEdit = true;
       print(_image);
     });
   }
@@ -160,13 +160,15 @@ class _EditItemState extends State<EditItem> {
       print(pricecontroller.text);
       print(namecontroller.text);
       print(descriptioncontroller.text);
-      request.files.add(
-        await http.MultipartFile.fromPath(
-          'picture',
-          _image.path,
-          // widget.image,
-        ),
-      );
+      if(_imageEdit) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'picture',
+            _image.path,
+            // widget.image,
+          ),
+        );
+      }
       final response = await request.send();
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);

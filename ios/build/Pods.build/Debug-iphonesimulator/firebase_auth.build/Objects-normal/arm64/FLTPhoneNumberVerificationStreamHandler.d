@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/FLTPhoneNumberVerificationStreamHandler.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/FLTPhoneNumberVerificationStreamHandler.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_auth.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_auth/firebase_auth-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Private/FLTPhoneNumberVerificationStreamHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Private/FLTPhoneNumberVerificationStreamHandler.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
@@ -64,10 +64,11 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAdditionalUserInfo.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRActionCodeSettings.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FirebaseAuth/FirebaseAuth-umbrella.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Public/FLTFirebaseAuthPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Public/FLTFirebaseAuthPlugin.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_core.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePluginRegistry.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/messages.g.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebaseCorePlugin.h \
-  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_core/firebase_core-umbrella.h
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePluginRegistry.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/messages.g.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebaseCorePlugin.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_core/firebase_core-umbrella.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Public/messages.g.h

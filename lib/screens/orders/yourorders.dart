@@ -30,7 +30,7 @@ class YourOrders extends StatelessWidget {
               height: 25,
             ),
             Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: [
                 SizedBox(
                   height: 180,
@@ -153,7 +153,7 @@ class YourOrders extends StatelessWidget {
             ),
             SizedBox(height: 25),
             Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: [
                 SizedBox(
                   height: 180,

@@ -24,7 +24,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Stack(
-                overflow: Overflow.visible,
+                clipBehavior: Clip.none,
                 children: [
                   Card(
                     shadowColor: Colors.black,
@@ -91,7 +91,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               SizedBox(height: 25),
               Stack(
-                overflow: Overflow.visible,
+                clipBehavior: Clip.none,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -152,7 +152,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               SizedBox(height: 25),
               Stack(
-                overflow: Overflow.visible,
+                clipBehavior: Clip.none,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -225,7 +225,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Stack(
-                overflow: Overflow.visible,
+                clipBehavior: Clip.none,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -286,8 +286,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               SizedBox(height: 25),
               Stack(
-                overflow: Overflow.visible,
-                children: [
+                clipBehavior: Clip.none, children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
@@ -347,8 +346,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               SizedBox(height: 25),
               Stack(
-                overflow: Overflow.visible,
-                children: [
+                clipBehavior: Clip.none, children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(

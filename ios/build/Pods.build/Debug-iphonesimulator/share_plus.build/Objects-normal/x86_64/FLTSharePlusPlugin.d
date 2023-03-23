@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/share_plus-4.5.3/ios/Classes/FLTSharePlusPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/share_plus-6.3.1/ios/Classes/FLTSharePlusPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/share_plus.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/share_plus/share_plus-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/share_plus-4.5.3/ios/Classes/FLTSharePlusPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/share_plus-6.3.1/ios/Classes/FLTSharePlusPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \

@@ -43,7 +43,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     Container(
                       decoration: BoxDecoration(

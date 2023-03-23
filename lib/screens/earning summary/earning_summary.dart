@@ -40,8 +40,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 const SizedBox(height: 15),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -99,8 +98,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -149,8 +147,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -200,8 +197,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -281,8 +277,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 15),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -340,8 +335,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -390,8 +384,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -441,8 +434,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
-                  children: [
+                  clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
@@ -522,7 +514,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 15),
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -581,7 +573,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -631,7 +623,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -682,7 +674,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 ),
                 SizedBox(height: 25),
                 Stack(
-                  overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,

@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_core.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_core/firebase_core-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRVersion.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIROptions.h \

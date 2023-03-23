@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.5/ios/Classes/FWFPreferencesHostApi.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFPreferencesHostApi.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/webview_flutter_wkwebview.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/webview_flutter_wkwebview/webview_flutter_wkwebview-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.5/ios/Classes/FWFPreferencesHostApi.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFPreferencesHostApi.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
@@ -20,6 +20,7 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.5/ios/Classes/FWFGeneratedWebKitApis.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.5/ios/Classes/FWFInstanceManager.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.7.5/ios/Classes/FWFWebViewConfigurationHostApi.h
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFGeneratedWebKitApis.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFInstanceManager.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFWebViewConfigurationHostApi.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5/ios/Classes/FWFObjectHostApi.h

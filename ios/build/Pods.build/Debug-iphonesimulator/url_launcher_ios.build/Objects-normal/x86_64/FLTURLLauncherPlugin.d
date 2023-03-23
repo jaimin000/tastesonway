@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/url_launcher_ios-6.0.18/ios/Classes/FLTURLLauncherPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/url_launcher_ios-6.0.18/ios/Classes/FLTURLLauncherPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/url_launcher_ios.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/url_launcher_ios/url_launcher_ios-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/url_launcher_ios-6.0.18/ios/Classes/FLTURLLauncherPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/url_launcher_ios-6.0.18/ios/Classes/FLTURLLauncherPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \

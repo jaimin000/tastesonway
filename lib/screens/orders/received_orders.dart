@@ -19,8 +19,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
       Column(
         children: [
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
@@ -150,8 +149,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
           ),
           SizedBox(height: 25),
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
@@ -285,8 +283,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
       Column(
         children: [
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
@@ -416,8 +413,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
           ),
           SizedBox(height: 25),
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
@@ -551,8 +547,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
       Column(
         children: [
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
@@ -682,8 +677,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
           ),
           SizedBox(height: 25),
           Stack(
-            overflow: Overflow.visible,
-            children: [
+            clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(

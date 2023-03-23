@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/FLTFirebaseAuthPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/FLTFirebaseAuthPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_auth.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_auth/firebase_auth-prefix.pch \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Headers/Public/Firebase/Firebase.h \
@@ -64,12 +64,14 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePluginRegistry.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/messages.g.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.24.0/ios/Classes/FLTFirebaseCorePlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePluginRegistry.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/messages.g.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebasePlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_core-1.24.0/ios/Classes/FLTFirebaseCorePlugin.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/firebase_core/firebase_core-umbrella.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Private/FLTAuthStateChannelStreamHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Private/FLTIdTokenChannelStreamHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Private/FLTPhoneNumberVerificationStreamHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.4.2/ios/Classes/Public/FLTFirebaseAuthPlugin.h
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Private/FLTAuthStateChannelStreamHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Private/FLTIdTokenChannelStreamHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Private/FLTPhoneNumberVerificationStreamHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Public/CustomPigeonHeader.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Public/messages.g.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/firebase_auth-3.11.2/ios/Classes/Public/FLTFirebaseAuthPlugin.h

@@ -41,12 +41,12 @@ class _AddNewItemState extends State<AddNewItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -70,10 +70,10 @@ class _AddNewItemState extends State<AddNewItem> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
               child: TextFormField(
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -94,17 +94,24 @@ class _AddNewItemState extends State<AddNewItem> {
                 },
               ),
             ),
+            IconButton(onPressed: removeToppingWidget, icon: Icon(Icons.delete,color: orangeColor(),),),
           ],
         ),
-        SizedBox(height:10),
+        const SizedBox(height:10),
       ],
     );
   }
 
   List<Widget>Toppings = [];
+
   void addToppingWidget(){
     setState(() {
         Toppings.add(topping());
+    });
+  }
+  void removeToppingWidget(){
+    setState(() {
+      Toppings.removeAt(0);
     });
   }
 
@@ -159,7 +166,7 @@ class _AddNewItemState extends State<AddNewItem> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -172,12 +179,12 @@ class _AddNewItemState extends State<AddNewItem> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.check_circle,
                     color: Colors.green,
                     size: 50.0,
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Text(
                     'Menu Item Added Successfully',
                     style: mTextStyle14(),
@@ -193,7 +200,7 @@ class _AddNewItemState extends State<AddNewItem> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -247,7 +254,7 @@ class _AddNewItemState extends State<AddNewItem> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -258,7 +265,7 @@ class _AddNewItemState extends State<AddNewItem> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Card(
@@ -271,8 +278,8 @@ class _AddNewItemState extends State<AddNewItem> {
                 // height: 630,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -283,22 +290,22 @@ class _AddNewItemState extends State<AddNewItem> {
                           'Basic Details',
                           style: mTextStyle18(),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Text(
                           'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                           style: cTextStyle12(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         SizedBox(
                           // height: 45,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -319,17 +326,17 @@ class _AddNewItemState extends State<AddNewItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
                           // height: 45,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -350,7 +357,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -358,7 +365,7 @@ class _AddNewItemState extends State<AddNewItem> {
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(37, 40, 48, 1),
+                              color: const Color.fromRGBO(37, 40, 48, 1),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: InkWell(
@@ -390,7 +397,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -398,7 +405,7 @@ class _AddNewItemState extends State<AddNewItem> {
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(37, 40, 48, 1),
+                              color: const Color.fromRGBO(37, 40, 48, 1),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Row(
@@ -431,19 +438,19 @@ class _AddNewItemState extends State<AddNewItem> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
                           height: 90,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             minLines: 3,
                             maxLines: 5,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -464,7 +471,7 @@ class _AddNewItemState extends State<AddNewItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -481,22 +488,22 @@ class _AddNewItemState extends State<AddNewItem> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromRGBO(37, 40, 48, 1),
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
                                   ),
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       "+",
                                       style: TextStyle(
                                         fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                      )
+                                    )
+                                  )
+                                )
+                              )
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
