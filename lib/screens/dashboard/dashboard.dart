@@ -1,18 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
-import 'package:tastesonway/screens/menu/text%20menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/image%20menu/create_image_menu.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
-import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/your_menus.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
 import '../../theme_data.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -36,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Good Morning",
                   style: TextStyle(
                       color: Colors.black,
@@ -57,7 +53,7 @@ class _DashboardState extends State<Dashboard> {
                   MaterialPageRoute(builder: (context) => const Profile()),
                 );
               },
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundImage:
                 NetworkImage(
                     'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
@@ -70,20 +66,20 @@ class _DashboardState extends State<Dashboard> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            SizedBox(
+            const SizedBox(
               height: 105,
               child: Stories(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
                 cursorColor: Colors.grey,
                 decoration: InputDecoration(
                     fillColor: inputColor(),
@@ -92,12 +88,12 @@ class _DashboardState extends State<Dashboard> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none),
                     hintText: 'Find Your Dishes',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                    hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
                     suffixIcon:
                         Image.asset('./assets/images/dashboard/Filter.png')),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Container(
@@ -109,7 +105,7 @@ class _DashboardState extends State<Dashboard> {
                   Row(
                     children: [
                       Text("All", style: mTextStyle14()),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Image.asset(
@@ -121,7 +117,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             SizedBox(
@@ -141,7 +137,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -171,7 +167,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -193,7 +189,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -214,7 +210,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Container(
@@ -234,7 +230,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Row(
                       children: [
                         Text("All", style: mTextStyle14()),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Image.asset(
@@ -247,7 +243,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             SizedBox(
@@ -262,18 +258,18 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CreateTextMenu()),
+                              builder: (context) => const CreateTextMenu()),
                         );
                       },
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
                           width: 330,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Rectangle 39389.png'),
@@ -282,7 +278,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("Create New\n Text Menu",
@@ -297,18 +293,18 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CreateImageMenu()),
+                              builder: (context) => const CreateImageMenu()),
                         );
                       },
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
                           width: 330,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Rectangle 39389.png'),
@@ -317,7 +313,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("Create New\n Image Menu",
@@ -331,7 +327,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -343,7 +339,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -363,7 +359,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -383,7 +379,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -405,14 +401,14 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReceivedOrders()),
+                  MaterialPageRoute(builder: (context) => const ReceivedOrders()),
                 );
               },
               child: Container(
@@ -432,7 +428,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Row(
                         children: [
                           Text("All", style: mTextStyle14()),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Image.asset(
@@ -446,7 +442,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             SizedBox(
@@ -457,7 +453,7 @@ class _DashboardState extends State<Dashboard> {
                   scrollDirection: Axis.horizontal,
                   children: [
                     Card(
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -472,7 +468,7 @@ class _DashboardState extends State<Dashboard> {
                         child: Container(
                           width: 300,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Frame 48095724.png'),
@@ -481,7 +477,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("View Your\n Orders",
@@ -500,14 +496,14 @@ class _DashboardState extends State<Dashboard> {
                         );
                       },
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
                           width: 300,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Frame 48095724.png'),
@@ -516,7 +512,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("View Received\n Orders",
@@ -530,7 +526,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -542,7 +538,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -562,7 +558,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -582,7 +578,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -604,7 +600,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Container(
@@ -624,7 +620,7 @@ class _DashboardState extends State<Dashboard> {
                     child: Row(
                       children: [
                         Text("All", style: mTextStyle14()),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Image.asset(
@@ -637,7 +633,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             GestureDetector(
@@ -656,14 +652,14 @@ class _DashboardState extends State<Dashboard> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
                           width: 330,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Rectangle 39389-1.png'),
@@ -672,7 +668,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("View Earning\n Summary",
@@ -681,18 +677,18 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ), //
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: Container(
                           width: 330,
                           height: 130,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(
                                   './assets/images/dashboard/Rectangle 39389-1.png'),
@@ -701,7 +697,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
                               child: Text("View Earning\n Summary",
@@ -715,7 +711,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -727,7 +723,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -747,7 +743,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -768,7 +764,7 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),

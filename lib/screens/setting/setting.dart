@@ -32,7 +32,7 @@ class _SettingState extends State<Setting> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -41,7 +41,7 @@ class _SettingState extends State<Setting> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Row(
@@ -72,7 +72,7 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             GestureDetector(
               onTap: (){
                 Navigator.push(
@@ -86,7 +86,7 @@ class _SettingState extends State<Setting> {
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -102,7 +102,7 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             GestureDetector(
@@ -118,7 +118,7 @@ class _SettingState extends State<Setting> {
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -134,7 +134,7 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             GestureDetector(
@@ -150,7 +150,7 @@ class _SettingState extends State<Setting> {
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -166,7 +166,7 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             GestureDetector(
@@ -190,7 +190,7 @@ class _SettingState extends State<Setting> {
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -206,7 +206,7 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
           ],

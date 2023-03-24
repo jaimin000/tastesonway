@@ -19,7 +19,7 @@ class FAQ extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -28,7 +28,7 @@ class FAQ extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -45,14 +45,14 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -69,14 +69,14 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -93,14 +93,14 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -117,14 +117,14 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(37, 40, 48, 1),
+                    color: const Color.fromRGBO(37, 40, 48, 1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Padding(
@@ -141,7 +141,7 @@ class FAQ extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
             ],

@@ -13,7 +13,7 @@ class _MenuItemsState extends State<MenuItems> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //step 1
       Column(
         children: [
@@ -23,7 +23,7 @@ class _MenuItemsState extends State<MenuItems> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -31,7 +31,7 @@ class _MenuItemsState extends State<MenuItems> {
                     Icons.search,
                     color: orangeColor(),
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -43,7 +43,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width,
@@ -54,8 +54,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -88,7 +88,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -101,8 +101,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -135,7 +135,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -148,8 +148,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -182,7 +182,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
@@ -197,7 +197,7 @@ class _MenuItemsState extends State<MenuItems> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -205,7 +205,7 @@ class _MenuItemsState extends State<MenuItems> {
                     Icons.search,
                     color: orangeColor(),
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -217,7 +217,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width,
@@ -228,8 +228,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -262,7 +262,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -275,8 +275,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -309,7 +309,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -322,8 +322,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -356,7 +356,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
@@ -371,7 +371,7 @@ class _MenuItemsState extends State<MenuItems> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -379,7 +379,7 @@ class _MenuItemsState extends State<MenuItems> {
                     Icons.search,
                     color: orangeColor(),
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -391,7 +391,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
             height: 120,
             width: MediaQuery.of(context).size.width,
@@ -402,8 +402,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -436,7 +436,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -449,8 +449,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -483,7 +483,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           SizedBox(
@@ -496,8 +496,8 @@ class _MenuItemsState extends State<MenuItems> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -530,7 +530,7 @@ class _MenuItemsState extends State<MenuItems> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
@@ -549,10 +549,10 @@ class _MenuItemsState extends State<MenuItems> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Row(
@@ -569,7 +569,7 @@ class _MenuItemsState extends State<MenuItems> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -598,7 +598,7 @@ class _MenuItemsState extends State<MenuItems> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -627,7 +627,7 @@ class _MenuItemsState extends State<MenuItems> {
                     shadowColor: Colors.black,
                     color: step == 2
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -648,11 +648,11 @@ class _MenuItemsState extends State<MenuItems> {
                 // ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
-            _widgetList[step],
-            SizedBox(
+            widgetList[step],
+            const SizedBox(
               height: 10,
             ),
           ],

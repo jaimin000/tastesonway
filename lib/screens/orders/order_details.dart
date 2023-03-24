@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/profile/profile.dart';
 import '../../theme_data.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -14,14 +13,14 @@ class _OrderDetailsState extends State<OrderDetails> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //today
       Column(
         children: [
           SizedBox(
             child: Card(
               shadowColor: Colors.black,
-              color: Color.fromRGBO(64, 68, 81, 1),
+              color: const Color.fromRGBO(64, 68, 81, 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
@@ -30,7 +29,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -47,8 +46,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -58,7 +57,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       padding: const EdgeInsets.symmetric(horizontal: 7.0),
                       child: Text("Test Menu Items",style:cTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -76,8 +75,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -100,7 +99,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -118,7 +117,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Divider(
                       thickness: 1,
                       height: 20,
@@ -126,13 +125,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                       indent: 10,
                       endIndent: 10,
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Align(alignment: Alignment.centerLeft, child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text("Order Details",style:mTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -155,7 +154,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -173,7 +172,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -191,7 +190,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -209,7 +208,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -231,7 +230,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
 
 
                   ],
@@ -239,7 +238,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
@@ -256,7 +255,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style: mTextStyle14(),
                     ),
                   ))),
-          SizedBox(height:25),
+          const SizedBox(height:25),
         ],
       ),
       //tomorrow
@@ -265,7 +264,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           SizedBox(
             child: Card(
               shadowColor: Colors.black,
-              color: Color.fromRGBO(64, 68, 81, 1),
+              color: const Color.fromRGBO(64, 68, 81, 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
@@ -274,7 +273,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -291,8 +290,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -302,7 +301,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       padding: const EdgeInsets.symmetric(horizontal: 7.0),
                       child: Text("Test Menu Items",style:cTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -320,8 +319,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -344,7 +343,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -362,7 +361,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Divider(
                       thickness: 1,
                       height: 20,
@@ -370,13 +369,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                       indent: 10,
                       endIndent: 10,
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Align(alignment: Alignment.centerLeft, child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text("Order Details",style:mTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -399,7 +398,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -417,7 +416,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -435,7 +434,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -453,7 +452,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -475,7 +474,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
 
 
                   ],
@@ -483,7 +482,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
@@ -500,7 +499,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style: mTextStyle14(),
                     ),
                   ))),
-          SizedBox(height:25),
+          const SizedBox(height:25),
         ],
       ),
       //other
@@ -509,7 +508,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           SizedBox(
             child: Card(
               shadowColor: Colors.black,
-              color: Color.fromRGBO(64, 68, 81, 1),
+              color: const Color.fromRGBO(64, 68, 81, 1),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
@@ -518,7 +517,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -535,8 +534,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -546,7 +545,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       padding: const EdgeInsets.symmetric(horizontal: 7.0),
                       child: Text("Test Menu Items",style:cTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -564,8 +563,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -588,7 +587,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -606,7 +605,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Divider(
                       thickness: 1,
                       height: 20,
@@ -614,13 +613,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                       indent: 10,
                       endIndent: 10,
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Align(alignment: Alignment.centerLeft, child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text("Order Details",style:mTextStyle16(),),
                     )),
-                    SizedBox(height: 5,),
-                    Divider(
+                    const SizedBox(height: 5,),
+                    const Divider(
                       height: 20,
                       color:Colors.white,
                       indent: 10,
@@ -643,7 +642,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -661,7 +660,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -679,7 +678,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -697,7 +696,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Row(
@@ -719,7 +718,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
 
 
                   ],
@@ -727,7 +726,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               ),
             ),
           ),
-          SizedBox(height:25),
+          const SizedBox(height:25),
           SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
@@ -744,7 +743,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style: mTextStyle14(),
                     ),
                   ))),
-          SizedBox(height:25),
+          const SizedBox(height:25),
         ],
       ),
     ];
@@ -759,10 +758,10 @@ class _OrderDetailsState extends State<OrderDetails> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Row(
@@ -779,7 +778,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -795,7 +794,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -808,7 +807,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -824,7 +823,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -837,7 +836,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     shadowColor: Colors.black,
                     color: step == 2
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -855,11 +854,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
-            _widgetList[step],
-            SizedBox(
+            widgetList[step],
+            const SizedBox(
               height: 10,
             ),
           ],

@@ -18,10 +18,10 @@ class BankDetails extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
 
@@ -35,13 +35,13 @@ class BankDetails extends StatelessWidget {
 
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
@@ -49,17 +49,17 @@ class BankDetails extends StatelessWidget {
                         style: mTextStyle18(),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -70,17 +70,17 @@ class BankDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -91,18 +91,18 @@ class BankDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -113,18 +113,18 @@ class BankDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -135,16 +135,16 @@ class BankDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white), //<-- SEE HERE
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -155,7 +155,7 @@ class BankDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
@@ -172,7 +172,7 @@ class BankDetails extends StatelessWidget {
                                   style: mTextStyle14(),
                                 ),
                               ))),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                     ],

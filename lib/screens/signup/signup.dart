@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -76,7 +75,7 @@ class _SignupState extends State<Signup> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   SizedBox(
@@ -84,11 +83,11 @@ class _SignupState extends State<Signup> {
                     width: MediaQuery.of(context).size.width,
                     child: otpVisibility ? Image.asset('assets/images/otp.png') :Image.asset('assets/images/mobile.png'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Card(
                       shadowColor: Colors.black,
                       color: cardColor(),
@@ -96,14 +95,14 @@ class _SignupState extends State<Signup> {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Container(
-                        margin: EdgeInsets.all(8),
-                        padding: EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               otpVisibility?
@@ -133,7 +132,7 @@ class _SignupState extends State<Signup> {
                               ):IntlPhoneField(
                                 initialCountryCode: 'IN',
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(10.0),
+                                  contentPadding: const EdgeInsets.all(10.0),
                                   fillColor: inputColor(),
                                   filled: true,
                                   border: OutlineInputBorder(
@@ -175,7 +174,7 @@ class _SignupState extends State<Signup> {
                                           ),
                                         ))),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               // !otpVisibility ? SizedBox(
@@ -242,7 +241,7 @@ class _SignupState extends State<Signup> {
       isLoading = true;
     });
     auth.verifyPhoneNumber(
-      phoneNumber: "+"+ phoneCode + phoneController.text,
+      phoneNumber: "+$phoneCode${phoneController.text}",
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential).then((value) {
           print("You are logged in successfully");
@@ -297,7 +296,7 @@ class _SignupState extends State<Signup> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => Home(),
+              builder: (context) => const Home(),
             ),
           );
         } else {

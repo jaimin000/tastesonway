@@ -16,7 +16,7 @@ class EditItem extends StatefulWidget {
   final String description;
   final int price;
 
-  EditItem({required this.id,
+  const EditItem({required this.id,
     required this.menu_id,
     required this.name,
     required this.price,
@@ -52,10 +52,10 @@ class _EditItemState extends State<EditItem> {
               width: MediaQuery.of(context).size.width * 0.5,
               child: TextFormField(
                 controller: namecontroller,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -80,10 +80,10 @@ class _EditItemState extends State<EditItem> {
               width: MediaQuery.of(context).size.width * 0.3,
               child: TextFormField(
                 controller: pricecontroller,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -106,7 +106,7 @@ class _EditItemState extends State<EditItem> {
             ),
           ],
         ),
-        SizedBox(height:10),
+        const SizedBox(height:10),
       ],
     );
   }
@@ -142,15 +142,14 @@ class _EditItemState extends State<EditItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-          // 'http://192.168.1.26:24/api/v2/create-or-update-menu-item'),
-            'https://dev-api.tastesonway.com/api/v2/create-or-update-menu-item'),
+            '$devUrl/v2/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '${widget.menu_id}';
-      request.fields['name'] = '${namecontroller.text}';
+      request.fields['name'] = namecontroller.text;
       request.fields['category_id'] = '1';
-      request.fields['amount'] = '${pricecontroller.text}';
-      request.fields['description'] = '${descriptioncontroller.text}';
+      request.fields['amount'] = pricecontroller.text;
+      request.fields['description'] = descriptioncontroller.text;
       request.fields['type'] = '$type';
       request.fields['id'] = '${widget.id}';
       for (int i = 0; i < toppingName.length; i++) {
@@ -176,7 +175,7 @@ class _EditItemState extends State<EditItem> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -189,12 +188,12 @@ class _EditItemState extends State<EditItem> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.check_circle,
                     color: Colors.green,
                     size: 50.0,
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Text(
                     'Menu Item Added Successfully',
                     style: mTextStyle14(),
@@ -210,7 +209,7 @@ class _EditItemState extends State<EditItem> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -264,7 +263,7 @@ class _EditItemState extends State<EditItem> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -275,7 +274,7 @@ class _EditItemState extends State<EditItem> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Card(
@@ -288,8 +287,8 @@ class _EditItemState extends State<EditItem> {
                 // height: 630,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -300,12 +299,12 @@ class _EditItemState extends State<EditItem> {
                           'Basic Details',
                           style: mTextStyle18(),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Text(
                           'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                           style: cTextStyle12(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         SizedBox(
@@ -313,10 +312,10 @@ class _EditItemState extends State<EditItem> {
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             controller: namecontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -333,7 +332,7 @@ class _EditItemState extends State<EditItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -341,10 +340,10 @@ class _EditItemState extends State<EditItem> {
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             controller: pricecontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -361,7 +360,7 @@ class _EditItemState extends State<EditItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -369,7 +368,7 @@ class _EditItemState extends State<EditItem> {
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(37, 40, 48, 1),
+                              color: const Color.fromRGBO(37, 40, 48, 1),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: InkWell(
@@ -400,7 +399,7 @@ class _EditItemState extends State<EditItem> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -408,7 +407,7 @@ class _EditItemState extends State<EditItem> {
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(37, 40, 48, 1),
+                              color: const Color.fromRGBO(37, 40, 48, 1),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Row(
@@ -441,7 +440,7 @@ class _EditItemState extends State<EditItem> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -449,12 +448,12 @@ class _EditItemState extends State<EditItem> {
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             controller: descriptioncontroller,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                             minLines: 3,
                             maxLines: 5,
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -471,7 +470,7 @@ class _EditItemState extends State<EditItem> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -488,9 +487,9 @@ class _EditItemState extends State<EditItem> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromRGBO(37, 40, 48, 1),
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
                                   ),
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       "+",
                                       style: TextStyle(
@@ -503,7 +502,7 @@ class _EditItemState extends State<EditItem> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -528,7 +527,7 @@ class _EditItemState extends State<EditItem> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CreateTextMenu2()),);
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
                                 }
                               },
                               child: Card(

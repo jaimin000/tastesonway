@@ -4,10 +4,14 @@ import 'package:http/http.dart' as http;
 var tokenvalue;
 var ownerId;
 
+const devUrl = "http://192.168.1.26:24/api";
+const liveUrl = "https://dev-api.tastesonway.com/api/v2";
+
 Future<String> getToken() async {
   const url =
       // "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
-  "https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
+  //"https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
+  "$devUrl/users/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",
@@ -23,14 +27,13 @@ Future<String> getToken() async {
   });
   final json = jsonDecode(tokenResponse.body);
   tokenvalue = (json['data'][0]['token']).toString();
-  //print(tokenvalue);
   return tokenvalue;
 }
 
 
 Future<int> getOwnerId() async {
   const url =
-      "https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
+      "$devUrl/v2/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",

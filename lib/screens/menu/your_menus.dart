@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../../theme_data.dart';
 
 class YourMenus extends StatefulWidget {
@@ -13,7 +12,7 @@ class _YourMenusState extends State<YourMenus> {
   int step = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //text
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -23,14 +22,14 @@ class _YourMenusState extends State<YourMenus> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
                   suffixIcon: Icon(
                     Icons.search,
                     color: orangeColor(),
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -41,7 +40,7 @@ class _YourMenusState extends State<YourMenus> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             SizedBox(
@@ -54,8 +53,8 @@ class _YourMenusState extends State<YourMenus> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Row(
                     children: [
                       ClipRRect(
@@ -98,8 +97,8 @@ class _YourMenusState extends State<YourMenus> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Row(
                     children: [
                       ClipRRect(
@@ -142,8 +141,8 @@ class _YourMenusState extends State<YourMenus> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: Row(
                     children: [
                       ClipRRect(
@@ -188,7 +187,7 @@ class _YourMenusState extends State<YourMenus> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: TextField(
-                style: TextStyle(color: Colors.white), //<-- SEE HERE
+                style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -196,7 +195,7 @@ class _YourMenusState extends State<YourMenus> {
                     Icons.search,
                     color: orangeColor(),
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
+                  contentPadding: const EdgeInsets.all(10.0),
                   fillColor: inputColor(),
                   filled: true,
                   border: OutlineInputBorder(
@@ -208,7 +207,7 @@ class _YourMenusState extends State<YourMenus> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -220,7 +219,7 @@ class _YourMenusState extends State<YourMenus> {
                 Row(
                   children: [
                     Text("All", style: mTextStyle14()),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Image.asset(
@@ -232,7 +231,7 @@ class _YourMenusState extends State<YourMenus> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -259,12 +258,12 @@ class _YourMenusState extends State<YourMenus> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -279,12 +278,12 @@ class _YourMenusState extends State<YourMenus> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -299,12 +298,12 @@ class _YourMenusState extends State<YourMenus> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -430,7 +429,7 @@ class _YourMenusState extends State<YourMenus> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -449,7 +448,7 @@ class _YourMenusState extends State<YourMenus> {
                       shadowColor: Colors.black,
                       color: step == 0
                           ? orangeColor()
-                          : Color.fromRGBO(53, 56, 66, 1),
+                          : const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -475,7 +474,7 @@ class _YourMenusState extends State<YourMenus> {
                       shadowColor: Colors.black,
                       color: step == 1
                           ? orangeColor()
-                          : Color.fromRGBO(53, 56, 66, 1),
+                          : const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -494,10 +493,10 @@ class _YourMenusState extends State<YourMenus> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            _widgetList[step],
+            widgetList[step],
           ],
         ),
       ),

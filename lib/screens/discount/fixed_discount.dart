@@ -30,10 +30,10 @@ class _FixedDiscountState extends State<FixedDiscount> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
 
@@ -47,13 +47,13 @@ class _FixedDiscountState extends State<FixedDiscount> {
 
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Padding(
@@ -64,17 +64,17 @@ class _FixedDiscountState extends State<FixedDiscount> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -85,7 +85,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -94,7 +94,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                         child:
                         Container(
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(37, 40, 48, 1),
+                            color: const Color.fromRGBO(37, 40, 48, 1),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(
@@ -108,7 +108,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                                   style: inputTextStyle16(),
                                 ),
                                 DropdownButton(
-                                  underline: SizedBox(),
+                                  underline: const SizedBox(),
                                   value: dropdownvalue,
                                   icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(255, 114, 105, 1),),
                                   items: items.map((String items) {
@@ -128,18 +128,18 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -150,18 +150,18 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -172,16 +172,16 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         height: 45,
                         width: MediaQuery.of(context).size.width,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
 
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
@@ -192,7 +192,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Padding(
@@ -202,7 +202,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           style: mTextStyle18(),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
@@ -213,10 +213,10 @@ class _FixedDiscountState extends State<FixedDiscount> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
+                                contentPadding: const EdgeInsets.all(10.0),
                                 fillColor: inputColor(),
                                 filled: true,
                                 border: OutlineInputBorder(
@@ -231,10 +231,10 @@ class _FixedDiscountState extends State<FixedDiscount> {
                             height: 40,
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: TextField(
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
+                                contentPadding: const EdgeInsets.all(10.0),
                                 fillColor: inputColor(),
                                 filled: true,
                                 border: OutlineInputBorder(
@@ -248,7 +248,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
 
                         ],
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,
@@ -265,7 +265,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                                   style: mTextStyle14(),
                                 ),
                               ))),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                     ],

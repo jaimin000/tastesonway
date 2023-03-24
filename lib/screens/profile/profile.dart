@@ -27,7 +27,7 @@ class Profile extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
           ),
         ],
       ),
@@ -46,7 +46,7 @@ class Profile extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
                               './assets/images/profile/image 28.png'),
@@ -58,18 +58,18 @@ class Profile extends StatelessWidget {
                       //margin: EdgeInsets.only(left: 82.87, top: 55.24),
                     ),
                     Positioned(
+                      left: -380,
+                      top: 150.78,
                       child: Container(
                         width: 1003.91,
                         height: 1037.91,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color.fromRGBO(39, 42, 50, 1),
                           shape: BoxShape.circle,
                         ),
                       ),
-                      left: -380,
-                      top: 150.78,
                     ),
-                    Positioned(
+                    const Positioned(
                       top: 70,
                       right: 70,
                       child: CircleAvatar(
@@ -83,11 +83,11 @@ class Profile extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 35,
           ),
           Container(
-            color: Color.fromRGBO(39, 42, 50, 1),
+            color: const Color.fromRGBO(39, 42, 50, 1),
             child: Text(
               'Shania Fraser (ENG)',
               textAlign: TextAlign.center,
@@ -95,8 +95,8 @@ class Profile extends StatelessWidget {
             ),
           ),
           Container(
-            color: Color.fromRGBO(39, 42, 50, 1),
-            padding: EdgeInsets.all(8.0),
+            color: const Color.fromRGBO(39, 42, 50, 1),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
               textAlign: TextAlign.center,
@@ -104,8 +104,8 @@ class Profile extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
-            color: Color.fromRGBO(39, 42, 50, 1),
+            padding: const EdgeInsets.all(10),
+            color: const Color.fromRGBO(39, 42, 50, 1),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +116,7 @@ class Profile extends StatelessWidget {
                       Icons.star_border,
                       color: fontColor(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text('4.8(163)', style: cTextStyle12())
@@ -128,7 +128,7 @@ class Profile extends StatelessWidget {
                       Icons.timer_sharp,
                       color: fontColor(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text('20 min', style: cTextStyle12())
@@ -140,7 +140,7 @@ class Profile extends StatelessWidget {
                       Icons.local_fire_department_outlined,
                       color: fontColor(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text('150 kcal', style: cTextStyle12())
@@ -151,9 +151,9 @@ class Profile extends StatelessWidget {
           ),
           Container(
             //height: 1150,
-            color: Color.fromRGBO(39, 42, 50, 1),
+            color: const Color.fromRGBO(39, 42, 50, 1),
             child: GridView.count(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(20),
               crossAxisCount: 2,
               mainAxisSpacing: 10,
@@ -169,7 +169,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -198,7 +198,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -228,7 +228,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -258,7 +258,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -284,12 +284,12 @@ class Profile extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ReceivedOrders()),
+                          builder: (context) => const ReceivedOrders()),
                     );
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -320,7 +320,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -350,7 +350,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -376,12 +376,12 @@ class Profile extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Tutorials()),
+                          builder: (context) => const Tutorials()),
                     );
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -404,7 +404,7 @@ class Profile extends StatelessWidget {
                 ),
                 Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(53, 56, 66, 1),
+                  color: const Color.fromRGBO(53, 56, 66, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -434,7 +434,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -464,7 +464,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
@@ -494,7 +494,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),

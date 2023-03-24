@@ -20,12 +20,12 @@ class ChoosePromo extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Padding(
@@ -35,12 +35,12 @@ class ChoosePromo extends StatelessWidget {
                 style: mTextStyle20(),
               ),
             ),
-            SizedBox(height: 5,),
+            const SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text("These Promos will run all on items in your outlet",style: cardTitleStyle14(),),
             ),
-            SizedBox(height:25),
+            const SizedBox(height:25),
             GestureDetector(
               onTap: (){
                 Navigator.push(
@@ -56,8 +56,8 @@ class ChoosePromo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -82,7 +82,7 @@ class ChoosePromo extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(color: Colors.white,
+                      const Divider(color: Colors.white,
                       height:25,
                       indent: 5,
                         endIndent: 5,
@@ -97,7 +97,7 @@ class ChoosePromo extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             GestureDetector(
               onTap: (){
                 Navigator.push(
@@ -113,8 +113,8 @@ class ChoosePromo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -139,7 +139,7 @@ class ChoosePromo extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(color: Colors.white,
+                      const Divider(color: Colors.white,
                         height:25,
                         indent: 5,
                         endIndent: 5,

@@ -139,15 +139,14 @@ class _AddNewItemState extends State<AddNewItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            // 'http://192.168.1.26:24/api/v2/create-or-update-menu-item'),
-          'https://dev-api.tastesonway.com/api/v2/create-or-update-menu-item'),
+          '$devUrl/v2/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';
-      request.fields['name'] = '$name';
-      request.fields['description']='$description';
+      request.fields['name'] = name;
+      request.fields['description']=description;
       request.fields['category_id'] = '1';
-      request.fields['amount'] = '$price';
+      request.fields['amount'] = price;
       request.fields['type'] = '$type';
       for (int i = 0; i < toppingName.length; i++) {
         request.fields['ingridients[$i][name]'] = '${toppingName[i]}';
@@ -528,7 +527,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CreateTextMenu2()),);
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
                                 }
                               },
                               child: Card(

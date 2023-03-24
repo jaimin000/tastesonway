@@ -25,7 +25,7 @@ class _MenuDesignState extends State<MenuDesign> {
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Padding(
@@ -52,12 +52,12 @@ class _MenuDesignState extends State<MenuDesign> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -72,12 +72,12 @@ class _MenuDesignState extends State<MenuDesign> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -92,12 +92,12 @@ class _MenuDesignState extends State<MenuDesign> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),

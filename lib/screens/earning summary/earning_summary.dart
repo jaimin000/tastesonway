@@ -13,7 +13,7 @@ class _EarningSummaryState extends State<EarningSummary> {
   int step = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //week
       Card(
         shadowColor: Colors.black,
@@ -51,7 +51,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -82,7 +82,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                                 builder: (context) => const PaymentDetails()),
                           );
                         },
-                        child: SizedBox(
+                        child: const SizedBox(
                           height:30,
                           width:100,
                           child: Card(
@@ -96,20 +96,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -129,7 +129,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -145,20 +145,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
@@ -179,7 +179,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -195,20 +195,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -228,7 +228,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -244,7 +244,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
               ],
             ),
@@ -262,8 +262,8 @@ class _EarningSummaryState extends State<EarningSummary> {
 
           width: MediaQuery.of(context).size.width,
           child: Container(
-            margin: EdgeInsets.all(8),
-            padding: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -275,20 +275,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                     style: mTextStyle18(),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -319,7 +319,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                                 builder: (context) => const PaymentDetails()),
                           );
                         },
-                        child: SizedBox(
+                        child: const SizedBox(
                           height:30,
                           width:100,
                           child: Card(
@@ -333,20 +333,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -366,7 +366,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -382,20 +382,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
@@ -416,7 +416,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -432,20 +432,20 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -465,7 +465,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -481,7 +481,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
               ],
             ),
@@ -499,8 +499,8 @@ class _EarningSummaryState extends State<EarningSummary> {
 
           width: MediaQuery.of(context).size.width,
           child: Container(
-            margin: EdgeInsets.all(8),
-            padding: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -512,7 +512,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     style: mTextStyle18(),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -520,13 +520,13 @@ class _EarningSummaryState extends State<EarningSummary> {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -557,7 +557,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                                 builder: (context) => const PaymentDetails()),
                           );
                         },
-                        child: SizedBox(
+                        child: const SizedBox(
                           height:30,
                           width:100,
                           child: Card(
@@ -571,7 +571,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -579,13 +579,13 @@ class _EarningSummaryState extends State<EarningSummary> {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -605,7 +605,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -621,7 +621,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -629,13 +629,13 @@ class _EarningSummaryState extends State<EarningSummary> {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
@@ -656,7 +656,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -672,7 +672,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -680,13 +680,13 @@ class _EarningSummaryState extends State<EarningSummary> {
                       width: MediaQuery.of(context).size.width,
                       child: Card(
                         shadowColor: Colors.black,
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
                         child: Container(
                           height: 70,
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment:MainAxisAlignment.spaceAround,
                             children: [
@@ -706,7 +706,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom:-10,
                       right:110,
                       child: SizedBox(
@@ -722,7 +722,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   ],
 
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
 
               ],
             ),
@@ -743,10 +743,10 @@ class _EarningSummaryState extends State<EarningSummary> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
 
@@ -764,7 +764,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -780,7 +780,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -793,7 +793,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -809,7 +809,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -822,7 +822,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     shadowColor: Colors.black,
                     color: step == 2
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -838,16 +838,16 @@ class _EarningSummaryState extends State<EarningSummary> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
-            _widgetList[step],
-            SizedBox(
+            widgetList[step],
+            const SizedBox(
               height: 10,
             ),
           ],

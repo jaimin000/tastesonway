@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/menu/text%20menu/add_new_item.dart';
-import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
 import '../../../theme_data.dart';
 
 class CreateImageMenu extends StatefulWidget {
@@ -17,10 +16,10 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
   int step = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //step 1
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Card(
           shadowColor: Colors.black,
           color: cardColor(),
@@ -31,8 +30,8 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
             height: 300,
             width: MediaQuery.of(context).size.width,
             child: Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -41,23 +40,23 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     'Basic Details',
                     style: mTextStyle18(),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                     style: cTextStyle12(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     height: 45,
                     width: MediaQuery.of(context).size.width,
                     child: TextField(
-                      style: TextStyle(color: Colors.white), //<-- SEE HERE
+                      style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(10.0),
+                        contentPadding: const EdgeInsets.all(10.0),
                         fillColor: inputColor(),
                         filled: true,
                         border: OutlineInputBorder(
@@ -68,7 +67,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -76,7 +75,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     width: MediaQuery.of(context).size.width,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(37, 40, 48, 1),
+                        color: const Color.fromRGBO(37, 40, 48, 1),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Row(
@@ -107,7 +106,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   GestureDetector(
@@ -133,7 +132,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                               ),
                             ))),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -142,7 +141,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
       ),
       //step 2
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Card(
           shadowColor: Colors.black,
           color: cardColor(),
@@ -153,8 +152,8 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
             height: 500,
             width: MediaQuery.of(context).size.width,
             child: Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(8),
+              margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -194,19 +193,19 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                     style: cTextStyle12(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width,
                     child: TextField(
-                      style: TextStyle(color: Colors.white), //<-- SEE HERE
+                      style: const TextStyle(color: Colors.white), //<-- SEE HERE
 
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
@@ -214,7 +213,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                           Icons.search,
                           color: orangeColor(),
                         ),
-                        contentPadding: EdgeInsets.all(10.0),
+                        contentPadding: const EdgeInsets.all(10.0),
                         fillColor: inputColor(),
                         filled: true,
                         border: OutlineInputBorder(
@@ -225,7 +224,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -266,8 +265,8 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
                             child: Divider(
                               color: Colors.white,
                             ),
@@ -335,7 +334,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           SizedBox(
@@ -401,14 +400,14 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   GestureDetector(
                     onTap: (){
                       setState(() {
@@ -431,7 +430,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                           ),
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -454,7 +453,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -468,7 +467,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                   child: Row(
                     children: [
                       Text("All", style: mTextStyle14()),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Image.asset(
@@ -481,7 +480,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -508,12 +507,12 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -528,12 +527,12 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -548,12 +547,12 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -572,7 +571,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(
@@ -652,7 +651,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
       ),
       body: ListView(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Padding(
@@ -662,7 +661,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               style: mTextStyle20(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Padding(
@@ -681,7 +680,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -708,7 +707,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -735,7 +734,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     shadowColor: Colors.black,
                     color: step == 2
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -755,11 +754,11 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
-          _widgetList[step],
-          SizedBox(
+          widgetList[step],
+          const SizedBox(
             height: 10,
           ),
         ],

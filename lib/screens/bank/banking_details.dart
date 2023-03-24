@@ -20,13 +20,13 @@ class BankingDetails extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
 
-            SizedBox(height:25),
+            const SizedBox(height:25),
             GestureDetector(
               onTap: (){
                 Navigator.push(
@@ -42,8 +42,8 @@ class BankingDetails extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -68,7 +68,7 @@ class BankingDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(color: Colors.white,
+                      const Divider(color: Colors.white,
                         height:25,
                         indent: 5,
                         endIndent: 5,
@@ -83,7 +83,7 @@ class BankingDetails extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height:10),
+            const SizedBox(height:10),
             GestureDetector(
               onTap: (){
                 Navigator.push(
@@ -99,8 +99,8 @@ class BankingDetails extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(8),
-                  margin: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -126,7 +126,7 @@ class BankingDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(color: Colors.white,
+                      const Divider(color: Colors.white,
                         height:25,
                         indent: 5,
                         endIndent: 5,

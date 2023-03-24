@@ -18,10 +18,10 @@ class PaymentReceived extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Card(
@@ -33,8 +33,8 @@ class PaymentReceived extends StatelessWidget {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,18 +46,18 @@ class PaymentReceived extends StatelessWidget {
                           style: mTextStyle18(),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -77,7 +77,7 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         height: 30,
                         indent: 10,
                         endIndent: 10,
@@ -87,17 +87,17 @@ class PaymentReceived extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 50,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
                                   radius: 40,
@@ -111,18 +111,19 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
+                          // ignore: prefer_const_constructors
                           color: Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,18 +145,18 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 110,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,18 +178,18 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,                              children: [
@@ -209,18 +210,18 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,                              children: [
@@ -240,18 +241,18 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,                              children: [
@@ -271,18 +272,18 @@ class PaymentReceived extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height:10),
+                      const SizedBox(height:10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: Card(
                           shadowColor: Colors.black,
-                          color: Color.fromRGBO(37, 40, 48, 1),
+                          color: const Color.fromRGBO(37, 40, 48, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
                           ),
                           child: Container(
                             height: 30,
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,                              children: [

@@ -18,6 +18,7 @@ class _ViewStoriesState extends State<ViewStories> {
   //get story
   final StoryController controller = StoryController();
 
+  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -54,11 +55,11 @@ class _ViewStoriesState extends State<ViewStories> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Story'),
+        title: const Text('View Story'),
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () {
               DeleteData();
             },

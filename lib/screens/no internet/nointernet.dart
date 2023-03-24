@@ -12,19 +12,19 @@ class NoInternetScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset('assets/images/no_internet.png',width: 250,height: 400,),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'No internet connection available \n Please check your connection',
               style: TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: orangeColor(),
               ),
               onPressed: () => _checkInternetConnectivity(context),
-              child: Text('Retry'),
+              child: const Text('Retry'),
             ),
           ],
         ),
@@ -40,7 +40,7 @@ class NoInternetScreen extends StatelessWidget {
       }
     } on SocketException catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('No internet connection available.'),
           duration: Duration(seconds: 3),
         ),

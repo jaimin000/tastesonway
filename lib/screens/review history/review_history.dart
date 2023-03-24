@@ -17,29 +17,29 @@ class ReviewHistory extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Column(
               children: [
-                SizedBox(height: 25,),
+                const SizedBox(height: 25,),
                 SizedBox(
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -50,45 +50,45 @@ class ReviewHistory extends StatelessWidget {
                               Icon(Icons.delete_rounded,color: orangeColor(),),
                             ],
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'Your Menu Changes is in Review',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:5),
-                          Divider(
+                          const SizedBox(height:5),
+                          const Divider(
                             height: 20,
                             color: Colors.white,
                             endIndent: 5,
                             indent: 5,
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'You have changed Menu Details, our team will Review it and get back to you!',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
 
                         ],
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 25,),
+                const SizedBox(height: 25,),
                 SizedBox(
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -99,45 +99,45 @@ class ReviewHistory extends StatelessWidget {
                               Icon(Icons.delete_rounded,color: orangeColor(),),
                             ],
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'Your Menu Changes is in Review',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:5),
-                          Divider(
+                          const SizedBox(height:5),
+                          const Divider(
                             height: 20,
                             color: Colors.white,
                             endIndent: 5,
                             indent: 5,
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'You have changed Menu Details, our team will Review it and get back to you!',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
 
                         ],
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 25,),
+                const SizedBox(height: 25,),
                 SizedBox(
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -148,24 +148,24 @@ class ReviewHistory extends StatelessWidget {
                               Icon(Icons.delete_rounded,color: orangeColor(),),
                             ],
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'Your Menu Changes is in Review',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:5),
-                          Divider(
+                          const SizedBox(height:5),
+                          const Divider(
                             height: 20,
                             color: Colors.white,
                             endIndent: 5,
                             indent: 5,
                           ),
-                          SizedBox(height:5),
+                          const SizedBox(height:5),
                           Text(
                             'You have changed Menu Details, our team will Review it and get back to you!',
                             style: cTextStyle16(),
                           ),
-                          SizedBox(height:10),
+                          const SizedBox(height:10),
 
                         ],
                       ),

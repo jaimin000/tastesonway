@@ -18,15 +18,15 @@ class YourOrders extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.filter_alt_outlined),
+            icon: const Icon(Icons.filter_alt_outlined),
           ),
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Stack(
@@ -36,14 +36,14 @@ class YourOrders extends StatelessWidget {
                   height: 180,
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -78,8 +78,8 @@ class YourOrders extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Divider(
                             height: 20,
                             color: Colors.white,
@@ -88,7 +88,7 @@ class YourOrders extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -139,7 +139,7 @@ class YourOrders extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                             '25th Nov 2022',
@@ -151,7 +151,7 @@ class YourOrders extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             Stack(
               clipBehavior: Clip.none,
               children: [
@@ -159,14 +159,14 @@ class YourOrders extends StatelessWidget {
                   height: 180,
                   child: Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -201,8 +201,8 @@ class YourOrders extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
                           child: Divider(
                             height: 20,
                             color: Colors.white,
@@ -211,7 +211,7 @@ class YourOrders extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -262,7 +262,7 @@ class YourOrders extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                             '25th Nov 2022',

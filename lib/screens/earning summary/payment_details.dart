@@ -13,12 +13,12 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   int step = 0;
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //pending payment
       SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,13 +28,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 children: [
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
+                    color: const Color.fromRGBO(64, 68, 81, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Container(
                       height: 70,
-                      margin: EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -74,7 +74,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         height: 30,
                         width: 120,
                         child: Card(
-                          color: Color.fromRGBO(53, 56, 66, 1),
+                          color: const Color.fromRGBO(53, 56, 66, 1),
                           child: Center(
                               child: Text(
                             '5th Dec 2022',
@@ -89,7 +89,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -97,13 +97,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
+                      color: const Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -137,7 +137,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       height: 30,
                       width: 120,
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
@@ -150,7 +150,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -158,13 +158,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
+                      color: const Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -198,7 +198,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       height: 30,
                       width: 120,
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
@@ -219,7 +219,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -231,13 +231,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
+                      color: const Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -271,7 +271,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       height: 30,
                       width: 120,
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
@@ -284,20 +284,20 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Stack(
                 clipBehavior: Clip.none, children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
+                      color: const Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -331,7 +331,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       height: 30,
                       width: 120,
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
@@ -344,20 +344,20 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   ),
                 ],
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Stack(
                 clipBehavior: Clip.none, children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
+                      color: const Color.fromRGBO(64, 68, 81, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: Container(
                         height: 70,
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -391,7 +391,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       height: 30,
                       width: 120,
                       child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
                         child: Center(
                             child: Text(
                               '5th Dec 2022',
@@ -422,10 +422,10 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Row(
@@ -442,7 +442,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -468,7 +468,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -486,11 +486,11 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            _widgetList[step],
-            SizedBox(
+            widgetList[step],
+            const SizedBox(
               height: 10,
             ),
           ],

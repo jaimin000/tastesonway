@@ -17,17 +17,17 @@ class Tutorials extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             SizedBox(
               height: 60,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
@@ -45,7 +45,7 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             SizedBox(
@@ -53,7 +53,7 @@ class Tutorials extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
@@ -71,13 +71,13 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             SizedBox(
               height: 60,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
@@ -95,7 +95,7 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             SizedBox(
@@ -103,7 +103,7 @@ class Tutorials extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
@@ -121,13 +121,13 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             SizedBox(
               height: 60,
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
@@ -145,7 +145,7 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15
             ),
             SizedBox(
@@ -153,7 +153,7 @@ class Tutorials extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(37, 40, 48, 1),
+                  color: const Color.fromRGBO(37, 40, 48, 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(

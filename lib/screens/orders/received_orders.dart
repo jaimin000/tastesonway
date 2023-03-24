@@ -14,7 +14,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
+    List<Widget> widgetList = [
       //today
       Column(
         children: [
@@ -24,14 +24,14 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -66,8 +66,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -76,7 +76,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -124,7 +124,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -134,7 +134,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -147,21 +147,21 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               ),
             ],
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Stack(
             clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -196,8 +196,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -206,7 +206,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -254,7 +254,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -264,7 +264,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -288,14 +288,14 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -330,8 +330,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -340,7 +340,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -388,7 +388,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -398,7 +398,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -411,21 +411,21 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               ),
             ],
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Stack(
             clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -460,8 +460,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -470,7 +470,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -518,7 +518,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -528,7 +528,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -552,14 +552,14 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -594,8 +594,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -604,7 +604,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -652,7 +652,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -662,7 +662,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -675,21 +675,21 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               ),
             ],
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Stack(
             clipBehavior: Clip.none, children: [
               SizedBox(
                 height: 180,
                 child: Card(
                   shadowColor: Colors.black,
-                  color: Color.fromRGBO(64, 68, 81, 1),
+                  color: const Color.fromRGBO(64, 68, 81, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -724,8 +724,8 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
                         child: Divider(
                           height: 20,
                           color: Colors.white,
@@ -734,7 +734,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -782,7 +782,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OrderDetails()),
+                      MaterialPageRoute(builder: (context) => const OrderDetails()),
                     );
                   },
                   child: SizedBox(
@@ -792,7 +792,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      color: Color.fromRGBO(53, 56, 66, 1),
+                      color: const Color.fromRGBO(53, 56, 66, 1),
                       child: Center(
                           child: Text(
                         '25th Nov 2022',
@@ -820,10 +820,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Row(
@@ -840,7 +840,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                     shadowColor: Colors.black,
                     color: step == 0
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -856,7 +856,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -869,7 +869,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                     shadowColor: Colors.black,
                     color: step == 1
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -885,7 +885,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
@@ -898,7 +898,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                     shadowColor: Colors.black,
                     color: step == 2
                         ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
+                        : const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -916,11 +916,11 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
-            _widgetList[step],
-            SizedBox(
+            widgetList[step],
+            const SizedBox(
               height: 10,
             ),
           ],

@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'menuIdController.dart';
 
 class CreateTextMenu extends StatefulWidget {
-  CreateTextMenu({Key? key}) : super(key: key);
+  const CreateTextMenu({Key? key}) : super(key: key);
   @override
   State<CreateTextMenu> createState() => _CreateTextMenuState();
 }
@@ -31,13 +31,14 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
     String token = await getToken();
     final url = Uri.parse(
         // 'http://192.168.1.26:24/api/v2/create-or-update-menu');
-      "https://dev-api.tastesonway.com/api/v2/create-or-update-menu");
+      "$devUrl/v2/create-or-update-menu");
+    print("$devUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
     final body= {
         "is_menu_completed": "1",
         "is_permanent_menu": "1",
         "menu_review_status": "1",
-        "name": "$menuItemName",
+        "name": menuItemName,
          "type": "$type"
       };
     try {
@@ -59,7 +60,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         context: context,
         initialDate: menuExpiryDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 365)));
+        lastDate: DateTime.now().add(const Duration(days: 365)));
     if (picked != null && picked != menuExpiryDate) {
       setState(() {
         menuExpiryDate = picked;
@@ -87,11 +88,11 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         ),
       ) : SingleChildScrollView(
         child:  Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
@@ -101,7 +102,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                   style: mTextStyle20(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
@@ -126,12 +127,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color:  Color.fromRGBO(53, 56, 66, 1),
+                    color:  const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -146,12 +147,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color:Color.fromRGBO(53, 56, 66, 1),
+                    color:const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -166,12 +167,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Card(
@@ -184,8 +185,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                   // height: 300,
                   width: MediaQuery.of(context).size.width,
                   child: Container(
-                    margin: EdgeInsets.all(8),
-                    padding: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -194,12 +195,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           'Basic Details',
                           style: mTextStyle18(),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                           style: cTextStyle12(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -207,10 +208,10 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           child: Form(
                             key: _formKey,
                             child: TextFormField(
-                              style: TextStyle(color: Colors.white), //<-- SEE HERE
+                              style: const TextStyle(color: Colors.white), //<-- SEE HERE
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(10.0),
+                                contentPadding: const EdgeInsets.all(10.0),
                                 fillColor: inputColor(),
                                 filled: true,
                                 border: OutlineInputBorder(
@@ -232,7 +233,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
@@ -240,7 +241,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(37, 40, 48, 1),
+                              color: const Color.fromRGBO(37, 40, 48, 1),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Row(
@@ -273,7 +274,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         if (!isPermanentMenu)
@@ -286,7 +287,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                               width: MediaQuery.of(context).size.width,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(37, 40, 48, 1),
+                                  color: const Color.fromRGBO(37, 40, 48, 1),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
@@ -300,7 +301,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                             ),
                           ),
                         if (!isPermanentMenu)
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         SizedBox(
@@ -321,7 +322,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => CreateTextMenu2()),
+                                        builder: (context) => const CreateTextMenu2()),
                                   );
                                 }
                               },
@@ -339,13 +340,13 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                     ),
                                   )),
                             )),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
             ],

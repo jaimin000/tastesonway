@@ -102,7 +102,7 @@ class _StoriesState extends State<Stories> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -136,7 +136,7 @@ class _StoriesState extends State<Stories> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(const Duration(seconds: 3), () {
             Navigator.of(context).pop(true);
           });
           return AlertDialog(
@@ -178,7 +178,7 @@ class _StoriesState extends State<Stories> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
-                    Future.delayed(Duration(seconds: 3), () {
+                    Future.delayed(const Duration(seconds: 3), () {
                       Navigator.pop(context);
                     });
                     return Container(
@@ -189,7 +189,7 @@ class _StoriesState extends State<Stories> {
                             'Error uploading video',
                             style: mTextStyle14(),
                           ),
-                          SizedBox(height: 10.0),
+                          const SizedBox(height: 10.0),
                           Text(
                             'Please upload video up to 15 sec',
                             style: mTextStyle14(),
@@ -198,19 +198,19 @@ class _StoriesState extends State<Stories> {
                       ),
                     );
                   } else {
-                    Future.delayed(Duration(seconds: 3), () {
+                    Future.delayed(const Duration(seconds: 3), () {
                       Navigator.pop(context);
                     });
                     return Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(
+                          const Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50.0,
                           ),
-                          SizedBox(height: 10.0),
+                          const SizedBox(height: 10.0),
                           Text(
                             'Video uploaded successfully',
                             style: mTextStyle14(),
@@ -228,7 +228,7 @@ class _StoriesState extends State<Stories> {
                           color: orangeColor(),
                           strokeWidth: 3.0,
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         Text(
                           'Uploading video...',
                           style: mTextStyle14(),
@@ -325,14 +325,14 @@ class _StoriesState extends State<Stories> {
                                 height: 160,
                                 decoration: BoxDecoration(
                                   color: cardColor(),
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
                                   ),
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Container(
                                       height: 5,
                                       width: 60,
@@ -341,7 +341,7 @@ class _StoriesState extends State<Stories> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     ListTile(
                                       leading: Icon(
                                         Icons.photo_library,
@@ -383,7 +383,7 @@ class _StoriesState extends State<Stories> {
                             CircleAvatar(
                               radius: 38,
                               backgroundColor: orangeColor(),
-                              child: CircleAvatar(
+                              child: const CircleAvatar(
                                 backgroundImage: NetworkImage(
                                     'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
                                 radius: 35,
@@ -399,7 +399,7 @@ class _StoriesState extends State<Stories> {
                                   shape: BoxShape.circle,
                                   color: orangeColor(),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Icon(
                                     Icons.add,
                                     size: 20,
@@ -411,7 +411,7 @@ class _StoriesState extends State<Stories> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 2,
                       ),
                       Text(
@@ -452,13 +452,13 @@ class _StoriesState extends State<Stories> {
                                   "Photos"
                               ? NetworkImage(data[reversedIndex - 1]['name'],
                                   scale: 0.5)
-                              : NetworkImage(
+                              : const NetworkImage(
                                   'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bW9kZWxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'),
                           radius: 35,
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(

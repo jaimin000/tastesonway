@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "10d9b2858d16c610aac532a1b86438cfbd41d41ed0c81fe7f2a6e94b08303c2b"
-build_start_time: [1678960850, 207805156]
-build_end_time: [1678960850, 234871864]
-inputs:
-  "/Users/mac/.pub-cache/hosted/pub.dartlang.org/video_compress-3.1.2/ios/Classes/AvController.swift": !private [1678776316, 903483629]
-  "/Users/mac/.pub-cache/hosted/pub.dartlang.org/video_compress-3.1.2/ios/Classes/SwiftVideoCompressPlugin.swift": !private [1678776316, 900964736]
-  "/Users/mac/.pub-cache/hosted/pub.dartlang.org/video_compress-3.1.2/ios/Classes/Utility.swift": !private [1678776316, 902766704]

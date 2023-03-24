@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/models/MenuItemModel.dart';
 import 'package:tastesonway/screens/menu/text%20menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu3.dart';
@@ -8,9 +9,10 @@ import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
 import '../../../apiServices/ApiService.dart';
 import '../../../theme_data.dart';
 import 'package:http/http.dart' as http;
+import 'menuIdController.dart';
 
 class CreateTextMenu2 extends StatefulWidget {
-  CreateTextMenu2({Key? key}) : super(key: key);
+  const CreateTextMenu2({Key? key}) : super(key: key);
   @override
   State<CreateTextMenu2> createState() => _CreateTextMenu2State();
 }
@@ -21,6 +23,9 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   bool isLoading = false;
   List<MenuItemModel> menuItemList = [];
   late List<dynamic> menuData = [];
+  late int menuId;
+  List<String> menuItemId = [];
+  final List<int> myList = [53, 54];
 
   Future<void> getMenu() async {
     String token = await getToken();
@@ -30,8 +35,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     });
     final response = await http.post(
       Uri.parse(
-          // 'http://192.168.1.26:24/api/v2/get-menu-item'),
-          'https://dev-api.tastesonway.com/api/v2/get-menu-item'),
+           //'http://192.168.1.26:24/api/v2/get-menu-item'),
+          '$devUrl/v2/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
@@ -57,15 +62,51 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       }
       setState(() {
       });
-    } else {
+    }
+    else {
       print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  Future<void> AddMultipleMenuId() async{
+    String token = await getToken();
+    setState(() {
+      isLoading = true;
+    });
+    var data = <String, dynamic>{
+      'menu_id': menuId,
+      'item_id': menuItemId,
+    };
+    final response = await http.post(
+      Uri.parse('$devUrl/v2/add-multiple-menu-item'),
+        headers: <String, String>{
+          'Authorization':'Bearer $token',
+          'Content-Type':'application/json',
+          'accept': 'application/json',
+        },
+      body: jsonEncode(data)
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        isLoading = true;
+      });
+      final json = jsonDecode(response.body);
+      print(json['message']);
+    }
+    else {
+      print('Request failed with status: ${response.statusCode}.');
+      final json = jsonDecode(response.body);
+      print(json['message']);
     }
   }
 
   @override
   void initState() {
     super.initState();
-      getMenu();
+    getMenu();
+    final MenuIdController menuIdController = Get.find<MenuIdController>();
+    menuId = menuIdController.menuId;
+    print("menuid $menuId");
   }
 
   @override
@@ -82,11 +123,11 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Padding(
@@ -96,7 +137,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                   style: mTextStyle20(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Row(
@@ -105,7 +146,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                 children: [
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -120,7 +161,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
@@ -140,12 +181,12 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Card(
                     shadowColor: Colors.black,
-                    color: Color.fromRGBO(53, 56, 66, 1),
+                    color: const Color.fromRGBO(53, 56, 66, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -160,12 +201,12 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Card(
@@ -177,8 +218,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Container(
-                    margin: EdgeInsets.all(8),
-                    padding: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -218,26 +259,26 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
                           style: cTextStyle12(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         SizedBox(
                           height: 50,
                           child: TextField(
                             style:
-                                TextStyle(color: Colors.white), //<-- SEE HERE
+                                const TextStyle(color: Colors.white), //<-- SEE HERE
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.search,
                                 color: orangeColor(),
                               ),
-                              contentPadding: EdgeInsets.all(10.0),
+                              contentPadding: const EdgeInsets.all(10.0),
                               fillColor: inputColor(),
                               filled: true,
                               border: OutlineInputBorder(
@@ -248,7 +289,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Card(
@@ -276,12 +317,15 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                               i < menuItemList.length;
                                               i++) {
                                             menuItemList[i].isChecked = true;
-                                          }
+                                            menuItemId.add(menuItemList[i].id.toString());
+
+                                                }
                                         } else {
                                           for (int i = 0;
                                               i < menuItemList.length;
                                               i++) {
                                             menuItemList[i].isChecked = false;
+                                            menuItemId.removeAt(i);
                                           }
                                         }
                                         Colors.black;
@@ -313,7 +357,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                               ),
                               isLoading
                                   ? const SizedBox(
-                                      height: 200,
+                                      height: 150,
                                       child: Center(
                                           child: CircularProgressIndicator(color: Colors.red,)))
                                   : SizedBox(
@@ -339,6 +383,13 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                       menuItemList[index]
                                                               .isChecked =
                                                           value ?? false;
+                                                      if(menuItemList[index].isChecked){
+                                                       menuItemId.add(menuItemList[index].id.toString()
+                                                       );
+                                                      }else{
+                                                       menuItemId.removeAt(index);
+                                                      }
+                                                      print(menuItemId);
                                                     });
                                                     checkColor:
                                                     Colors.black;
@@ -466,19 +517,20 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                           );
                                         }),
                                   ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 10),
-                        GestureDetector(
-                          onTap: () {
+                        const SizedBox(height: 10),
+                        InkWell(
+                          onTap: () async{
+                             await AddMultipleMenuId();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateTextMenu3()));
+                                    builder: (context) => const CreateTextMenu3()));
                           },
                           child: SizedBox(
                               height: 45,
@@ -496,7 +548,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                 ),
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                       ],
@@ -504,7 +556,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
             ],
