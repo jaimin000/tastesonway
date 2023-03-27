@@ -28,25 +28,33 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
   final menuIdController = Get.put(MenuIdController());
 
   Future getMenuId() async {
+    print(type);
+    print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
-        // 'http://192.168.1.26:24/api/v2/create-or-update-menu');
       "$devUrl/v2/create-or-update-menu");
-    print("$devUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
-    final body= {
+    final body=  type == 2 ? {
         "is_menu_completed": "1",
         "is_permanent_menu": "1",
         "menu_review_status": "1",
         "name": menuItemName,
-         "type": "$type"
-      };
+        "type": "$type",
+        "date_of_menu" : "${DateFormat('yyyy-MM-dd').format(menuExpiryDate)}"
+      }: {
+    "is_menu_completed": "1",
+    "is_permanent_menu": "1",
+    "menu_review_status": "1",
+    "name": menuItemName,
+    "type": "$type",
+    };
     try {
       final response = await http.post(url, headers: headers, body: body);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
         menuId = json['data']['id'];
         return menuId;
+        print(menuId);
       } else {
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -64,7 +72,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
     if (picked != null && picked != menuExpiryDate) {
       setState(() {
         menuExpiryDate = picked;
-        print(DateFormat('yyyy-MM-dd').format(menuExpiryDate));
+        // print(DateFormat('yyyy-MM-dd').format(menuExpiryDate));
       });
     }
   }
@@ -265,7 +273,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           isPermanentMenu = value ?? false;
-                                          isPermanentMenu == true ? type = 1 : type = 0;
+                                          isPermanentMenu == true ? type = 1 : type = 2;
                                           print(type);
                                         });
                                       }),
