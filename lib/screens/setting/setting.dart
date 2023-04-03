@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
@@ -174,7 +175,7 @@ class _SettingState extends State<Setting> {
                 final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
                 sharedPreferences.remove('user');
                 await FirebaseAuth.instance.signOut();
-                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil( CupertinoPageRoute(builder: (context) => Signup()), (route) => false);
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil( CupertinoPageRoute(builder: (context) => const LanguageScreen()), (route) => false);
                 Fluttertoast.showToast(
                   msg: "You are logged out successfully",
                   toastLength: Toast.LENGTH_SHORT,

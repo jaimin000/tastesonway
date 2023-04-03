@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tastesonway/screens/register/question2.dart';
 import '../../theme_data.dart';
 
-class Questions extends StatefulWidget {
-  const Questions({Key? key}) : super(key: key);
+class Question1 extends StatefulWidget {
+  const Question1({Key? key}) : super(key: key);
   @override
-  _QuestionsState createState() => _QuestionsState();
+  _Question1State createState() => _Question1State();
 }
 
-class _QuestionsState extends State<Questions> {
+class _Question1State extends State<Question1> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -34,7 +35,8 @@ class _QuestionsState extends State<Questions> {
               SizedBox(
                 height: 15,
               ),
-              Center(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
                   'Which of the Following best describes you?',
                   style: TextStyle(
@@ -169,19 +171,25 @@ class _QuestionsState extends State<Questions> {
                 child: SizedBox(
                     height: 50,
                     width: MediaQuery.of(context).size.width,
-                    child: Card(
-                        shadowColor: Colors.black,
-                        color: orangeColor(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Proceed',
-                            style: mTextStyle14(),
+                    child: InkWell(
+                      onTap: (){
+                        Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Question2()),);
+                      },
+                      child: Card(
+                          shadowColor: Colors.black,
+                          color: orangeColor(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                        ))),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Next',
+                              style: mTextStyle14(),
+                            ),
+                          )),
+                    )),
               ),
               const SizedBox(
                 height: 10,

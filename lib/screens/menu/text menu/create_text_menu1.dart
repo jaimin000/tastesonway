@@ -7,7 +7,6 @@ import '../../../theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-
 import 'menuIdController.dart';
 
 class CreateTextMenu extends StatefulWidget {
@@ -27,8 +26,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
    int type = 1;
   final menuIdController = Get.put(MenuIdController());
 
-  Future getMenuId() async {
-    print(type);
+  Future getMenuId() async  {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
@@ -56,7 +54,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         return menuId;
         print(menuId);
       } else {
+        //  AlertDialog(
+        //   title: Text('Error'),
+        //   content: Text('Failed to load data'),
+        // );
         print('Request failed with status: ${response.statusCode}.');
+
       }
     } catch (e) {
       print('Error occurred: $e');
@@ -89,7 +92,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
           style: cardTitleStyle20(),
         ),
       ),
-      body:_isLoading ?
+      body:
+      _isLoading ?
       Center(
         child: CircularProgressIndicator(
           color: orangeColor(),
@@ -316,24 +320,50 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                             height: 50,
                             width: MediaQuery.of(context).size.width,
                             child: InkWell(
-                              onTap: () async{
+                              onTap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
                                   setState(() {
                                     _isLoading = true;
                                   });
-                                  menuIdController.menuId  = await getMenuId();
-                                  // print(apiId);
-                                  setState(() {
-                                    _isLoading = false;
-                                  });
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const CreateTextMenu2()),
-                                  );
+                                  try {
+                                    menuIdController.menuId = await getMenuId();
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const CreateTextMenu2()),
+                                    );
+                                  } catch (e) {
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          backgroundColor: cardColor(),
+                                          title: Text('Error',style: TextStyle(color: orangeColor()),),
+                                          content: Text('Name Already Exists :\nPlease try again with different name'),
+                                          actions: [
+                                            ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all(orangeColor()),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('OK'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
                                 }
                               },
+
                               child: Card(
                                   shadowColor: Colors.black,
                                   color: orangeColor(),

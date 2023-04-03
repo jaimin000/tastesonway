@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/ios/Classes/FLTPHPickerSaveImageToPathOperation.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+2/ios/Classes/FLTPHPickerSaveImageToPathOperation.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/image_picker_ios.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/image_picker_ios/image_picker_ios-prefix.pch \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
@@ -19,7 +19,7 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/ios/Classes/FLTPHPickerSaveImageToPathOperation.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/ios/Classes/FLTImagePickerImageUtil.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/ios/Classes/FLTImagePickerMetaDataUtil.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+1/ios/Classes/FLTImagePickerPhotoAssetUtil.h
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+2/ios/Classes/FLTPHPickerSaveImageToPathOperation.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+2/ios/Classes/FLTImagePickerImageUtil.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+2/ios/Classes/FLTImagePickerMetaDataUtil.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+2/ios/Classes/FLTImagePickerPhotoAssetUtil.h

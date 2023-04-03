@@ -54,6 +54,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
           price: menuData[i]['amount'],
           image: menuData[i]['picture'],
           description: menuData[i]['description'] ?? "",
+          toppingName: menuData[i]['toppingName'] ?? "",
         //     for (int j = 0; i < menuData[i]['item_ingridient'].length; j++) {
         // toppingName: menuData[i]['item_ingridient'][j]['name'] ?? "",
         // toppingPrice: menuData[i]['item_ingridient'][j]['price'] ?? "",
@@ -103,6 +104,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   @override
   void initState() {
     super.initState();
+    isLoading = false;
     getMenu();
     final MenuIdController menuIdController = Get.find<MenuIdController>();
     menuId = menuIdController.menuId;
@@ -318,16 +320,16 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                               i++) {
                                             menuItemList[i].isChecked = true;
                                             menuItemId.add(menuItemList[i].id.toString());
-
                                                 }
-                                        } else {
+                                        } else{
                                           for (int i = 0;
                                               i < menuItemList.length;
                                               i++) {
                                             menuItemList[i].isChecked = false;
-                                            menuItemId.removeAt(i);
+                                            menuItemId=[];
                                           }
                                         }
+                                        print(menuItemId);
                                         Colors.black;
                                       },
                                       focusColor: orangeColor(),
@@ -476,12 +478,9 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                                       menu_id: menuItemList[index].menu_id,
                                                                       name:menuItemList[index].name,
                                                                     price:menuItemList[index].price,
-                                                                    description:menuItemList[index].description
+                                                                    description:menuItemList[index].description,
+
                                                                   ),),);
-                                                         // print("result $result");
-                                                         // if(result == "true"){
-                                                         //   getMenu();
-                                                         // }
                                                         },
                                                         child: Card(
                                                           shadowColor:

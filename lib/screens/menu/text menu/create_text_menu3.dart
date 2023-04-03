@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/apiServices/ApiService.dart';
+import 'package:tastesonway/main.dart';
+import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import '../../../theme_data.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
@@ -64,6 +66,12 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
     return Scaffold(
         backgroundColor: backgroundColor(),
         appBar: AppBar(
+          leading: IconButton(
+            icon:const Icon(Icons.arrow_back_ios),
+            onPressed: (){
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+          ),
           elevation: 0,
           backgroundColor: backgroundColor(),
           title: Text(

@@ -16,11 +16,13 @@ class EditItem extends StatefulWidget {
   final String description;
   final int price;
 
-  const EditItem({required this.id,
+  const EditItem({
+    required this.id,
     required this.menu_id,
     required this.name,
     required this.price,
-    required this.description});
+    required this.description,
+   });
 
   @override
   State<EditItem> createState() => _EditItemState();
@@ -34,6 +36,8 @@ class _EditItemState extends State<EditItem> {
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController pricecontroller = TextEditingController();
   final TextEditingController descriptioncontroller = TextEditingController();
+  final TextEditingController toppingNamecontroller = TextEditingController();
+  final TextEditingController toppingPricecontroller = TextEditingController();
   int type = 1;
   late File _image;
   List toppingPrice = [];
@@ -51,7 +55,7 @@ class _EditItemState extends State<EditItem> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               child: TextFormField(
-                controller: namecontroller,
+                controller: toppingNamecontroller,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -79,7 +83,7 @@ class _EditItemState extends State<EditItem> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
               child: TextFormField(
-                controller: pricecontroller,
+                controller: toppingPricecontroller,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -153,9 +157,12 @@ class _EditItemState extends State<EditItem> {
       request.fields['type'] = '$type';
       request.fields['id'] = '${widget.id}';
       for (int i = 0; i < toppingName.length; i++) {
-        request.fields['ingridients[$i][name]'] = '${toppingName[i]}';
-        request.fields['ingridients[$i][price]'] = '${toppingPrice[i]}';
+        request.fields['ingridients[$i][name]'] = toppingNamecontroller.text;
+        request.fields['ingridients[$i][price]'] = toppingPricecontroller.text;
       }
+        //request.fields['ingridients[$i][price]'] = '${toppingPrice[i]}';
+        //print('topping name : $toppingName[i]');
+
       print(pricecontroller.text);
       print(namecontroller.text);
       print(descriptioncontroller.text);

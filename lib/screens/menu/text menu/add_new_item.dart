@@ -103,7 +103,6 @@ class _AddNewItemState extends State<AddNewItem> {
   }
 
   List<Widget>Toppings = [];
-
   void addToppingWidget(){
     setState(() {
         Toppings.add(topping());
@@ -160,40 +159,67 @@ class _AddNewItemState extends State<AddNewItem> {
       );
       final response = await request.send();
       final responseData = await response.stream.bytesToString();
-      final json = jsonDecode(responseData);
-      print(responseData);
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pop(true);
-          });
-          return AlertDialog(
-            backgroundColor: cardColor(),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            content: SizedBox(
-              height: 100,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 50.0,
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(
-                    'Menu Item Added Successfully',
-                    style: mTextStyle14(),
-                  ),
-                ],
+      if (response.statusCode == 200) {
+        final json = jsonDecode(responseData);
+        print(json);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(const Duration(seconds: 2), () {
+              Navigator.of(context).pop(true);
+            });
+            return AlertDialog(
+              backgroundColor: cardColor(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-            ),
-          );
-        },
-      );
+              content: SizedBox(
+                height: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 50.0,
+                    ),
+                    const SizedBox(height: 10.0),
+                    Text(
+                      'Menu Item Added Successfully',
+                      style: mTextStyle14(),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      } else {
+        print(json);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: cardColor(),
+              title: Text('Error',style: TextStyle(color: orangeColor()),),
+              content: Text('Name Already Exists :\nPlease try again with different name'),
+              actions: [
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(orangeColor()),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+
+      }
+
     } catch (e) {
       print(e);
       showDialog(
