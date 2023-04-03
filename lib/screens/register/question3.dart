@@ -173,7 +173,7 @@ class _Question3State extends State<Question3> {
                 width: MediaQuery.of(context).size.width,
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Cuisines()),);
                   },
                   child: Card(

@@ -90,7 +90,7 @@ class _CuisinesState extends State<Cuisines> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Dashboard()),
+                          builder: (context) => const Home()),
                     );
                   },
                   child: Card(

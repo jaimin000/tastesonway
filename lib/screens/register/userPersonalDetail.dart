@@ -1,10 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:tastesonway/screens/discount/choose_promo.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
-import 'package:tastesonway/screens/register/questions1.dart';
 import 'package:tastesonway/theme_data.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:intl/intl.dart';
 
 class userPersonalDetail extends StatefulWidget {
   const userPersonalDetail({Key? key}) : super(key: key);
@@ -14,28 +14,48 @@ class userPersonalDetail extends StatefulWidget {
 }
 
 class _userPersonalDetailState extends State<userPersonalDetail> {
+  String name = "";
+  String email = "";
+  String pincode = "";
+  late DateTime selectedDate = DateTime.now();
+  File? _image;
+  DateTime currentDate = DateTime.now();
+  final _formKey = GlobalKey<FormState>();
   int _current = 0;
   String dropdownvalue = 'Male';
+
   var items = [
     'Male',
     'Female',
     'Other',
   ];
-  DateTime currentDate = DateTime.now();
+
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(
+      source: source,
+      imageQuality: 70,
+      maxWidth: 800,
+      maxHeight: 800,
+    );
+    setState(() {
+      _image = File(pickedFile!.path);
+    });
+  }
+
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: currentDate,
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 365)));
+        lastDate: DateTime.now(),
+        firstDate: DateTime.now().subtract(const Duration(days: 365*100)));
     if (picked != null && picked != currentDate) {
       setState(() {
-        currentDate = picked;
+        selectedDate = picked;
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,152 +79,162 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Stack(
+              //   clipBehavior: Clip.none,
+              //   children: [
+              //     Center(
+              //       child: GestureDetector(
+              //         onTap: () async{
+              //           await _pickImage(ImageSource.camera);
+              //         },
+              //         child: Container(
+              //           height: 120,
+              //           width: 120,
+              //           decoration: const BoxDecoration(
+              //             shape: BoxShape.circle,
+              //             color: Color.fromRGBO(53, 56, 66, 1),
+              //           ),
+              //           alignment: Alignment.bottomRight,
+              //           child: Icon(
+              //             Icons.camera_alt_rounded,
+              //             color: orangeColor(),
+              //             size: 35,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Stack(
                 clipBehavior: Clip.none,
                 children: [
                   Center(
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () async {
+                        await _pickImage(ImageSource.camera);
                       },
-                      child: Container(
-                        height: 120,
-                        width: 120,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromRGBO(53, 56, 66, 1),
-                        ),
-                        alignment: Alignment.bottomRight,
-                        child: Icon(Icons.camera_alt_rounded, color: orangeColor(),size: 35,),
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundColor: const Color.fromRGBO(53, 56, 66, 1),
+                        backgroundImage: _image != null ? FileImage(_image!) : null,
+                        child: _image == null
+                            ? const Icon(
+                          Icons.camera_alt_rounded,
+                          color: Colors.red,
+                          size: 35,
+                        )
+                            : null,
                       ),
                     ),
                   ),
                 ],
               ),
+
             ],
           ),
           const SizedBox(
             height: 20,
           ),
           Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  child: TextField(
-                    style: const TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(10.0),
-                      fillColor: inputColor(),
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
-                      hintText: 'Name',
-                      hintStyle: inputTextStyle16(),
+              padding: EdgeInsets.all(10),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  child: TextField(
-                    style: const TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(10.0),
-                      fillColor: inputColor(),
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
-                      hintText: 'Email',
-                      hintStyle: inputTextStyle16(),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  child: TextField(
-                    style: const TextStyle(color: Colors.white),
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-
-                      contentPadding: const EdgeInsets.all(10.0),
-                      fillColor: inputColor(),
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
-                      hintText: 'Pincode',
-                      hintStyle: inputTextStyle16(),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  child:
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(37, 40, 48, 1),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Select Gender',
-                            textAlign: TextAlign.left,
-                            style: inputTextStyle16(),
-                          ),
-                          DropdownButton(
-                            underline: const SizedBox(),
-                            value: dropdownvalue,
-                            icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(255, 114, 105, 1),),
-                            items: items.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items,style: inputTextStyle16(),),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownvalue = newValue!;
-                              });
-                            },
-                          ),
-                        ],
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10.0),
+                          fillColor: inputColor(),
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none),
+                          hintText: 'Name',
+                          hintStyle: inputTextStyle16(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter name';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          name = value!;
+                          print(name);
+                        },
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height:10),
-                SizedBox(
-                  height: 45,
-                  width: MediaQuery.of(context).size.width,
-                  child: GestureDetector(
-                    onTap: () {
-                      _selectDate(context);
-                    },
-                    child: SizedBox(
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10.0),
+                          fillColor: inputColor(),
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none),
+                          hintText: 'Email',
+                          hintStyle: inputTextStyle16(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter email';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value!;
+                          print(email);
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextFormField(
+                        style: const TextStyle(color: Colors.white),
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(10.0),
+                          fillColor: inputColor(),
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none),
+                          hintText: 'Pincode',
+                          hintStyle: inputTextStyle16(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter pincode';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          pincode = value!;
+                          print(pincode);
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
                       height: 45,
                       width: MediaQuery.of(context).size.width,
                       child: Container(
@@ -214,59 +244,111 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Date of birth',
-                            style: inputTextStyle16(),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Select Gender',
+                                textAlign: TextAlign.left,
+                                style: inputTextStyle16(),
+                              ),
+                              DropdownButton(
+                                underline: const SizedBox(),
+                                value: dropdownvalue,
+                                icon: const Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color.fromRGBO(255, 114, 105, 1),
+                                ),
+                                items: items.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(
+                                      items,
+                                      style: inputTextStyle16(),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownvalue = newValue!;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  // TextField(
-                  //   style: const TextStyle(color: Colors.white),
-                  //   cursorColor: Colors.white,
-                  //   decoration: InputDecoration(
-                  //
-                  //     contentPadding: const EdgeInsets.all(10.0),
-                  //     fillColor: inputColor(),
-                  //     filled: true,
-                  //     border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(10),
-                  //         borderSide: BorderSide.none),
-                  //     hintText: 'Date of birth',
-                  //     hintStyle: inputTextStyle16(),
-                  //   ),
-                  // ),
-                ),
-                const SizedBox(height: 15),
-                SizedBox(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    child: InkWell(
-                      onTap: (){
-                        Navigator.push(context,
-                          MaterialPageRoute(builder: (context) =>  const AddressPage()));
-                      },
-                      child: Card(
-                          shadowColor: Colors.black,
-                          color: orangeColor(),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Proceed',
-                              style: mTextStyle14(),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: GestureDetector(
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                        child: SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(37, 40, 48, 1),
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                       ' Date of Birth',
+                                    style: inputTextStyle16(),
+                                  ),
+                                  Text(
+                                    DateFormat('dd-MM-yyyy').format(selectedDate),
+                                    style: inputTextStyle16(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: InkWell(
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState?.save();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AddressPage()));
+                            }
+                          },
+                          child: Card(
+                              shadowColor: Colors.black,
+                              color: orangeColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Proceed',
+                                  style: mTextStyle14(),
+                                ),
+                              )),
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )
+              ))
         ],
       ),
     );

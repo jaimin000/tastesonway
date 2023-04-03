@@ -19,6 +19,19 @@ class _AddressPageState extends State<AddressPage> {
   bool _isLocationConfirm = false;
   LatLng latLng = const LatLng(23.0000, 72.000);
   String _currentAddress = "";
+  String ownerName = "";
+  String address = "";
+  String landmark = "";
+  String pincode = "";
+  final _formKey = GlobalKey<FormState>();
+  var addressType = [
+    'Home',
+    'Office',
+    'Other',
+  ];
+  String dropdownvalue = 'Home';
+
+
 
   void _getCurrentLocation() async {
     setState(() {
@@ -127,10 +140,10 @@ class _AddressPageState extends State<AddressPage> {
                       ),
                       _isLoading
                           ? SizedBox(
-                        width: 150,
+                              width: 150,
                               child: LinearProgressIndicator(
-                              color: orangeColor(),
-                            ))
+                                color: orangeColor(),
+                              ))
                           : Text(_currentAddress,
                               overflow: TextOverflow.ellipsis,
                               style: mTextStyle16()),
@@ -143,153 +156,234 @@ class _AddressPageState extends State<AddressPage> {
                           style: TextStyle(fontSize: 16),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchLocation()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SearchLocation()));
                         },
                       ),
                     ],
                   ),
-                  _isLocationConfirm?
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 40,
+                  _isLocationConfirm
+                      ? Container(
+                          margin: EdgeInsets.all(5),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextField(
+                                    style: const TextStyle(
+                                        color: Colors.white), //<-- SEE HERE
+                                    cursorColor: Colors.white,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(10.0),
+                                      fillColor: inputColor(),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                      hintText: 'Kitchen Owner Name',
+                                      hintStyle: inputTextStyle16(),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextField(
+                                    style: const TextStyle(
+                                        color: Colors.white), //<-- SEE HERE
+                                    cursorColor: Colors.white,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(10.0),
+                                      fillColor: inputColor(),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                      hintText: 'Address*',
+                                      hintStyle: inputTextStyle16(),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextField(
+                                    style: const TextStyle(
+                                        color: Colors.white), //<-- SEE HERE
+                                    cursorColor: Colors.white,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(10.0),
+                                      fillColor: inputColor(),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                      hintText: 'Landmark',
+                                      hintStyle: inputTextStyle16(),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TextField(
+                                    style: const TextStyle(
+                                        color: Colors.white), //<-- SEE HERE
+                                    cursorColor: Colors.white,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(10.0),
+                                      fillColor: inputColor(),
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide.none),
+                                      hintText: 'Pincode',
+                                      hintStyle: inputTextStyle16(),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(37, 40, 48, 1),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Select Gender',
+                                            textAlign: TextAlign.left,
+                                            style: inputTextStyle16(),
+                                          ),
+                                          DropdownButton(
+                                            underline: const SizedBox(),
+                                            value: dropdownvalue,
+                                            icon: const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Color.fromRGBO(255, 114, 105, 1),
+                                            ),
+                                            items: addressType.map((String items) {
+                                              return DropdownMenuItem(
+                                                value: items,
+                                                child: Text(
+                                                  items,
+                                                  style: inputTextStyle16(),
+                                                ),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                dropdownvalue = newValue!;
+                                              });
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                //   child: SizedBox(
+                                //     width: MediaQuery.of(context).size.width,
+                                //     child: ElevatedButton(
+                                //       style: ElevatedButton.styleFrom(
+                                //         primary: orangeColor(),
+                                //       ),
+                                //       child: const Text(
+                                //         'Save Location',
+                                //         style: TextStyle(fontSize: 16),
+                                //       ),
+                                //       onPressed: () {
+                                //         Navigator.push(context,
+                                //             MaterialPageRoute(builder: (context) =>  const Question1()));
+                                //       },
+                                //     ),
+                                //   ),
+                                // ),
+                                SizedBox(height: 5,),
+                                SizedBox(
+                                    height: 45,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: InkWell(
+                                      onTap: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState?.save();
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                  const Question1()));
+                                        }
+                                      },
+                                      child: Card(
+                                          shadowColor: Colors.black,
+                                          color: orangeColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'Proceed',
+                                              style: mTextStyle14(),
+                                            ),
+                                          )),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        )
+                      : SizedBox(
+                          height: 50,
                           width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              fillColor: inputColor(),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              hintText: 'Kitchen Owner Name',
-                              hintStyle: inputTextStyle16(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 3,),
-                        SizedBox(
-                          height: 40,
-                          width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              fillColor: inputColor(),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              hintText: 'Address*',
-                              hintStyle: inputTextStyle16(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 3,),
-                        SizedBox(
-                          height: 40,
-                          width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              fillColor: inputColor(),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              hintText: 'Landmark',
-                              hintStyle: inputTextStyle16(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 3,),
-                        SizedBox(
-                          height: 40,
-                          width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              fillColor: inputColor(),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              hintText: 'Pincode',
-                              hintStyle: inputTextStyle16(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 3,),
-                        SizedBox(
-                          height: 40,
-                          width: MediaQuery.of(context).size.width,
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                            cursorColor: Colors.white,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.all(10.0),
-                              fillColor: inputColor(),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              hintText: 'Address Type',
-                              hintStyle: inputTextStyle16(),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 3,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: orangeColor(),
-                              ),
-                              child: const Text(
-                                'Save Location',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) =>  const Question1()));
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                  :Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: orangeColor(),
-                        ),
-                        child: const Text(
-                          'Confirm Location',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isLocationConfirm = true;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                _isLocationConfirm = true;
+                              });
+                            },
+                            child: Card(
+                                shadowColor: Colors.black,
+                                color: orangeColor(),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Confirm Location',
+                                    style: mTextStyle14(),
+                                  ),
+                                )),
+                          )),
                 ],
               ),
             ),

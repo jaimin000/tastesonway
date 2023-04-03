@@ -217,9 +217,7 @@ class _AddNewItemState extends State<AddNewItem> {
             );
           },
         );
-
       }
-
     } catch (e) {
       print(e);
       showDialog(

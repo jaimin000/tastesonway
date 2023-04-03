@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tastesonway/main.dart';
+import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -296,7 +297,7 @@ class _SignupState extends State<Signup> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const Home(),
+              builder: (context) => const userPersonalDetail(),
             ),
           );
         } else {
