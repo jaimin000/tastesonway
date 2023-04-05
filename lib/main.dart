@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
+import 'package:tastesonway/screens/register/addressPage.dart';
+import 'package:tastesonway/screens/register/questions.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/theme_data.dart';
 import 'screens/menu/your_menus.dart';
@@ -59,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
-        home: isUser == "null" ? const LanguageScreen() : const Home()
+        home: isUser == "null" ?  const AddressPage() : const Home()
         );
   }
 }

@@ -277,6 +277,7 @@ class _StoriesState extends State<Stories> {
 
   // get story_view
   List<dynamic> data = [];
+
   Future fetchData() async {
     String token = await getToken();
     final response = await http.get(
@@ -285,9 +286,11 @@ class _StoriesState extends State<Stories> {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      setState(() {
+      if (mounted) {
+        setState(() {
         data = jsonData['data'];
       });
+      }
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }

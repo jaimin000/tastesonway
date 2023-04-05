@@ -1,9 +1,0 @@
-version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "ec3a92f63c13a714fbd0f12b26ca1e8aeb89afbbbc5714223658f1f1377fbd32"
-build_start_time: [1680248754, 173465013]
-build_end_time: [1680248755, 16751050]
-inputs:
-  "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.3/ios/Classes/ConnectivityProvider.swift": [1679547503, 950077295]
-  "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.3/ios/Classes/PathMonitorConnectivityProvider.swift": [1679547503, 950672626]
-  "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.3/ios/Classes/ReachabilityConnectivityProvider.swift": [1679547503, 950379610]
-  "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.3/ios/Classes/SwiftConnectivityPlusPlugin.swift": [1679547503, 949409484]

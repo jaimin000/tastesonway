@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:tastesonway/screens/register/questions1.dart';
+import 'package:tastesonway/screens/register/questions.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/theme_data.dart';
 
@@ -65,7 +65,8 @@ class _AddressPageState extends State<AddressPage> {
       Placemark place = placemarks[0];
       setState(() {
         _currentAddress =
-            "${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.locality}";
+                //", ${place.postalCode}, ${place.country}";
       });
       print("this is current address $_currentAddress");
     } catch (e) {
@@ -116,7 +117,6 @@ class _AddressPageState extends State<AddressPage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              // height: 140,
               decoration: BoxDecoration(
                 color: cardColor(),
                 borderRadius: const BorderRadius.only(
@@ -166,201 +166,247 @@ class _AddressPageState extends State<AddressPage> {
                     ],
                   ),
                   _isLocationConfirm
-                      ? Container(
-                          margin: EdgeInsets.all(5),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TextField(
-                                    style: const TextStyle(
-                                        color: Colors.white), //<-- SEE HERE
-                                    cursorColor: Colors.white,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(10.0),
-                                      fillColor: inputColor(),
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide.none),
-                                      hintText: 'Kitchen Owner Name',
-                                      hintStyle: inputTextStyle16(),
+                      ? Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.all( 3.0),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                //height: 40,
+                                width: MediaQuery.of(context).size.width,
+                                child: TextFormField(
+                                  style: const TextStyle(
+                                      color: Colors.white), //<-- SEE HERE
+                                  cursorColor: Colors.white,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(10.0),
+                                    fillColor: inputColor(),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                    hintText: 'Kitchen Owner Name',
+                                    hintStyle: inputTextStyle16(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter kitchen owner name';
+                                    }
+                                    if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
+                                      return 'Please enter a valid name';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    ownerName = value!;
+                                    print(ownerName);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TextFormField(
+                                  style: const TextStyle(
+                                      color: Colors.white), //<-- SEE HERE
+                                  cursorColor: Colors.white,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(10.0),
+                                    fillColor: inputColor(),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                    hintText: 'Address*',
+                                    hintStyle: inputTextStyle16(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Address';
+                                    }
+                                    if (value.length < 10) {
+                                      return 'Address must be at least 10 characters';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    address = value!;
+                                    print(address);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TextFormField(
+                                  style: const TextStyle(
+                                      color: Colors.white), //<-- SEE HERE
+                                  cursorColor: Colors.white,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(10.0),
+                                    fillColor: inputColor(),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                    hintText: 'Landmark',
+                                    hintStyle: inputTextStyle16(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter landmark';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    landmark = value!;
+                                    print(landmark);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: TextFormField(
+                                  style: const TextStyle(
+                                      color: Colors.white), //<-- SEE HERE
+                                  cursorColor: Colors.white,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(10.0),
+                                    fillColor: inputColor(),
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide.none),
+                                    hintText: 'Pincode',
+                                    hintStyle: inputTextStyle16(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter pincode';
+                                    }
+                                    if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+                                      return 'Please enter a valid 6-digit pin code';
+                                    }
+                                    return null;
+                                  },
+                                  onSaved: (value) {
+                                    pincode = value!;
+                                    print(pincode);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              SizedBox(
+                                height: 45,
+                                width: MediaQuery.of(context).size.width,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Select Address Type',
+                                          textAlign: TextAlign.left,
+                                          style: inputTextStyle16(),
+                                        ),
+                                        DropdownButton(
+                                          underline: const SizedBox(),
+                                          value: dropdownvalue,
+                                          icon: const Icon(
+                                            Icons.keyboard_arrow_down,
+                                            color: Color.fromRGBO(255, 114, 105, 1),
+                                          ),
+                                          items: addressType.map((String items) {
+                                            return DropdownMenuItem(
+                                              value: items,
+                                              child: Text(
+                                                items,
+                                                style: inputTextStyle16(),
+                                              ),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              dropdownvalue = newValue!;
+                                            });
+                                          },
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TextField(
-                                    style: const TextStyle(
-                                        color: Colors.white), //<-- SEE HERE
-                                    cursorColor: Colors.white,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(10.0),
-                                      fillColor: inputColor(),
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide.none),
-                                      hintText: 'Address*',
-                                      hintStyle: inputTextStyle16(),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TextField(
-                                    style: const TextStyle(
-                                        color: Colors.white), //<-- SEE HERE
-                                    cursorColor: Colors.white,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(10.0),
-                                      fillColor: inputColor(),
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide.none),
-                                      hintText: 'Landmark',
-                                      hintStyle: inputTextStyle16(),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TextField(
-                                    style: const TextStyle(
-                                        color: Colors.white), //<-- SEE HERE
-                                    cursorColor: Colors.white,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.all(10.0),
-                                      fillColor: inputColor(),
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: BorderSide.none),
-                                      hintText: 'Pincode',
-                                      hintStyle: inputTextStyle16(),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                SizedBox(
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              //   child: SizedBox(
+                              //     width: MediaQuery.of(context).size.width,
+                              //     child: ElevatedButton(
+                              //       style: ElevatedButton.styleFrom(
+                              //         primary: orangeColor(),
+                              //       ),
+                              //       child: const Text(
+                              //         'Save Location',
+                              //         style: TextStyle(fontSize: 16),
+                              //       ),
+                              //       onPressed: () {
+                              //         Navigator.push(context,
+                              //             MaterialPageRoute(builder: (context) =>  const Question1()));
+                              //       },
+                              //     ),
+                              //   ),
+                              // ),
+                              SizedBox(height: 5,),
+                              SizedBox(
                                   height: 45,
                                   width: MediaQuery.of(context).size.width,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: const Color.fromRGBO(37, 40, 48, 1),
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Select Gender',
-                                            textAlign: TextAlign.left,
-                                            style: inputTextStyle16(),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        _formKey.currentState?.save();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                const Questions()));
+                                      }
+                                    },
+                                    child: Card(
+                                        shadowColor: Colors.black,
+                                        color: orangeColor(),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'Proceed',
+                                            style: mTextStyle14(),
                                           ),
-                                          DropdownButton(
-                                            underline: const SizedBox(),
-                                            value: dropdownvalue,
-                                            icon: const Icon(
-                                              Icons.keyboard_arrow_down,
-                                              color: Color.fromRGBO(255, 114, 105, 1),
-                                            ),
-                                            items: addressType.map((String items) {
-                                              return DropdownMenuItem(
-                                                value: items,
-                                                child: Text(
-                                                  items,
-                                                  style: inputTextStyle16(),
-                                                ),
-                                              );
-                                            }).toList(),
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                dropdownvalue = newValue!;
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                //   child: SizedBox(
-                                //     width: MediaQuery.of(context).size.width,
-                                //     child: ElevatedButton(
-                                //       style: ElevatedButton.styleFrom(
-                                //         primary: orangeColor(),
-                                //       ),
-                                //       child: const Text(
-                                //         'Save Location',
-                                //         style: TextStyle(fontSize: 16),
-                                //       ),
-                                //       onPressed: () {
-                                //         Navigator.push(context,
-                                //             MaterialPageRoute(builder: (context) =>  const Question1()));
-                                //       },
-                                //     ),
-                                //   ),
-                                // ),
-                                SizedBox(height: 5,),
-                                SizedBox(
-                                    height: 45,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: InkWell(
-                                      onTap: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          _formKey.currentState?.save();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                  const Question1()));
-                                        }
-                                      },
-                                      child: Card(
-                                          shadowColor: Colors.black,
-                                          color: orangeColor(),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Proceed',
-                                              style: mTextStyle14(),
-                                            ),
-                                          )),
-                                    )),
-                              ],
-                            ),
+                                        )),
+                                  )),
+                            ],
                           ),
-                        )
+                        ),
+                      )
                       : SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width,

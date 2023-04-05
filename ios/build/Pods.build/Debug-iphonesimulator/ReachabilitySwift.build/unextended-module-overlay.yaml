@@ -10,5 +10,14 @@
       'name': "module.modulemap",
       'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/ReachabilitySwift.build/unextended-module.modulemap",
     }]
-  }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/ReachabilitySwift/Reachability.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "Reachability-Swift.h",
+      'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/ReachabilitySwift.build/unextended-interface-header.h",
+    }]
+    }]
 }

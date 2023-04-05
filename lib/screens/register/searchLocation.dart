@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/theme_data.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 
 class SearchLocation extends StatelessWidget {
   const SearchLocation({Key? key}) : super(key: key);
@@ -21,7 +22,6 @@ class SearchLocation extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
-
             SizedBox(
               height: 45,
               width: MediaQuery.of(context).size.width,

@@ -4,11 +4,20 @@
   'case-sensitive': 'false',
   'roots': [{
     'type': 'directory',
-    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseCoreInternal/FirebaseCoreInternal.framework/Modules"
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphonesimulator/FirebaseCoreInternal/FirebaseCoreInternal.framework/Modules"
     'contents': [{
       'type': 'file',
       'name': "module.modulemap",
       'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCoreInternal.build/unextended-module.modulemap",
     }]
-  }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphonesimulator/FirebaseCoreInternal/FirebaseCoreInternal.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "FirebaseCoreInternal-Swift.h",
+      'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCoreInternal.build/unextended-interface-header.h",
+    }]
+    }]
 }

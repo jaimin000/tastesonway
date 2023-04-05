@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
@@ -17,11 +16,10 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
   String name = "";
   String email = "";
   String pincode = "";
-  late DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate;
   File? _image;
   DateTime currentDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  int _current = 0;
   String dropdownvalue = 'Male';
 
   var items = [
@@ -43,18 +41,37 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
     });
   }
 
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: currentDate,
         lastDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 365*100)));
+        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)));
     if (picked != null && picked != currentDate) {
       setState(() {
         selectedDate = picked;
       });
     }
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: cardColor(),
+        title: Text('Error'),
+        content: Text('Please select an image'),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: orangeColor(), // Background color
+            ),
+            onPressed: () => Navigator.pop(context),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -79,32 +96,6 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Stack(
-              //   clipBehavior: Clip.none,
-              //   children: [
-              //     Center(
-              //       child: GestureDetector(
-              //         onTap: () async{
-              //           await _pickImage(ImageSource.camera);
-              //         },
-              //         child: Container(
-              //           height: 120,
-              //           width: 120,
-              //           decoration: const BoxDecoration(
-              //             shape: BoxShape.circle,
-              //             color: Color.fromRGBO(53, 56, 66, 1),
-              //           ),
-              //           alignment: Alignment.bottomRight,
-              //           child: Icon(
-              //             Icons.camera_alt_rounded,
-              //             color: orangeColor(),
-              //             size: 35,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -116,20 +107,20 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                       child: CircleAvatar(
                         radius: 60,
                         backgroundColor: const Color.fromRGBO(53, 56, 66, 1),
-                        backgroundImage: _image != null ? FileImage(_image!) : null,
+                        backgroundImage:
+                            _image != null ? FileImage(_image!) : null,
                         child: _image == null
                             ? const Icon(
-                          Icons.camera_alt_rounded,
-                          color: Colors.red,
-                          size: 35,
-                        )
+                                Icons.camera_alt_rounded,
+                                color: Colors.red,
+                                size: 35,
+                              )
                             : null,
                       ),
                     ),
                   ),
                 ],
               ),
-
             ],
           ),
           const SizedBox(
@@ -163,6 +154,9 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter name';
                           }
+                          if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
+                            return 'Please enter a valid name';
+                          }
                           return null;
                         },
                         onSaved: (value) {
@@ -193,6 +187,9 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter email';
                           }
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                            return 'Please enter a valid email address';
+                          }
                           return null;
                         },
                         onSaved: (value) {
@@ -222,6 +219,9 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter pincode';
+                          }
+                          if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+                            return 'Please enter a valid 6-digit pin code';
                           }
                           return null;
                         },
@@ -297,14 +297,18 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                       ' Date of Birth',
+                                    ' Date of Birth',
                                     style: inputTextStyle16(),
                                   ),
                                   Text(
-                                    DateFormat('dd-MM-yyyy').format(selectedDate),
+                                    selectedDate == null
+                                        ? 'No Date Chosen'
+                                    :DateFormat('dd-MM-yyyy')
+                                        .format(selectedDate!),
                                     style: inputTextStyle16(),
                                   ),
                                 ],
@@ -320,13 +324,24 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         width: MediaQuery.of(context).size.width,
                         child: InkWell(
                           onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState?.save();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const AddressPage()));
+                            if (_image == null) {
+                              _showErrorDialog(context);
+                            }else if(selectedDate == null){
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Please select a date of birth"),
+                                ),
+                              );
+                            }
+                            else {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState?.save();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AddressPage()));
+                              }
                             }
                           },
                           child: Card(
