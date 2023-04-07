@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:tastesonway/main.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/sharedpreferences.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -28,7 +29,8 @@ class _SignupState extends State<Signup> {
   bool otpVisibility = false;
   String verificationID = "";
   late String otpCode;
-  late String phoneCode = "91";
+  String phoneCode = "91";
+  String countryCode = "IN";
   bool isLoading = false;
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
@@ -144,8 +146,12 @@ class _SignupState extends State<Signup> {
                                 ),
                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 controller: phoneController,
-                                onCountryChanged: (country) {
-                                  phoneCode = country.dialCode;
+                                // onCountryChanged: (country) {
+                                //   phoneCode = country.dialCode;
+                                // },
+                                onChanged: (phone) {
+                                  phoneCode = phone.countryCode;
+                                  countryCode = phone.countryISOCode;
                                 },
                               ),
                               GestureDetector(
@@ -238,6 +244,10 @@ class _SignupState extends State<Signup> {
     );
   }
   void login() async {
+    await Sharedprefrences.setCountryCode(phoneCode);
+    await Sharedprefrences.setMobileNumber(phoneController.text);
+    await Sharedprefrences.setShortCode(countryCode);
+    // print("this is complete data: $countryCode, $phoneController.text, $phoneCode");
     setState(() {
       isLoading = true;
     });

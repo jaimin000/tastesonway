@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/signup/signup.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 
 class NoInternetScreen extends StatelessWidget {
   @override

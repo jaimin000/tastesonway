@@ -8,7 +8,7 @@ import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import '../tutorials/tutorials.dart';
 
 import '../bank/banking_details.dart';

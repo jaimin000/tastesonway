@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 
 class FAQ extends StatelessWidget {
   const FAQ({Key? key}) : super(key: key);

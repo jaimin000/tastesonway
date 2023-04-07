@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/signup/signup.dart';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 import 'package:page_indicator/page_indicator.dart';
 
 

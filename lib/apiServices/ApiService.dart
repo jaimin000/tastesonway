@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../utils/sharedpreferences.dart';
 
 var tokenvalue;
 var ownerId;
@@ -27,6 +30,7 @@ Future<String> getToken() async {
   });
   final json = jsonDecode(tokenResponse.body);
   tokenvalue = (json['data'][0]['token']).toString();
+  await Sharedprefrences.setToken(tokenvalue);
   return tokenvalue;
 }
 
@@ -50,5 +54,6 @@ Future<int> getOwnerId() async {
   final json = jsonDecode(tokenResponse.body);
   ownerId = json['data'][0]['id'];
   print(ownerId);
+  await Sharedprefrences.setId(ownerId);
   return ownerId;
 }

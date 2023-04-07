@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class OrderDetails extends StatefulWidget {
   const OrderDetails({Key? key}) : super(key: key);

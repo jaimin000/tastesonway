@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/discount/discount.dart';
 import 'package:tastesonway/screens/discount/fixed_discount.dart';
 
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class ChoosePromo extends StatelessWidget {
   const ChoosePromo({Key? key}) : super(key: key);

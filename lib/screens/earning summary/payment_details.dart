@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/earning%20summary/payment_received.dart';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class PaymentDetails extends StatefulWidget {
   const PaymentDetails({Key? key}) : super(key: key);

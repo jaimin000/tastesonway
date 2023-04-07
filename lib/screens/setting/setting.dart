@@ -7,7 +7,7 @@ import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 
 import '../signup/signup.dart';
 

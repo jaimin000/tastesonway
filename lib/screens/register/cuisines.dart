@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/main.dart';
-import 'package:tastesonway/screens/dashboard/dashboard.dart';
-import '../../theme_data.dart';
+import '../../apiServices/ApiService.dart';
+import '../../models/cuisines.dart';
+import '../../utils/theme_data.dart';
+import 'package:http/http.dart' as http;
 
 class Cuisines extends StatefulWidget {
   const Cuisines({Key? key}) : super(key: key);
@@ -11,10 +14,10 @@ class Cuisines extends StatefulWidget {
 }
 
 class _CuisinesState extends State<Cuisines> {
-  List<String> _foodItems = ['Chinese', 'Indian', 'Mexican', 'Punjabi'];
+  List<CuisineModel> _foodItems = [];
   List<String> _selectedItems = [];
 
-  void _onItemSelect(String item) {
+  void _onItemSelect(item) {
     setState(() {
       if (_selectedItems.contains(item)) {
         _selectedItems.remove(item);
@@ -22,6 +25,35 @@ class _CuisinesState extends State<Cuisines> {
         _selectedItems.add(item);
       }
     });
+    print(_selectedItems);
+  }
+
+  Future fetchData() async {
+    String token = await getToken();
+    final response = await http.get(
+      Uri.parse('https://dev-api.tastesonway.com/api/owners/get-cuisines'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      if (mounted) {
+        setState(() {
+          var data = jsonData['data'];
+          print(data);
+        });
+        dynamic cuisineData = jsonData['data'];
+        cuisineData
+            .forEach((json) => _foodItems.add(CuisineModel.fromJson(json)));
+        setState(() {});
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
   }
 
   @override
@@ -65,16 +97,18 @@ class _CuisinesState extends State<Cuisines> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Wrap(
-              spacing: 10,
-              runSpacing: 5,
+              spacing: 5,
+              runSpacing: 2,
               children: _foodItems.map((item) {
                 return FilterChip(
-                  label: Text(item),
-                  selected: _selectedItems.contains(item),
+                  label: Text(item.name!),
+                  selected: item.isSelected ?? false,
                   selectedColor: orangeColor(),
                   backgroundColor: cardColor(),
-                  onSelected: (selected) {
-                    _onItemSelect(item);
+                  onSelected: (value) {
+                    item.isSelected = value;
+                    setState(() {
+                    });
                   },
                 );
               }).toList(),

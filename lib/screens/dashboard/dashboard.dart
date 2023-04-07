@@ -8,7 +8,7 @@ import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);

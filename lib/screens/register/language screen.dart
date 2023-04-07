@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tastesonway/screens/register/landing%20screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../theme_data.dart';
+import '../../utils/sharedpreferences.dart';
+import '../../utils/theme_data.dart';
 
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({Key? key}) : super(key: key);
@@ -320,9 +321,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                 languageId = 2;
                                 languageCode = 'hi';
                               }
-                              print(languageId);
-                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setInt('languageId', languageId);
+                              // print('this is languageId $languageId');
+                              await Sharedprefrences.setLanguageId(languageId);
+                              // print(await Sharedprefrences.getLanguageId());
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

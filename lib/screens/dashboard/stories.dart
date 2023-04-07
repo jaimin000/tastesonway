@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/ApiService.dart';
 import 'package:tastesonway/screens/dashboard/view%20stories.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'package:video_compress/video_compress.dart';
 
 class Stories extends StatefulWidget {
@@ -355,7 +355,6 @@ class _StoriesState extends State<Stories> {
                                         style: cTextStyle16(),
                                       ),
                                       onTap: () {
-                                        // TODO: Implement photo selection logic
                                         createImgStory();
                                         Navigator.pop(context);
                                       },
@@ -370,7 +369,6 @@ class _StoriesState extends State<Stories> {
                                         style: cTextStyle16(),
                                       ),
                                       onTap: () {
-                                        // TODO: Implement video selection logic
                                         createVideoStory();
                                         Navigator.pop(context);
                                       },

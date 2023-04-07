@@ -7,8 +7,9 @@ import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/questions.dart';
+import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
@@ -57,11 +58,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: "Taste On Way",
         theme:ThemeData(
+          primaryColor: orangeColor(),
           brightness: Brightness.dark,
           accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
-        home: isUser == "null" ?  const AddressPage() : const Home()
+        home: isUser == "null" ?  const userPersonalDetail() : const Home()
         );
   }
 }

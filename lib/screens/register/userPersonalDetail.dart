@@ -1,9 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/sharedpreferences.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart'as http;
+import '../../apiServices/ApiService.dart';
 
 class userPersonalDetail extends StatefulWidget {
   const userPersonalDetail({Key? key}) : super(key: key);
@@ -20,7 +25,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
   File? _image;
   DateTime currentDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
-  String dropdownvalue = 'Male';
+  String gender = 'Male';
 
   var items = [
     'Male',
@@ -46,7 +51,8 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         context: context,
         initialDate: currentDate,
         lastDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)));
+        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100))
+    );
     if (picked != null && picked != currentDate) {
       setState(() {
         selectedDate = picked;
@@ -59,20 +65,53 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: cardColor(),
-        title: Text('Error'),
-        content: Text('Please select an image'),
+        title: const Text('Error'),
+        content: const Text('Please select an image'),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: orangeColor(), // Background color
             ),
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
     );
   }
+
+  Future fetchData() async {
+    int id = await Sharedprefrences.getLanguageId();
+    dynamic number = await Sharedprefrences.getMobileNumber();
+    print(number);
+    String token = await Sharedprefrences.getToken();
+    final response = await http.post(
+      Uri.parse('https://dev-api.tastesonway.com/api/v2/kitchen-owner-update-profile'),
+      headers: {'Authorization': 'Bearer $token',
+      },
+      body: {
+        'language_id':"$id",
+        'country_code':await Sharedprefrences.getCountryCode(),
+        'short_code':await Sharedprefrences.getShortCode(),
+        //'mobile_number':'7069836196',
+        //'avatar':await Sharedprefrences.getProfilePic().toString(),
+         'name':name,
+         'email':email,
+         'pin_code':pincode,
+        'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
+      }
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+        setState(() {
+          var data = jsonData['data'];
+          print(data);
+        });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +293,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                               ),
                               DropdownButton(
                                 underline: const SizedBox(),
-                                value: dropdownvalue,
+                                value: gender,
                                 icon: const Icon(
                                   Icons.keyboard_arrow_down,
                                   color: Color.fromRGBO(255, 114, 105, 1),
@@ -270,7 +309,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                                 }).toList(),
                                 onChanged: (String? newValue) {
                                   setState(() {
-                                    dropdownvalue = newValue!;
+                                    gender = newValue!;
                                   });
                                 },
                               ),
@@ -323,7 +362,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
                             if (_image == null) {
                               _showErrorDialog(context);
                             }else if(selectedDate == null){
@@ -336,6 +375,17 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                             else {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState?.save();
+                                Sharedprefrences.setFullName(name);
+                                Sharedprefrences.setProfilePic(_image.toString());
+                                Sharedprefrences.setEmail(email);
+                                Sharedprefrences.setGender(gender);
+                                Sharedprefrences.setPincode(pincode);
+                                Sharedprefrences.setBirthdate(DateFormat('yyyy-MM-dd')
+                                    .format(selectedDate!));
+                                // print("this is data ${await Sharedprefrences.getFullName()},${await Sharedprefrences.getGender()}"
+                                //     "${await Sharedprefrences.getEmail()},${await Sharedprefrences.getProfilePic()},"
+                                //     "${await Sharedprefrences.getPincode()}, ${await Sharedprefrences.getBirthdate()}");
+                                await fetchData();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

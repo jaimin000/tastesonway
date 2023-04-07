@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/orders/order_details.dart';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class ReceivedOrders extends StatefulWidget {
   const ReceivedOrders({Key? key}) : super(key: key);

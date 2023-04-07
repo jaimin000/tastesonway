@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tastesonway/apiServices/ApiService.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
-import '../../../theme_data.dart';
+import '../../../utils/theme_data.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
 import 'menuIdController.dart';

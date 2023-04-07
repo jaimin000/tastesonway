@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme_data.dart';
+import '../../utils/theme_data.dart';
 
 class PendingPayment extends StatelessWidget {
   const PendingPayment({Key? key}) : super(key: key);

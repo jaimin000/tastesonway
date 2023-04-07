@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/bank/bank_details.dart';
 import 'package:tastesonway/screens/bank/upi_details.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 
 class BankingDetails extends StatelessWidget {
   const BankingDetails({Key? key}) : super(key: key);
