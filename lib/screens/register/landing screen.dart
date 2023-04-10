@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/signup/signup.dart';
@@ -52,7 +53,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         Column(
                           children: [
                             Text(
-                              'Capture your',
+                              'key_Capture_your'.tr,
                               style: TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
@@ -61,7 +62,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               maxLines: 1,
                             ),
                            Text(
-                              'orders from chat',
+                              'key_orders_from_chat'.tr,
                               style: TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
@@ -70,7 +71,7 @@ class _LandingScreenState extends State<LandingScreen> {
                               maxLines: 1,
                             ),
                             Text(
-                              'Apps easily',
+                              'key_Apps_easily'.tr,
                               style: TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
@@ -78,30 +79,6 @@ class _LandingScreenState extends State<LandingScreen> {
                               ),
                               maxLines: 1,
                             ),
-                            // Text(
-                            //   "Capture your",
-                            //   style: TextStyle(
-                            //     fontSize: 30,
-                            //     fontFamily: 'Roboto',
-                            //     fontWeight: FontWeight.w900,
-                            //   ),
-                            // ),
-                            // Text(
-                            //   "orders from chat",
-                            //   style: TextStyle(
-                            //     fontSize: 30,
-                            //     fontFamily: 'Roboto',
-                            //     fontWeight: FontWeight.w900,
-                            //   ),
-                            // ),
-                            // Text(
-                            //   "Apps easily",
-                            //   style: TextStyle(
-                            //     fontSize: 30,
-                            //     fontFamily: 'Roboto',
-                            //     fontWeight: FontWeight.w900,
-                            //   ),
-                            // )
                           ],
                         )
                       ],
@@ -122,17 +99,17 @@ class _LandingScreenState extends State<LandingScreen> {
                           height: 30,
                         ),
                         Column(
-                          children: const [
+                          children:  [
                             Text(
-                              'Design Cool',
-                              style: TextStyle(
+                              'key_Design_Cool'.tr,
+                              style: const TextStyle(
                                 fontSize: 30,
 
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             Text(
-                              'Menus',
+                              'key_Menus'.tr,
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,
@@ -154,24 +131,24 @@ class _LandingScreenState extends State<LandingScreen> {
                           height: 25,
                         ),
                         Column(
-                          children: const [
+                          children:  [
                             Text(
-                              'Track your',
+                              'key_Track_your'.tr,
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Text(
+                              'key_Expenses_and'.tr,
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             Text(
-                              'Expenses and',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                            Text(
-                              'Earnings',
-                              style: TextStyle(
+                              'key_Earnings'.tr,
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,
                               ),
@@ -213,9 +190,9 @@ class _LandingScreenState extends State<LandingScreen> {
                           );
                           //Sharedprefrences.isFirstTimeSet(false);
                         },
-                        child: const Text(
-                          'Get Stated on Tastes On Way',
-                          style: TextStyle(
+                        child:  Text(
+                          'key_Get_Stated'.tr,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w700,

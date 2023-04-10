@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/hearAboutModel.dart';
 import 'package:tastesonway/screens/register/cuisines.dart';
@@ -60,7 +61,7 @@ class _QuestionsState extends State<Questions> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                'Which of the Following best describes you?',
+                'key_Which_of_the_following_best_describes_you'.tr,
                 style: TextStyle(
                   color: orangeColor(),
                   fontSize: 16,
@@ -102,7 +103,7 @@ class _QuestionsState extends State<Questions> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                'Why do you wish to use Tastes On Way?',
+                'key_Why_do_you_wish_to_use_Tastes_on_Ways'.tr,
                 style: TextStyle(
                   color: orangeColor(),
                   fontSize: 16,
@@ -148,7 +149,7 @@ class _QuestionsState extends State<Questions> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                'How did you hear about Tastes On Way?',
+                'key_How_did_you_hear_about_Tastes_on_Ways'.tr,
                 style: TextStyle(
                   color: orangeColor(),
                   fontSize: 16,
@@ -232,10 +233,10 @@ class _QuestionsState extends State<Questions> {
             children: [
               Container(
                   color: cardColor(),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      'We are committed to helping chefs Food Busines with menu Creation, order management, sales tracking and lots more.',
+                    'key_We_are_Committed'.tr,
                     ),
                   )),
               const SizedBox(
@@ -294,7 +295,7 @@ class _QuestionsState extends State<Questions> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Previous',
+                                    'key_Previous'.tr,
                                     style: mTextStyle14(),
                                   ),
                                 )),
@@ -326,7 +327,7 @@ class _QuestionsState extends State<Questions> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Next',
+                                    'key_Next'.tr,
                                     style: mTextStyle14(),
                                   ),
                                 )),

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/utils/theme_data.dart';
@@ -12,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../utils/sharedpreferences.dart';
 
@@ -35,11 +38,17 @@ class _SignupState extends State<Signup> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
+  final _key = UniqueKey();
+  late WebViewController webViewControllers;
+  bool agree = false;
+  bool showAgreeMessage = false;
+  int _selectedIndex = 0;
 
-  @override
-  void initState() {
-    getConnectivity();
-    super.initState();
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      webViewControllers.loadUrl('https://www.tastesonway.com/Terms-of-Service');
+    });
   }
 
   getConnectivity() =>
@@ -52,6 +61,140 @@ class _SignupState extends State<Signup> {
           }
         },
       );
+
+  showPrivacyPolicyDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        useRootNavigator: true,
+        barrierDismissible: false,
+        builder: (BuildContext context) => StatefulBuilder(
+            builder: (BuildContext context, state) => AlertDialog(
+              backgroundColor: cardColor(),
+              content: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: 400,
+                          child: WebView(
+                            key: _key,
+                            initialUrl: 'https://www.tastesonway.com/Terms-of-Service',
+                            javascriptMode: JavascriptMode.unrestricted,
+                            onWebViewCreated:
+                                (WebViewController webViewController) {
+                              webViewControllers = webViewController;
+                            },
+                            onProgress: (int progress) {
+                              print(
+                                  'WebView is loading (progress : $progress%)');
+                            },
+                            navigationDelegate: (NavigationRequest request) {
+                              print('allowing navigation to $request');
+                              return NavigationDecision.navigate;
+                            },
+                            onPageStarted: (String url) {
+                              print('Page started loading: $url');
+                            },
+                            onPageFinished: (String url) {
+                              print('Page finished loading: $url');
+                            },
+                            // gestureNavigationEnabled: true,
+                          )),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: agree,
+                            checkColor: Colors.black,
+                            activeColor: orangeColor(),
+                            onChanged: (value) {
+                              state(() {
+                                agree = value!;
+                                if (value) {
+                                  showAgreeMessage = false;
+                                }
+                              });
+                            },
+                          ),
+                          Expanded(
+                              child: Text(
+                                'key_I_have_read'.tr,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              )),
+                        ],
+                      ),
+                      showAgreeMessage
+                          ? Text(
+                        'key_Select_checkbox_for_agree'.tr,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: Colors.red),
+                      )
+                          : Container(),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: orangeColor(),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Center(
+                                    child: Text(
+                                      'key_Cancel'.tr
+                                          .toUpperCase(),
+                                      textAlign: TextAlign.right,
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white),
+                                    )),
+                              ),
+                              const SizedBox(height: 10,width: 10,),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: orangeColor(),
+                                ),
+                                onPressed: () {
+                                  state(() {
+                                    showAgreeMessage = true;
+                                  });
+                                  if (agree) {
+                                    Navigator.pop(context);
+                                    state(() {
+                                      showAgreeMessage = false;
+                                      agree = false;
+                                    });
+                                  }
+                                },
+                                child: Center(
+                                    child: Text(
+                                      'key_Agree'.tr.toUpperCase(),
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: agree
+                                              ? Colors.white
+                                              : Colors.grey),
+                                    )),
+                              ),
+                            ],
+                          ))
+                    ],
+                  )),
+              // );
+            )));
+  }
+
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -67,7 +210,7 @@ class _SignupState extends State<Signup> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          otpVisibility? 'Enter OTP' : 'Quick Login / Register',
+          otpVisibility? 'key_Enter_otp'.tr : 'key_register'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -78,16 +221,60 @@ class _SignupState extends State<Signup> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
                   SizedBox(
                     height: 230,
                     width: MediaQuery.of(context).size.width,
                     child: otpVisibility ? Image.asset('assets/images/otp.png') :Image.asset('assets/images/mobile.png'),
                   ),
+                  SizedBox(height: 20,),
+                  otpVisibility?Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'key_Enter_your_security_code'.tr,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          'key_OTP_has_been_sent_to_your_mobile'.tr,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  ):Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'key_Enter_your_mobile_number'.tr,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20.0),
+                      ),
+                      Text(
+                        'key_to_create_account'.tr,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          'key_We_will_text_you'.tr,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ],
+                  ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Container(
                     padding: const EdgeInsets.all(8.0),
@@ -176,53 +363,63 @@ class _SignupState extends State<Signup> {
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            otpVisibility ? "Verify" : "Send OTP",
+                                            otpVisibility ? "key_Click_Verify_Button".tr : "key_Verify_OTP".tr,
                                             style: mTextStyle16(),
                                           ),
                                         ))),
                               ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              // !otpVisibility ? SizedBox(
-                              //   width: MediaQuery.of(context).size.width,
-                              //   child: Row(
-                              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              //     crossAxisAlignment: CrossAxisAlignment.center,
-                              //     children: [
-                              //       Image.asset(
-                              //         './assets/images/google.png',
-                              //         height: 28,
-                              //         width: 28,
-                              //       ),
-                              //       Image.asset(
-                              //         './assets/images/facebook.png',
-                              //         height: 30,
-                              //         width: 30,
-                              //       ),
-                              //       Image.asset(
-                              //         './assets/images/apple.png',
-                              //         height: 30,
-                              //         width: 30,
-                              //         color: Colors.white,
-                              //       ),
-                              //       Image.asset(
-                              //         './assets/images/email.png',
-                              //         height: 30,
-                              //         width: 30,
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ) : SizedBox(),
-                              // SizedBox(
-                              //   height: 15,
-                              // ),
                             ],
                           ),
                         ),
                       ),
                     ),
                   ),
+                  SizedBox(height: 20,),
+                  otpVisibility ?const SizedBox(): Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 20, right: 20, bottom: 20),
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                  text:
+                                  'key_By_completing_registration'.tr,
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white),
+                                ),
+                                TextSpan(
+                                  text: 'key_Privacy_policy'.tr,
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                       showPrivacyPolicyDialog(context);
+                                       _onItemTapped(0);
+                                    },
+                                  style: const TextStyle(
+                                      decoration:
+                                      TextDecoration.underline,
+                                      fontSize: 14,
+                                      color: Colors.white),
+                                ),
+                                const TextSpan(text: ' & '),
+                                TextSpan(
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      showPrivacyPolicyDialog(context);
+                                      _onItemTapped(1);
+                                    },
+                                  text: 'key_Terms_Of_service'.tr,
+                                  style: const TextStyle(
+                                      decoration:
+                                      TextDecoration.underline,
+                                      fontSize: 14,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ))),
                 ],
               ),
             ),
@@ -243,6 +440,7 @@ class _SignupState extends State<Signup> {
       ),
     );
   }
+
   void login() async {
     await Sharedprefrences.setCountryCode(phoneCode);
     await Sharedprefrences.setMobileNumber(phoneController.text);
@@ -296,7 +494,7 @@ class _SignupState extends State<Signup> {
           () {
         if (user != null) {
           Fluttertoast.showToast(
-            msg: "You are logged in successfully",
+            msg: "key_login_success".tr,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -331,12 +529,12 @@ class _SignupState extends State<Signup> {
   showDialogBox() => showCupertinoDialog<String>(
     context: context,
     builder: (BuildContext context) => CupertinoAlertDialog(
-      title: const Text('No Connection'),
-      content: const Text('Please check your internet connectivity'),
+      title:  Text('key_Check_your_connection'.tr),
+      content:  Text('key_No_Internet_connection_found'.tr),
       actions: <Widget>[
         TextButton(
           onPressed: () async {
-            Navigator.pop(context, 'Cancel');
+            Navigator.pop(context, 'key_CANCEL'.tr);
             setState(() => isAlertSet = false);
             isDeviceConnected =
             await InternetConnectionChecker().hasConnection;
@@ -345,7 +543,7 @@ class _SignupState extends State<Signup> {
               setState(() => isAlertSet = true);
             }
           },
-          child: const Text('OK'),
+          child: Text('key_OKAY'.tr),
         ),
       ],
     ),

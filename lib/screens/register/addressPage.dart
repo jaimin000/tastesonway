@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -184,7 +185,7 @@ class _AddressPageState extends State<AddressPage> {
               child: Column(
                 children: [
                   Text(
-                    "Select Current Location",
+                    "key_Select_delivery_location".tr,
                     style: cardTextStyle16(),
                   ),
                   Row(
@@ -208,8 +209,8 @@ class _AddressPageState extends State<AddressPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: orangeColor(),
                         ),
-                        child: const Text(
-                          'Edit',
+                        child: Text(
+                          'key_Edit'.tr,
                           style: TextStyle(fontSize: 16),
                         ),
                         onPressed: () {
@@ -249,16 +250,16 @@ class _AddressPageState extends State<AddressPage> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide.none),
-                                      hintText: 'Kitchen Owner Name',
+                                      hintText: 'key_Enter_Your_Kitchen_Owner_Name'.tr,
                                       hintStyle: inputTextStyle16(),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter kitchen owner name';
+                                        return 'key_please_enter_your_Kitchen_Owner_Name_indentity'.tr;
                                       }
                                       if (!RegExp(r'^[a-zA-Z\s]+$')
                                           .hasMatch(value)) {
-                                        return 'Please enter a valid name';
+                                        return 'key_please_enter_your_Kitchen_Owner_Name_indentity'.tr;
                                       }
                                       return null;
                                     },
@@ -286,15 +287,15 @@ class _AddressPageState extends State<AddressPage> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide.none),
-                                      hintText: 'Address*',
+                                      hintText: 'key_Enter_Your_Address'.tr,
                                       hintStyle: inputTextStyle16(),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter Address';
+                                        return 'key_please_enter_your_Address_indentity'.tr;
                                       }
-                                      if (value.length < 10) {
-                                        return 'Address must be at least 10 characters';
+                                      if (value.length < 8) {
+                                        return 'key_please_enter_your_Address_indentity'.tr;
                                       }
                                       return null;
                                     },
@@ -322,12 +323,12 @@ class _AddressPageState extends State<AddressPage> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide.none),
-                                      hintText: 'Landmark',
+                                      hintText: 'key_Enter_Your_Landmark'.tr,
                                       hintStyle: inputTextStyle16(),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter landmark';
+                                        return 'key_please_enter_your_Landmark_indentity'.tr;
                                       }
                                       return null;
                                     },
@@ -355,15 +356,15 @@ class _AddressPageState extends State<AddressPage> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           borderSide: BorderSide.none),
-                                      hintText: 'Pincode',
+                                      hintText: 'key_pincode'.tr,
                                       hintStyle: inputTextStyle16(),
                                     ),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter pincode';
+                                        return 'key_please_enter_your_Pincode_indentity'.tr;
                                       }
                                       if (!RegExp(r'^\d{6}$').hasMatch(value)) {
-                                        return 'Please enter a valid 6-digit pin code';
+                                        return 'key_please_enter_your_Pincode_indentity'.tr;
                                       }
                                       return null;
                                     },
@@ -392,7 +393,7 @@ class _AddressPageState extends State<AddressPage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Select Address Type',
+                                            'key_Enter_Your_Address_Type'.tr,
                                             textAlign: TextAlign.left,
                                             style: inputTextStyle16(),
                                           ),
@@ -409,7 +410,7 @@ class _AddressPageState extends State<AddressPage> {
                                               return DropdownMenuItem(
                                                 value: items,
                                                 child: Text(
-                                                  items,
+                                                  items=='Home'?'key_Home'.tr: items=='Office'?'key_Work'.tr:'key_Other'.tr,
                                                   style: inputTextStyle16(),
                                                 ),
                                               );
@@ -475,7 +476,7 @@ class _AddressPageState extends State<AddressPage> {
                                           child: Align(
                                             alignment: Alignment.center,
                                             child: Text(
-                                              'Proceed',
+                                              'key_Save_Address'.tr,
                                               style: mTextStyle14(),
                                             ),
                                           )),
@@ -502,7 +503,7 @@ class _AddressPageState extends State<AddressPage> {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Confirm Location',
+                                    'key_Confirm_Location'.tr,
                                     style: mTextStyle14(),
                                   ),
                                 )),

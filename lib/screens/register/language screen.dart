@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/screens/register/landing%20screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/sharedpreferences.dart';
@@ -12,12 +14,14 @@ class LanguageScreen extends StatefulWidget {
 }
 
 class _LanguageScreenState extends State<LanguageScreen> {
+  late Locale _currentLocale;
   bool selectedEnglish = true;
   bool selectedGujarati = false;
   bool selectedHindi = false;
   bool isServicePresent = false;
   final _scrollController = ScrollController();
   String languageCode = 'en';
+  String countryCode = 'US';
   final GlobalKey _key1 = GlobalKey();
   final GlobalKey _key2 = GlobalKey();
   final GlobalKey _key3 = GlobalKey();
@@ -26,6 +30,25 @@ class _LanguageScreenState extends State<LanguageScreen> {
   @override
   void initState() {
     super.initState();
+    _getCurrentLocale();
+  }
+  Future<void> _getCurrentLocale() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? languageCode = prefs.getString('language');
+    String? countryCode = prefs.getString('country');
+    if (languageCode != null) {
+      setState(() {
+        _currentLocale = Locale(languageCode, countryCode);
+      });
+    }
+  }
+
+  Future<void> _setLanguagePreference(Locale locale) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language', locale.languageCode);
+    await prefs.setString('country', locale.countryCode ?? '');
+    Get.updateLocale(locale); // update the app's localization
+    setState(() {}); // update the app's UI
   }
 
   @override
@@ -37,7 +60,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 65),
+                  padding: EdgeInsets.only(top: 55),
                   child: Center(
                       child: Text(
                     'Choose Language',
@@ -71,7 +94,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     children: [
                       Expanded(
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            await _setLanguagePreference(Locale('en', 'US'));
                             setState(() {
                               selectedEnglish = true;
                               if (selectedEnglish == true) {
@@ -146,7 +170,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       ),
                       Expanded(
                         child: InkWell(
-                          onTap: () {
+                          onTap: () async {
+                            await _setLanguagePreference(Locale('gj', 'IN'));
                             setState(() {
                               selectedGujarati = true;
                               if (selectedGujarati == true) {
@@ -224,7 +249,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   height: 15,
                 ),
                 InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await _setLanguagePreference(Locale('hi', 'IN'));
                       setState(() {
                         selectedHindi = true;
                         if (selectedHindi == true) {
@@ -313,16 +339,23 @@ class _LanguageScreenState extends State<LanguageScreen> {
                               int languageId;
                               if (selectedEnglish == true) {
                                 languageId = 1;
-                                languageCode = 'en';
-                              } else if (selectedGujarati == true) {
+                                languageCode = 'hi';
+                                countryCode = 'IN';
+                              }
+                              else if (selectedGujarati == true) {
                                 languageId = 3;
-                                languageCode = 'gu';
+                                languageCode = 'en';
+                                countryCode = 'US';
+
                               } else {
                                 languageId = 2;
-                                languageCode = 'hi';
+                                languageCode = 'gj';
+                                countryCode = 'IN';
                               }
-                              // print('this is languageId $languageId');
-                              await Sharedprefrences.setLanguageId(languageId);
+                              print('this is languageId $languageId');
+                              await Sharedprefrences.setLanguagePreference(Locale('$languageCode','$countryCode'));
+                              print(await Sharedprefrences.getLanguagePreference());
+                              //await Sharedprefrences.setLanguageId(languageId);
                               // print(await Sharedprefrences.getLanguageId());
                               Navigator.push(
                                 context,

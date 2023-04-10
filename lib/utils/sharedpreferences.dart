@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Sharedprefrences {
@@ -58,6 +59,19 @@ class Sharedprefrences {
   static Future<String?> getShortCode() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('ShortCode');
+  }
+
+  static Future<void> setLanguagePreference(Locale locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language', locale.languageCode);
+    await prefs.setString('country', locale.countryCode!);
+  }
+
+  static Future<Locale> getLanguagePreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    final languageCode = prefs.getString('language') ?? 'en';
+    final countryCode = prefs.getString('country') ?? 'US';
+    return Locale(languageCode, countryCode);
   }
 
   static Future<bool> setFullName(String value) async {

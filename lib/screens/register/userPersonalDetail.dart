@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart'as http;
-import '../../apiServices/ApiService.dart';
 
 class userPersonalDetail extends StatefulWidget {
   const userPersonalDetail({Key? key}) : super(key: key);
@@ -30,7 +29,6 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
   var items = [
     'Male',
     'Female',
-    'Other',
   ];
 
   Future<void> _pickImage(ImageSource source) async {
@@ -66,14 +64,14 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
       builder: (_) => AlertDialog(
         backgroundColor: cardColor(),
         title: const Text('Error'),
-        content: const Text('Please select an image'),
+        content: Text('key_please_select_Image'.tr),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: orangeColor(), // Background color
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
+            child:  Text('key_OKAY'.tr),
           ),
         ],
       ),
@@ -121,7 +119,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Personal Details',
+          'key_Personal_Details'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -129,7 +127,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         scrollDirection: Axis.vertical,
         children: [
           SizedBox(
-            height: 25,
+            height: 75,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -144,7 +142,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         await _pickImage(ImageSource.gallery);
                       },
                       child: CircleAvatar(
-                        radius: 60,
+                        radius: 80,
                         backgroundColor: const Color.fromRGBO(53, 56, 66, 1),
                         backgroundImage:
                             _image != null ? FileImage(_image!) : null,
@@ -163,7 +161,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           Container(
               padding: EdgeInsets.all(10),
@@ -186,12 +184,12 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none),
-                          hintText: 'Name',
+                          hintText: 'key_Name'.tr,
                           hintStyle: inputTextStyle16(),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter name';
+                            return 'key_Please_Enter_Name'.tr;
                           }
                           if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
                             return 'Please enter a valid name';
@@ -219,15 +217,15 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none),
-                          hintText: 'Email',
+                          hintText: 'key_Email'.tr,
                           hintStyle: inputTextStyle16(),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter email';
+                            return 'key_Please_Enter_Email'.tr;
                           }
                           if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                            return 'Please enter a valid email address';
+                            return 'key_Please_Enter_Valid_Email'.tr;
                           }
                           return null;
                         },
@@ -252,15 +250,15 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide.none),
-                          hintText: 'Pincode',
+                          hintText: 'key_pincode'.tr,
                           hintStyle: inputTextStyle16(),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter pincode';
+                            return 'key_please_Enter_Valid_pincode'.tr;
                           }
                           if (!RegExp(r'^\d{6}$').hasMatch(value)) {
-                            return 'Please enter a valid 6-digit pin code';
+                            return 'key_please_Enter_Valid_pincode'.tr;
                           }
                           return null;
                         },
@@ -287,7 +285,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Select Gender',
+                                'key_Select_your_gender'.tr,
                                 textAlign: TextAlign.left,
                                 style: inputTextStyle16(),
                               ),
@@ -302,7 +300,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                                   return DropdownMenuItem(
                                     value: items,
                                     child: Text(
-                                      items,
+                                      items == "Male"? 'key_male'.tr:'key_female'.tr,
                                       style: inputTextStyle16(),
                                     ),
                                   );
@@ -340,12 +338,12 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    ' Date of Birth',
+                                    'key_Please_select_your_year_of_birth'.tr,
                                     style: inputTextStyle16(),
                                   ),
                                   Text(
                                     selectedDate == null
-                                        ? 'No Date Chosen'
+                                        ? ''
                                     :DateFormat('dd-MM-yyyy')
                                         .format(selectedDate!),
                                     style: inputTextStyle16(),
@@ -357,7 +355,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 45),
                     SizedBox(
                         height: 50,
                         width: MediaQuery.of(context).size.width,
@@ -367,8 +365,8 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                               _showErrorDialog(context);
                             }else if(selectedDate == null){
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Please select a date of birth"),
+                                 SnackBar(
+                                  content: Text("key_Please_Enter_DateOfBirth".tr),
                                 ),
                               );
                             }
@@ -403,7 +401,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Proceed',
+                                  'key_Click_Proceed_Button'.tr,
                                   style: mTextStyle14(),
                                 ),
                               )),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
 import '../../apiServices/ApiService.dart';
 import '../../models/cuisines.dart';
@@ -64,7 +65,7 @@ class _CuisinesState extends State<Cuisines> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Welcome to Tastes on Way',
+          'key_Welcome_to_Tastes_on_Way'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -73,9 +74,9 @@ class _CuisinesState extends State<Cuisines> {
           Container(
               color: cardColor(),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(
-                  'We are committed to helping chefs Food Busines with menu Creation, order management, sales tracking and lots more.',
+                    'key_We_are_Committed'.tr,
                 ),
               )),
           SizedBox(
@@ -84,7 +85,7 @@ class _CuisinesState extends State<Cuisines> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'How did you hear about Tastes On Way?',
+              'key_which_type_of_cuisines_you_will_sell'.tr,
               style: TextStyle(
                 color: orangeColor(),
                 fontSize: 16,
@@ -136,7 +137,7 @@ class _CuisinesState extends State<Cuisines> {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Next',
+                          'key_Next'.tr,
                           style: mTextStyle14(),
                         ),
                       )),
