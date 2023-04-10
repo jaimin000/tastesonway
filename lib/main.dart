@@ -6,8 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
-import 'package:tastesonway/screens/register/questions.dart';
-import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'screens/menu/your_menus.dart';
@@ -15,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'screens/register/language screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +60,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
-        home: isUser == "null" ?  const userPersonalDetail() : const Home()
+        home: isUser == "null" ?  const AddressPage() : const Home()
         );
   }
 }

@@ -49,7 +49,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   )),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
                 Image.asset(
                   './assets/images/language.png',
@@ -291,7 +291,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                   ))
                                 ])))),
                 const SizedBox(
-                  height: 15,
+                  height: 45,
                 ),
                 Padding(
                     padding: const EdgeInsets.only(

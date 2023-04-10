@@ -8,6 +8,12 @@
     <string>This app requires access to the Camera</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>This app requires access to the Microphone</string>
+    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>>$(PRODUCT_NAME) needs Location access for detect Tastes On Way user near you.</string>
+   	<key>NSLocationAlwaysUsageDescription</key>
+    <string>$(PRODUCT_NAME) needs Location access for detect Tastes On Way user near you.</string>
+   	<key>NSLocationWhenInUseUsageDescription</key>
+   	<string>$(PRODUCT_NAME) needs Location access for detect Tastes On Way user near you.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

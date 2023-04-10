@@ -141,7 +141,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                   Center(
                     child: GestureDetector(
                       onTap: () async {
-                        await _pickImage(ImageSource.camera);
+                        await _pickImage(ImageSource.gallery);
                       },
                       child: CircleAvatar(
                         radius: 60,
