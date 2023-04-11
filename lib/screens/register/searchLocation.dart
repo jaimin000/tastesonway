@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -183,7 +184,7 @@ class _SearchLocationState extends State<SearchLocation> {
           backgroundColor: backgroundColor(),
 
           title: Text(
-            'Search Location',
+            'key_Search_Location'.tr,
             style: cardTitleStyle20(),
           ),
         ),
@@ -249,7 +250,7 @@ class _SearchLocationState extends State<SearchLocation> {
                                   : null,
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
-                              hintText: 'Search for your location'),
+                              hintText: 'key_Search_for_your_location'.tr),
                           onChanged: (value) {
                             if (value.length > 2) {
                               autoCompleteSearch(value);
@@ -281,7 +282,7 @@ class _SearchLocationState extends State<SearchLocation> {
                         ),
                         minLeadingWidth: 10,
                         title: Text(
-                          'Use Current Location',
+                          'key_Use_current_location'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               color: orangeColor()),

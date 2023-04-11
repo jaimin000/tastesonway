@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class YourOrders extends StatelessWidget {
@@ -12,7 +13,7 @@ class YourOrders extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Your Orders',
+          'key_Your_Orders'.tr,
           style: cardTitleStyle20(),
         ),
         actions: [
@@ -30,108 +31,114 @@ class YourOrders extends StatelessWidget {
               height: 25,
             ),
             Stack(
-              clipBehavior: Clip.none,
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(64, 68, 81, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Received',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    '1 Order',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Amount',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    '₹ 50',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+              clipBehavior: Clip.none, children: [
+              SizedBox(
+                height: 180,
+                child: Card(
+                  shadowColor: Colors.black,
+                  color: const Color.fromRGBO(64, 68, 81, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_Orders_Received'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  '1 ${'key_order'.tr}',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_ORDER_AMOUNT'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  '₹ 50',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Divider(
-                            height: 20,
-                            color: Colors.white,
-                            endIndent: 5,
-                            indent: 5,
-                          ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Divider(
+                          height: 20,
+                          color: Colors.white,
+                          endIndent: 5,
+                          indent: 5,
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Status',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    'Pending',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                  height: 35,
-                                  width: MediaQuery.of(context).size.width * 0.45,
-                                  child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_ORDER_STATUS'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  'Pending',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                                height: 35,
+                                width: MediaQuery.of(context).size.width * 0.45,
+                                child: Card(
+                                    shadowColor: Colors.black,
+                                    color: orangeColor(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        '${'key_Order_Ready'.tr} (2:25)',
+                                        style: mTextStyle14(),
                                       ),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Order Ready (2:25)',
-                                          style: mTextStyle14(),
-                                        ),
-                                      ))),
-                            ],
-                          ),
+                                    ))),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                Positioned(
-                  bottom: -10,
-                  right: 120,
+              ),
+              Positioned(
+                bottom: -10,
+                right: 120,
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                    // );
+                  },
                   child: SizedBox(
                     height: 35,
                     width: 120,
@@ -149,112 +156,119 @@ class YourOrders extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+              ),
+            ],
             ),
             const SizedBox(height: 25),
             Stack(
-              clipBehavior: Clip.none,
-              children: [
-                SizedBox(
-                  height: 180,
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(64, 68, 81, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Received',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    '1 Order',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Amount',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    '₹ 50',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+              clipBehavior: Clip.none, children: [
+              SizedBox(
+                height: 180,
+                child: Card(
+                  shadowColor: Colors.black,
+                  color: const Color.fromRGBO(64, 68, 81, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_Orders_Received'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  '1 ${'key_order'.tr}',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_ORDER_AMOUNT'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  '₹ 50',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Divider(
-                            height: 20,
-                            color: Colors.white,
-                            endIndent: 5,
-                            indent: 5,
-                          ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Divider(
+                          height: 20,
+                          color: Colors.white,
+                          endIndent: 5,
+                          indent: 5,
                         ),
-                        Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order Status',
-                                    style: mTextStyle16(),
-                                  ),
-                                  Text(
-                                    'Pending',
-                                    style: cTextStyle16(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                  height: 35,
-                                  width: MediaQuery.of(context).size.width * 0.45,
-                                  child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'key_ORDER_STATUS'.tr,
+                                  style: mTextStyle16(),
+                                ),
+                                Text(
+                                  'Pending',
+                                  style: cTextStyle16(),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                                height: 35,
+                                width: MediaQuery.of(context).size.width * 0.45,
+                                child: Card(
+                                    shadowColor: Colors.black,
+                                    color: orangeColor(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        '${'key_Order_Ready'.tr} (2:25)',
+                                        style: mTextStyle14(),
                                       ),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Order Ready (2:25)',
-                                          style: mTextStyle14(),
-                                        ),
-                                      ))),
-                            ],
-                          ),
+                                    ))),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                Positioned(
-                  bottom: -10,
-                  right: 120,
+              ),
+              Positioned(
+                bottom: -10,
+                right: 120,
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                    // );
+                  },
                   child: SizedBox(
                     height: 35,
                     width: 120,
@@ -272,7 +286,8 @@ class YourOrders extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+              ),
+            ],
             ),
           ],
         ),

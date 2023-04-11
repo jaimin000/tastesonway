@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/screens/signup/signup.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
@@ -13,8 +14,8 @@ class NoInternetScreen extends StatelessWidget {
           children: <Widget>[
             Image.asset('assets/images/no_internet.png',width: 250,height: 400,),
             const SizedBox(height: 16),
-            const Text(
-              'No internet connection available \n Please check your connection',
+             Text(
+              'key_No_Internet_connection_found'.tr,
               style: TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
@@ -24,7 +25,7 @@ class NoInternetScreen extends StatelessWidget {
                 primary: orangeColor(),
               ),
               onPressed: () => _checkInternetConnectivity(context),
-              child: const Text('Retry'),
+              child:  Text('key_Try_Again'.tr),
             ),
           ],
         ),

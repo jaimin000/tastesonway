@@ -52,12 +52,12 @@ class _AddNewItemState extends State<AddNewItem> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Name',
+                  hintText: "key_Name".tr,
                   hintStyle: inputTextStyle16(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter Name for the topping item';
+                    return 'key_Please_enter_item_name_and_price'.tr;
                   }
                   return null;
                 },
@@ -79,12 +79,12 @@ class _AddNewItemState extends State<AddNewItem> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Price',
+                  hintText: 'key_Price'.tr,
                   hintStyle: inputTextStyle16(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter Price for the topping item';
+                    return 'key_Please_enter_item_name_and_price'.tr;
                   }
                   return null;
                 },
@@ -138,7 +138,7 @@ class _AddNewItemState extends State<AddNewItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-          '$devUrl/v2/create-or-update-menu-item'),
+          '$liveUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';
@@ -264,7 +264,7 @@ class _AddNewItemState extends State<AddNewItem> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Add New Item',
+          'key_Add_New_Item'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -283,7 +283,7 @@ class _AddNewItemState extends State<AddNewItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "Create Text Menu",
+                "key_Create_Text_Menu".tr,
                 style: mTextStyle20(),
               ),
             ),
@@ -310,7 +310,7 @@ class _AddNewItemState extends State<AddNewItem> {
                       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Basic Details',
+                          'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
                         const SizedBox(height: 15),
@@ -334,12 +334,12 @@ class _AddNewItemState extends State<AddNewItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Name Of Menu Item',
+                              hintText: 'key_Name_your_menu'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a name for the menu item';
+                                return 'key_Please_enter_MenuName'.tr;
                               }
                               return null;
                             },
@@ -365,12 +365,12 @@ class _AddNewItemState extends State<AddNewItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Price Per Serving',
+                              hintText: 'key_What_the_price_per_serving'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter price for the menu item';
+                                return 'key_Please_enter_the_price_per_serving'.tr;
                               }
                               return null;
                             },
@@ -402,7 +402,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      _imageSelected ? 'image.jpg' : 'Select Image',
+                                      _imageSelected ? 'image.jpg' : 'key_Select_Item_Image'.tr,
                                       textAlign: TextAlign.center,
                                       overflow: TextOverflow.clip,
                                       style: inputTextStyle16(),
@@ -438,7 +438,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'Type Of Dish Veg',
+                                    'key_Veg_Only'.tr,
                                     textAlign: TextAlign.center,
                                     style: inputTextStyle16(),
                                   ),
@@ -479,12 +479,12 @@ class _AddNewItemState extends State<AddNewItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Add Dish Description',
+                              hintText: 'key_Add_Dish_Description'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter description for the menu item';
+                                return 'key_Please_enter_dish_description'.tr;
                               }
                               return null;
                             },
@@ -500,7 +500,7 @@ class _AddNewItemState extends State<AddNewItem> {
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Add Toppings',
+                              'key_Extra_Topping'.tr,
                               style: mTextStyle18(),
                             ),
                             InkWell(
@@ -563,7 +563,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Proceed',
+                                      'key_Proceed'.tr,
                                       style: mTextStyle14(),
                                     ),
                                   )),

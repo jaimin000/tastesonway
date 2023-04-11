@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/ApiService.dart';
@@ -351,7 +352,7 @@ class _StoriesState extends State<Stories> {
                                         color: orangeColor(),
                                       ),
                                       title: Text(
-                                        'Upload Photo',
+                                        'key_upload_images'.tr,
                                         style: cTextStyle16(),
                                       ),
                                       onTap: () {
@@ -365,7 +366,7 @@ class _StoriesState extends State<Stories> {
                                         color: orangeColor(),
                                       ),
                                       title: Text(
-                                        'Upload Video',
+                                        'key_upload_images'.tr,
                                         style: cTextStyle16(),
                                       ),
                                       onTap: () {
@@ -416,7 +417,7 @@ class _StoriesState extends State<Stories> {
                         height: 2,
                       ),
                       Text(
-                        'Create Story',
+                        'key_create_story'.tr,
                         style: mTextStyle14(),
                       ),
                     ],

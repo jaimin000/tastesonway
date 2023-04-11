@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/discount/choose_promo.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +25,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Delivery Promo',
+          'key_Outlet_Promos'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -93,7 +94,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
           const SizedBox(
             height: 20,
           ),
-          Center(child: Text("Add New",style: mTextStyle18(),)),
+          Center(child: Text("key_New".tr,style: mTextStyle18(),)),
           const SizedBox(
             height: 35,
           ),
@@ -120,7 +121,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Best Offer",style: cardTextStyle12(),),
+                        Text("key_bestoffer".tr,style: cardTextStyle12(),),
                         Text("Cashback Upto ₹ 100 \nUse Code TRYME",style: cTextStyle18(),),
                         const Divider(
                           height: 20,
@@ -135,7 +136,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         SizedBox(height: 35,
                             width:double.infinity,
                             child: Card(color: const Color.fromRGBO(105, 111, 130, 1),child: Center(
-                              child: Text("In Review",
+                              child: Text("key_in_review".tr,
                                 textAlign: TextAlign.center,
                                 style: mTextStyle16(),
                               ),
@@ -162,7 +163,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Best Offer",style: cardTextStyle12(),),
+                        Text("key_bestoffer".tr,style: cardTextStyle12(),),
                         Text("Cashback Upto ₹ 100 \nUse Code TRYME",style: cTextStyle18(),),
                         const Divider(
                           height: 20,
@@ -177,7 +178,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         SizedBox(height: 35,
                           width:double.infinity,
                           child: Card(color: const Color.fromRGBO(105, 111, 130, 1),child: Center(
-                            child: Text("In Review",
+                            child: Text("key_in_review".tr,
                               textAlign: TextAlign.center,
                               style: mTextStyle16(),
                             ),
@@ -204,7 +205,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Best Offer",style: cardTextStyle12(),),
+                        Text("key_bestoffer".tr,style: cardTextStyle12(),),
                         Text("Cashback Upto ₹ 100 \nUse Code TRYME",style: cTextStyle18(),),
                         const Divider(
                           height: 20,
@@ -219,7 +220,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                         SizedBox(height: 35,
                           width:double.infinity,
                           child: Card(color: const Color.fromRGBO(105, 111, 130, 1),child: Center(
-                            child: Text("In Review",
+                            child: Text("key_in_review".tr,
                               textAlign: TextAlign.center,
                               style: mTextStyle16(),
                             ),
@@ -232,6 +233,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                   ),
                 ),
               ),
+
             ],
           ),
           const SizedBox(

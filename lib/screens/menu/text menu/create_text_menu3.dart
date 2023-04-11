@@ -23,7 +23,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
   Future<void> Menu() async {
     String token = await getToken();
     int ownerId = await getOwnerId();
-    final response = await http.post(Uri.parse('$devUrl/v2/get-menu-item'),
+    final response = await http.post(Uri.parse('$liveUrl/get-menu-item'),
         headers: {
           'Authorization':'Bearer $token',
         },
@@ -75,7 +75,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
           elevation: 0,
           backgroundColor: backgroundColor(),
           title: Text(
-            'Create New Text Menu',
+            'key_Create_Text_Menu'.tr,
             style: cardTitleStyle20(),
           ),
         ),
@@ -105,7 +105,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            "Create Text Menu",
+                            "key_Create_Text_Menu".tr,
                             style: mTextStyle20(),
                           ),
                         ),
@@ -128,7 +128,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Step 1',
+                                      'key_step1'.tr,
                                       style: mTextStyle16(),
                                     )),
                               ),
@@ -148,7 +148,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Step 2',
+                                      'key_step2'.tr,
                                       style: mTextStyle16(),
                                     )),
                               ),
@@ -168,7 +168,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Step 3',
+                                      'key_step3'.tr,
                                       style: mTextStyle16(),
                                     )),
                               ),
@@ -271,7 +271,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                         horizontal: 15,
                                       ),
                                       child: Text(
-                                        'Whatsapp',
+                                        'key_Whatsapp'.tr,
                                         style: mTextStyle14(),
                                       ),
                                     ),

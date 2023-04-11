@@ -79,7 +79,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
   }
 
   Future fetchData() async {
-    int id = await Sharedprefrences.getLanguageId();
+    int id = await Sharedprefrences.getLanguageId() ?? 0;
     dynamic number = await Sharedprefrences.getMobileNumber();
     print(number);
     String token = await Sharedprefrences.getToken();

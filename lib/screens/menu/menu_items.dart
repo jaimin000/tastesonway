@@ -17,7 +17,7 @@ class _MenuItemsState extends State<MenuItems> {
       //step 1
       Column(
         children: [
-          Padding(
+          Padding (
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: SizedBox(
               height: 50,

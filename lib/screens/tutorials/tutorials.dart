@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class Tutorials extends StatelessWidget {
@@ -12,7 +13,7 @@ class Tutorials extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Tutorials',
+          'key_Tutorials'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -36,7 +37,7 @@ class Tutorials extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'How Can I Create a Text Menu ?',
+                        'key_How_can_I_create_a_Text_Menu'.tr,
                         style: inputTextStyle16(),
                       ),
                       Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
@@ -62,7 +63,7 @@ class Tutorials extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'How Can I Create a Text Menu ?',
+                        'key_How_can_I_create_a_beautiful_Menu_Card'.tr,
                         style: inputTextStyle16(),
                       ),
                       Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
@@ -86,7 +87,7 @@ class Tutorials extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'How Can I Create a Text Menu ?',
+                        'key_How_can_I_create_a_Store_on_the_app'.tr,
                         style: inputTextStyle16(),
                       ),
                       Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
@@ -95,83 +96,6 @@ class Tutorials extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(37, 40, 48, 1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'How Can I Create a Text Menu ?',
-                        style: inputTextStyle16(),
-                      ),
-                      Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 15),
-            SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(37, 40, 48, 1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'How Can I Create a Text Menu ?',
-                        style: inputTextStyle16(),
-                      ),
-                      Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15
-            ),
-            SizedBox(
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(37, 40, 48, 1),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'How Can I Create a Text Menu ?',
-                        style: inputTextStyle16(),
-                      ),
-                      Icon(Icons.play_circle_rounded,color: orangeColor(),size: 35,),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
 
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/discount/discount.dart';
 import 'package:tastesonway/screens/discount/fixed_discount.dart';
 
@@ -15,7 +16,7 @@ class ChoosePromo extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Choose Promo',
+          'key_Choose_promo'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -31,14 +32,14 @@ class ChoosePromo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "Outlet Promos",
+                "key_Outlet_Promos".tr,
                 style: mTextStyle20(),
               ),
             ),
             const SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("These Promos will run all on items in your outlet",style: cardTitleStyle14(),),
+              child: Text("key_These_promos_will_run_all_on_items_in_your_outlet".tr,style: cardTitleStyle14(),),
             ),
             const SizedBox(height:25),
             GestureDetector(
@@ -76,7 +77,7 @@ class ChoosePromo extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Discount',
+                              'key_discount'.tr,
                               style: mTextStyle20(),
                             ),
                           ),
@@ -88,7 +89,7 @@ class ChoosePromo extends StatelessWidget {
                         endIndent: 5,
                       ),
                       Text(
-                        'Get more orders with the most famous discount on Tastes On Way',
+                        'key_Get_more_orders_with_the_most_famous_discount_on_Tastes_On_Way'.tr,
                         style: cTextStyle16(),
                       ),
 
@@ -133,7 +134,7 @@ class ChoosePromo extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Fixed Discount',
+                              'key_Fixed_discount'.tr,
                               style: mTextStyle20(),
                             ),
                           ),
@@ -145,7 +146,7 @@ class ChoosePromo extends StatelessWidget {
                         endIndent: 5,
                       ),
                       Text(
-                        'Delight Customers with offers like ₹100 Off on the orders ',
+                        'key_Delight_customers_with_offers_like_100_OFF_on_the_orders'.tr,
                         style: cTextStyle16(),
                       ),
 

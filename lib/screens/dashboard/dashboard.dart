@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/image%20menu/create_image_menu.dart';
@@ -87,7 +88,7 @@ class _DashboardState extends State<Dashboard> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide.none),
-                    hintText: 'Find Your Dishes',
+                    hintText: 'key_find_dishes'.tr,
                     hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
                     suffixIcon:
                         Image.asset('./assets/images/dashboard/Filter.png')),
@@ -101,10 +102,10 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Quick Links", style: mTextStyle20()),
+                  Text("key_Quick_Link".tr, style: mTextStyle20()),
                   Row(
                     children: [
-                      Text("All", style: mTextStyle14()),
+                      Text("key_all".tr, style: mTextStyle14()),
                       const SizedBox(
                         width: 5,
                       ),
@@ -150,7 +151,7 @@ class _DashboardState extends State<Dashboard> {
                                 Image.asset(
                                     './assets/images/dashboard/food.png'),
                                 Text(
-                                  'Orders',
+                                  'key_Orders'.tr,
                                   style: cTextStyle18(),
                                 )
                               ],
@@ -180,7 +181,7 @@ class _DashboardState extends State<Dashboard> {
                                 Image.asset(
                                     './assets/images/dashboard/menu.png'),
                                 Text(
-                                  'Menus',
+                                  'key_Menu'.tr,
                                   style: cTextStyle18(),
                                 )
                               ],
@@ -200,7 +201,7 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Others',
+                                'key_other'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -218,7 +219,7 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Your Menus", style: mTextStyle20()),
+                  Text("key_Your_Menus".tr, style: mTextStyle20()),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -229,7 +230,7 @@ class _DashboardState extends State<Dashboard> {
                     },
                     child: Row(
                       children: [
-                        Text("All", style: mTextStyle14()),
+                        Text("key_all".tr, style: mTextStyle14()),
                         const SizedBox(
                           width: 5,
                         ),
@@ -281,7 +282,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("Create New\n Text Menu",
+                              child: Text("key_Create_Text_Menu".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -316,7 +317,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("Create New\n Image Menu",
+                              child: Text("key_Create_Image_Menu".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -351,7 +352,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('0', style: cTextStyle36()),
                               Text(
-                                'Your Menus',
+                                'key_Your_Menus'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -371,7 +372,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('2', style: cTextStyle36()),
                               Text(
-                                'Menu Items',
+                                'key_Items_In_Menu'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -391,7 +392,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('2', style: cTextStyle36()),
                               Text(
-                                'Menu Items',
+                                'key_My_Menu_Designs'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -416,7 +417,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Your Orders", style: mTextStyle20()),
+                    Text("key_Your_Orders".tr, style: mTextStyle20()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -427,7 +428,7 @@ class _DashboardState extends State<Dashboard> {
                       },
                       child: Row(
                         children: [
-                          Text("All", style: mTextStyle14()),
+                          Text("key_all".tr, style: mTextStyle14()),
                           const SizedBox(
                             width: 5,
                           ),
@@ -480,7 +481,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("View Your\n Orders",
+                              child: Text("key_view_orders".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -515,7 +516,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("View Received\n Orders",
+                              child: Text("key_view_received_orders".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -550,7 +551,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('0', style: cTextStyle36()),
                               Text(
-                                'Today',
+                                'key_Today'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -570,7 +571,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('2', style: cTextStyle36()),
                               Text(
-                                'Yesterday',
+                                'key_Yesterday'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -590,7 +591,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('2', style: cTextStyle36()),
                               Text(
-                                'Yesterday',
+                                'key_Later'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -608,7 +609,7 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Earning Summary", style: mTextStyle20()),
+                  Text('key_Earning_Summary'.tr, style: mTextStyle20()),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -619,7 +620,7 @@ class _DashboardState extends State<Dashboard> {
                     },
                     child: Row(
                       children: [
-                        Text("All", style: mTextStyle14()),
+                        Text("key_all".tr, style: mTextStyle14()),
                         const SizedBox(
                           width: 5,
                         ),
@@ -671,7 +672,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("View Earning\n Summary",
+                              child: Text("key_Earning_Summary".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -700,7 +701,7 @@ class _DashboardState extends State<Dashboard> {
                             padding: const EdgeInsets.all(15),
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text("View Earning\n Summary",
+                              child: Text("key_Expenses_Summary".tr,
                                   style: cardTextStyle20()),
                             ),
                           ),
@@ -735,7 +736,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('₹100', style: cTextStyle36()),
                               Text(
-                                'This Week',
+                                'key_week'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -755,7 +756,7 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('₹200', style: cTextStyle36()),
                               Text(
-                                'This Month',
+                                'key_month'.tr,
                                 style: cTextStyle18(),
                                 overflow: TextOverflow.ellipsis,
                               )
@@ -776,9 +777,9 @@ class _DashboardState extends State<Dashboard> {
                             children: [
                               Text('₹200', style: cTextStyle36()),
                               Text(
-                                'Last Month',
+                                'key_last_month'.tr,
                                 style: cTextStyle18(),
-                                overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.clip,
                               )
                             ],
                           )),

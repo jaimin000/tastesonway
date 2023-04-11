@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class ContactUs extends StatelessWidget {
@@ -12,7 +13,7 @@ class ContactUs extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Contact Us',
+          'key_Contact_Us'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -47,7 +48,7 @@ class ContactUs extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: Text(
-                        'Email Us',
+                        'key_Email_Us'.tr,
                         style: mTextStyle18(),
                       ),
                     ),
@@ -80,7 +81,7 @@ class ContactUs extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0),
                       child: Text(
-                        'Request Call Back',
+                        'key_Request_Callback'.tr,
                         style: mTextStyle18(),
                       ),
                     ),

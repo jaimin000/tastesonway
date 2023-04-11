@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class UPIDetails extends StatelessWidget {
@@ -13,7 +14,7 @@ class UPIDetails extends StatelessWidget {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'UPI Details',
+          'key_upi_id'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -45,7 +46,7 @@ class UPIDetails extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Basic Details',
+                        'key_Basic_Details'.tr,
                         style: mTextStyle18(),
                       ),
 
@@ -65,7 +66,7 @@ class UPIDetails extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'UPI ID',
+                            hintText: 'key_upi_id'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),

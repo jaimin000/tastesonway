@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/earning%20summary/payment_received.dart';
 import '../../utils/theme_data.dart';
 
@@ -42,8 +43,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Order Received',style: mTextStyle16(),),
-                              Text('1 Order',style: cTextStyle16(),),
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
                             ],
                           ),
                           Column(
@@ -51,7 +52,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
 
                             children: [
-                              Text('Order Amount',style: mTextStyle16(),),
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
                               Text('₹ 50',style: cTextStyle16(),),
                             ],
                           ),
@@ -93,58 +94,64 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(64, 68, 81, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: 70,
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
+                            children: [
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
+                              Text('₹ 50',style: cTextStyle16(),),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentReceived()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Card(
+                          color: const Color.fromRGBO(53, 56, 66, 1),
+                          child: Center(
+                              child: Text(
+                                '5th Dec 2022',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins', color: orangeColor()),
+                                textAlign: TextAlign.center,
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -154,58 +161,64 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(64, 68, 81, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: 70,
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
+                            children: [
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
+                              Text('₹ 50',style: cTextStyle16(),),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentReceived()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Card(
+                          color: const Color.fromRGBO(53, 56, 66, 1),
+                          child: Center(
+                              child: Text(
+                                '5th Dec 2022',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins', color: orangeColor()),
+                                textAlign: TextAlign.center,
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -227,58 +240,64 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(64, 68, 81, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: 70,
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
+                            children: [
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
+                              Text('₹ 50',style: cTextStyle16(),),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentReceived()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Card(
+                          color: const Color.fromRGBO(53, 56, 66, 1),
+                          child: Center(
+                              child: Text(
+                                '5th Dec 2022',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins', color: orangeColor()),
+                                textAlign: TextAlign.center,
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -286,59 +305,66 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               const SizedBox(height: 25),
               Stack(
-                clipBehavior: Clip.none, children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                clipBehavior: Clip.none,
+                children: [
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(64, 68, 81, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: 70,
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
+                            children: [
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
+                              Text('₹ 50',style: cTextStyle16(),),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentReceived()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Card(
+                          color: const Color.fromRGBO(53, 56, 66, 1),
+                          child: Center(
+                              child: Text(
+                                '5th Dec 2022',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins', color: orangeColor()),
+                                textAlign: TextAlign.center,
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -346,59 +372,66 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
               const SizedBox(height: 25),
               Stack(
-                clipBehavior: Clip.none, children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                clipBehavior: Clip.none,
+                children: [
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(64, 68, 81, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      height: 70,
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('key_Orders_Received'.tr,style: mTextStyle16(),),
+                              Text('1 ${'key_order'.tr}',style: cTextStyle16(),),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
+                            children: [
+                              Text('key_ORDER_AMOUNT'.tr,style: mTextStyle16(),),
+                              Text('₹ 50',style: cTextStyle16(),),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentReceived()),
+                        );
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        width: 120,
+                        child: Card(
+                          color: const Color.fromRGBO(53, 56, 66, 1),
+                          child: Center(
+                              child: Text(
+                                '5th Dec 2022',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Poppins', color: orangeColor()),
+                                textAlign: TextAlign.center,
+                              )),
+                        ),
                       ),
                     ),
                   ),
@@ -417,7 +450,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Order From This Week',
+          'key_Orders_Captured_this_week'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -452,7 +485,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Pending Payment',
+                            'key_Pending_Payment'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -478,7 +511,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Payment Received',
+                            'key_Payment_Received'.tr,
                             style: mTextStyle16(),
                           )),
                     ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/ApiService.dart';
 import '../../../utils/theme_data.dart';
@@ -65,12 +66,12 @@ class _EditItemState extends State<EditItem> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Name',
+                  hintText: 'key_Name'.tr,
                   hintStyle: inputTextStyle16(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter Name for the topping item';
+                    return 'key_Please_enter_item_name_and_price'.tr;
                   }
                   return null;
                 },
@@ -93,12 +94,12 @@ class _EditItemState extends State<EditItem> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Price',
+                  hintText: 'key_Price'.tr,
                   hintStyle: inputTextStyle16(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter Price for the topping item';
+                    return 'key_Please_enter_item_name_and_price'.tr;
                   }
                   return null;
                 },
@@ -257,7 +258,7 @@ class _EditItemState extends State<EditItem> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Edit Item',
+          'key_Edit_Item'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -276,7 +277,7 @@ class _EditItemState extends State<EditItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "Edit Text Menu",
+                "key_Edit_menu".tr,
                 style: mTextStyle20(),
               ),
             ),
@@ -303,7 +304,7 @@ class _EditItemState extends State<EditItem> {
                       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Basic Details',
+                          'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
                         const SizedBox(height: 15),
@@ -328,12 +329,12 @@ class _EditItemState extends State<EditItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Name Of Menu Item',
+                              hintText: 'key_Name_your_menu'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter a name for the menu item';
+                                return 'key_Please_enter_MenuName'.tr;
                               }
                               return null;
                             },
@@ -356,12 +357,12 @@ class _EditItemState extends State<EditItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Price Per Serving',
+                              hintText: 'key_What_the_price_per_serving'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter price for the menu item';
+                                return 'key_Please_enter_the_price_per_serving'.tr;
                               }
                               return null;
                             },
@@ -424,7 +425,7 @@ class _EditItemState extends State<EditItem> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'Type Of Dish Veg',
+                                    'key_Veg_Only'.tr,
                                     textAlign: TextAlign.center,
                                     style: inputTextStyle16(),
                                   ),
@@ -466,12 +467,12 @@ class _EditItemState extends State<EditItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Add Dish Description',
+                              hintText: 'key_Add_Dish_Description'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter description for the menu item';
+                                return 'key_Please_enter_dish_description'.tr;
                               }
                               return null;
                             },
@@ -483,7 +484,7 @@ class _EditItemState extends State<EditItem> {
                         Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Add Toppings',
+                              'key_Extra_Topping'.tr,
                               style: mTextStyle18(),
                             ),
                             InkWell(
@@ -546,7 +547,7 @@ class _EditItemState extends State<EditItem> {
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Proceed',
+                                      'key_Proceed'.tr,
                                       style: mTextStyle14(),
                                     ),
                                   )),

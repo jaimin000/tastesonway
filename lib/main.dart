@@ -65,7 +65,9 @@ class _MyAppState extends State<MyApp> {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Taste On Way",
-            locale: snapshot.data, // set the locale to the user's preference
+            locale: snapshot.data,
+            //set the locale to the user's preference
+            // locale:Locale('gj','IN'),
             translations: Languages(),
             theme: ThemeData(
               primaryColor: orangeColor(),

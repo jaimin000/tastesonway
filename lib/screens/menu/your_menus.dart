@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../utils/theme_data.dart';
 
 class YourMenus extends StatefulWidget {
@@ -35,7 +36,7 @@ class _YourMenusState extends State<YourMenus> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Search Menu Items',
+                  hintText: 'key_Search_menu_item'.tr,
                   hintStyle: inputTextStyle16(),
                 ),
               ),
@@ -201,7 +202,7 @@ class _YourMenusState extends State<YourMenus> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none),
-                  hintText: 'Search Menu Items',
+                  hintText: 'key_Search_menu_item'.tr,
                   hintStyle: inputTextStyle16(),
                 ),
               ),
@@ -215,10 +216,10 @@ class _YourMenusState extends State<YourMenus> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Themes", style: mTextStyle20()),
+                Text("key_Menu_Theme".tr, style: mTextStyle20()),
                 Row(
                   children: [
-                    Text("All", style: mTextStyle14()),
+                    Text("key_all".tr, style: mTextStyle14()),
                     const SizedBox(
                       width: 5,
                     ),
@@ -421,7 +422,7 @@ class _YourMenusState extends State<YourMenus> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Your Menus',
+          'key_Your_Menus'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -458,7 +459,7 @@ class _YourMenusState extends State<YourMenus> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'Text Menu',
+                              'key_Text_Menus'.tr,
                               style: mTextStyle16(),
                             )),
                       ),
@@ -484,7 +485,7 @@ class _YourMenusState extends State<YourMenus> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'Image Menu',
+                              'key_Image_Menus'.tr,
                               style: mTextStyle16(),
                             )),
                       ),

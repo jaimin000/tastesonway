@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'dart:async';
 
@@ -42,7 +43,7 @@ class _DiscountState extends State<Discount> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Discount',
+          'key_DISCOUNT'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -75,7 +76,7 @@ class _DiscountState extends State<Discount> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 3.0),
                         child: Text(
-                          'Basic Details',
+                          'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
                       ),
@@ -96,7 +97,7 @@ class _DiscountState extends State<Discount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Name',
+                            hintText: 'key_enter_coupan_name'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -119,7 +120,7 @@ class _DiscountState extends State<Discount> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Enter Coupon Value',
+                                  'key_Enter_coupan_value'.tr,
                                   textAlign: TextAlign.left,
                                   style: inputTextStyle16(),
                                 ),
@@ -155,14 +156,13 @@ class _DiscountState extends State<Discount> {
                           style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-
                             contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Valid Per User',
+                            hintText: 'key_Enter_Valid_per_User'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -184,7 +184,7 @@ class _DiscountState extends State<Discount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Total No User',
+                            hintText: 'key_Enter_Total_no_User'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -204,7 +204,7 @@ class _DiscountState extends State<Discount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Minimum Order Value',
+                            hintText: 'key_Enter_Minimum_Order_Value'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -289,7 +289,7 @@ class _DiscountState extends State<Discount> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Proceed',
+                                  'key_Proceed'.tr,
                                   style: mTextStyle14(),
                                 ),
                               ))),

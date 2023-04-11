@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/earning%20summary/payment_details.dart';
 import '../../utils/theme_data.dart';
 
@@ -34,7 +35,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'Total Earning This Week',
+                    'key_Total_Earnings_this_week'.tr,
                     style: mTextStyle18(),
                   ),
                 ),
@@ -57,7 +58,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                             children: [
                               Flexible(
                                 child: Text(
-                                  'Includes both Received and Pending Payment',
+                                  'key_Includes_both_Recived_and_Pending_payment'.tr,
                                   style: cTextStyle16(),
                                   overflow: TextOverflow.clip,
                                 ),
@@ -82,12 +83,15 @@ class _EarningSummaryState extends State<EarningSummary> {
                                 builder: (context) => const PaymentDetails()),
                           );
                         },
-                        child: const SizedBox(
+                        child: SizedBox(
                           height:30,
                           width:100,
                           child: Card(
                             color: Color.fromRGBO(105, 111, 130, 1),
-                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                            child: Center(child:
+                            Text('key_View_Details'.tr,
+                              style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                              )),
                           ),
                         ),
                       ),
@@ -99,149 +103,184 @@ class _EarningSummaryState extends State<EarningSummary> {
                 const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
@@ -271,214 +310,252 @@ class _EarningSummaryState extends State<EarningSummary> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'Total Earning This Month',
+                    'key_Total_Earnings_this_month'.tr,
                     style: mTextStyle18(),
                   ),
                 ),
                 const SizedBox(height: 15),
                 Stack(
                   clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom:-10,
-                      right:110,
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PaymentDetails()),
-                          );
-                        },
-                        child: const SizedBox(
-                          height:30,
-                          width:100,
-                          child: Card(
-                            color: Color.fromRGBO(105, 111, 130, 1),
-                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-
-                ),
-                const SizedBox(height: 25),
-                Stack(
-                  clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
-
-                ),
-                const SizedBox(height: 25),
-                Stack(
-                  clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
-                      child: SizedBox(
-                        height:30,
-                        width:100,
-                        child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
-                        ),
-                      ),
-                    ),
-
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
                 Stack(
                   clipBehavior: Clip.none, children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
+
+                ),
+                const SizedBox(height: 25),
+                Stack(
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
+                      child: SizedBox(
+                        height:30,
+                        width:100,
+                        child: Card(
+                          color: Color.fromRGBO(105, 111, 130, 1),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+
+                ),
+                const SizedBox(height: 25),
+                Stack(
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
+                      child: SizedBox(
+                        height:30,
+                        width:100,
+                        child: Card(
+                          color: Color.fromRGBO(105, 111, 130, 1),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
 
                 ),
                 const SizedBox(height: 25),
@@ -508,218 +585,252 @@ class _EarningSummaryState extends State<EarningSummary> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'Total Earning Total',
+                    'key_Total_Earnings'.tr,
                     style: mTextStyle18(),
                   ),
                 ),
                 const SizedBox(height: 15),
                 Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom:-10,
-                      right:110,
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PaymentDetails()),
-                          );
-                        },
-                        child: const SizedBox(
-                          height:30,
-                          width:100,
-                          child: Card(
-                            color: Color.fromRGBO(105, 111, 130, 1),
-                            child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-
-                ),
-                const SizedBox(height: 25),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
                 Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
 
                 ),
                 const SizedBox(height: 25),
                 Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(37, 40, 48, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
-                          height: 70,
-                          margin: const EdgeInsets.all(10),
-                          child: Row(
-                            mainAxisAlignment:MainAxisAlignment.spaceAround,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  'Includes both Received and Pending Payment',
-                                  style: cTextStyle16(),
-                                  overflow: TextOverflow.clip,
-                                ),
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
                               ),
-                              Text(
-                                '₹ 200',
-                                style: cardTextStyle18(),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    const Positioned(
-                      bottom:-10,
-                      right:110,
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
                       child: SizedBox(
                         height:30,
                         width:100,
                         child: Card(
                           color: Color.fromRGBO(105, 111, 130, 1),
-                          child: Center(child: Text('View Details',style: TextStyle(fontFamily: 'Poppins'),textAlign: TextAlign.center,)),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
                         ),
                       ),
                     ),
+                  ),
 
-                  ],
+                ],
+
+                ),
+                const SizedBox(height: 25),
+                Stack(
+                  clipBehavior: Clip.none, children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(37, 40, 48, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 70,
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                'key_Includes_both_Recived_and_Pending_payment'.tr,
+                                style: cTextStyle16(),
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
+                            Text(
+                              '₹ 200',
+                              style: cardTextStyle18(),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom:-10,
+                    right:110,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentDetails()),
+                        );
+                      },
+                      child: SizedBox(
+                        height:30,
+                        width:100,
+                        child: Card(
+                          color: Color.fromRGBO(105, 111, 130, 1),
+                          child: Center(child:
+                          Text('key_View_Details'.tr,
+                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
 
                 ),
                 const SizedBox(height: 25),
@@ -738,7 +849,7 @@ class _EarningSummaryState extends State<EarningSummary> {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Earning Summary',
+          'key_Earning_Summary'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -774,7 +885,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'This Week',
+                            'key_This_Week'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -803,7 +914,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'This Month',
+                            'key_This_Month'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -832,7 +943,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Total',
+                            'key_Total'.tr,
                             style: mTextStyle16(),
                           )),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/contact%20us/contactus.dart';
 import 'package:tastesonway/screens/fssai/fssai.dart';
 import 'package:tastesonway/screens/my%20website/my_website.dart';
@@ -10,7 +11,6 @@ import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../tutorials/tutorials.dart';
-
 import '../bank/banking_details.dart';
 
 class Profile extends StatelessWidget {
@@ -181,7 +181,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Coupon.png'),
                             Text(
-                              'Create Discount Coupon',
+                              'key_Create_a_Discount_Coupan'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -210,7 +210,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Website.png'),
                             Text(
-                              'My Website',
+                              'key_My_Website'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -240,7 +240,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Fssai.png'),
                             Text(
-                              'Fssai Registration',
+                              'key_Fssai_Registration'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -271,7 +271,7 @@ class Profile extends StatelessWidget {
                             Image.asset(
                                 './assets/images/profile/Bank Details.png'),
                             Text(
-                              'Bank Details',
+                              'key_Bank_Details'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -302,7 +302,7 @@ class Profile extends StatelessWidget {
                             Image.asset(
                                 './assets/images/profile/Your Orders.png'),
                             Text(
-                              'Your Orders',
+                              'key_Your_Orders'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -332,7 +332,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Menu Items.png'),
                             Text(
-                              'Menu Items',
+                              'key_Menu_Items'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -363,7 +363,7 @@ class Profile extends StatelessWidget {
                             Image.asset(
                                 './assets/images/profile/My Menu Design.png'),
                             Text(
-                              'My Menu Design',
+                              'key_My_Menu_Designs'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -394,7 +394,7 @@ class Profile extends StatelessWidget {
                             Image.asset(
                                 './assets/images/profile/VideoTutorials.png'),
                             Text(
-                              'Video Tutorials',
+                              'key_Tutorials'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -417,7 +417,7 @@ class Profile extends StatelessWidget {
                           Image.asset(
                               './assets/images/profile/Shares Taste on Way.png'),
                           Text(
-                            'Share Tastes On Way',
+                            'key_Share_Tastes_on_way'.tr,
                             textAlign: TextAlign.center,
                             style: cTextStyle16(),
                           )
@@ -446,7 +446,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Contact Us.png'),
                             Text(
-                              'Contact Us',
+                              'key_Contact_Us'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -476,7 +476,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/FAQ.png'),
                             Text(
-                              'FAQ',
+                              'key_FAQ'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )
@@ -506,7 +506,7 @@ class Profile extends StatelessWidget {
                           children: [
                             Image.asset('./assets/images/profile/Settings.png'),
                             Text(
-                              'Settings',
+                              'key_Settings'.tr,
                               textAlign: TextAlign.center,
                               style: cTextStyle16(),
                             )

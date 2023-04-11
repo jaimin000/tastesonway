@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class FixedDiscount extends StatefulWidget {
@@ -9,6 +10,19 @@ class FixedDiscount extends StatefulWidget {
 }
 
 class _FixedDiscountState extends State<FixedDiscount> {
+  DateTime selectedDate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
   String dropdownvalue = 'Item 1';
   var items = [
     'Item 1',
@@ -25,7 +39,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Fixed Discount',
+          'key_Fixed_discount'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -36,7 +50,6 @@ class _FixedDiscountState extends State<FixedDiscount> {
             const SizedBox(
               height: 25,
             ),
-
             Card(
               shadowColor: Colors.black,
               color: cardColor(),
@@ -59,7 +72,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 3.0),
                         child: Text(
-                          'Basic Details',
+                          'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
                       ),
@@ -80,7 +93,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Coupon Name',
+                            hintText: 'key_enter_coupan_name'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -103,11 +116,12 @@ class _FixedDiscountState extends State<FixedDiscount> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Enter Coupon Value',
+                                  'key_Enter_coupan_value'.tr,
                                   textAlign: TextAlign.left,
                                   style: inputTextStyle16(),
                                 ),
                                 DropdownButton(
+
                                   underline: const SizedBox(),
                                   value: dropdownvalue,
                                   icon: const Icon(Icons.keyboard_arrow_down,color: Color.fromRGBO(255, 114, 105, 1),),
@@ -138,14 +152,13 @@ class _FixedDiscountState extends State<FixedDiscount> {
                           style: const TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration: InputDecoration(
-
                             contentPadding: const EdgeInsets.all(10.0),
                             fillColor: inputColor(),
                             filled: true,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Valid Per User',
+                            hintText: 'key_Enter_Valid_per_User'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -167,7 +180,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Total No User',
+                            hintText: 'key_Enter_Total_no_User'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -187,7 +200,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Enter Minimum Order Value',
+                            hintText: 'key_Enter_Minimum_Order_Value'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -209,42 +222,53 @@ class _FixedDiscountState extends State<FixedDiscount> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: const TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '24th Nov 2022',
-                                hintStyle: inputTextStyle16(),
+                          GestureDetector(
+                            onTap: (){
+                              _selectDate(context);
+                            },
+                            child: SizedBox(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(37, 40, 48, 1),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '25th Nov 2022',
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            child: TextField(
-                              style: const TextStyle(color: Colors.white),
-                              cursorColor: Colors.white,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.all(10.0),
-                                fillColor: inputColor(),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none),
-                                hintText: '30th Nov 2022',
-                                hintStyle: inputTextStyle16(),
+                          GestureDetector(
+                            onTap: (){
+                              _selectDate(context);
+                            },
+                            child: SizedBox(
+                              height: 40,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(37, 40, 48, 1),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    '30th Nov 2022',
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
+
 
                         ],
                       ),
@@ -261,7 +285,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Proceed',
+                                  'key_Proceed'.tr,
                                   style: mTextStyle14(),
                                 ),
                               ))),

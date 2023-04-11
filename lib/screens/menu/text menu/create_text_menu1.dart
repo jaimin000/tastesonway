@@ -30,7 +30,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
-      "$devUrl/v2/create-or-update-menu");
+      "$liveUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
     final body=  type == 2 ? {
         "is_menu_completed": "1",
@@ -38,7 +38,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         "menu_review_status": "1",
         "name": menuItemName,
         "type": "$type",
-        "date_of_menu" : "${DateFormat('yyyy-MM-dd').format(menuExpiryDate)}"
+        "date_of_menu" : DateFormat('yyyy-MM-dd').format(menuExpiryDate)
       }: {
     "is_menu_completed": "1",
     "is_permanent_menu": "1",
@@ -52,7 +52,6 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         final json = jsonDecode(response.body);
         menuId = json['data']['id'];
         return menuId;
-        print(menuId);
       } else {
         //  AlertDialog(
         //   title: Text('Error'),
@@ -88,7 +87,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Create New Text Menu',
+          'key_Create_Text_Menu'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -110,7 +109,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  "Create Text Menu",
+                  "key_Create_Text_Menu".tr,
                   style: mTextStyle20(),
                 ),
               ),
@@ -134,7 +133,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 1',
+                            'key_step1'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -154,7 +153,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 2',
+                            'key_step2'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -174,7 +173,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 3',
+                            'key_step3'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -204,7 +203,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          'Basic Details',
+                          'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
                         const SizedBox(height: 5),
@@ -229,12 +228,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: BorderSide.none),
-                                hintText: 'Name Of Menu Item',
+                                hintText: 'key_Name_your_menu'.tr,
                                 hintStyle: inputTextStyle16(),
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter a name for the menu item';
+                                  return 'key_Please_enter_MenuName'.tr;
                                 }
                                 return null;
                               },
@@ -263,7 +262,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'This is Permanent Menu',
+                                    'key_this_is_permanent_menu'.tr,
                                     textAlign: TextAlign.center,
                                     style: inputTextStyle16(),
                                   ),
@@ -344,8 +343,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                       builder: (context) {
                                         return AlertDialog(
                                           backgroundColor: cardColor(),
-                                          title: Text('Error',style: TextStyle(color: orangeColor()),),
-                                          content: Text('Name Already Exists :\nPlease try again with different name'),
+                                          title: Text('key_error'.tr,style: TextStyle(color: orangeColor()),),
+                                          content: Text('key_name_exits'.tr),
                                           actions: [
                                             ElevatedButton(
                                               style: ButtonStyle(
@@ -354,7 +353,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('OK'),
+                                              child: const Text('OK'),
                                             ),
                                           ],
                                         );

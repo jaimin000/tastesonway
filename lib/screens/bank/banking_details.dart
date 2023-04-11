@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/bank/bank_details.dart';
 import 'package:tastesonway/screens/bank/upi_details.dart';
 import 'package:tastesonway/utils/theme_data.dart';
@@ -15,7 +16,7 @@ class BankingDetails extends StatelessWidget {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Bank Details',
+          'key_Bank_Details'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -62,7 +63,7 @@ class BankingDetails extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'Net Banking',
+                              'key_net_banking'.tr,
                               style: mTextStyle20(),
                             ),
                           ),
@@ -120,7 +121,7 @@ class BankingDetails extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Text(
-                              'UPI',
+                              'key_upi_id'.tr,
                               style: mTextStyle20(),
                             ),
                           ),

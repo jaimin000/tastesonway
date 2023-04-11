@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class BankDetails extends StatelessWidget {
@@ -13,7 +14,7 @@ class BankDetails extends StatelessWidget {
         backgroundColor: backgroundColor(),
 
         title: Text(
-          'Bank Details',
+          'key_Bank_Details'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -45,7 +46,7 @@ class BankDetails extends StatelessWidget {
                         height: 15,
                       ),
                       Text(
-                        'Basic Details',
+                        'key_Basic_Details'.tr,
                         style: mTextStyle18(),
                       ),
 
@@ -65,7 +66,7 @@ class BankDetails extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Bank Name',
+                            hintText: 'key_Bank_Name'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -86,29 +87,7 @@ class BankDetails extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Bank Holder Name',
-                            hintStyle: inputTextStyle16(),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: TextField(
-                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                          cursorColor: Colors.white,
-                          decoration: InputDecoration(
-
-                            contentPadding: const EdgeInsets.all(10.0),
-                            fillColor: inputColor(),
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none),
-                            hintText: 'Bank Account Number',
+                            hintText: 'key_Bank_Holder_Name'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -130,7 +109,29 @@ class BankDetails extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'Re-Enter Bank Account Number',
+                            hintText: 'key_Bank_Account_Number'.tr,
+                            hintStyle: inputTextStyle16(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        height: 45,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          style: const TextStyle(color: Colors.white), //<-- SEE HERE
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+
+                            contentPadding: const EdgeInsets.all(10.0),
+                            fillColor: inputColor(),
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
+                            hintText: 'key_Re_enter_Bank_Account_Number'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),
@@ -150,7 +151,7 @@ class BankDetails extends StatelessWidget {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none),
-                            hintText: 'IFSC Code',
+                            hintText: 'key_ifsc_code'.tr,
                             hintStyle: inputTextStyle16(),
                           ),
                         ),

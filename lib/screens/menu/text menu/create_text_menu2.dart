@@ -36,7 +36,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
-          '$devUrl/v2/get-menu-item'),
+          '$liveUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
@@ -119,7 +119,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Create New Text Menu',
+          'key_Create_Text_Menu'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -135,7 +135,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  "Create Text Menu",
+                  "key_Create_Text_Menu".tr,
                   style: mTextStyle20(),
                 ),
               ),
@@ -158,7 +158,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 1',
+                            'key_step1'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -178,7 +178,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 2',
+                            'key_step2'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -198,7 +198,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'Step 3',
+                            'key_step3'.tr,
                             style: mTextStyle16(),
                           )),
                     ),
@@ -230,7 +230,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Dishes in the menu',
+                              'key_Dishes_in_the_menu'.tr,
                               style: mTextStyle18(),
                             ),
                             GestureDetector(
@@ -253,7 +253,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        'Add New',
+                                        'key_ADD_ITEM'.tr,
                                         style: mTextStyle14(),
                                       )),
                                 ),
@@ -286,7 +286,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'Search Menu Items',
+                              hintText: 'key_Search_menu_item'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                           ),
@@ -343,7 +343,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                       width: MediaQuery.of(context).size.width *
                                           0.5,
                                       child: Text(
-                                        'Select All',
+                                        'key_Select_All'.tr,
                                         style: inputTextStyle16(),
                                       ),
                                     ),
@@ -501,7 +501,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                                     Alignment
                                                                         .center,
                                                                 child: Text(
-                                                                  'Edit',
+                                                                  'key_Edit'.tr,
                                                                   style:
                                                                       mTextStyle14(),
                                                                 )),
@@ -541,7 +541,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Proceed',
+                                    'key_Proceed'.tr,
                                     style: mTextStyle14(),
                                   ),
                                 ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -25,7 +26,7 @@ class _MyWebsiteState extends State<MyWebsite> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         title: Text(
-          'My Website',
+          'key_My_Website'.tr,
           style: cardTitleStyle20(),
         ),
         elevation: 0,

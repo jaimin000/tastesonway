@@ -59,12 +59,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
             controller: _scrollController,
             child: Column(
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.only(top: 55),
                   child: Center(
                       child: Text(
-                    'Choose Language',
-                    style: TextStyle(
+                    'key_choose_language'.tr,
+                    style: const TextStyle(
                       fontSize: 23,
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -82,9 +82,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                const Text(
-                  'Select your language',
-                  style: TextStyle(fontSize: 17, color: Colors.white),
+                 Text(
+                  'key_select_your_language'.tr,
+                  style: const TextStyle(fontSize: 17, color: Colors.white),
                 ),
                 Padding(
                   padding:
@@ -209,7 +209,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text(
-                                        'Gujarati',
+                                        'ગુજરાતી',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 17,
@@ -289,7 +289,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Text(
-                                        'Hindi',
+                                        'हिंदी',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 17,
@@ -364,9 +364,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                         const LandingScreen()),
                               );
                             },
-                            child: const Text(
-                              'Continue',
-                              style: TextStyle(
+                            child:  Text(
+                              'key_continue'.tr,
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700),
