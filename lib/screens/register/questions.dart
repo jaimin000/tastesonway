@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/hearAboutModel.dart';
 import 'package:tastesonway/screens/register/cuisines.dart';
-import '../../apiServices/ApiService.dart';
+import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;

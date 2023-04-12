@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tastesonway/apiServices/ApiService.dart';
+import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import '../../../utils/theme_data.dart';

@@ -32,7 +32,7 @@ class _LandingScreenState extends State<LandingScreen> {
               length: 3,
               indicatorSpace: 10.0,
               padding: const EdgeInsets.all(10),
-              indicatorColor: Color(0xFFF85649).withOpacity(0.3),
+              indicatorColor: const Color(0xFFF85649).withOpacity(0.3),
               indicatorSelectorColor: Colors.red,
               shape: IndicatorShape.circle(),
               child: PageView(
@@ -47,14 +47,14 @@ class _LandingScreenState extends State<LandingScreen> {
                             'assets/images/slider_1.png',
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         Column(
                           children: [
                             Text(
                               'key_Capture_your'.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w900,
@@ -63,7 +63,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ),
                            Text(
                               'key_orders_from_chat'.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w900,
@@ -72,7 +72,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ),
                             Text(
                               'key_Apps_easily'.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontFamily: 'Roboto',
                                 fontWeight: FontWeight.w900,
@@ -110,7 +110,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ),
                             Text(
                               'key_Menus'.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,
                               ),
@@ -141,7 +141,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ),
                             Text(
                               'key_Expenses_and'.tr,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w900,
                               ),
@@ -163,7 +163,7 @@ class _LandingScreenState extends State<LandingScreen> {
             ),
             ),
           ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Expanded(

@@ -210,7 +210,7 @@ class _SearchLocationState extends State<SearchLocation> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
@@ -266,13 +266,13 @@ class _SearchLocationState extends State<SearchLocation> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       ListTile(
-                        visualDensity: VisualDensity(
+                        visualDensity: const VisualDensity(
                             vertical: -4),
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                         ),
                         dense: true,
                         leading: Icon(
@@ -291,8 +291,8 @@ class _SearchLocationState extends State<SearchLocation> {
                           getCurrentLocation();
                         },
                       ),
-                      Divider(),
-                      SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 10,
                       ),
                       Expanded(
@@ -301,7 +301,7 @@ class _SearchLocationState extends State<SearchLocation> {
                           shrinkWrap: true,
                           separatorBuilder:
                               (BuildContext context, int index) =>
-                              Divider(height: 1),
+                              const Divider(height: 1),
                           itemBuilder: (context, index) =>
                               ListTile(
                                 contentPadding: EdgeInsets.zero,

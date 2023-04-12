@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:tastesonway/apiServices/ApiService.dart';
+import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/view%20stories.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:video_compress/video_compress.dart';

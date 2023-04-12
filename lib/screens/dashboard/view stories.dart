@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:story_view/story_view.dart';
 import 'package:http/http.dart' as http;
-import '../../apiServices/ApiService.dart';
+import '../../apiServices/api_service.dart';
 
 class ViewStories extends StatefulWidget {
   String image;

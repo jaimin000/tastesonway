@@ -179,7 +179,7 @@ class _SettingState extends State<Setting> {
                               ? await _setLanguagePreference(const Locale('en', 'US'))
                               : newValue == "हिंदी"
                           ? await _setLanguagePreference(const Locale('hi', 'IN'))
-                              : await _setLanguagePreference(Locale('gj', 'IN'));
+                              : await _setLanguagePreference(const Locale('gj', 'IN'));
                         },
                       ),
                     ],

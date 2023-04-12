@@ -4,7 +4,7 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import '../../apiServices/ApiService.dart';
+import '../../apiServices/api_service.dart';
 import '../../utils/snackbar.dart';
 
 

@@ -60,7 +60,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             child: Column(
               children: [
                  Padding(
-                  padding: EdgeInsets.only(top: 55),
+                  padding: const EdgeInsets.only(top: 55),
                   child: Center(
                       child: Text(
                     'key_choose_language'.tr,
@@ -95,7 +95,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            await _setLanguagePreference(Locale('en', 'US'));
+                            await _setLanguagePreference(const Locale('en', 'US'));
                             setState(() {
                               selectedEnglish = true;
                               if (selectedEnglish == true) {
@@ -171,7 +171,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            await _setLanguagePreference(Locale('gj', 'IN'));
+                            await _setLanguagePreference(const Locale('gj', 'IN'));
                             setState(() {
                               selectedGujarati = true;
                               if (selectedGujarati == true) {
@@ -250,7 +250,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 InkWell(
                     onTap: () async {
-                      await _setLanguagePreference(Locale('hi', 'IN'));
+                      await _setLanguagePreference(const Locale('hi', 'IN'));
                       setState(() {
                         selectedHindi = true;
                         if (selectedHindi == true) {

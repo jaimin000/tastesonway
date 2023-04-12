@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -15,7 +17,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:http/http.dart' as http;
+import '../../main.dart';
 import '../../utils/sharedpreferences.dart';
 
 class Signup extends StatefulWidget {
@@ -43,6 +46,8 @@ class _SignupState extends State<Signup> {
   bool agree = false;
   bool showAgreeMessage = false;
   int _selectedIndex = 0;
+  var profileStatus;
+  var profileAddress;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -127,7 +132,7 @@ class _SignupState extends State<Signup> {
                         'key_Select_checkbox_for_agree'.tr,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       )
                           : Container(),
                       Align(
@@ -190,6 +195,32 @@ class _SignupState extends State<Signup> {
             )));
   }
 
+  Future decidePath() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.post(
+        Uri.parse('$devUrl/kitchen-owner-login-registration'),
+        headers: {'Authorization': 'Bearer $token',
+        },
+        body: {
+          "language_id":"1",
+          "mobile_number": "7069836196",
+          "short_code":"IN",
+          "country_code": "91"
+        }
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      setState(() {
+         profileStatus = jsonData['data'][0]['status'];
+         profileAddress = jsonData['data'][0]['owner_address'];
+        print("profileStatus is $profileStatus & address is $profileAddress");
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+
   @override
   void initState() {
     getConnectivity();
@@ -226,7 +257,7 @@ class _SignupState extends State<Signup> {
                     width: MediaQuery.of(context).size.width,
                     child: otpVisibility ? Image.asset('assets/images/otp.png') :Image.asset('assets/images/mobile.png'),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   otpVisibility?Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -374,11 +405,11 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   otpVisibility ?const SizedBox(): Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                               left: 20, right: 20, bottom: 20),
                           child: Text.rich(
                             TextSpan(
@@ -491,7 +522,7 @@ class _SignupState extends State<Signup> {
         });
       },
     ).whenComplete(
-          () {
+          () async {
         if (user != null) {
           Fluttertoast.showToast(
             msg: "key_login_success".tr,
@@ -502,13 +533,23 @@ class _SignupState extends State<Signup> {
             textColor: orangeColor(),
             fontSize: 16.0,
           );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const userPersonalDetail(),
-            ),
-          );
-        } else {
+          await decidePath();
+          if (profileStatus == 1 && profileAddress == null) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const userPersonalDetail(),
+              ),
+            );
+          }else{
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Home(),
+              ),
+            );
+          }
+        }else {
           Fluttertoast.showToast(
             msg: "your login is failed",
             toastLength: Toast.LENGTH_SHORT,

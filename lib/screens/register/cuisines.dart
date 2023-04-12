@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
-import '../../apiServices/ApiService.dart';
+import '../../apiServices/api_service.dart';
 import '../../models/cuisines.dart';
 import '../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
@@ -74,12 +74,12 @@ class _CuisinesState extends State<Cuisines> {
           Container(
               color: cardColor(),
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                     'key_We_are_Committed'.tr,
                 ),
               )),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
@@ -92,7 +92,7 @@ class _CuisinesState extends State<Cuisines> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Padding(

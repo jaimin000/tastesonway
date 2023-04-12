@@ -126,7 +126,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 75,
           ),
           Column(
@@ -164,7 +164,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
             height: 30,
           ),
           Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Form(
                 key: _formKey,
                 child: Column(
