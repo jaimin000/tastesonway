@@ -23,7 +23,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
   Future<void> Menu() async {
     String token = await getToken();
     int ownerId = await getOwnerId();
-    final response = await http.post(Uri.parse('$liveUrl/get-menu-item'),
+    final response = await http.post(Uri.parse('$devUrl/get-menu-item'),
         headers: {
           'Authorization':'Bearer $token',
         },

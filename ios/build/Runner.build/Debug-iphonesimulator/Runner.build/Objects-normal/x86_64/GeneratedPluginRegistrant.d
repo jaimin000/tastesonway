@@ -81,6 +81,10 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTPhoneNumberVerificationStreamHandler.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/CustomPigeonHeader.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/InAppWebViewFlutterPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/flutter_inappwebview-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/flutter_inappwebview-Swift.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Headers/FluttertoastPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/fluttertoast/fluttertoast.framework/Headers/fluttertoast-umbrella.h \
@@ -202,6 +206,12 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteDatabase.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteOperation.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/sqflite/sqflite.framework/Headers/SqfliteImport.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FLTURLLauncherPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/url_launcher_ios-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FLTURLLauncherPlugin_Test.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/url_launcher_ios/url_launcher_ios.framework/Headers/FULLauncher.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Headers/VideoCompressPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Headers/video_compress-umbrella.h \

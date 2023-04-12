@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
 options: "19a0cdf9396de0a586ce8cf90ee2e8af2afd7553fe661290490adc108418f541"
-build_start_time: [1681103337, 517753000]
-build_end_time: [1681103347, 154009000]
+build_start_time: [1681293185, 723125000]
+build_end_time: [1681293186, 114188000]
 inputs:
   "/Users/mac/.pub-cache/hosted/pub.dev/video_compress-3.1.2/ios/Classes/AvController.swift": [1679546869, 673427959]
   "/Users/mac/.pub-cache/hosted/pub.dev/video_compress-3.1.2/ios/Classes/SwiftVideoCompressPlugin.swift": [1679546869, 669332100]

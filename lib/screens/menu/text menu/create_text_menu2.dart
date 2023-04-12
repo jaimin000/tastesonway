@@ -36,7 +36,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
-          '$liveUrl/get-menu-item'),
+          '$devUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
@@ -79,7 +79,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       'item_id': menuItemId,
     };
     final response = await http.post(
-      Uri.parse('$devUrl/v2/add-multiple-menu-item'),
+      Uri.parse('$localUrl/v2/add-multiple-menu-item'),
         headers: <String, String>{
           'Authorization':'Bearer $token',
           'Content-Type':'application/json',
@@ -233,7 +233,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                               'key_Dishes_in_the_menu'.tr,
                               style: mTextStyle18(),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.pushReplacement(
                                   context,

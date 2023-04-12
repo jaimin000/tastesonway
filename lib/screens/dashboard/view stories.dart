@@ -28,7 +28,7 @@ class _ViewStoriesState extends State<ViewStories> {
   Future DeleteData() async {
     String token = await getToken();
     final response = await http.delete(
-      Uri.parse('http://192.168.1.26:24/api/owners/delete-story'),
+      Uri.parse('$storyUrl/owners/delete-story'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'story_id': widget.id.toString()},
     );

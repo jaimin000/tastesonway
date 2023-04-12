@@ -83,7 +83,7 @@ class _StoriesState extends State<Stories> {
     String token = await getToken();
     try {
       await _pickImage(ImageSource.camera);
-      const url = "http://192.168.1.26:24/api/owners/create-story";
+      const url = "$storyUrl/owners/create-story";
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(url),
@@ -251,7 +251,7 @@ class _StoriesState extends State<Stories> {
     try {
       await _pickVideo(ImageSource.camera);
 
-      const url = "http://192.168.1.26:24/api/owners/create-story";
+      const url = "$storyUrl/owners/create-story";
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(url),
@@ -282,7 +282,7 @@ class _StoriesState extends State<Stories> {
   Future fetchData() async {
     String token = await getToken();
     final response = await http.get(
-      Uri.parse('http://192.168.1.26:24/api/owners/my-stories'),
+      Uri.parse('$storyUrl/owners/my-stories'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode == 200) {
@@ -320,7 +320,7 @@ class _StoriesState extends State<Stories> {
                   height: 100,
                   child: Column(
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           showModalBottomSheet(
                             context: context,
@@ -366,7 +366,7 @@ class _StoriesState extends State<Stories> {
                                         color: orangeColor(),
                                       ),
                                       title: Text(
-                                        'key_upload_images'.tr,
+                                        'key_upload_videos'.tr,
                                         style: cTextStyle16(),
                                       ),
                                       onTap: () {

@@ -341,7 +341,7 @@ class _SignupState extends State<Signup> {
                                   countryCode = phone.countryISOCode;
                                 },
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   if (_formKey.currentState!.validate()){
                                     if (otpVisibility) {

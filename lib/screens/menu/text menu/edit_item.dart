@@ -147,7 +147,7 @@ class _EditItemState extends State<EditItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$devUrl/v2/create-or-update-menu-item'),
+            '$localUrl/v2/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '${widget.menu_id}';

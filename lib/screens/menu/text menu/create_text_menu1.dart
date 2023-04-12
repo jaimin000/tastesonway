@@ -30,7 +30,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
-      "$liveUrl/create-or-update-menu");
+      "$devUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
     final body=  type == 2 ? {
         "is_menu_completed": "1",
@@ -289,7 +289,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           height: 10,
                         ),
                         if (!isPermanentMenu)
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               _selectDate(context);
                             },

@@ -121,7 +121,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               Positioned(
                 bottom: -10,
                 right: 120,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -251,7 +251,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
             Positioned(
               bottom: -10,
               right: 120,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -385,7 +385,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
             Positioned(
               bottom: -10,
               right: 120,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -515,7 +515,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
             Positioned(
               bottom: -10,
               right: 120,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -649,7 +649,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
             Positioned(
               bottom: -10,
               right: 120,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -779,7 +779,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
             Positioned(
               bottom: -10,
               right: 120,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
@@ -831,7 +831,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 0;
@@ -860,7 +860,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 1;
@@ -889,7 +889,7 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 2;

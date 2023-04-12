@@ -64,7 +64,7 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                       top: 100,
                       right: 105,
                       child:  Center(
-                        child: GestureDetector(
+                        child: InkWell(
                           onTap: (){
                             Navigator.push(
                               context,

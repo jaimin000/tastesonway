@@ -138,7 +138,7 @@ class _AddNewItemState extends State<AddNewItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-          '$liveUrl/create-or-update-menu-item'),
+          '$devUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';

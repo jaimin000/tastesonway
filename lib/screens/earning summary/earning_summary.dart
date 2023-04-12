@@ -75,7 +75,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                     Positioned(
                       bottom:-10,
                       right:110,
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: (){
                           Navigator.push(
                             context,
@@ -136,7 +136,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -197,7 +197,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -258,7 +258,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -350,7 +350,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -411,7 +411,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -472,7 +472,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -533,7 +533,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -625,7 +625,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -686,7 +686,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -747,7 +747,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -808,7 +808,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                   Positioned(
                     bottom:-10,
                     right:110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -865,7 +865,7 @@ class _EarningSummaryState extends State<EarningSummary> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 0;
@@ -894,7 +894,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 1;
@@ -923,7 +923,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 2;

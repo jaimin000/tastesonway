@@ -42,7 +42,7 @@ class ChoosePromo extends StatelessWidget {
               child: Text("key_These_promos_will_run_all_on_items_in_your_outlet".tr,style: cardTitleStyle14(),),
             ),
             const SizedBox(height:25),
-            GestureDetector(
+            InkWell(
               onTap: (){
                 Navigator.push(
                   context,
@@ -99,7 +99,7 @@ class ChoosePromo extends StatelessWidget {
               ),
             ),
             const SizedBox(height:10),
-            GestureDetector(
+            InkWell(
               onTap: (){
                 Navigator.push(
                   context,

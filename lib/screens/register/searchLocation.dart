@@ -189,7 +189,7 @@ class _SearchLocationState extends State<SearchLocation> {
           ),
         ),
         body:
-        _isLoading? Center(child: CircularProgressIndicator(color: orangeColor(),)):GestureDetector(
+        _isLoading? Center(child: CircularProgressIndicator(color: orangeColor(),)):InkWell(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },

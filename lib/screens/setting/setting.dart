@@ -107,7 +107,7 @@ class _SettingState extends State<Setting> {
               ),
             ),
             const SizedBox(height: 15),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -190,7 +190,7 @@ class _SettingState extends State<Setting> {
             const SizedBox(
               height: 15,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -221,7 +221,7 @@ class _SettingState extends State<Setting> {
             const SizedBox(
               height: 15,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -253,7 +253,7 @@ class _SettingState extends State<Setting> {
             const SizedBox(
               height: 15,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () async {
                 final SharedPreferences sharedPreferences =
                     await SharedPreferences.getInstance();

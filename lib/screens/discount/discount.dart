@@ -226,7 +226,7 @@ class _DiscountState extends State<Discount> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: (){
                               _selectDate(context);
                             },
@@ -249,7 +249,7 @@ class _DiscountState extends State<Discount> {
                                 ),
                               ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: (){
                               _selectDate(context);
                             },

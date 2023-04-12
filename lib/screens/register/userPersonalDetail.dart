@@ -137,7 +137,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                 clipBehavior: Clip.none,
                 children: [
                   Center(
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () async {
                         await _pickImage(ImageSource.gallery);
                       },
@@ -319,7 +319,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                     const SizedBox(height: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           _selectDate(context);
                         },

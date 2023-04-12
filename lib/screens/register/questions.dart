@@ -30,7 +30,7 @@ class _QuestionsState extends State<Questions> {
   Future<void> getQuestion() async {
     String token = await getToken();
     final response = await http.get(
-      Uri.parse('$liveUrl/get-owner-opinion'),
+      Uri.parse('$devUrl/get-owner-opinion'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode == 200) {

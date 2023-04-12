@@ -222,7 +222,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: (){
                               _selectDate(context);
                             },
@@ -245,7 +245,7 @@ class _FixedDiscountState extends State<FixedDiscount> {
                               ),
                             ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: (){
                               _selectDate(context);
                             },

@@ -61,6 +61,9 @@ dependencies:
   flutter_google_places: ^0.3.0
   uuid: ^3.0.7
   location: ^4.4.0
+  url_launcher: ^6.1.10
+  youtube_player_flutter: ^8.1.2
+  getwidget: ^3.0.1
 
 dev_dependencies:
   flutter_test:

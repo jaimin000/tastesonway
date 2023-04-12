@@ -109,7 +109,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                   const SizedBox(
                     height: 10,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: (){
                       setState(() {
                         step = 1;
@@ -165,7 +165,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                         'Dishes in the menu',
                         style: mTextStyle18(),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: (){
                           Navigator.push(
                             context,
@@ -408,7 +408,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  GestureDetector(
+                  InkWell(
                     onTap: (){
                       setState(() {
                         step = 2;
@@ -670,7 +670,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 0;
@@ -697,7 +697,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                   ),
                 ),
 
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 1;
@@ -724,7 +724,7 @@ class _CreateImageMenuState extends State<CreateImageMenu> {
                   ),
                 ),
 
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 2;

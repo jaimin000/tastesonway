@@ -559,7 +559,7 @@ class _MenuItemsState extends State<MenuItems> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 0;
@@ -588,7 +588,7 @@ class _MenuItemsState extends State<MenuItems> {
                 // SizedBox(
                 //   width: 5,
                 // ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 1;
@@ -617,7 +617,7 @@ class _MenuItemsState extends State<MenuItems> {
                 // SizedBox(
                 //   width: 5,
                 // ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 2;

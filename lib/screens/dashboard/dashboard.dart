@@ -47,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ],
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -128,7 +128,7 @@ class _DashboardState extends State<Dashboard> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -158,7 +158,7 @@ class _DashboardState extends State<Dashboard> {
                             )),
                       ),
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -220,7 +220,7 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("key_Your_Menus".tr, style: mTextStyle20()),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -254,7 +254,7 @@ class _DashboardState extends State<Dashboard> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -289,7 +289,7 @@ class _DashboardState extends State<Dashboard> {
                         ), //
                       ),
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -405,7 +405,7 @@ class _DashboardState extends State<Dashboard> {
             const SizedBox(
               height: 25,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,
@@ -418,7 +418,7 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("key_Your_Orders".tr, style: mTextStyle20()),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -458,7 +458,7 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -488,7 +488,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ), //
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -610,7 +610,7 @@ class _DashboardState extends State<Dashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('key_Earning_Summary'.tr, style: mTextStyle20()),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -637,7 +637,7 @@ class _DashboardState extends State<Dashboard> {
             const SizedBox(
               height: 25,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Navigator.push(
                   context,

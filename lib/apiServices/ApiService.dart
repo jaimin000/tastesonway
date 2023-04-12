@@ -1,20 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../utils/sharedpreferences.dart';
 
-var tokenvalue;
+var messageg;
 var ownerId;
 
-const devUrl = "http://192.168.1.26:24/api";
-const liveUrl = "https://dev-api.tastesonway.com/api/v2";
+const localUrl = "http://192.168.1.26:24/api";
+const devUrl = "https://dev-api.tastesonway.com/api/v2";
+const storyUrl = "https://dev-api.tastesonway.com/api";
 
 Future<String> getToken() async {
   const url =
   // "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
   //"https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
-      "$liveUrl/kitchen-owner-login-registration";
+      "$devUrl/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",
@@ -29,15 +28,15 @@ Future<String> getToken() async {
     "country_code": "91"
   });
   final json = jsonDecode(tokenResponse.body);
-  tokenvalue = (json['data'][0]['token']).toString();
-  await Sharedprefrences.setToken(tokenvalue);
-  return tokenvalue;
+  messageg = (json['data'][0]['token']).toString();
+  await Sharedprefrences.setToken(messageg);
+  return messageg;
 }
 
 
 Future<int> getOwnerId() async {
   const url =
-      "$devUrl/v2/kitchen-owner-login-registration";
+      "$localUrl/v2/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",

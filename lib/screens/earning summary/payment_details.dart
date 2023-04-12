@@ -63,7 +63,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -130,7 +130,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -197,7 +197,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -276,7 +276,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -343,7 +343,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -410,7 +410,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Positioned(
                     bottom: -10,
                     right: 110,
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: (){
                         Navigator.push(
                           context,
@@ -465,7 +465,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 0;
@@ -491,7 +491,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     ),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     setState(() {
                       step = 1;

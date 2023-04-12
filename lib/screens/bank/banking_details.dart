@@ -28,7 +28,7 @@ class BankingDetails extends StatelessWidget {
           children: [
 
             const SizedBox(height:25),
-            GestureDetector(
+            InkWell(
               onTap: (){
                 Navigator.push(
                   context,
@@ -85,7 +85,7 @@ class BankingDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height:10),
-            GestureDetector(
+            InkWell(
               onTap: (){
                 Navigator.push(
                   context,

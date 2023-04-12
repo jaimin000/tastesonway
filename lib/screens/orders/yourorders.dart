@@ -132,7 +132,7 @@ class YourOrders extends StatelessWidget {
               Positioned(
                 bottom: -10,
                 right: 120,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     // Navigator.push(
                     //   context,
@@ -262,7 +262,7 @@ class YourOrders extends StatelessWidget {
               Positioned(
                 bottom: -10,
                 right: 120,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     // Navigator.push(
                     //   context,

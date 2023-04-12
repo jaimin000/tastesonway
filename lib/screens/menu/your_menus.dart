@@ -439,7 +439,7 @@ class _YourMenusState extends State<YourMenus> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       setState(() {
                         step = 0;
@@ -465,7 +465,7 @@ class _YourMenusState extends State<YourMenus> {
                       ),
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       setState(() {
                         step = 1;
