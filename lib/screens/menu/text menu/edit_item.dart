@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
+import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
 import 'create_text_menu2.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +24,7 @@ class EditItem extends StatefulWidget {
     required this.name,
     required this.price,
     required this.description,
-   });
+  });
 
   @override
   State<EditItem> createState() => _EditItemState();
@@ -142,12 +143,16 @@ class _EditItemState extends State<EditItem> {
 
   //api call
   Future UpdateMenuItem() async {
+
+    print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
+
     String token = await getToken();
+    print(token);
     try {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$localUrl/v2/create-or-update-menu-item'),
+            '$localUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '${widget.menu_id}';
@@ -161,8 +166,8 @@ class _EditItemState extends State<EditItem> {
         request.fields['ingridients[$i][name]'] = toppingNamecontroller.text;
         request.fields['ingridients[$i][price]'] = toppingPricecontroller.text;
       }
-        //request.fields['ingridients[$i][price]'] = '${toppingPrice[i]}';
-        //print('topping name : $toppingName[i]');
+      //request.fields['ingridients[$i][price]'] = '${toppingPrice[i]}';
+      //print('topping name : $toppingName[i]');
 
       print(pricecontroller.text);
       print(namecontroller.text);
@@ -243,6 +248,27 @@ class _EditItemState extends State<EditItem> {
     }
   }
 
+  Future DeleteMenuItem() async {
+    print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
+    String token = await getToken();
+    print(token);
+    try {
+      final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            '$localUrl/delete-menu-item'),
+      );
+      request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+      request.fields['menu_item_id'] = '${widget.id}';
+      final response = await request.send();
+      final responseData = await response.stream.bytesToString();
+      final json = jsonDecode(responseData);
+      print(responseData);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -257,6 +283,22 @@ class _EditItemState extends State<EditItem> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+            onPressed: () async {
+              await DeleteMenuItem();
+              setState(() {
+                _isLoading = false;
+              });
+              ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
+            },
+          )
+        ],
         title: Text(
           'key_Edit_Item'.tr,
           style: cardTitleStyle20(),

@@ -10,6 +10,7 @@ import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
 import '../../utils/theme_data.dart';
+import '../menu/image menu/create_img_menu1.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -294,7 +295,7 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CreateImageMenu()),
+                              builder: (context) => const CreateImgMenu()),
                         );
                       },
                       child: Card(

@@ -23,28 +23,28 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
   DateTime menuExpiryDate = DateTime.now();
   bool _isLoading = false;
   late int apiId;
-   int type = 1;
+   int isPermanent = 1;
   final menuIdController = Get.put(MenuIdController());
 
   Future getMenuId() async  {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
-      "$devUrl/create-or-update-menu");
+      "$localUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
-    final body=  type == 2 ? {
+    final body=  isPermanent == 2 ? {
         "is_menu_completed": "1",
-        "is_permanent_menu": "1",
+        "is_permanent_menu": "$isPermanent",
         "menu_review_status": "1",
         "name": menuItemName,
-        "type": "$type",
+        "type": "1",
         "date_of_menu" : DateFormat('yyyy-MM-dd').format(menuExpiryDate)
       }: {
     "is_menu_completed": "1",
-    "is_permanent_menu": "1",
+    "is_permanent_menu": "$isPermanent",
     "menu_review_status": "1",
     "name": menuItemName,
-    "type": "$type",
+    "type": "1",
     };
     try {
       final response = await http.post(url, headers: headers, body: body);
@@ -276,8 +276,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           isPermanentMenu = value ?? false;
-                                          isPermanentMenu == true ? type = 1 : type = 2;
-                                          print(type);
+                                          isPermanentMenu == true ? isPermanent = 1 : isPermanent = 2;
+                                          print(isPermanent);
                                         });
                                       }),
                                 ),

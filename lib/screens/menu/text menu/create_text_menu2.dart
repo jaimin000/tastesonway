@@ -36,7 +36,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
-          '$devUrl/get-menu-item'),
+          '$localUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
@@ -79,7 +79,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       'item_id': menuItemId,
     };
     final response = await http.post(
-      Uri.parse('$localUrl/v2/add-multiple-menu-item'),
+      Uri.parse('$localUrl/add-multiple-menu-item'),
         headers: <String, String>{
           'Authorization':'Bearer $token',
           'Content-Type':'application/json',
@@ -329,7 +329,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                             menuItemId=[];
                                           }
                                         }
-                                        print(menuItemId);
+                                        print("menu item id $menuItemId");
                                         Colors.black;
                                       },
                                       focusColor: orangeColor(),
@@ -363,7 +363,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                       child: Center(
                                           child: CircularProgressIndicator(color: Colors.red,)))
                                   : SizedBox(
-                                height: 400,
+                                height: 300,
                                     child: ListView.builder(
                                         itemCount: menuItemList.length,
                                         shrinkWrap: true,
