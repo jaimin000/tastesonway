@@ -124,11 +124,12 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
       maxWidth: 800,
       maxHeight: 800,
     );
-    setState(() {
-      _image = File(pickedFile!.path);
-      _imageSelected = true;
-      print(_image);
-    });
+      setState(() {
+        _image = File(pickedFile!.path);
+        _imageSelected = true;
+        print(_image);
+      });
+
   }
   var menuId;
 
@@ -545,14 +546,25 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                               onTap: ()async{
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState?.save();
-                                  setState(() {
-                                    _isLoading = true;
-                                  });
-                                  await CreateMenuItem();
-                                  setState(() {
-                                    _isLoading = false;
-                                  });
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateImgMenu2()),);
+
+                                if(_imageSelected) {
+                                    setState(() {
+                                      _isLoading = true;
+                                    });
+                                    await CreateMenuItem();
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (
+                                          context) => const CreateImgMenu2()),);
+                                  }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                     SnackBar(
+                                      content: Text('key_please_select_Image'.tr,style: TextStyle(color: Colors.red),),
+                                    ),
+                                  );
+                                }
                                 }
                               },
                               child: Card(

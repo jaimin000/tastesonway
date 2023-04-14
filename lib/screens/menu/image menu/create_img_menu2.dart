@@ -8,6 +8,7 @@ import '../../../apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import 'add_new_item.dart';
+import 'create_img_menu3.dart';
 import 'imageMenuIdController.dart';
 
 class CreateImgMenu2 extends StatefulWidget {
@@ -525,10 +526,10 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                         InkWell(
                           onTap: () async{
                              await AddMultipleMenuId();
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => const CreateTextMenu3()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const CreateImgMenu3()));
                           },
                           child: SizedBox(
                               height: 45,

@@ -13,7 +13,7 @@ Future<String> getToken() async {
   const url =
   // "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
   //"https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
-      "$localUrl/kitchen-owner-login-registration";
+      "$devUrl/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",
@@ -36,7 +36,7 @@ Future<String> getToken() async {
 
 Future<int> getOwnerId() async {
   const url =
-      "$localUrl/kitchen-owner-login-registration";
+      "$devUrl/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",
