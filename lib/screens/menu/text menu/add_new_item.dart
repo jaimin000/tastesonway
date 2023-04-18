@@ -519,7 +519,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                                                           ? type =
                                                                               1
                                                                           : type =
-                                                                              0;
+                                                                              2;
                                                                       print(
                                                                           type);
                                                                     });

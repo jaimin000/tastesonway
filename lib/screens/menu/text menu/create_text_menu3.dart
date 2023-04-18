@@ -22,15 +22,14 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
     String token = await getToken();
     int ownerId = await getOwnerId();
     print('ownerid $ownerId');
-    final response = await http.post(Uri.parse('$localUrl/get-menu-item'),
-        headers: {
-          'Authorization':'Bearer $token',
-        },
-        body: {
-          'menu_id': menuId.toString(),
-          'category_id': '1',
-          'business_owner_id': ownerId.toString()
-        });
+    final response =
+        await http.post(Uri.parse('$baseUrl/get-menu-item'), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      'menu_id': menuId.toString(),
+      'category_id': '1',
+      'business_owner_id': ownerId.toString()
+    });
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       menuList = (json['data'][1]['data']);
@@ -66,8 +65,8 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
         backgroundColor: backgroundColor(),
         appBar: AppBar(
           leading: IconButton(
-            icon:const Icon(Icons.arrow_back_ios),
-            onPressed: (){
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
               Navigator.popUntil(context, (route) => route.isFirst);
             },
           ),
@@ -83,7 +82,9 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: CircularProgressIndicator(color: Colors.redAccent,),
+                  child: CircularProgressIndicator(
+                    color: Colors.redAccent,
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return Padding(
@@ -92,8 +93,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                 );
               }
               return SingleChildScrollView(
-                child:
-                Container(
+                child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,68 +181,64 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                         height: 10,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height*0.50,
-                        child: ListView.builder(
-                          itemCount: menuList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) {
-                            return SizedBox(
-                              height: 120,
-                              width: MediaQuery.of(context).size.width,
-                              child: Card(
-                                shadowColor: Colors.black,
-                                color: cardColor(),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  margin: const EdgeInsets.all(8),
-                                  child: Row(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: Image.network(
-                                          menuList[index]['picture'],
-                                          height: 90,
-                                          width: 95,
-                                          fit: BoxFit.fill,
+                          height: MediaQuery.of(context).size.height * 0.50,
+                          child: ListView.builder(
+                              itemCount: menuList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                return SizedBox(
+                                    height: 120,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Card(
+                                        shadowColor: Colors.black,
+                                        color: cardColor(),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(left: 20.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              menuList[index]['name'],
-                                              style: mTextStyle20(),
-                                            ),
-                                            Text(
-                                              '₹ ${menuList[index]['amount']}',
-                                              style: cTextStyle18(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                                        child: Container(
+                                            padding: const EdgeInsets.all(8),
+                                            margin: const EdgeInsets.all(8),
+                                            child: Row(children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                child: Image.network(
+                                                  menuList[index]['picture'],
+                                                  height: 90,
+                                                  width: 95,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 20.0),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          menuList[index]
+                                                              ['name'],
+                                                          style: mTextStyle20(),
+                                                        ),
+                                                        Text(
+                                                          '₹ ${menuList[index]['amount']}',
+                                                          style: cTextStyle18(),
+                                                        )
+                                                      ]))
+                                            ]))));
+                              })),
                       const SizedBox(
                         height: 10,
                       ),
                       InkWell(
                         onTap: () async {
-                          await Share.share("🍴👨‍🍳 MENU BY ${menuList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
-                              "${menuList.map((menu) =>
-                          "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                          await Share.share(
+                              "🍴👨‍🍳 MENU BY ${menuList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
+                              "${menuList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
                               "📱 Sent from Tastes on Way app");
                         },
                         child: SizedBox(

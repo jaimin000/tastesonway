@@ -36,7 +36,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
-          '$localUrl/get-menu-item'),
+          '$baseUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': '$ownerId'},
     );
@@ -51,6 +51,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
           id: menuData[i]['id'],
           menu_id: menuData[i]['menu_id'],
           name: menuData[i]['name'],
+          type:menuData[i]['type'],
           price: menuData[i]['amount'],
           image: menuData[i]['picture'],
           description: menuData[i]['description'] ?? "",
@@ -79,7 +80,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
       'item_id': menuItemId,
     };
     final response = await http.post(
-      Uri.parse('$localUrl/add-multiple-menu-item'),
+      Uri.parse('$baseUrl/add-multiple-menu-item'),
         headers: <String, String>{
           'Authorization':'Bearer $token',
           'Content-Type':'application/json',
@@ -478,6 +479,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                                                       menu_id: menuItemList[index].menu_id,
                                                                       name:menuItemList[index].name,
                                                                     price:menuItemList[index].price,
+                                                                    type:menuItemList[index].type,
                                                                     description:menuItemList[index].description,
 
                                                                   ),),);
@@ -529,7 +531,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const CreateImgMenu3()));
+                                    builder: (context) => CreateImgMenu3(imageMenuId:menuId)));
                           },
                           child: SizedBox(
                               height: 45,

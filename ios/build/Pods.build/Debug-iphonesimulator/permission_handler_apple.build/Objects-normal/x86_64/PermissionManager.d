@@ -1,0 +1,40 @@
+dependencies: \
+  /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/permission_handler_apple.build/module.modulemap \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/PermissionManager.m \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/permission_handler_apple/permission_handler_apple-prefix.pch \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/PermissionManager.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterMacros.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPlugin.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterBinaryMessenger.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterChannels.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterCodecs.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPlatformViews.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterTexture.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterCallbackCache.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterDartProject.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterEngine.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterEngineGroup.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
+  /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterViewController.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/AudioVideoPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/PermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/PermissionHandlerEnums.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/UnknownPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/AppTrackingTransparencyPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/BluetoothPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/ContactPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/EventPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/LocationPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/MediaLibraryPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/PhonePermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/PhotoPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/SensorPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/SpeechPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/StoragePermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/NotificationPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/strategies/CriticalAlertsPermissionStrategy.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/ios/Classes/util/Codec.h

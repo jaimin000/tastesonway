@@ -1,0 +1,10 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-ios-simulator, arm64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/social_share.framework/social_share'
+exports:
+  - targets:         [ x86_64-ios-simulator, arm64-ios-simulator ]
+    symbols:         [ _social_shareVersionNumber, _social_shareVersionString ]
+    objc-classes:    [ PodsDummy_social_share, SocialSharePlugin ]
+...

@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
             home: isUser == "null" ? const LanguageScreen() : const Home(),
           );
         } else {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );
@@ -108,11 +108,18 @@ class _HomeState extends State<Home> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
+  final GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> fourthTabNavKey = GlobalKey<NavigatorState>();
+  CupertinoTabController tabController = CupertinoTabController(initialIndex: 0);
+
 
   @override
   void initState() {
     getConnectivity();
     super.initState();
+    tabController = CupertinoTabController(initialIndex: 0);
   }
 
   getConnectivity() =>
@@ -126,6 +133,7 @@ class _HomeState extends State<Home> {
           }
         },
       );
+
   @override
   void dispose() {
     subscription.cancel();
@@ -134,40 +142,60 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
-          backgroundColor: const Color.fromRGBO(50, 54, 64, 1),
-          inactiveColor: const Color.fromRGBO(105, 111, 130, 1),
-          iconSize: 30,
-          activeColor: orangeColor(),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_rounded)),
-            BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu)),
-            BottomNavigationBarItem(icon: Icon(Icons.settings)),
-            BottomNavigationBarItem(icon: Icon(Icons.person_sharp)),
-          ],
+    final listOfKeys = [firstTabNavKey, secondTabNavKey, thirdTabNavKey,fourthTabNavKey];
+    List homeScreenList = [
+      Dashboard(),
+      YourMenus(),
+      Setting(),
+      Profile(),
+    ];
+    return MaterialApp(
+        home: WillPopScope(
+        onWillPop: () async {
+      return !await listOfKeys[tabController.index].currentState!.maybePop();
+    },
+      child: CupertinoTabScaffold(
+          tabBar: CupertinoTabBar(
+            backgroundColor: const Color.fromRGBO(50, 54, 64, 1),
+            inactiveColor: const Color.fromRGBO(105, 111, 130, 1),
+            iconSize: 30,
+            activeColor: orangeColor(),
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home_rounded)),
+              BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu)),
+              BottomNavigationBarItem(icon: Icon(Icons.settings)),
+              BottomNavigationBarItem(icon: Icon(Icons.person_sharp)),
+            ],
+          ),
+          tabBuilder: (context, index) {
+            // switch (index) {
+            //   case 0:
+            //     return CupertinoTabView(builder: (context) {
+            //       return const CupertinoPageScaffold(child: Dashboard());
+            //     });
+            //   case 1:
+            //     return CupertinoTabView(builder: (context) {
+            //       return const CupertinoPageScaffold(child: YourMenus());
+            //     });
+            //   case 2:
+            //     return CupertinoTabView(builder: (context) {
+            //       return const CupertinoPageScaffold(child: Setting());
+            //     });
+            //   case 3:
+            //     return CupertinoTabView(builder: (context) {
+            //       return const CupertinoPageScaffold(child: Profile());
+            //     });
+            // }
+            return CupertinoTabView(
+              navigatorKey: listOfKeys[
+              index], //set navigatorKey here which was initialized before
+              builder: (context) {
+                return homeScreenList[index];
+              },
+            );
+          }),
         ),
-        tabBuilder: (context, index) {
-          switch (index) {
-            case 0:
-              return CupertinoTabView(builder: (context) {
-                return const CupertinoPageScaffold(child: Dashboard());
-              });
-            case 1:
-              return CupertinoTabView(builder: (context) {
-                return const CupertinoPageScaffold(child: YourMenus());
-              });
-            case 2:
-              return CupertinoTabView(builder: (context) {
-                return const CupertinoPageScaffold(child: Setting());
-              });
-            case 3:
-              return CupertinoTabView(builder: (context) {
-                return const CupertinoPageScaffold(child: Profile());
-              });
-          }
-          return Container();
-        });
+    );
   }
 
   showDialogBox() => showCupertinoDialog<String>(

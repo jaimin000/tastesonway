@@ -9,11 +9,13 @@ const localUrl = "http://192.168.1.26:24/api/v2";
 const devUrl = "https://dev-api.tastesonway.com/api/v2";
 const storyUrl = "https://dev-api.tastesonway.com/api";
 
+const baseUrl = devUrl;
+
 Future<String> getToken() async {
   const url =
   // "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
   //"https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
-      "$devUrl/kitchen-owner-login-registration";
+      "$baseUrl/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",
@@ -36,7 +38,7 @@ Future<String> getToken() async {
 
 Future<int> getOwnerId() async {
   const url =
-      "$devUrl/kitchen-owner-login-registration";
+      "$baseUrl/kitchen-owner-login-registration";
 
   final tokenResponse = await http.post(Uri.parse(url), body: {
     "language_id": "1",

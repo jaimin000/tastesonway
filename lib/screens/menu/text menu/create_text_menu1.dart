@@ -30,7 +30,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
     String token = await getToken();
     final url = Uri.parse(
-      "$localUrl/create-or-update-menu");
+      "$baseUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
     final body=  isPermanent == 2 ? {
         "is_menu_completed": "1",

@@ -193,6 +193,9 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/path_provider_foundation/path_provider_foundation.framework/Headers/path_provider_foundation-Swift.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/printing/printing.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/printing/printing.framework/Headers/printing-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/printing/printing.framework/Headers/printing-Swift.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/FLTSharePlusPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/share_plus/share_plus.framework/Headers/share_plus-umbrella.h \

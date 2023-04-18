@@ -1,0 +1,50 @@
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/PrintJS.swift":
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PrintJS.d"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PrintJS.o"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PrintJS.swiftdeps"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PrintJS.dia"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PullToRefresh/PullToRefreshDelegate.swift":
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshDelegate.swiftdeps"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshDelegate.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshDelegate.d"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshDelegate.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/Types/SecCertificate.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.o"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.d"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.dia"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SecCertificate.swiftdeps"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/Types/PluginScript.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScript.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScript.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScript.swiftdeps"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScript.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PullToRefresh/PullToRefreshControl.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshControl.o"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshControl.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshControl.swiftdeps"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshControl.dia"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/PluginScriptsUtil.swift":
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScriptsUtil.swiftdeps"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScriptsUtil.d"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScriptsUtil.dia"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PluginScriptsUtil.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/SafariViewController/SafariViewController.swift":
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.swiftdeps"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.d"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.o"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariViewController.dia"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/PromisePolyfillJS.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PromisePolyfillJS.o"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PromisePolyfillJS.d"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PromisePolyfillJS.dia"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PromisePolyfillJS.swiftdeps"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PullToRefresh/PullToRefreshOptions.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshOptions.o"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshOptions.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshOptions.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/PullToRefreshOptions.swiftdeps"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/SafariViewController/SafariBrowserOptions.swift":
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserOptions.d"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserOptions.o"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserOptions.swiftdeps"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/arm64/SafariBrowserOptions.dia"

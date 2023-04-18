@@ -87,10 +87,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                           height:30,
                           width:100,
                           child: Card(
-                            color: Color.fromRGBO(105, 111, 130, 1),
+                            color: const Color.fromRGBO(105, 111, 130, 1),
                             child: Center(child:
                             Text('key_View_Details'.tr,
-                              style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                              style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                               )),
                           ),
                         ),
@@ -148,10 +148,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -209,10 +209,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -270,10 +270,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -362,10 +362,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -423,10 +423,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -484,10 +484,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -545,10 +545,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -637,10 +637,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -698,10 +698,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -759,10 +759,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),
@@ -820,10 +820,10 @@ class _EarningSummaryState extends State<EarningSummary> {
                         height:30,
                         width:100,
                         child: Card(
-                          color: Color.fromRGBO(105, 111, 130, 1),
+                          color: const Color.fromRGBO(105, 111, 130, 1),
                           child: Center(child:
                           Text('key_View_Details'.tr,
-                            style: TextStyle(fontSize: 12,fontFamily: 'Poppins'),
+                            style: const TextStyle(fontSize: 12,fontFamily: 'Poppins'),
                           )),
                         ),
                       ),

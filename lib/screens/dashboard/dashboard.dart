@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
-import 'package:tastesonway/screens/menu/image%20menu/create_image_menu.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
 import 'package:tastesonway/screens/menu/your_menus.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
@@ -296,7 +295,7 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CreateImgMenu3()),
+                              builder: (context) => const CreateImgMenu()),
                         );
                       },
                       child: Card(

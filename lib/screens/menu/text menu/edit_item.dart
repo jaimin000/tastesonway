@@ -15,6 +15,7 @@ class EditItem extends StatefulWidget {
   final int id;
   final int menu_id;
   final String name;
+  final String type;
   final String description;
   final int price;
 
@@ -22,6 +23,7 @@ class EditItem extends StatefulWidget {
     required this.id,
     required this.menu_id,
     required this.name,
+    required this.type,
     required this.price,
     required this.description,
   });
@@ -481,7 +483,7 @@ class _EditItemState extends State<EditItem> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           _switchValue = value ?? false;
-                                          _switchValue?type = 1:type=0;
+                                          _switchValue?type = 1:type=2;
                                           print(type);
                                         });
                                       }),

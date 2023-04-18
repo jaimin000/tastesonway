@@ -4,6 +4,7 @@ class MenuItemModel {
   String name;
   int price;
   String image;
+  String type;
   String description;
   bool isChecked;
   String  toppingName;
@@ -14,6 +15,7 @@ class MenuItemModel {
     this.menu_id=0,
     this.description="",
     this.name="empty",
+    this.type="Veg",
     this.price=0,
     this.image="",
     this.isChecked=false,

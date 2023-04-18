@@ -52,13 +52,14 @@ class _SignupState extends State<Signup> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      webViewControllers.loadUrl('https://www.tastesonway.com/Terms-of-Service');
+      webViewControllers
+          .loadUrl('https://www.tastesonway.com/Terms-of-Service');
     });
   }
 
   getConnectivity() =>
       subscription = Connectivity().onConnectivityChanged.listen(
-            (ConnectivityResult result) async {
+        (ConnectivityResult result) async {
           isDeviceConnected = await InternetConnectionChecker().hasConnection;
           if (!isDeviceConnected && isAlertSet == false) {
             showDialogBox();
@@ -74,15 +75,16 @@ class _SignupState extends State<Signup> {
         barrierDismissible: false,
         builder: (BuildContext context) => StatefulBuilder(
             builder: (BuildContext context, state) => AlertDialog(
-              backgroundColor: cardColor(),
-              content: SingleChildScrollView(
-                  child: Column(
+                  backgroundColor: cardColor(),
+                  content: SingleChildScrollView(
+                      child: Column(
                     children: [
                       SizedBox(
                           height: 400,
                           child: WebView(
                             key: _key,
-                            initialUrl: 'https://www.tastesonway.com/Terms-of-Service',
+                            initialUrl:
+                                'https://www.tastesonway.com/Terms-of-Service',
                             javascriptMode: JavascriptMode.unrestricted,
                             onWebViewCreated:
                                 (WebViewController webViewController) {
@@ -121,19 +123,19 @@ class _SignupState extends State<Signup> {
                           ),
                           Expanded(
                               child: Text(
-                                'key_I_have_read'.tr,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              )),
+                            'key_I_have_read'.tr,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          )),
                         ],
                       ),
                       showAgreeMessage
                           ? Text(
-                        'key_Select_checkbox_for_agree'.tr,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.red),
-                      )
+                              'key_Select_checkbox_for_agree'.tr,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.red),
+                            )
                           : Container(),
                       Align(
                           alignment: Alignment.bottomRight,
@@ -149,16 +151,18 @@ class _SignupState extends State<Signup> {
                                 },
                                 child: Center(
                                     child: Text(
-                                      'key_Cancel'.tr
-                                          .toUpperCase(),
-                                      textAlign: TextAlign.right,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white),
-                                    )),
+                                  'key_Cancel'.tr.toUpperCase(),
+                                  textAlign: TextAlign.right,
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white),
+                                )),
                               ),
-                              const SizedBox(height: 10,width: 10,),
+                              const SizedBox(
+                                height: 10,
+                                width: 10,
+                              ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: orangeColor(),
@@ -177,49 +181,58 @@ class _SignupState extends State<Signup> {
                                 },
                                 child: Center(
                                     child: Text(
-                                      'key_Agree'.tr.toUpperCase(),
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          color: agree
-                                              ? Colors.white
-                                              : Colors.grey),
-                                    )),
+                                  'key_Agree'.tr.toUpperCase(),
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color:
+                                          agree ? Colors.white : Colors.grey),
+                                )),
                               ),
                             ],
                           ))
                     ],
                   )),
-              // );
-            )));
+                  // );
+                )));
   }
 
   Future decidePath() async {
-    String token = await Sharedprefrences.getToken();
-    final response = await http.post(
-        Uri.parse('$devUrl/kitchen-owner-login-registration'),
-        headers: {'Authorization': 'Bearer $token',
-        },
-        body: {
-          "language_id":"1",
-          "mobile_number": "7069836196",
-          "short_code":"IN",
-          "country_code": "91"
-        }
-    );
+    final response = await http
+        .post(Uri.parse('$baseUrl/kitchen-owner-login-registration'), body: {
+      "language_id": "1",
+      "mobile_number": "7069836196",
+      "short_code": "IN",
+      "country_code": "91"
+    });
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      setState(() {
-         profileStatus = jsonData['data'][0]['status'];
-         profileAddress = jsonData['data'][0]['owner_address'];
-        print("profileStatus is $profileStatus & address is $profileAddress");
-      });
+      // setState(() {
+      profileStatus = jsonData['data'][0]['status'];
+      profileAddress = jsonData['data'][0]['owner_address'];
+      debugPrint(
+          "profileStatus is $profileStatus & address is $profileAddress");
+      if (profileStatus == 1 && profileAddress == null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const userPersonalDetail(),
+          ),
+        );
+      } else {
+        await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        );
+      }
+      // });
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
-
 
   @override
   void initState() {
@@ -241,7 +254,7 @@ class _SignupState extends State<Signup> {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          otpVisibility? 'key_Enter_otp'.tr : 'key_register'.tr,
+          otpVisibility ? 'key_Enter_otp'.tr : 'key_register'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -255,55 +268,61 @@ class _SignupState extends State<Signup> {
                   SizedBox(
                     height: 230,
                     width: MediaQuery.of(context).size.width,
-                    child: otpVisibility ? Image.asset('assets/images/otp.png') :Image.asset('assets/images/mobile.png'),
+                    child: otpVisibility
+                        ? Image.asset('assets/images/otp.png')
+                        : Image.asset('assets/images/mobile.png'),
                   ),
-                  const SizedBox(height: 20,),
-                  otpVisibility?Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'key_Enter_your_security_code'.tr,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Text(
-                          'key_OTP_has_been_sent_to_your_mobile'.tr,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      )
-                    ],
-                  ):Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'key_Enter_your_mobile_number'.tr,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20.0),
-                      ),
-                      Text(
-                        'key_to_create_account'.tr,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Text(
-                          'key_We_will_text_you'.tr,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      )
-                    ],
+                  const SizedBox(
+                    height: 20,
                   ),
+                  otpVisibility
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'key_Enter_your_security_code'.tr,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(
+                                'key_OTP_has_been_sent_to_your_mobile'.tr,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'key_Enter_your_mobile_number'.tr,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20.0),
+                            ),
+                            Text(
+                              'key_to_create_account'.tr,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20.0),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(
+                                'key_We_will_text_you'.tr,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -326,58 +345,65 @@ class _SignupState extends State<Signup> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              otpVisibility?
-                              PinCodeTextField(
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                appContext: context,
-                                length: 6,
-                                obscureText: false,
-                                controller: otpController,
-                                animationType: AnimationType.fade,
-                                pinTheme: PinTheme(
-                                  shape: PinCodeFieldShape.box,
-                                  borderRadius: BorderRadius.circular(5),
-                                  fieldHeight: 60,
-                                  fieldWidth: 40,
-                                  activeFillColor: Colors.white,
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    otpCode = value;
-                                  });
-                                  if(value.length == 6){
-                                    verifyOTP();
-                                  }
-                                },
-                              ):IntlPhoneField(
-                                initialCountryCode: 'IN',
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(10.0),
-                                  fillColor: inputColor(),
-                                  filled: true,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none),
-                                  hintText: 'Phone Number',
-                                  hintStyle: inputTextStyle16(),
-                                ),
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                controller: phoneController,
-                                // onCountryChanged: (country) {
-                                //   phoneCode = country.dialCode;
-                                // },
-                                onChanged: (phone) {
-                                  phoneCode = phone.countryCode;
-                                  countryCode = phone.countryISOCode;
-                                },
-                              ),
+                              otpVisibility
+                                  ? PinCodeTextField(
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      appContext: context,
+                                      length: 6,
+                                      obscureText: false,
+                                      controller: otpController,
+                                      animationType: AnimationType.fade,
+                                      pinTheme: PinTheme(
+                                        shape: PinCodeFieldShape.box,
+                                        borderRadius: BorderRadius.circular(5),
+                                        fieldHeight: 60,
+                                        fieldWidth: 40,
+                                        activeFillColor: Colors.white,
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          otpCode = value;
+                                        });
+                                        if (value.length == 6) {
+                                          verifyOTP();
+                                        }
+                                      },
+                                    )
+                                  : IntlPhoneField(
+                                      initialCountryCode: 'IN',
+                                      decoration: InputDecoration(
+                                        contentPadding:
+                                            const EdgeInsets.all(10.0),
+                                        fillColor: inputColor(),
+                                        filled: true,
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: BorderSide.none),
+                                        hintText: 'Phone Number',
+                                        hintStyle: inputTextStyle16(),
+                                      ),
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      controller: phoneController,
+                                      // onCountryChanged: (country) {
+                                      //   phoneCode = country.dialCode;
+                                      // },
+                                      onChanged: (phone) {
+                                        phoneCode = phone.countryCode;
+                                        countryCode = phone.countryISOCode;
+                                      },
+                                    ),
                               InkWell(
                                 onTap: () {
-                                  if (_formKey.currentState!.validate()){
+                                  if (_formKey.currentState!.validate()) {
                                     if (otpVisibility) {
                                       verifyOTP();
-                                    }else {
+                                    } else {
                                       login();
                                     }
                                   }
@@ -389,12 +415,15 @@ class _SignupState extends State<Signup> {
                                         shadowColor: Colors.black,
                                         color: orangeColor(),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
                                         ),
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            otpVisibility ? "key_Click_Verify_Button".tr : "key_Verify_OTP".tr,
+                                            otpVisibility
+                                                ? "key_Click_Verify_Button".tr
+                                                : "key_Verify_OTP".tr,
                                             style: mTextStyle16(),
                                           ),
                                         ))),
@@ -405,68 +434,70 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20,),
-                  otpVisibility ?const SizedBox(): Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, bottom: 20),
-                          child: Text.rich(
-                            TextSpan(
-                              children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  otpVisibility
+                      ? const SizedBox()
+                      : Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 20),
+                              child: Text.rich(
                                 TextSpan(
-                                  text:
-                                  'key_By_completing_registration'.tr,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white),
+                                  children: [
+                                    TextSpan(
+                                      text: 'key_By_completing_registration'.tr,
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.white),
+                                    ),
+                                    TextSpan(
+                                      text: 'key_Privacy_policy'.tr,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          showPrivacyPolicyDialog(context);
+                                          _onItemTapped(0);
+                                        },
+                                      style: const TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14,
+                                          color: Colors.white),
+                                    ),
+                                    const TextSpan(text: ' & '),
+                                    TextSpan(
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          showPrivacyPolicyDialog(context);
+                                          _onItemTapped(1);
+                                        },
+                                      text: 'key_Terms_Of_service'.tr,
+                                      style: const TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 14,
+                                          color: Colors.white),
+                                    ),
+                                  ],
                                 ),
-                                TextSpan(
-                                  text: 'key_Privacy_policy'.tr,
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                       showPrivacyPolicyDialog(context);
-                                       _onItemTapped(0);
-                                    },
-                                  style: const TextStyle(
-                                      decoration:
-                                      TextDecoration.underline,
-                                      fontSize: 14,
-                                      color: Colors.white),
-                                ),
-                                const TextSpan(text: ' & '),
-                                TextSpan(
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      showPrivacyPolicyDialog(context);
-                                      _onItemTapped(1);
-                                    },
-                                  text: 'key_Terms_Of_service'.tr,
-                                  style: const TextStyle(
-                                      decoration:
-                                      TextDecoration.underline,
-                                      fontSize: 14,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ))),
+                              ))),
                 ],
               ),
             ),
-            isLoading ? Positioned.fill(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  color: Colors.transparent,
-                  child: Center(child: CircularProgressIndicator(
-                    color: orangeColor(),
-                  )),
-                ),
-              ),
-            ) : Container(),
+            isLoading
+                ? Positioned.fill(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: orangeColor(),
+                        )),
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
-
         ),
       ),
     );
@@ -503,8 +534,10 @@ class _SignupState extends State<Signup> {
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
+
   void verifyOTP() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.setString('user', phoneController.text);
 
     setState(() {
@@ -514,15 +547,14 @@ class _SignupState extends State<Signup> {
         verificationId: verificationID, smsCode: otpController.text);
 
     await auth.signInWithCredential(credential).then(
-          (value) {
+      (value) {
         setState(() {
           user = FirebaseAuth.instance.currentUser;
           isLoading = false;
-
         });
       },
     ).whenComplete(
-          () async {
+      () async {
         if (user != null) {
           Fluttertoast.showToast(
             msg: "key_login_success".tr,
@@ -534,22 +566,7 @@ class _SignupState extends State<Signup> {
             fontSize: 16.0,
           );
           await decidePath();
-          if (profileStatus == 1 && profileAddress == null) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const userPersonalDetail(),
-              ),
-            );
-          }else{
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Home(),
-              ),
-            );
-          }
-        }else {
+        } else {
           Fluttertoast.showToast(
             msg: "your login is failed",
             toastLength: Toast.LENGTH_SHORT,
@@ -564,29 +581,29 @@ class _SignupState extends State<Signup> {
           });
         }
       },
-
     );
   }
+
   showDialogBox() => showCupertinoDialog<String>(
-    context: context,
-    builder: (BuildContext context) => CupertinoAlertDialog(
-      title:  Text('key_Check_your_connection'.tr),
-      content:  Text('key_No_Internet_connection_found'.tr),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () async {
-            Navigator.pop(context, 'key_CANCEL'.tr);
-            setState(() => isAlertSet = false);
-            isDeviceConnected =
-            await InternetConnectionChecker().hasConnection;
-            if (!isDeviceConnected && isAlertSet == false) {
-              showDialogBox();
-              setState(() => isAlertSet = true);
-            }
-          },
-          child: Text('key_OKAY'.tr),
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: Text('key_Check_your_connection'.tr),
+          content: Text('key_No_Internet_connection_found'.tr),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'key_CANCEL'.tr);
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected && isAlertSet == false) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: Text('key_OKAY'.tr),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 }

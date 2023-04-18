@@ -16,6 +16,7 @@ class EditImgItem extends StatefulWidget {
   final int id;
   final int menu_id;
   final String name;
+  final String type;
   final String description;
   final int price;
 
@@ -23,6 +24,7 @@ class EditImgItem extends StatefulWidget {
     required this.id,
     required this.menu_id,
     required this.name,
+    required this.type,
     required this.price,
     required this.description,
   });
@@ -257,7 +259,7 @@ class _EditImgItemState extends State<EditImgItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$localUrl/delete-menu-item'),
+            '$baseUrl/delete-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_item_id'] = '${widget.id}';
@@ -482,7 +484,7 @@ class _EditImgItemState extends State<EditImgItem> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           _switchValue = value ?? false;
-                                          _switchValue?type = 1:type=0;
+                                          _switchValue?type = 1:type=2;
                                           print(type);
                                         });
                                       }),

@@ -140,7 +140,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-          '$localUrl/create-or-update-menu-item'),
+          '$baseUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';
@@ -454,7 +454,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                                       onChanged: (bool? value) {
                                         setState(() {
                                           _switchValue = value ?? false;
-                                          _switchValue?type = 1:type=0;
+                                          _switchValue?type = 1:type=2;
                                           print(type);
                                         });
                                       }),
