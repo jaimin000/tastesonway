@@ -359,10 +359,10 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                 ),
                               ),
                               isLoading
-                                  ? const SizedBox(
+                                  ?  SizedBox(
                                       height: 150,
                                       child: Center(
-                                          child: CircularProgressIndicator(color: Colors.red,)))
+                                          child: CircularProgressIndicator(color: orangeColor(),)))
                                   : SizedBox(
                                     height: 300,
                                     child: ListView.builder(

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/menu/image%20menu/create_img_menu2.dart';
 import '../../../apiServices/api_service.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +19,7 @@ class CreateImgMenu extends StatefulWidget {
 
 class _CreateImgMenuState extends State<CreateImgMenu> {
   bool isPermanentMenu = true;
-  late String menuItemName;
+  late String menuName;
   late int menuId;
   final _formKey = GlobalKey<FormState>();
   DateTime menuExpiryDate = DateTime.now();
@@ -37,14 +38,14 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
         "is_menu_completed": "1",
         "is_permanent_menu": "$isPermanent",
         "menu_review_status": "1",
-        "name": menuItemName,
+        "name": menuName,
         "type": "2",
         "date_of_menu" : DateFormat('yyyy-MM-dd').format(menuExpiryDate)
       }: {
     "is_menu_completed": "1",
     "is_permanent_menu": "$isPermanent",
     "menu_review_status": "1",
-    "name": menuItemName,
+    "name": menuName,
     "type": "2",
     };
     try {
@@ -238,9 +239,10 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
                                 }
                                 return null;
                               },
-                              onSaved: (value) {
-                                menuItemName = value!;
-                                print(menuItemName);
+                              onSaved: (value) async {
+                                menuName = value!;
+                                await Sharedprefrences.setMenuName(menuName);
+                                print(menuName);
                               },
                             ),
                           ),

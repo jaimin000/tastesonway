@@ -17,7 +17,7 @@ class CreateTextMenu extends StatefulWidget {
 
 class _CreateTextMenuState extends State<CreateTextMenu> {
   bool isPermanentMenu = true;
-  late String menuItemName;
+  late String menuName;
   late int menuId;
   final _formKey = GlobalKey<FormState>();
   DateTime menuExpiryDate = DateTime.now();
@@ -36,14 +36,14 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         "is_menu_completed": "1",
         "is_permanent_menu": "$isPermanent",
         "menu_review_status": "1",
-        "name": menuItemName,
+        "name": menuName,
         "type": "1",
         "date_of_menu" : DateFormat('yyyy-MM-dd').format(menuExpiryDate)
       }: {
     "is_menu_completed": "1",
     "is_permanent_menu": "$isPermanent",
     "menu_review_status": "1",
-    "name": menuItemName,
+    "name": menuName,
     "type": "1",
     };
     try {
@@ -238,8 +238,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                 return null;
                               },
                               onSaved: (value) {
-                                menuItemName = value!;
-                                print(menuItemName);
+                                menuName = value!;
+                                print(menuName);
                               },
                             ),
                           ),

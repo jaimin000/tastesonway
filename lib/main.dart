@@ -150,6 +150,13 @@ class _HomeState extends State<Home> {
       Profile(),
     ];
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: orangeColor(),
+          brightness: Brightness.dark,
+          accentColor: orangeColor(),
+          fontFamily: 'Poppins',
+        ),
         home: WillPopScope(
         onWillPop: () async {
       return !await listOfKeys[tabController.index].currentState!.maybePop();
@@ -220,4 +227,12 @@ class _HomeState extends State<Home> {
           ],
         ),
       );
+}
+
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
 }

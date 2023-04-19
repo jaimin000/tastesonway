@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import 'package:tastesonway/models/theme_category_model.dart';
 import 'package:tastesonway/utils/utilities.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../models/theme_image_model.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,7 +22,6 @@ import 'package:printing/printing.dart';
 
 class CreateImgMenu3 extends StatefulWidget {
   final int imageMenuId;
-
   const CreateImgMenu3({Key? key, required this.imageMenuId}) : super(key: key);
 
   @override
@@ -43,8 +42,10 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
   List<pw.ImageProvider> pdfImages = [];
   List<Uint8List> imageMenuList = [];
   List<String> images = [];
+  String name = "";
 
   Future getTheme(BuildContext context, int index) async {
+    name = await Sharedprefrences.getMenuName();
     String token = await getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-theme'),
@@ -540,7 +541,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 15.0),
                                     child: Text(
-                                      "Menu",
+                                      name,
                                       style: TextStyle(
                                         color: menuFontColor,
                                         fontSize: 16,
@@ -689,7 +690,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                                     child: Text(
-                                      "Menu",
+                                      name,
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: menuFontColor,
@@ -989,13 +990,14 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                 width: MediaQuery.of(context).size.width,
                 child: InkWell(
                   onTap: () async {
+                    var menuName = await Sharedprefrences.getMenuName();
                     if (isProceed) {
                       // share
                       shareImages();
                     } else {
                       isProceed = true;
                       setState(() {});
-                      writeOnPdf("Test", context);
+                      writeOnPdf(menuName, context);
                     }
                   },
                   child: Card(
@@ -1007,10 +1009,27 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                       child: Align(
                         alignment: Alignment.center,
                         child: isProceed
-                            ? Text(
+                            ?  Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              './assets/images/whatsapp.png',
+                              width: 24,
+                              height: 24,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15,
+                              ),
+                              child: Text(
                                 'key_Whatsapp'.tr,
                                 style: mTextStyle14(),
-                              )
+                              ),
+                            ),
+                          ],
+                        )
                             : Text(
                                 'key_Proceed'.tr,
                                 style: mTextStyle14(),

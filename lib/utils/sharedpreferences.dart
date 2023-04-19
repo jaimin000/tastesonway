@@ -24,6 +24,17 @@ class Sharedprefrences {
     return prefs.getString('Userid');
   }
 
+  static Future<bool> setMenuName(value) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.setString('MenuName', value.toString());
+  }
+  static Future<dynamic> getMenuName() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getString('MenuName');
+  }
+
   static Future setLanguageId(value) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setInt('LangId', value);
