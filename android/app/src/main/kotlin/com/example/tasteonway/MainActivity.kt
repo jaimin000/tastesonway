@@ -1,4 +1,4 @@
-package com.testing.tastesonway.android
+package com.testing.tastesonway.ios.android
 
 import io.flutter.embedding.android.FlutterActivity
 

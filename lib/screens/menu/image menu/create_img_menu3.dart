@@ -1,18 +1,23 @@
 import 'dart:io';
+import 'dart:async';
+import 'dart:typed_data';
+import 'dart:convert';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/theme_category_model.dart';
 import 'package:tastesonway/utils/utilities.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../models/theme_image_model.dart';
 import '../../../utils/sharedpreferences.dart';
+import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,8 +25,10 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
+
 class CreateImgMenu3 extends StatefulWidget {
   final int imageMenuId;
+
   const CreateImgMenu3({Key? key, required this.imageMenuId}) : super(key: key);
 
   @override
@@ -31,6 +38,7 @@ class CreateImgMenu3 extends StatefulWidget {
 class _CreateImgMenu3State extends State<CreateImgMenu3> {
   List<ThemeImageModel> image = <ThemeImageModel>[];
   String backgroundImage = "";
+  int backgroundImageId = 1;
   List<ThemeCategoryModel> themeCategoryList = [];
   bool _isLoading = true;
   int selectedIndex = 0;
@@ -38,11 +46,13 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
   List menuList = [];
   bool isProceed = false;
   Color menuFontColor = Colors.white;
-  PdfColor pdfFontColor = PdfColor.fromInt(0xFF1E1E1E);
+  PdfColor pdfFontColor = const PdfColor.fromInt(0xFF1E1E1E);
   List<pw.ImageProvider> pdfImages = [];
   List<Uint8List> imageMenuList = [];
   List<String> images = [];
   String name = "";
+  String imageMenuLink ="";
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
   Future getTheme(BuildContext context, int index) async {
     name = await Sharedprefrences.getMenuName();
@@ -288,19 +298,24 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                     width: 17,
                                     decoration: pw.BoxDecoration(
                                         border: pw.Border.all(
-                                            color: menuList[i]['type'] == 'Non veg'
-                                                ? PdfColor.fromInt(0xFFF85649)
-                                                : PdfColor.fromInt(
-                                                    0xFF208824))),
+                                            color:
+                                                menuList[i]['type'] == 'Non veg'
+                                                    ? const PdfColor.fromInt(
+                                                        0xFFF85649)
+                                                    : const PdfColor.fromInt(
+                                                        0xFF208824))),
                                     padding: const pw.EdgeInsets.all(2),
                                     child: pw.Container(
                                       height: 8,
                                       width: 8,
                                       decoration: pw.BoxDecoration(
                                           shape: pw.BoxShape.circle,
-                                          color: menuList[i]['type'] == 'Non veg'
-                                              ? PdfColor.fromInt(0xFFF85649)
-                                              : PdfColor.fromInt(0xFF208824)),
+                                          color:
+                                              menuList[i]['type'] == 'Non veg'
+                                                  ? const PdfColor.fromInt(
+                                                      0xFFF85649)
+                                                  : const PdfColor.fromInt(
+                                                      0xFF208824)),
                                     ),
                                   ),
                                   pw.SizedBox(
@@ -360,14 +375,14 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     imageMenuList.clear();
     try {
       await for (var page in Printing.raster(await document.save())) {
-        print('here');
+        // print('here');
         imageMenuList.add(await page.toPng());
       }
+      addMenuImage(imageMenuList);
+
       // var type = int.parse(widget.menuType.toString());
       // print(type);
-
       // addMultipleMenuItems();
-
       for (var x = 0; x < imageMenuList.length; x++) {
         // createDoc['${menuName}_$x.png'] =
         //     imageMenuList[x].buffer.asUint8List();
@@ -383,12 +398,92 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     }
   }
 
-  shareImages() async {
+  shareImages(String shortUrl) async {
     print("images " + images.length.toString());
     await Share.shareFiles(images,
-        text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 www.tastesonway.com 🔗\n',
+        text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n',
         subject: 'Share Menu Image');
   }
+
+  Future addMenuImage(
+      List<Uint8List> pictures,
+      ) async {
+    dynamic token = await Sharedprefrences.getToken();
+
+    var headers = <String, String>{
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json'
+    }; // ignore this headers if there is no authentication
+    var url = '$baseUrl/add-image-menu-link';
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.fields['id'] = widget.imageMenuId.toString();
+
+    final documentDirectory = Platform.isAndroid
+        ? (await getExternalStorageDirectory()) //FOR ANDROID
+        : (await getApplicationSupportDirectory());
+    var newList = <http.MultipartFile>[];
+    print('pictures.length ${pictures.length}');
+    for (var i = 0; i < pictures.length; i++) {
+      // File imageFile = File(pictures[i].toString());
+
+      var imageFile =
+      await File('${documentDirectory!.path}/image_${widget.imageMenuId}$i.jpg')
+          .create();
+      imageFile.writeAsBytesSync(pictures[i].buffer.asUint8List());
+
+      var multipartFile =
+      await http.MultipartFile.fromPath("image_menu_link[]", imageFile.path);
+      newList.add(multipartFile);
+    }
+    print('image_menu_link  ${newList.length}');
+
+    request.files.addAll(newList);
+    request.headers.addAll(headers);
+    var streamResponse = await request.send();
+    http.Response response = await http.Response.fromStream(streamResponse);
+    // tempDir.deleteSync(recursive: true);
+    // return response;
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      await UpdateMenu(json['data'][0].toString());
+      print(json['data'][0].toString());
+      print(json['message']);
+
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      final json = jsonDecode(response.body);
+      print(json['message']);
+    }
+  }
+
+  Future<void> UpdateMenu(String imageLink) async {
+    imageMenuLink = imageLink;
+    debugPrint("this is menuid ${widget.imageMenuId}");
+    debugPrint("this is theme id $backgroundImageId");
+    String token = await getToken();
+    final response =
+    await http.post(Uri.parse('$baseUrl/create-or-update-menu'), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      'is_menu_completed':'1',
+      'id': '${widget.imageMenuId}',
+      "type": '2',
+      "theme_id": '$backgroundImageId'
+    });
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      //menuList = (json['data'][1]['data']);
+      print(json['message']);
+      return ScaffoldSnackbar.of(context).show(json['message']);
+
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      final json = jsonDecode(response.body);
+      return ScaffoldSnackbar.of(context).show(json['message']);
+      // print(json['message']);
+    }
+  }
+
 
   @override
   void initState() {
@@ -402,6 +497,9 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     return Scaffold(
       backgroundColor: backgroundColor(),
       appBar: AppBar(
+        leading:  BackButton(
+          onPressed:() => Navigator.popUntil(context, (route) => route.isFirst),
+        ),
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
@@ -525,107 +623,115 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                           ),
                           isProceed
                               ? Container()
-                              : Center(
+                              : const Center(
                                   child: CircularProgressIndicator(
                                     color: Colors.redAccent,
                                   ),
                                 ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.8,
-                              child: ListView(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0),
-                                    child: Text(
-                                      name,
-                                      style: TextStyle(
-                                        color: menuFontColor,
-                                        fontSize: 16,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15.0),
+                                      child: Text(
+                                        name,
+                                        style: TextStyle(
+                                          color: menuFontColor,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0),
-                                    child: Text(
-                                      "Dishes In The Menu",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: menuFontColor,
+                                    const SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15.0),
+                                      child: Text(
+                                        "Dishes In The Menu",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: menuFontColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Divider(
-                                      color: menuFontColor,
-                                      indent: 30,
-                                      endIndent: 30,
-                                      thickness: 2.0),
-                                  ListView.builder(
-                                      itemCount: menuList.length,
-                                      shrinkWrap: true,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      child: Image.network(
-                                                          menuList[index]
-                                                                  ['picture'] ??
-                                                              "",
-                                                          width: 50,
-                                                          height: 50,
-                                                          fit: BoxFit.cover)),
-                                                ),
-                                                Image.asset(
-                                                  './assets/images/veg.png',
-                                                  color: menuList[index]
-                                                              ['type'] ==
-                                                          'Non veg'
-                                                      ? Colors.red
-                                                      : Colors.green,
-                                                  height: 20,
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(10),
-                                              child: Text(
-                                                menuList[index]['name'] ?? "",
-                                                style: TextStyle(
-                                                  color: menuFontColor,
-                                                  fontSize: 14,
+                                    Divider(
+                                        color: menuFontColor,
+                                        indent: 30,
+                                        endIndent: 30,
+                                        thickness: 2.0),
+                                    ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: menuList.length,
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        child: Image.network(
+                                                            menuList[index][
+                                                                    'picture'] ??
+                                                                "",
+                                                            width: 50,
+                                                            height: 50,
+                                                            fit: BoxFit.cover)),
+                                                  ),
+                                                  Image.asset(
+                                                    './assets/images/veg.png',
+                                                    color: menuList[index]
+                                                                ['type'] ==
+                                                            'Non veg'
+                                                        ? Colors.red
+                                                        : Colors.green,
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(
+                                                  menuList[index]['name'] ?? "",
+                                                  style: TextStyle(
+                                                    color: menuFontColor,
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Text(
-                                                '₹ ${menuList[index]['amount']}' ??
-                                                    "",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: menuFontColor,
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(
+                                                  '₹ ${menuList[index]['amount']}' ??
+                                                      "",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: menuFontColor,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                ],
+                                            ],
+                                          );
+                                        }),
+                                  ],
+                                ),
                               )),
                         ],
                       ),
@@ -682,98 +788,108 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                           ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.8,
-                              child: ListView(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                    child: Text(
-                                      name,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: menuFontColor,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15.0),
+                                      child: Text(
+                                        name,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: menuFontColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                    child: Text(
-                                      "Dishes In The Menu",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: menuFontColor,
+                                    const SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15.0),
+                                      child: Text(
+                                        "Dishes In The Menu",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: menuFontColor,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Divider(
-                                      color: menuFontColor,
-                                      indent: 30,
-                                      endIndent: 30,
-                                      thickness: 2.0),
-                                  ListView.builder(
-                                      itemCount: menuList.length,
-                                      shrinkWrap: true,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          8),
-                                                      child: Image.network(
-                                                          menuList[index]
-                                                          ['picture'] ??
-                                                              "",
-                                                          width: 50,
-                                                          height: 50,
-                                                          fit: BoxFit.cover)),
-                                                ),
-                                                Image.asset(
-                                                  './assets/images/veg.png',
-                                                  color: menuList[index]
-                                                  ['type'] ==
-                                                      'Non veg'
-                                                      ? Colors.red
-                                                      : Colors.green,
-                                                  height: 20,
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(10),
-                                              child: Text(
-                                                menuList[index]['name'] ?? "",
-                                                style: TextStyle(
-                                                  color: menuFontColor,
-                                                  fontSize: 14,
+                                    Divider(
+                                        color: menuFontColor,
+                                        indent: 30,
+                                        endIndent: 30,
+                                        thickness: 2.0),
+                                    ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: menuList.length,
+                                        shrinkWrap: true,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        child: Image.network(
+                                                            menuList[index][
+                                                                    'picture'] ??
+                                                                "",
+                                                            width: 50,
+                                                            height: 50,
+                                                            fit: BoxFit.cover)),
+                                                  ),
+                                                  Image.asset(
+                                                    './assets/images/veg.png',
+                                                    color: menuList[index]
+                                                                ['type'] ==
+                                                            'Non veg'
+                                                        ? Colors.red
+                                                        : Colors.green,
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(
+                                                  menuList[index]['name'] ?? "",
+                                                  style: TextStyle(
+                                                    color: menuFontColor,
+                                                    fontSize: 14,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.all(10),
-                                              child: Text(
-                                                '₹ ${menuList[index]['amount']}' ??
-                                                    "",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: menuFontColor,
+                                              Container(
+                                                padding:
+                                                    const EdgeInsets.all(10),
+                                                child: Text(
+                                                  '₹ ${menuList[index]['amount']}' ??
+                                                      "",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: menuFontColor,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                ],
+                                            ],
+                                          );
+                                        }),
+                                  ],
+                                ),
                               ))
                         ],
                       ),
@@ -891,6 +1007,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                                 selectedBackgroundIndex = index;
                                                 backgroundImage =
                                                     image[index].picture;
+                                                backgroundImageId = int.parse(image[index].id);
                                                 menuFontColor =
                                                     await Utilities()
                                                         .menuTextColor(
@@ -990,10 +1107,44 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                 width: MediaQuery.of(context).size.width,
                 child: InkWell(
                   onTap: () async {
+                    print("imageMenuLink is $imageMenuLink");
                     var menuName = await Sharedprefrences.getMenuName();
                     if (isProceed) {
                       // share
-                      shareImages();
+                      dynamic id = await Sharedprefrences.getId();
+                      var fullName = await Sharedprefrences.getFullName();
+                      var profileImage = await Sharedprefrences.getProfilePic();
+                      var parameters = DynamicLinkParameters(
+                        uriPrefix: "https://tastesonway.page.link",
+                        link: Uri.parse(
+                            'https://www.tastesonway.com/welcome?menuId=${widget.imageMenuId}&buissnessownerId=$id&chefName=$menuName&profileImage=$profileImage'),
+                        navigationInfoParameters:
+                            const NavigationInfoParameters(
+                                forcedRedirectEnabled: true),
+                        androidParameters: const AndroidParameters(
+                          packageName: 'com.testing.tastesonway.ios.android',
+                        ),
+                        iosParameters: const IOSParameters(
+                            bundleId: 'com.testing.tastesonway.ios',
+                            appStoreId: '123456789',
+                            minimumVersion: '1.0.0'),
+                        socialMetaTagParameters: SocialMetaTagParameters(
+                            title: 'Tastes On Way',
+                            description: 'Menu by Chef $fullName',
+                            imageUrl: Uri.parse(imageMenuLink)),
+                      );
+                      // var dynamicUrl = await parameters.buildUrl();
+                      // var shortLink = await parameters.buildShortLink();
+                      // var shortUrl = shortLink.shortUrl;
+                      final ShortDynamicLink shortLink =
+                          await dynamicLinks.buildShortLink(parameters);
+                      // final ShortDynamicLink shortLink = await DynamicLinkParameters.shortenUrl(
+                      //     Uri.parse('https://example.page.link/?link=https://example.com/&apn=com.example.android&ibn=com.example.ios'),
+                      //     DynamicLinkParametersOptions(ShortDynamicLinkPathLength.unguessable),
+                      // );
+
+                      var shortUrl = shortLink.shortUrl;
+                      shareImages(shortUrl.toString());
                     } else {
                       isProceed = true;
                       setState(() {});
@@ -1009,27 +1160,27 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                       child: Align(
                         alignment: Alignment.center,
                         child: isProceed
-                            ?  Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              './assets/images/whatsapp.png',
-                              width: 24,
-                              height: 24,
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 15,
-                              ),
-                              child: Text(
-                                'key_Whatsapp'.tr,
-                                style: mTextStyle14(),
-                              ),
-                            ),
-                          ],
-                        )
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    './assets/images/whatsapp.png',
+                                    width: 24,
+                                    height: 24,
+                                    color: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                    ),
+                                    child: Text(
+                                      'key_Whatsapp'.tr,
+                                      style: mTextStyle14(),
+                                    ),
+                                  ),
+                                ],
+                              )
                             : Text(
                                 'key_Proceed'.tr,
                                 style: mTextStyle14(),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
+import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +22,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
   Future<void> Menu() async {
     String token = await getToken();
     int ownerId = await getOwnerId();
-    print('ownerid $ownerId');
+    // print('ownerid $ownerId');
     final response =
         await http.post(Uri.parse('$baseUrl/get-menu-item'), headers: {
       'Authorization': 'Bearer $token',
@@ -33,11 +34,36 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
       menuList = (json['data'][1]['data']);
-      print(menuList);
+      // print(menuList);
     } else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       print(json['message']);
+    }
+  }
+
+  Future<void> UpdateMenu() async {
+    debugPrint("this is menuid"+menuId.toString());
+    String token = await getToken();
+    final response =
+        await http.post(Uri.parse('$baseUrl/create-or-update-menu'), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+          'is_menu_completed':'1',
+      'id': menuId.toString(),
+          "type": '1'
+    });
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      //menuList = (json['data'][1]['data']);
+      print(json['message']);
+      return ScaffoldSnackbar.of(context).show(json['message']);
+
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      final json = jsonDecode(response.body);
+      return ScaffoldSnackbar.of(context).show(json['message']);
+      // print(json['message']);
     }
   }
 
@@ -56,7 +82,8 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
     Menu();
     final MenuIdController menuIdController = Get.find<MenuIdController>();
     menuId = menuIdController.menuId;
-    print("menuid $menuId");
+    // print("menuid $menuId");
+    UpdateMenu();
   }
 
   @override
@@ -64,11 +91,8 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
     return Scaffold(
         backgroundColor: backgroundColor(),
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.popUntil(context, (route) => route.isFirst);
-            },
+          leading:  BackButton(
+            onPressed:() => Navigator.popUntil(context, (route) => route.isFirst),
           ),
           elevation: 0,
           backgroundColor: backgroundColor(),

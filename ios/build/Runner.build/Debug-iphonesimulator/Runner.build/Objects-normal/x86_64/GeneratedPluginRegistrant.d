@@ -68,6 +68,13 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseAuth/FirebaseAuth.framework/Headers/FIRPhoneMultiFactorAssertion.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseAuth/FirebaseAuth.framework/Headers/FIRPhoneMultiFactorGenerator.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseAuth/FirebaseAuth.framework/Headers/FIRPhoneMultiFactorInfo.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FirebaseDynamicLinks-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FDLURLComponents.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FIRDynamicLink.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FIRDynamicLinks.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FIRDynamicLinksCommon.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FirebaseDynamicLinks.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Firebase/CoreOnly/Sources/Firebase.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Headers/firebase_core-umbrella.h \
@@ -81,6 +88,9 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/FLTPhoneNumberVerificationStreamHandler.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/CustomPigeonHeader.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_auth/firebase_auth.framework/Headers/messages.g.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Headers/FLTFirebaseDynamicLinksPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Headers/firebase_dynamic_links-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/InAppWebViewFlutterPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/flutter_inappwebview-umbrella.h \

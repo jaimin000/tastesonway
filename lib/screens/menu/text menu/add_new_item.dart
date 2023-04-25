@@ -7,8 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
 import 'create_text_menu2.dart';
-import 'menuIdController.dart';
 import 'package:http/http.dart' as http;
+import 'menuIdController.dart';
+
 
 class AddNewItem extends StatefulWidget {
   const AddNewItem({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
+
   bool _switchValue = true;
   int step = 1;
   final _formKey = GlobalKey<FormState>();
@@ -27,11 +29,11 @@ class _AddNewItemState extends State<AddNewItem> {
   late String description;
   late File _image;
   List toppingPrice = [];
-  List toppingName = [];
+  List toppingName=[];
   bool _isLoading = false;
   bool _imageSelected = false;
 
-  Widget topping() {
+  Widget topping(){
     return Column(
       children: [
         Row(
@@ -55,7 +57,7 @@ class _AddNewItemState extends State<AddNewItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_name'.tr;
                   }
                   return null;
                 },
@@ -82,7 +84,9 @@ class _AddNewItemState extends State<AddNewItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_price'.tr;
+                  }else if (!RegExp(r'^\d+(\.\d{1,2})?$').hasMatch(value)) {
+                    return 'key_Please_enter_the_valid_price_per_serving'.tr;
                   }
                   return null;
                 },
@@ -92,28 +96,21 @@ class _AddNewItemState extends State<AddNewItem> {
                 },
               ),
             ),
-            IconButton(
-              onPressed: removeToppingWidget,
-              icon: Icon(
-                Icons.delete,
-                color: orangeColor(),
-              ),
-            ),
+            IconButton(onPressed: removeToppingWidget, icon: Icon(Icons.delete,color: orangeColor(),),),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height:10),
       ],
     );
   }
 
-  List<Widget> Toppings = [];
-  void addToppingWidget() {
+  List<Widget>Toppings = [];
+  void addToppingWidget(){
     setState(() {
       Toppings.add(topping());
     });
   }
-
-  void removeToppingWidget() {
+  void removeToppingWidget(){
     setState(() {
       Toppings.removeAt(0);
     });
@@ -133,8 +130,8 @@ class _AddNewItemState extends State<AddNewItem> {
       _imageSelected = true;
       print(_image);
     });
-  }
 
+  }
   var menuId;
 
   //api call
@@ -143,12 +140,13 @@ class _AddNewItemState extends State<AddNewItem> {
     try {
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse('$localUrl/create-or-update-menu-item'),
+        Uri.parse(
+            '$baseUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '$menuId';
       request.fields['name'] = name;
-      request.fields['description'] = description;
+      request.fields['description']=description;
       request.fields['category_id'] = '1';
       request.fields['amount'] = price;
       request.fields['type'] = '$type';
@@ -206,12 +204,8 @@ class _AddNewItemState extends State<AddNewItem> {
           builder: (context) {
             return AlertDialog(
               backgroundColor: cardColor(),
-              title: Text(
-                'Error',
-                style: TextStyle(color: orangeColor()),
-              ),
-              content: Text(
-                  'Name Already Exists :\nPlease try again with different name'),
+              title: Text('Error',style: TextStyle(color: orangeColor()),),
+              content: Text('Name Already Exists :\nPlease try again with different name'),
               actions: [
                 ElevatedButton(
                   style: ButtonStyle(
@@ -265,408 +259,336 @@ class _AddNewItemState extends State<AddNewItem> {
     menuId = menuIdController.menuId;
     print(menuId);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor(),
+      appBar: AppBar(
+        elevation: 0,
         backgroundColor: backgroundColor(),
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: backgroundColor(),
-          title: Text(
-            'key_Add_New_Item'.tr,
-            style: cardTitleStyle20(),
-          ),
+        title: Text(
+          'key_Add_New_Item'.tr,
+          style: cardTitleStyle20(),
         ),
-        body: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(
-                  color: orangeColor(),
-                ),
-              )
-            : Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ListView(children: [
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "key_Create_Text_Menu".tr,
-                      style: mTextStyle20(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Card(
-                      shadowColor: Colors.black,
-                      color: cardColor(),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: SizedBox(
-                          // height: 630,
+      ),
+      body:_isLoading ?
+      Center(
+        child: CircularProgressIndicator(
+          color: orangeColor(),
+        ),
+      ) : Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                "key_Create_Text_Menu".tr,
+                style: mTextStyle20(),
+              ),
+            ),
+
+            const SizedBox(
+              height: 25,
+            ),
+            Card(
+              shadowColor: Colors.black,
+              color: cardColor(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: SizedBox(
+                // height: 630,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  margin: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          'key_Basic_Details'.tr,
+                          style: mTextStyle18(),
+                        ),
+
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                          // height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            style: const TextStyle(color: Colors.white),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_What_the_name_of_the_menu_item'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'key_Please_enter_the_name_of_the_menu_item'.tr;
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              name = value!;
+                              print("name : $name");
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          // height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            style: const TextStyle(color: Colors.white),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_What_the_price_per_serving'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'key_Please_enter_the_price_per_serving'.tr;
+                              }else if (!RegExp(r'^\d+(\.\d{1,2})?$').hasMatch(value)) {
+                                return 'key_Please_enter_the_valid_price_per_serving'.tr;
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              price = value!;
+                              print(price);
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 50,
                           width: MediaQuery.of(context).size.width,
                           child: Container(
-                              margin: const EdgeInsets.all(8),
-                              padding: const EdgeInsets.all(8),
-                              child: Form(
-                                  key: _formKey,
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          'key_Basic_Details'.tr,
-                                          style: mTextStyle18(),
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(37, 40, 48, 1),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: InkWell(
+                              onTap: (){
+                                _pickImage(ImageSource.gallery);
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      _imageSelected ? 'image.jpg' : 'key_Select_Item_Image'.tr,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.clip,
+                                      style: inputTextStyle16(),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Icon(
+                                      Icons.ios_share,
+                                      color: orangeColor(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(37, 40, 48, 1),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'key_Veg_Only'.tr,
+                                    textAlign: TextAlign.center,
+                                    style: inputTextStyle16(),
+                                  ),
+                                ),
+                                Transform.scale(
+                                  scale: 0.8,
+                                  child: CupertinoSwitch(
+                                      thumbColor: Colors.black,
+                                      activeColor: Colors.green,
+                                      value: _switchValue,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          _switchValue = value ?? false;
+                                          _switchValue?type = 1:type=2;
+                                          print(type);
+                                        });
+                                      }),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 90,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            style: const TextStyle(color: Colors.white),
+                            minLines: 3,
+                            maxLines: 5,
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_Add_Dish_Description'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'key_Please_enter_dish_description'.tr;
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              description = value!;
+                              print(description);
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'key_Extra_Topping'.tr,
+                              style: mTextStyle18(),
+                            ),
+                            InkWell(
+                                onTap: addToppingWidget,
+                                child: SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: const Color.fromRGBO(37, 40, 48, 1),
                                         ),
-                                        const SizedBox(height: 15),
-                                        Text(
-                                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                                          style: cTextStyle12(),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        SizedBox(
-                                          // height: 45,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: TextFormField(
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                            cursorColor: Colors.white,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.all(10.0),
-                                              fillColor: inputColor(),
-                                              filled: true,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  borderSide: BorderSide.none),
-                                              hintText: 'key_Name_your_menu'.tr,
-                                              hintStyle: inputTextStyle16(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return 'key_Please_enter_MenuName'
-                                                    .tr;
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              name = value!;
-                                              print("name : $name");
-                                            },
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          // height: 45,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: TextFormField(
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                            cursorColor: Colors.white,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.all(10.0),
-                                              fillColor: inputColor(),
-                                              filled: true,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  borderSide: BorderSide.none),
-                                              hintText:
-                                                  'key_What_the_price_per_serving'
-                                                      .tr,
-                                              hintStyle: inputTextStyle16(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return 'key_Please_enter_the_price_per_serving'
-                                                    .tr;
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              price = value!;
-                                              print(price);
-                                            },
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          height: 50,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  37, 40, 48, 1),
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: InkWell(
-                                              onTap: () {
-                                                _pickImage(ImageSource.gallery);
-                                              },
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      _imageSelected
-                                                          ? 'image.jpg'
-                                                          : 'key_Select_Item_Image'
-                                                              .tr,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                      style: inputTextStyle16(),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Icon(
-                                                      Icons.ios_share,
-                                                      color: orangeColor(),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                            height: 50,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: const Color.fromRGBO(
-                                                      37, 40, 48, 1),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Text(
-                                                          'key_Veg_Only'.tr,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style:
-                                                              inputTextStyle16(),
-                                                        ),
-                                                      ),
-                                                      Transform.scale(
-                                                          scale: 0.8,
-                                                          child:
-                                                              CupertinoSwitch(
-                                                                  thumbColor:
-                                                                      Colors
-                                                                          .black,
-                                                                  activeColor:
-                                                                      Colors
-                                                                          .green,
-                                                                  value:
-                                                                      _switchValue,
-                                                                  onChanged:
-                                                                      (bool?
-                                                                          value) {
-                                                                    setState(
-                                                                        () {
-                                                                      _switchValue =
-                                                                          value ??
-                                                                              false;
-                                                                      _switchValue
-                                                                          ? type =
-                                                                              1
-                                                                          : type =
-                                                                              2;
-                                                                      print(
-                                                                          type);
-                                                                    });
-                                                                  }))
-                                                    ]))),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          height: 90,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: TextFormField(
-                                            style: const TextStyle(
-                                                color: Colors.white),
-                                            minLines: 3,
-                                            maxLines: 5,
-                                            cursorColor: Colors.white,
-                                            decoration: InputDecoration(
-                                              contentPadding:
-                                                  const EdgeInsets.all(10.0),
-                                              fillColor: inputColor(),
-                                              filled: true,
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  borderSide: BorderSide.none),
-                                              hintText:
-                                                  'key_Add_Dish_Description'.tr,
-                                              hintStyle: inputTextStyle16(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return 'key_Please_enter_dish_description'
-                                                    .tr;
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              description = value!;
-                                              print(description);
-                                            },
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'key_Extra_Topping'.tr,
-                                              style: mTextStyle18(),
-                                            ),
-                                            InkWell(
-                                                onTap: addToppingWidget,
-                                                child: SizedBox(
-                                                    height: 30,
-                                                    width: 30,
-                                                    child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          color: const Color
-                                                                  .fromRGBO(
-                                                              37, 40, 48, 1),
-                                                        ),
-                                                        child: const Center(
-                                                            child: Text("+",
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 18,
-                                                                ))))))
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          height: Toppings.length * 70,
-                                          child: ListView.builder(
-                                              itemCount: Toppings.length,
-                                              itemBuilder: (context, index) {
-                                                return Toppings[index];
-                                              }),
-                                        ),
-                                        SizedBox(
-                                            height: 50,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            child: InkWell(
-                                                onTap: () async {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    _formKey.currentState
-                                                        ?.save();
+                                        child: const Center(
+                                            child: Text(
+                                                "+",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: Toppings.length * 70,
+                          child: ListView.builder(
+                              itemCount:Toppings.length,
+                              itemBuilder:(context,index){
+                                return Toppings[index];
+                              }),
+                        ),
+                        SizedBox(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: InkWell(
+                              onTap: ()async{
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState?.save();
 
-                                                    if (_imageSelected) {
-                                                      setState(() {
-                                                        _isLoading = true;
-                                                      });
-                                                      await CreateMenuItem();
-                                                      setState(() {
-                                                        _isLoading = false;
-                                                      });
-                                                      Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const CreateTextMenu2()),
-                                                      );
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                                  content: Text(
-                                                        'key_please_select_Image'
-                                                            .tr,
-                                                        style: const TextStyle(
-                                                            color: Colors.red),
-                                                      )));
-                                                    }
-                                                  }
-                                                },
-                                                child: Card(
-                                                    shadowColor: Colors.black,
-                                                    color: orangeColor(),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text(
-                                                          'key_Proceed'.tr,
-                                                          style: mTextStyle14(),
-                                                        )))))
-                                      ])))))
-                ])));
+                                  if(_imageSelected) {
+                                    setState(() {
+                                      _isLoading = true;
+                                    });
+                                    await CreateMenuItem();
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.pushReplacement(context,
+                                      MaterialPageRoute(builder: (
+                                          context) => const CreateTextMenu2()),);
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('key_please_select_Image'.tr,style: TextStyle(color: Colors.red),),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                              child: Card(
+                                  shadowColor: Colors.black,
+                                  color: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'key_Proceed'.tr,
+                                      style: mTextStyle14(),
+                                    ),
+                                  )),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

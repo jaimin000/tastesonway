@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
+import 'package:tastesonway/screens/orders/order_details.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/questions.dart';
@@ -14,11 +15,14 @@ import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/languages.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
+import 'package:url_launcher/link.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +31,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((value) => runApp(const MyApp()));
+  
   runApp(const MyApp());
 }
 
@@ -42,6 +47,28 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     getValidationData();
     super.initState();
+    initDynamicLinks();
+  }
+
+  Future<void> initDynamicLinks() async {
+    await Future.delayed(Duration(seconds: 3));
+    var data = await FirebaseDynamicLinks.instance.getInitialLink();
+    var deepLink = data?.link;
+    final queryParams = deepLink!.queryParameters;
+    if (queryParams.length > 0) {
+      var userName = queryParams['userId'];
+    }
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+      dynamicLinkData.link.data;
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetails()));
+      // if(dynamicLinkData != null) {
+      //   Navigator.push(context,
+      //       MaterialPageRoute(builder: (context) => const OrderDetails()));
+      // }
+    }).onError((error) {
+      print('onLink error');
+      print(error.message);
+    });
   }
 
   String? isUser;
@@ -66,8 +93,6 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: "Taste On Way",
             locale: snapshot.data,
-            //set the locale to the user's preference
-            // locale:Locale('gj','IN'),
             translations: Languages(),
             theme: ThemeData(
               primaryColor: orangeColor(),
@@ -82,19 +107,6 @@ class _MyAppState extends State<MyApp> {
         }
       },
     );
-
-    // return GetMaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     title: "Taste On Way",
-    //     locale: Sharedprefrences.getLanguagePreference(),
-    //     translations: Languages(),
-    //     theme: ThemeData(
-    //       primaryColor: orangeColor(),
-    //       brightness: Brightness.dark,
-    //       accentColor: orangeColor(),
-    //       fontFamily: 'Poppins',
-    //     ),
-    //     home: isUser == "null" ? const LanguageScreen() : const Home());
   }
 }
 
@@ -113,7 +125,7 @@ class _HomeState extends State<Home> {
   final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> fourthTabNavKey = GlobalKey<NavigatorState>();
   CupertinoTabController tabController = CupertinoTabController(initialIndex: 0);
-
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -143,11 +155,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final listOfKeys = [firstTabNavKey, secondTabNavKey, thirdTabNavKey,fourthTabNavKey];
-    List homeScreenList = [
-      Dashboard(),
-      YourMenus(),
-      Setting(),
-      Profile(),
+    final List<Widget> homeScreenList = [
+      const Dashboard(),
+      const YourMenus(),
+      const Setting(),
+      const Profile(),
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -175,27 +187,8 @@ class _HomeState extends State<Home> {
             ],
           ),
           tabBuilder: (context, index) {
-            // switch (index) {
-            //   case 0:
-            //     return CupertinoTabView(builder: (context) {
-            //       return const CupertinoPageScaffold(child: Dashboard());
-            //     });
-            //   case 1:
-            //     return CupertinoTabView(builder: (context) {
-            //       return const CupertinoPageScaffold(child: YourMenus());
-            //     });
-            //   case 2:
-            //     return CupertinoTabView(builder: (context) {
-            //       return const CupertinoPageScaffold(child: Setting());
-            //     });
-            //   case 3:
-            //     return CupertinoTabView(builder: (context) {
-            //       return const CupertinoPageScaffold(child: Profile());
-            //     });
-            // }
             return CupertinoTabView(
-              navigatorKey: listOfKeys[
-              index], //set navigatorKey here which was initialized before
+              navigatorKey: listOfKeys[index], //set navigatorKey here which was initialized before
               builder: (context) {
                 return homeScreenList[index];
               },
@@ -229,10 +222,5 @@ class _HomeState extends State<Home> {
       );
 }
 
-class MyBehavior extends ScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
-  }
-}
+
+

@@ -236,7 +236,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const AddNewItem()),
@@ -261,11 +261,6 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                               ),
                             ),
                           ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: cTextStyle12(),
                         ),
                         const SizedBox(
                           height: 10,
@@ -364,7 +359,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                       child: Center(
                                           child: CircularProgressIndicator(color: orangeColor())))
                                   : SizedBox(
-                                height: 300,
+                                height: MediaQuery.of(context).size.height*0.3,
                                     child: ListView.builder(
                                         itemCount: menuItemList.length,
                                         shrinkWrap: true,
@@ -440,50 +435,49 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                     ],
                                                   ),
                                                 ),
-                                                Stack(
-                                                  clipBehavior: Clip.none, children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      child: Image.network(
-                                                        menuItemList[index].image,
-                                                        height: 60,
-                                                        width: 65,
-                                                        fit: BoxFit.fill,
-                                                        errorBuilder:
-                                                            (BuildContext context,
-                                                                Object exception,
-                                                                StackTrace?
-                                                                    stackTrace) {
-                                                          return Image.asset(
-                                                            'assets/images/tea.jpg',
-                                                            height: 60,
-                                                            width: 65,
-                                                            fit: BoxFit.fill,
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      top: 45,
-                                                      right: 10,
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                         // final result = await
-                                                         Navigator.pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (context) => EditItem(
-                                                                      id: menuItemList[index].id,
-                                                                      menu_id: menuItemList[index].menu_id,
-                                                                      name:menuItemList[index].name,
-                                                                    type:menuItemList[index].type,
-                                                                    price:menuItemList[index].price,
-                                                                    description:menuItemList[index].description,
+                                                InkWell(
+                                                  onTap: (){
+                                                    Navigator.pushReplacement(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => EditItem(
+                                                          id: menuItemList[index].id,
+                                                          menu_id: menuItemList[index].menu_id,
+                                                          name:menuItemList[index].name,
+                                                          type:menuItemList[index].type.toString(),
+                                                          price:menuItemList[index].price,
+                                                          description:menuItemList[index].description,
 
-                                                                  ),),);
-                                                        },
+                                                        ),),);
+                                                  },
+                                                  child: Stack(
+                                                    clipBehavior: Clip.none, children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                        child: Image.network(
+                                                          menuItemList[index].image,
+                                                          height: 60,
+                                                          width: 65,
+                                                          fit: BoxFit.fill,
+                                                          errorBuilder:
+                                                              (BuildContext context,
+                                                                  Object exception,
+                                                                  StackTrace?
+                                                                      stackTrace) {
+                                                            return Image.asset(
+                                                              'assets/images/tea.jpg',
+                                                              height: 60,
+                                                              width: 65,
+                                                              fit: BoxFit.fill,
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                      Positioned(
+                                                        top: 45,
+                                                        right: 10,
                                                         child: Card(
                                                           shadowColor:
                                                               Colors.black,
@@ -510,8 +504,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),

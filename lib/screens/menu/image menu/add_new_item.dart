@@ -8,7 +8,6 @@ import 'package:tastesonway/apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
 import 'create_img_menu2.dart';
 import 'package:http/http.dart' as http;
-
 import 'imageMenuIdController.dart';
 
 
@@ -58,7 +57,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_name'.tr;
                   }
                   return null;
                 },
@@ -85,7 +84,9 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_price'.tr;
+                  }else if (!RegExp(r'^\d+(\.\d{1,2})?$').hasMatch(value)) {
+                    return 'key_Please_enter_the_valid_price_per_serving'.tr;
                   }
                   return null;
                 },
@@ -315,11 +316,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                           'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
-                        const SizedBox(height: 15),
-                        Text(
-                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: cTextStyle12(),
-                        ),
+
                         const SizedBox(
                           height: 15,
                         ),
@@ -336,12 +333,12 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
-                              hintText: 'key_Name_your_menu'.tr,
+                              hintText: 'key_What_the_name_of_the_menu_item'.tr,
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'key_Please_enter_MenuName'.tr;
+                                return 'key_Please_enter_the_name_of_the_menu_item'.tr;
                               }
                               return null;
                             },
@@ -373,6 +370,8 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_the_price_per_serving'.tr;
+                              }else if (!RegExp(r'^\d+(\.\d{1,2})?$').hasMatch(value)) {
+                                return 'key_Please_enter_the_valid_price_per_serving'.tr;
                               }
                               return null;
                             },

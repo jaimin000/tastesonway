@@ -206,11 +206,6 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                           'key_Basic_Details'.tr,
                           style: mTextStyle18(),
                         ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: cTextStyle12(),
-                        ),
                         const SizedBox(
                           height: 10,
                         ),

@@ -75,7 +75,7 @@ class BankingDetails extends StatelessWidget {
                         endIndent: 5,
                       ),
                       Text(
-                        'lorem ipsum',
+                        'Bank Details',
                         style: cTextStyle16(),
                       ),
 
@@ -133,10 +133,9 @@ class BankingDetails extends StatelessWidget {
                         endIndent: 5,
                       ),
                       Text(
-                        'lorem ipsum ',
+                        'Bank Details',
                         style: cTextStyle16(),
                       ),
-
                     ],
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
@@ -102,15 +103,6 @@ class Profile extends StatelessWidget {
                 ),
               ),
               Container(
-                color: const Color.fromRGBO(39, 42, 50, 1),
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                  textAlign: TextAlign.center,
-                  style: cTextStyle12(),
-                ),
-              ),
-              Container(
                 padding: const EdgeInsets.all(10),
                 color: const Color.fromRGBO(39, 42, 50, 1),
                 child: Row(
@@ -169,11 +161,14 @@ class Profile extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const CreateDiscountCoupon()));
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => CreateDiscountCoupon()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             const CreateDiscountCoupon()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -200,10 +195,13 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MyWebsite()));
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => MyWebsite()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const MyWebsite()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -230,11 +228,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Fssai()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => Fssai()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const Fssai()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -261,11 +262,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const BankingDetails()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => BankingDetails()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const BankingDetails()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -292,11 +296,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ReceivedOrders()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => ReceivedOrders()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const ReceivedOrders()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -323,11 +330,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MenuItems()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => MenuItems()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const MenuItems()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -354,11 +364,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MenuDesign()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => MenuDesign()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const MenuDesign()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -385,11 +398,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Tutorials()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => Tutorials()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => Tutorials()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -445,11 +461,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactUs()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => ContactUs()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => ContactUs()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -476,10 +495,13 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const FAQ()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => FAQ()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => const FAQ()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -505,11 +527,14 @@ class Profile extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Setting()),
-                        );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => Setting()));
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const Setting()),
+                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,

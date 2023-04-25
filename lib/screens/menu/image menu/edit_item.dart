@@ -43,12 +43,16 @@ class _EditImgItemState extends State<EditImgItem> {
   final TextEditingController descriptioncontroller = TextEditingController();
   final TextEditingController toppingNamecontroller = TextEditingController();
   final TextEditingController toppingPricecontroller = TextEditingController();
-  int type = 1;
+  int type =1;
   late File _image;
   List toppingPrice = [];
   List toppingName=[];
   bool _isLoading = false;
   bool _imageEdit = false;
+
+  isVeg(){
+    widget.type == "Veg"?_switchValue=true:_switchValue=false;
+  }
 
   Widget topping(){
     return Column(
@@ -75,7 +79,7 @@ class _EditImgItemState extends State<EditImgItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_name'.tr;
                   }
                   return null;
                 },
@@ -103,7 +107,7 @@ class _EditImgItemState extends State<EditImgItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_price'.tr;
                   }
                   return null;
                 },
@@ -155,7 +159,7 @@ class _EditImgItemState extends State<EditImgItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$localUrl/create-or-update-menu-item'),
+            '$baseUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '${widget.menu_id}';
@@ -275,6 +279,7 @@ class _EditImgItemState extends State<EditImgItem> {
   @override
   void initState() {
     super.initState();
+    isVeg();
     namecontroller.text = widget.name;
     pricecontroller.text = widget.price.toString();
     descriptioncontroller.text = widget.description;
@@ -351,11 +356,6 @@ class _EditImgItemState extends State<EditImgItem> {
                         Text(
                           'key_Basic_Details'.tr,
                           style: mTextStyle18(),
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: cTextStyle12(),
                         ),
                         const SizedBox(
                           height: 15,
@@ -483,6 +483,7 @@ class _EditImgItemState extends State<EditImgItem> {
                                       value: _switchValue,
                                       onChanged: (bool? value) {
                                         setState(() {
+                                          print(widget.type);
                                           _switchValue = value ?? false;
                                           _switchValue?type = 1:type=2;
                                           print(type);

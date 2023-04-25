@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
+import '../text menu/create_text_menu2.dart';
 import 'create_text_menu2.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,7 +43,7 @@ class _EditItemState extends State<EditItem> {
   final TextEditingController descriptioncontroller = TextEditingController();
   final TextEditingController toppingNamecontroller = TextEditingController();
   final TextEditingController toppingPricecontroller = TextEditingController();
-  int type = 1;
+  int type =1;
   late File _image;
   List toppingPrice = [];
   List toppingName=[];
@@ -74,7 +75,7 @@ class _EditItemState extends State<EditItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_name'.tr;
                   }
                   return null;
                 },
@@ -102,7 +103,7 @@ class _EditItemState extends State<EditItem> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'key_Please_enter_item_name_and_price'.tr;
+                    return 'key_Please_enter_item_price'.tr;
                   }
                   return null;
                 },
@@ -154,7 +155,7 @@ class _EditItemState extends State<EditItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$localUrl/create-or-update-menu-item'),
+            '$baseUrl/create-or-update-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_id'] = '${widget.menu_id}';
@@ -258,7 +259,7 @@ class _EditItemState extends State<EditItem> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '$localUrl/delete-menu-item'),
+            '$baseUrl/delete-menu-item'),
       );
       request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
       request.fields['menu_item_id'] = '${widget.id}';
@@ -350,11 +351,6 @@ class _EditItemState extends State<EditItem> {
                         Text(
                           'key_Basic_Details'.tr,
                           style: mTextStyle18(),
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          'Lorem ipsum is simply dummy text of the printing and typesetting industry.',
-                          style: cTextStyle12(),
                         ),
                         const SizedBox(
                           height: 15,

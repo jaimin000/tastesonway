@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
@@ -50,10 +51,13 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Profile()),
-                );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => Profile()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const Profile()),
+                // );
               },
               child: const CircleAvatar(
                 backgroundImage:
@@ -131,11 +135,14 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const YourOrders()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const YourOrders()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => YourOrders()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -161,11 +168,14 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const YourMenus()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const YourMenus()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => YourMenus()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -223,11 +233,14 @@ class _DashboardState extends State<Dashboard> {
                   Text("key_Your_Menus".tr, style: mTextStyle20()),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const YourMenus()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const YourMenus()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) =>const YourMenus()));
                     },
                     child: Row(
                       children: [
@@ -257,11 +270,14 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CreateTextMenu()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const CreateTextMenu()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => CreateTextMenu()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -292,11 +308,14 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CreateImgMenu()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const CreateImgMenu()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => CreateImgMenu()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -408,10 +427,13 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ReceivedOrders()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const ReceivedOrders()),
+                // );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => ReceivedOrders()));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -421,11 +443,14 @@ class _DashboardState extends State<Dashboard> {
                     Text("key_Your_Orders".tr, style: mTextStyle20()),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const YourOrders()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const YourOrders()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => YourOrders()));
                       },
                       child: Row(
                         children: [
@@ -461,11 +486,14 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const YourOrders()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const YourOrders()),
+                          // );
+                          Navigator.of(context, rootNavigator: true).push(
+                              CupertinoPageRoute(
+                                  builder: (BuildContext context) => YourOrders()));
                         },
                         child: Container(
                           width: 300,
@@ -491,11 +519,14 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ReceivedOrders()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const ReceivedOrders()),
+                        // );
+                        Navigator.of(context, rootNavigator: true).push(
+                            CupertinoPageRoute(
+                                builder: (BuildContext context) => ReceivedOrders()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -613,11 +644,14 @@ class _DashboardState extends State<Dashboard> {
                   Text('key_Earning_Summary'.tr, style: mTextStyle20()),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EarningSummary()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const EarningSummary()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => EarningSummary()));
                     },
                     child: Row(
                       children: [
@@ -640,11 +674,9 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const EarningSummary()),
-                );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => EarningSummary()));
               },
               child: SizedBox(
                 height: 130,

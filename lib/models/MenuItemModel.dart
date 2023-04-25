@@ -7,20 +7,20 @@ class MenuItemModel {
   String type;
   String description;
   bool isChecked;
-  String  toppingName;
-  // List <String> toppingPrice;
+  String toppingName;
+  String toppingPrice;
 
   MenuItemModel({
     this.id=0,
     this.menu_id=0,
     this.description="",
     this.name="empty",
-    this.type="Veg",
+    this.type="",
     this.price=0,
     this.image="",
     this.isChecked=false,
     this.toppingName="",
-    // required this.toppingPrice
+    this.toppingPrice="",
   });
 
 }

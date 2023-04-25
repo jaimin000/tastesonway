@@ -46,6 +46,13 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRPhoneMultiFactorAssertion.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRPhoneMultiFactorGenerator.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRPhoneMultiFactorInfo.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FirebaseDynamicLinks.h \
+  /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseDynamicLinks.build/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FirebaseDynamicLinks/FirebaseDynamicLinks-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FDLURLComponents.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLink.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLinks.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLinksCommon.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_core.build/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
