@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/bank/banking_details.dart';
@@ -10,29 +9,33 @@ import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
 
 class UPIDetails extends StatefulWidget {
+  final id;
   final upiId;
-
-  const UPIDetails(this.upiId);
+  const UPIDetails(this.id,this.upiId);
   @override
   State<UPIDetails> createState() => _UPIDetailsState();
 }
 
 class _UPIDetailsState extends State<UPIDetails> {
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController upiIdController = TextEditingController();
-  bool showDetails = true;
+  bool showDetails = false;
 
 Future setUpi() async {
-    String token = await Sharedprefrences.getToken();
+  isLoading = true;
+  String token = await Sharedprefrences.getToken();
     final response = await http.post(
       Uri.parse("$baseUrl/add-or-update-kitchen-owner-bank-details"),
       headers: {'Authorization': 'Bearer $token'},
       body:{
+        "id":"${widget.id}",
         "upi_id":upiIdController.text,
         "transaction_type":"2"
       }
     );
     if (response.statusCode == 200) {
+      isLoading = false;
       final jsonData = json.decode(response.body);
       var profileData = jsonData['message'];
       debugPrint(profileData);
@@ -40,13 +43,17 @@ Future setUpi() async {
       setState(() {
       });
     } else {
+      isLoading = false;
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context).show('Something Went Wrong Please try again!');
+      setState(() {
+      });
     }
   }
 
   @override
   void initState() {
+    widget.upiId == ""?showDetails=false:showDetails=true;
     upiIdController.text = widget.upiId;
     super.initState();
   }
@@ -79,7 +86,9 @@ Future setUpi() async {
           style: cardTitleStyle20(),
         ),
       ),
-      body: Container(
+      body: isLoading?
+          Center(child: CircularProgressIndicator(color:orangeColor()),)
+          :Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Form(
           key: _formKey,
@@ -154,11 +163,12 @@ Future setUpi() async {
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState?.save();
+                                  isLoading=true;
+                                  setState(() {
+                                  });
                                   await setUpi();
                                   Get.off(() => const BankingDetails());
-                                  return Future.value(true);
-                                  // Navigator.pushReplacement(context,
-                                  //     MaterialPageRoute(builder: (context) => BankingDetails()));
+                                   return Future.value(true);
                                 }
                               },
                               child: Card(

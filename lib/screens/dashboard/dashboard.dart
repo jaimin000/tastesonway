@@ -99,7 +99,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => Profile()));
+                        builder: (BuildContext context) => const Profile()));
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => const Profile()),
@@ -188,7 +188,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => YourOrders()));
+                                builder: (BuildContext context) => const YourOrders()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -221,7 +221,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => YourMenus()));
+                                builder: (BuildContext context) => const YourMenus()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -323,7 +323,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => CreateTextMenu()));
+                                builder: (BuildContext context) => const CreateTextMenu()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -361,7 +361,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => CreateImgMenu()));
+                                builder: (BuildContext context) => const CreateImgMenu()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -479,7 +479,7 @@ class _DashboardState extends State<Dashboard> {
                 // );
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => ReceivedOrders()));
+                        builder: (BuildContext context) => const ReceivedOrders()));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -496,7 +496,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => YourOrders()));
+                                builder: (BuildContext context) => const YourOrders()));
                       },
                       child: Row(
                         children: [
@@ -539,7 +539,7 @@ class _DashboardState extends State<Dashboard> {
                           // );
                           Navigator.of(context, rootNavigator: true).push(
                               CupertinoPageRoute(
-                                  builder: (BuildContext context) => YourOrders()));
+                                  builder: (BuildContext context) => const YourOrders()));
                         },
                         child: Container(
                           width: 300,
@@ -572,7 +572,7 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => ReceivedOrders()));
+                                builder: (BuildContext context) => const ReceivedOrders()));
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -697,7 +697,7 @@ class _DashboardState extends State<Dashboard> {
                       // );
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => EarningSummary()));
+                              builder: (BuildContext context) => const EarningSummary()));
                     },
                     child: Row(
                       children: [
@@ -722,7 +722,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => EarningSummary()));
+                        builder: (BuildContext context) => const EarningSummary()));
               },
               child: SizedBox(
                 height: 130,

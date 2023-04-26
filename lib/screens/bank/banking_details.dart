@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/bank/bank_details.dart';
 import 'package:tastesonway/screens/bank/upi_details.dart';
 import 'package:tastesonway/utils/theme_data.dart';
-
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 
@@ -17,22 +16,39 @@ class BankingDetails extends StatefulWidget {
 }
 
 class _BankingDetailsState extends State<BankingDetails> {
-  String upiId="";
+  int id = 0;
+  String upiId = "";
+  String bankName = "";
+  String bankHolderName = "";
+  String bankAccNumber = "";
+  String bankIfsc = "";
 
   Future getBankDetails() async {
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse("$baseUrl/get-kitchen-owner-bank-detail"),
-      headers: {'Authorization': 'Bearer $token',
+      headers: {
+        'Authorization': 'Bearer $token',
       },
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       var bankData = jsonData['data'][0];
-      upiId = bankData['upi_id'];
-      print(upiId);
-      setState(() {
-      });
+      id = bankData['id']== 0 ?'':bankData['id'];
+      upiId = bankData['upi_id'].toString()=="null"?'':bankData['upi_id'];
+      bankName =
+          bankData['bank_name'].toString()=="null" ? '' : bankData['bank_name'];
+      bankHolderName = bankData['account_holder_name'].toString()=="null"
+          ? ''
+          : bankData['account_holder_name'];
+      bankAccNumber = bankData['bank_acc_number'].toString()=="null"
+          ? ''
+          : bankData['bank_acc_number'];
+      bankIfsc = bankData['bank_ifsc_code'].toString()=="null"
+          ? ''
+          : bankData['bank_ifsc_code'];
+      print(id);
+      setState(() {});
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -51,7 +67,6 @@ class _BankingDetailsState extends State<BankingDetails> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
-
         title: Text(
           'key_Bank_Details'.tr,
           style: cardTitleStyle20(),
@@ -63,14 +78,14 @@ class _BankingDetailsState extends State<BankingDetails> {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
-
-            const SizedBox(height:25),
+            const SizedBox(height: 25),
             InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => BankDetails()),
+                      builder: (context) => BankDetails(
+                         id,bankName, bankHolderName, bankAccNumber, bankIfsc)),
                 );
               },
               child: Card(
@@ -106,28 +121,28 @@ class _BankingDetailsState extends State<BankingDetails> {
                           ),
                         ],
                       ),
-                      const Divider(color: Colors.white,
-                        height:25,
+                      const Divider(
+                        color: Colors.white,
+                        height: 25,
                         indent: 5,
                         endIndent: 5,
                       ),
                       Text(
-                        'Bank Details',
+                        bankAccNumber == ""
+                            ? 'Bank Details'
+                            : "$bankAccNumber  ✅",
                         style: cTextStyle16(),
                       ),
-
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height:10),
+            const SizedBox(height: 10),
             InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => UPIDetails(upiId)));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UPIDetails(id,upiId)));
               },
               child: Card(
                 shadowColor: Colors.black,
@@ -163,13 +178,16 @@ class _BankingDetailsState extends State<BankingDetails> {
                           ),
                         ],
                       ),
-                      const Divider(color: Colors.white,
-                        height:25,
+                      const Divider(
+                        color: Colors.white,
+                        height: 25,
                         indent: 5,
                         endIndent: 5,
                       ),
                       Text(
-                        "$upiId   ✅" ?? 'Bank Details',
+                        upiId == ""
+                            ? 'Bank Details'
+                            : "$upiId  ✅",
                         style: cTextStyle16(),
                       ),
                     ],
