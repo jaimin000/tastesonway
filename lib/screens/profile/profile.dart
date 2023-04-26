@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,11 +15,46 @@ import 'package:tastesonway/screens/menu/my_menu_design.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
 import '../tutorials/tutorials.dart';
 import '../bank/banking_details.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
+
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String name ="";
+  String profile ="";
+
+  Future fetchData() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.get(
+      Uri.parse("$baseUrl/get-kitchen-owner-profile"),
+      headers: {'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      setState(() {
+        var profileData = jsonData['data'];
+        name = profileData['name'];
+        profile = profileData['avatar'];
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +113,11 @@ class Profile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Positioned(
+                         Positioned(
                           top: 70,
                           right: 70,
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
+                            backgroundImage: NetworkImage(profile),
                             radius: 80,
                           ),
                         ),
@@ -97,7 +132,7 @@ class Profile extends StatelessWidget {
               Container(
                 color: const Color.fromRGBO(39, 42, 50, 1),
                 child: Text(
-                  'Shania Fraser (ENG)',
+                  name,
                   textAlign: TextAlign.center,
                   style: mTextStyle20(),
                 ),

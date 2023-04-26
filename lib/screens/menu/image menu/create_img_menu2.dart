@@ -41,9 +41,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
       body: {'business_owner_id': '$ownerId'},
     );
     if (response.statusCode == 200) {
-      setState(() {
-        isLoading = false;
-      });
+      isLoading = false;
       final json = jsonDecode(response.body);
       menuData = json['data'][1]['data'];
       for (int i = 0; i < menuData.length; i++) {

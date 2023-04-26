@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
@@ -9,9 +11,10 @@ import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
+import '../../utils/sharedpreferences.dart';
 import '../../utils/theme_data.dart';
 import '../menu/image menu/create_img_menu1.dart';
-import '../menu/image menu/create_img_menu3.dart';
+import 'package:http/http.dart' as http;
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -21,6 +24,49 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  int totalMenu = 0;
+  int totalMenuItem = 0;
+  int theme = 0;
+  int todayOrder = 0;
+  int tommorrowOrder = 0;
+  int laterOrder = 0;
+  int earningWeek = 0;
+  int earningMonth = 0;
+  int earningSummary = 0;
+
+  Future fetchData() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.get(
+        Uri.parse("$baseUrl/kitchen-owner-dashboard"),
+        headers: {'Authorization': 'Bearer $token',
+        },
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      setState(() {
+        var dashboardData = jsonData['data'];
+        print(dashboardData);
+        totalMenu = dashboardData['total_menus'];
+         totalMenuItem = dashboardData['total_menu_items'];
+         theme = dashboardData['total_theme'];
+         todayOrder = dashboardData['total_today_order'];
+         tommorrowOrder = dashboardData['total_tomorrow_order'];
+         laterOrder = dashboardData['total_later_date'];
+         earningWeek = dashboardData['total_earning_summary_of_week'];
+         earningMonth = dashboardData['total_earning_summary_of_month'];
+         earningSummary = dashboardData['total_earning_summary'];
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -370,7 +416,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('0', style: cTextStyle36()),
+                              Text("$totalMenu", style: cTextStyle36()),
                               Text(
                                 'key_Your_Menus'.tr,
                                 style: cTextStyle18(),
@@ -390,7 +436,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle36()),
+                              Text("$totalMenuItem", style: cTextStyle36()),
                               Text(
                                 'key_Items_In_Menu'.tr,
                                 style: cTextStyle18(),
@@ -410,7 +456,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle36()),
+                              Text('$theme', style: cTextStyle36()),
                               Text(
                                 'key_My_Menu_Designs'.tr,
                                 style: cTextStyle18(),
@@ -581,7 +627,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('0', style: cTextStyle36()),
+                              Text('$todayOrder', style: cTextStyle36()),
                               Text(
                                 'key_Today'.tr,
                                 style: cTextStyle18(),
@@ -601,9 +647,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle36()),
+                              Text('$tommorrowOrder', style: cTextStyle36()),
                               Text(
-                                'key_Yesterday'.tr,
+                                'key_Tomorrow'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -621,7 +667,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('2', style: cTextStyle36()),
+                              Text('$laterOrder', style: cTextStyle36()),
                               Text(
                                 'key_Later'.tr,
                                 style: cTextStyle18(),
@@ -762,14 +808,14 @@ class _DashboardState extends State<Dashboard> {
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       child: SizedBox(
-                          width: 220,
+                          width: 250,
                           height: 100,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹100', style: cTextStyle36()),
+                              Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
                               Text(
-                                'key_week'.tr,
+                                'key_This_Week'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
@@ -787,9 +833,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹200', style: cTextStyle36()),
+                              Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
                               Text(
-                                'key_month'.tr,
+                                'key_This_Month'.tr,
                                 style: cTextStyle18(),
                                 overflow: TextOverflow.ellipsis,
                               )
@@ -808,9 +854,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹200', style: cTextStyle36()),
+                              Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
                               Text(
-                                'key_last_month'.tr,
+                                'key_Total'.tr,
                                 style: cTextStyle18(),
                                 overflow: TextOverflow.clip,
                               )

@@ -23,10 +23,10 @@ class _AddNewItemState extends State<AddNewItem> {
   bool _switchValue = true;
   int step = 1;
   final _formKey = GlobalKey<FormState>();
-  late String name;
-  late String price;
+   String name="";
+   String price="";
   int type = 1;
-  late String description;
+  String description="";
   late File _image;
   List toppingPrice = [];
   List toppingName=[];

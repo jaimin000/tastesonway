@@ -1,11 +1,48 @@
+import 'dart:convert';
+import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/bank/bank_details.dart';
 import 'package:tastesonway/screens/bank/upi_details.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
-class BankingDetails extends StatelessWidget {
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
+
+class BankingDetails extends StatefulWidget {
   const BankingDetails({Key? key}) : super(key: key);
+
+  @override
+  State<BankingDetails> createState() => _BankingDetailsState();
+}
+
+class _BankingDetailsState extends State<BankingDetails> {
+  String upiId="";
+
+  Future getBankDetails() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.get(
+      Uri.parse("$baseUrl/get-kitchen-owner-bank-detail"),
+      headers: {'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      var bankData = jsonData['data'][0];
+      upiId = bankData['upi_id'];
+      print(upiId);
+      setState(() {
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  @override
+  void initState() {
+    getBankDetails();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +70,7 @@ class BankingDetails extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const BankDetails()),
+                      builder: (context) => BankDetails()),
                 );
               },
               child: Card(
@@ -90,8 +127,7 @@ class BankingDetails extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const UPIDetails()),
-                );
+                      builder: (context) => UPIDetails(upiId)));
               },
               child: Card(
                 shadowColor: Colors.black,
@@ -133,7 +169,7 @@ class BankingDetails extends StatelessWidget {
                         endIndent: 5,
                       ),
                       Text(
-                        'Bank Details',
+                        "$upiId   ✅" ?? 'Bank Details',
                         style: cTextStyle16(),
                       ),
                     ],

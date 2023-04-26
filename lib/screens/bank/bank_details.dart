@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
+import 'package:http/http.dart'as http;
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
+import 'dart:convert';
 
-class BankDetails extends StatelessWidget {
-  const BankDetails({Key? key}) : super(key: key);
+class BankDetails extends StatefulWidget {
+  @override
+  State<BankDetails> createState() => _BankDetailsState();
+}
+
+class _BankDetailsState extends State<BankDetails> {
+
 
   @override
   Widget build(BuildContext context) {

@@ -20,19 +20,16 @@ class CreateTextMenu2 extends StatefulWidget {
 class _CreateTextMenu2State extends State<CreateTextMenu2> {
   bool _checkAll = false;
   bool isPermanentMenu = true;
-  bool isLoading = false;
+  bool isLoading = true;
   List<MenuItemModel> menuItemList = [];
   late List<dynamic> menuData = [];
   late int menuId;
   List<String> menuItemId = [];
-  final List<int> myList = [53, 54];
+  // final List<int> myList = [53, 54];
 
   Future<void> getMenu() async {
     String token = await getToken();
     int ownerId = await getOwnerId();
-    setState(() {
-      isLoading = true;
-    });
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
@@ -41,9 +38,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       body: {'business_owner_id': '$ownerId'},
     );
     if (response.statusCode == 200) {
-      setState(() {
-        isLoading = false;
-      });
+      isLoading = false;
       final json = jsonDecode(response.body);
       menuData = json['data'][1]['data'];
       for (int i = 0; i < menuData.length; i++) {
@@ -66,7 +61,10 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       });
     }
     else {
+      isLoading = false;
       print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+      });
     }
   }
 
@@ -105,7 +103,6 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   @override
   void initState() {
     super.initState();
-    isLoading = false;
     getMenu();
     final MenuIdController menuIdController = Get.find<MenuIdController>();
     menuId = menuIdController.menuId;

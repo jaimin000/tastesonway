@@ -1082,12 +1082,12 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                                                     index
                                                                 ? orangeColor()
                                                                 : menuFontColor,
-                                                            child: const Center(
+                                                            child:  Center(
                                                                 child: Text(
-                                                                    //image[index]['name'],
-                                                                    'test',
+                                                                    image[index].name??
+                                                                        'test',
                                                                     style:
-                                                                        TextStyle(
+                                                                        const TextStyle(
                                                                       fontSize:
                                                                           12,
                                                                       color: Colors
