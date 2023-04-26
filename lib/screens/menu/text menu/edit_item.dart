@@ -146,9 +146,7 @@ class _EditItemState extends State<EditItem> {
 
   //api call
   Future UpdateMenuItem() async {
-
-    print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
-
+    // print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
     String token = await getToken();
     print(token);
     try {
@@ -575,7 +573,7 @@ class _EditItemState extends State<EditItem> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
+                                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
                                 }
                               },
                               child: Card(

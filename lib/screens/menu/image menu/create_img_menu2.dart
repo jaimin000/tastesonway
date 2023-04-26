@@ -234,7 +234,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                             ),
                             InkWell(
                               onTap: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const AddNewImgItem()),
@@ -469,7 +469,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                                 child: InkWell(
                                                   onTap: () async {
                                                     // final result = await
-                                                    Navigator.pushReplacement(
+                                                    Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) => EditImgItem(
@@ -479,7 +479,6 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                                           price:menuItemList[index].price,
                                                           type:menuItemList[index].type.toString(),
                                                           description:menuItemList[index].description,
-
                                                         ),),);
                                                   },
                                                   child: Card(
@@ -526,7 +525,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                         InkWell(
                           onTap: () async{
                             await AddMultipleMenuId();
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => CreateImgMenu3(imageMenuId:menuId)));

@@ -434,7 +434,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                 ),
                                                 InkWell(
                                                   onTap: (){
-                                                    Navigator.pushReplacement(
+                                                    Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) => EditItem(
@@ -519,7 +519,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                         InkWell(
                           onTap: () async{
                              await AddMultipleMenuId();
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const CreateTextMenu3()));
