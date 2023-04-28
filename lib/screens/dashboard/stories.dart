@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -225,9 +226,10 @@ class _StoriesState extends State<Stories> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        CircularProgressIndicator(
+                        SpinKitFadingCircle(
                           color: orangeColor(),
-                          strokeWidth: 3.0,
+                          size: 3.0,
+                          //strokeWidth: 3.0,
                         ),
                         const SizedBox(height: 10.0),
                         Text(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
@@ -68,7 +69,7 @@ class _MenuItemsState extends State<MenuItems> {
           ),
         ),
         body: _isLoading? Center(
-          child: CircularProgressIndicator(
+          child: SpinKitFadingCircle(
             color: orangeColor(),
           ),
         ) :Container(

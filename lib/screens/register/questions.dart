@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/hearAboutModel.dart';
@@ -245,7 +246,7 @@ class _QuestionsState extends State<Questions> {
               isLoading
                   ? LimitedBox(
                 maxHeight: 50,
-                    child: CircularProgressIndicator(
+                    child: SpinKitFadingCircle(
                         color: orangeColor(),
                       ),
                   )

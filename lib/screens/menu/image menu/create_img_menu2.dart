@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/models/MenuItemModel.dart';
@@ -360,7 +361,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                   ?  SizedBox(
                                   height: 150,
                                   child: Center(
-                                      child: CircularProgressIndicator(color: orangeColor(),)))
+                                      child: SpinKitFadingCircle(color: orangeColor(),)))
                                   : SizedBox(
                                 height: 300,
                                 child: ListView.builder(

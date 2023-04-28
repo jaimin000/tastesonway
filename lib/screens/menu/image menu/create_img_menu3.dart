@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tastesonway/main.dart';
@@ -589,7 +590,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                             color: backgroundColor(),
                             child: _isLoading
                                 ? Center(
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitFadingCircle(
                                         color: orangeColor()),
                                   )
                                 : Image.network(
@@ -624,7 +625,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                           isProceed
                               ? Container()
                               : const Center(
-                                  child: CircularProgressIndicator(
+                                  child: SpinKitFadingCircle(
                                     color: Colors.redAccent,
                                   ),
                                 ),
@@ -754,7 +755,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                             color: backgroundColor(),
                             child: _isLoading
                                 ? Center(
-                                    child: CircularProgressIndicator(
+                                    child: SpinKitFadingCircle(
                                         color: orangeColor()),
                                   )
                                 : Image.network(
@@ -931,7 +932,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                       height: 50,
                       child: _isLoading
                           ? Center(
-                              child: CircularProgressIndicator(
+                              child: SpinKitFadingCircle(
                                 color: orangeColor(),
                               ),
                             )

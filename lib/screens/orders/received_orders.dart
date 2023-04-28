@@ -123,10 +123,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
                 right: 120,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const OrderDetails()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                    // );
                   },
                   child: SizedBox(
                     height: 35,
@@ -253,10 +253,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               right: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OrderDetails()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                  // );
                 },
                 child: SizedBox(
                   height: 35,
@@ -387,10 +387,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               right: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OrderDetails()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                  // );
                 },
                 child: SizedBox(
                   height: 35,
@@ -517,10 +517,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               right: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OrderDetails()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                  // );
                 },
                 child: SizedBox(
                   height: 35,
@@ -651,10 +651,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               right: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OrderDetails()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                  // );
                 },
                 child: SizedBox(
                   height: 35,
@@ -781,10 +781,10 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
               right: 120,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const OrderDetails()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const OrderDetails()),
+                  // );
                 },
                 child: SizedBox(
                   height: 35,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -151,7 +152,7 @@ class _AddressPageState extends State<AddressPage> {
                 children: [
                   _isLoading
                       ? Center(
-                          child: CircularProgressIndicator(
+                          child: SpinKitFadingCircle(
                           color: orangeColor(),
                         ))
                       : GoogleMap(

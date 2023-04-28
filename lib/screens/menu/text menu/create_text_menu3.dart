@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import '../../../utils/snackbar.dart';
@@ -106,7 +107,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: CircularProgressIndicator(
+                  child: SpinKitFadingCircle(
                     color: Colors.redAccent,
                   ),
                 );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 import '../../apiServices/api_service.dart';
@@ -141,7 +142,7 @@ class _MenuDesignState extends State<MenuDesign> {
                   width: MediaQuery.of(context).size.width,
                   child: _isLoading
                       ?  Center(
-                        child: CircularProgressIndicator(
+                        child: SpinKitFadingCircle(
                     color: orangeColor(),
                   ),
                       )
@@ -192,7 +193,7 @@ class _MenuDesignState extends State<MenuDesign> {
                       //                           return child;
                       //                         return Center(
                       //                           child:
-                      //                           CircularProgressIndicator(
+                      //                           SpinKitFadingCircle(
                       //                             color:
                       //                             orangeColor(),
                       //                             value: loadingProgress

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -74,7 +75,7 @@ class _FssaiState extends State<Fssai> {
         },
         gestureNavigationEnabled: true,
       ),
-          _isLoading?Center(child: CircularProgressIndicator(
+          _isLoading?Center(child: SpinKitFadingCircle(
             color: orangeColor(),
           )):Stack(),
         ],

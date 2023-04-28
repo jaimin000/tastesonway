@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/bank/banking_details.dart';
 import 'package:tastesonway/utils/theme_data.dart';
@@ -87,7 +88,7 @@ Future setUpi() async {
         ),
       ),
       body: isLoading?
-          Center(child: CircularProgressIndicator(color:orangeColor()),)
+          Center(child: SpinKitFadingCircle(color:orangeColor()),)
           :Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Form(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
@@ -60,7 +61,6 @@ class _MyAppState extends State<MyApp> {
     }
     FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
       dynamicLinkData.link.data;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderDetails()));
       // if(dynamicLinkData != null) {
       //   Navigator.push(context,
       //       MaterialPageRoute(builder: (context) => const OrderDetails()));
@@ -103,7 +103,7 @@ class _MyAppState extends State<MyApp> {
             home: isUser == "null" ? const LanguageScreen() : const Home(),
           );
         } else {
-          return const CircularProgressIndicator();
+          return SpinKitFadingCircle();
         }
       },
     );

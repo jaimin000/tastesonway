@@ -45,7 +45,7 @@ class _DashboardState extends State<Dashboard> {
       final jsonData = json.decode(response.body);
       setState(() {
         var dashboardData = jsonData['data'];
-        print(dashboardData);
+        //print(dashboardData);
         totalMenu = dashboardData['total_menus'];
          totalMenuItem = dashboardData['total_menu_items'];
          theme = dashboardData['total_theme'];

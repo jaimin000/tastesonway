@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -490,7 +491,7 @@ class _SignupState extends State<Signup> {
                       child: Container(
                         color: Colors.transparent,
                         child: Center(
-                            child: CircularProgressIndicator(
+                            child: SpinKitFadingCircle(
                           color: orangeColor(),
                         )),
                       ),
