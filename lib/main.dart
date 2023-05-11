@@ -51,13 +51,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initDynamicLinks() async {
-    await Future.delayed(Duration(seconds: 3));
-    var data = await FirebaseDynamicLinks.instance.getInitialLink();
-    var deepLink = data?.link;
-    final queryParams = deepLink!.queryParameters;
-    if (queryParams.length > 0) {
-      var userName = queryParams['userId'];
-    }
+    // await Future.delayed(Duration(seconds: 3));
+    // var data = await FirebaseDynamicLinks.instance.getInitialLink();
+    // var deepLink = data?.link;
+    // final queryParams = deepLink!.queryParameters;
+    // if (queryParams.isNotEmpty) {
+    //   var userName = queryParams['userId'];
+    // }
+
     FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
       dynamicLinkData.link.data;
       // if(dynamicLinkData != null) {
