@@ -10,8 +10,6 @@ import '../../utils/snackbar.dart';
 import '../../utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import 'package:blinking_text/blinking_text.dart';
-
 import '../../utils/timer.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -34,15 +32,36 @@ class _OrderDetailsState extends State<OrderDetails>
   double _selectedMinutes = 1;
   bool timeOut = false;
   int _countdownSeconds = 00;
+  Timer? _fetchTimer;
   Timer? _timer;
   int secondsLeft = 300;
   bool isTimeoutFinished = false;
   late AnimationController _animationController;
 
+  StreamController<String> _orderDetailsStreamController =
+      StreamController<String>();
+
+  Stream<String> get orderDetailsStream => _orderDetailsStreamController.stream;
+
   String getFormatedDate(String date) {
     var tempDate = DateFormat("MMM dd, yyyy hh:mm:ss a").parse(date);
 
     return DateFormat('dd-MM-yyyy').format(tempDate);
+  }
+
+  void startFetchingOrderDetails() {
+    // Cancel the previous timer if it's active
+    _fetchTimer?.cancel();
+
+    // Start a new timer to fetch data every 5 seconds
+    _fetchTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+      fetchOrderDetails();
+    });
+  }
+
+  void stopFetchingOrderDetails() {
+    // Cancel the timer when it's no longer needed
+    _fetchTimer?.cancel();
   }
 
   Future<void> fetchOrderDetails({
@@ -61,16 +80,17 @@ class _OrderDetailsState extends State<OrderDetails>
     if (response.statusCode == 200) {
       isLoading = false;
       final jsonData = json.decode(response.body);
-      setState(() {
-        orderData = jsonData['data'];
-      });
+      orderData = jsonData['data'];
+      _orderDetailsStreamController.add(json.encode(orderData));
+
+      // setState(() {
+      //   orderData = jsonData['data'];
+      // });
       if (orderData['order_status'].toString() == 'Pending') {
         isShowAcceptButton = true;
         isShowPreparingButton = false;
         isShowDeliveredOrderButton = false;
-        setState(() {
-          isLoading = false;
-        });
+        isLoading = false;
         if (isFromAcceptButton) {
           // await updateOrderStatus(orderID, '2',
           //     preparationTime: preparationTime);
@@ -81,38 +101,30 @@ class _OrderDetailsState extends State<OrderDetails>
                   orderData['order_preparing_time'].toString());
           startCountdown();
           await acceptOrder();
-          setState(() {});
         } else if (isFromCancelButton) {
           // deleteconfirmationDialog(
           //   context,
           // );
           isLoading = false;
           showCancelConfirmationDialog(context);
-          setState(() {});
         }
       } else if (orderData['order_status'].toString() == 'Cancelled') {
         isShowAcceptButton = false;
         isShowPreparingButton = false;
         isShowDeliveredOrderButton = false;
         if (mounted) {
-          setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
         }
         if (isFromAcceptButton || isFromCancelButton) {
           showOrderCancelledDialog();
-          setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
         }
       } else if (orderData['order_status'].toString() == 'Accepted') {
         isShowAcceptButton = false;
         isShowPreparingButton = false;
         isShowDeliveredOrderButton = false;
         if (mounted) {
-          setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
         }
       } else if (orderData['order_status'].toString() == 'Preparing') {
         isShowAcceptButton = false;
@@ -122,14 +134,10 @@ class _OrderDetailsState extends State<OrderDetails>
         //     orderData['order_preparing_time'].toString());
         _countdownSeconds = calculateRemainingMinutes(
             orderData['order_preparing_time'].toString());
-        setState(() {
-          isLoading = false;
-        });
+        isLoading = false;
         if (isFromPreparingButton) {
-          setState(() {
-            isLoading = true;
-            isShowPreparingButton = false;
-          });
+          isLoading = true;
+          isShowPreparingButton = false;
           // sendOTP(orderID);
           preparedOrder();
           // await updateOrderStatus(orderID, '8',
@@ -146,14 +154,10 @@ class _OrderDetailsState extends State<OrderDetails>
 
         verificationId = orderData['otp_verification_id'].toString();
         if (mounted) {
-          setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
         }
         if (isFromDeliveryButton) {
-          setState(() {
-            isShowDeliveredOrderButton = false;
-          });
+          isShowDeliveredOrderButton = false;
 
           //   updateOrderStatus(orderID, "5");
         }
@@ -162,9 +166,7 @@ class _OrderDetailsState extends State<OrderDetails>
         isShowPreparingButton = false;
         isShowDeliveredOrderButton = false;
         if (mounted) {
-          setState(() {
-            isLoading = false;
-          });
+          isLoading = false;
         }
       }
       // print("orderData $orderData");
@@ -173,166 +175,139 @@ class _OrderDetailsState extends State<OrderDetails>
       ScaffoldSnackbar.of(context)
           .show('Something Went Wrong Please Try Again!');
       print('Request failed with status: ${response.statusCode}.');
-      setState(() {});
     }
   }
 
   //api
+
   Future<void> acceptOrder() async {
     String token = await Sharedprefrences.getToken();
-    try {
-      final response = await http.post(
-        Uri.parse("$baseUrl/update-order-status"),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-        body: {
-          "order_id": widget.id.toString(),
-          "order_status": "2",
-          "order_preparing_time": "${_selectedMinutes.toInt()}",
-        },
-      );
-      // print(widget.id);
-      print(response.body);
-      if (response.statusCode == 200) {
-        setState(() {
-          isLoading = false;
-
-        });
-        final jsonData = json.decode(response.body);
-        orderData = jsonData['data'];
-        ScaffoldSnackbar.of(context).show('Order Accepted');
-        print(jsonData);
-        fetchOrderDetails(
-            isFromAcceptButton: true);
-        setState(() {});
-        //print("orderData $orderData");
-      } else {
-        isLoading = false;
-        ScaffoldSnackbar.of(context)
-            .show('Something Went Wrong Please Try Again!');
-        print('Request failed with status: ${response.statusCode}.');
-        setState(() {});
-      }
-    } catch (error) {
+    Map<String, dynamic> bodyData = {
+      "order_id": widget.id.toString(),
+      "order_status": "2",
+      "order_preparing_time": _selectedMinutes.toInt().toString(),
+    };
+    final response = await http.post(
+      Uri.parse("$baseUrl/update-order-status"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        "Content-Type": "application/json",
+        'accept': 'application/json',
+      },
+      body: jsonEncode(bodyData),
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
       isLoading = false;
-      print('Request failed with error: $error');
+      final jsonData = json.decode(response.body);
+      ScaffoldSnackbar.of(context).show('Order Accepted Successfully');
+      fetchOrderDetails(isFromCancelButton: true);
+      setState(() {});
+    } else {
+      isLoading = false;
+      print('Request failed with status: ${response.statusCode}.');
+      ScaffoldSnackbar.of(context)
+          .show('Something Went Wrong Please Try Again!');
       setState(() {});
     }
   }
 
   Future<void> cancelOrder() async {
     String token = await Sharedprefrences.getToken();
-    try {
-      final response = await http.post(
-        Uri.parse("$baseUrl/update-order-status"),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-        body: {"order_id": widget.id.toString(), "order_status": "6"},
-      );
-      // print(widget.id);
-      print(response.body);
-      if (response.statusCode == 200) {
-        isLoading = false;
-        final jsonData = json.decode(response.body);
-
-        orderData = jsonData['data'];
-
-        print(jsonData);
-        fetchOrderDetails(isFromCancelButton:true);
-        setState(() {});
-        //print("orderData $orderData");
-      } else {
-        isLoading = false;
-        print('Request failed with status: ${response.statusCode}.');
-        ScaffoldSnackbar.of(context)
-            .show('Something Went Wrong Please Try Again!');
-        setState(() {});
-      }
-    } catch (error) {
+    Map<String, dynamic> bodyData = {
+      "order_id": widget.id.toString(),
+      "order_status": "6"
+    };
+    final response = await http.post(
+      Uri.parse("$baseUrl/update-order-status"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        "Content-Type": "application/json",
+        'accept': 'application/json',
+      },
+      body: jsonEncode(bodyData),
+    );
+    // print(widget.id);
+    print(response.body);
+    if (response.statusCode == 200) {
       isLoading = false;
-      print('Request failed with error: $error');
+      final jsonData = json.decode(response.body);
+
+      print(jsonData);
+      ScaffoldSnackbar.of(context).show(jsonData['message']);
+      fetchOrderDetails(isFromCancelButton: true);
+      setState(() {});
+      //print("orderData $orderData");
+    } else {
+      isLoading = false;
+      print('Request failed with status: ${response.statusCode}.');
+      ScaffoldSnackbar.of(context)
+          .show('Something Went Wrong Please Try Again!');
       setState(() {});
     }
   }
 
   Future<void> preparedOrder() async {
     String token = await Sharedprefrences.getToken();
-    try {
-      final response = await http.post(
-        Uri.parse("$baseUrl/update-order-status"),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-        body: {
-          "order_id": widget.id.toString(),
-          "order_status": "8",
-          'otp_verification_id': verificationId
-        },
-      );
-      // print(widget.id);
-      print(response.body);
-      if (response.statusCode == 200) {
-        isLoading = false;
-        final jsonData = json.decode(response.body);
-        orderData = jsonData['data'];
-        print(jsonData);
-        fetchOrderDetails();
-        setState(() {});
-        //print("orderData $orderData");
-      } else {
-        isLoading = false;
-        print('Request failed with status: ${response.statusCode}.');
-        ScaffoldSnackbar.of(context)
-            .show('Something Went Wrong Please Try Again!');
-        setState(() {});
-      }
-    } catch (error) {
+    Map<String, dynamic> bodyData = {
+      "order_id": widget.id.toString(),
+      "order_status": "8",
+      'otp_verification_id': verificationId
+    };
+    final response = await http.post(
+      Uri.parse("$baseUrl/update-order-status"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        "Content-Type": "application/json",
+        'accept': 'application/json',
+      },
+      body: jsonEncode(bodyData),
+    );
+    // print(widget.id);
+    print(response.body);
+    if (response.statusCode == 200) {
       isLoading = false;
-      print('Request failed with error: $error');
+      final jsonData = json.decode(response.body);
+      fetchOrderDetails(isFromCancelButton: true);
+      setState(() {});
+      //print("orderData $orderData");
+    } else {
+      isLoading = false;
+      print('Request failed with status: ${response.statusCode}.');
+      ScaffoldSnackbar.of(context)
+          .show('Something Went Wrong Please Try Again!');
       setState(() {});
     }
   }
 
   Future<void> verifyOtp(String otp) async {
     String token = await Sharedprefrences.getToken();
-    try {
-      final response = await http.post(
-        Uri.parse("$baseUrl/delivery-person-status-update"),
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-        body: {
-          "order_id": widget.id.toString(),
-          "delivery_person_order_status": "3",
-          "owner_otp": otp
-        },
-      );
-      // print(widget.id);
-      // print(response.body);
-      if (response.statusCode == 200) {
-        setState(() {
-          isLoading = false;
-
-        });
-        final jsonData = json.decode(response.body);
-        orderData = jsonData['message'];
-        print("this is orderdata $orderData");
-        await fetchOrderDetails(isFromDeliveryButton: true);
-        setState(() {});
-        //ScaffoldSnackbar.of(context).show(jsonData['message']);
-        //print("orderData $orderData");
-      } else {
+    final response = await http.post(
+      Uri.parse("$baseUrl/delivery-person-status-update"),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      body: {
+        "order_id": widget.id.toString(),
+        "delivery_person_order_status": "3",
+        "owner_otp": otp
+      },
+    );
+    // print(widget.id);
+    // print(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
         isLoading = false;
-        print('Request failed with status: ${response.statusCode}.');
-        ScaffoldSnackbar.of(context)
-            .show('Something Went Wrong Please Try Again!');
-        setState(() {});
-      }
-    } catch (error) {
+      });
+      final jsonData = json.decode(response.body);
+      print(response.body);
+      await fetchOrderDetails(isFromDeliveryButton: true);
+      setState(() {});
+    } else {
       isLoading = false;
-      print('Request failed with error: $error');
+      print('Request failed with status: ${response.statusCode}.');
+      ScaffoldSnackbar.of(context)
+          .show('Something Went Wrong Please Try Again!');
       setState(() {});
     }
   }
@@ -342,8 +317,8 @@ class _OrderDetailsState extends State<OrderDetails>
       //this right here
       child: Container(
         height: 150,
-        color: backgroundColor(),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: backgroundColor(),
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
@@ -401,7 +376,7 @@ class _OrderDetailsState extends State<OrderDetails>
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                //Navigator.pop(context,"true");
                 setState(() {}); // Close the dialog
               },
               child: Text(
@@ -602,13 +577,12 @@ class _OrderDetailsState extends State<OrderDetails>
     final remainingTime = apiTime.difference(currentTime);
     final remainingMinutes = remainingTime.inSeconds;
 
-    print(remainingMinutes);
     return remainingMinutes < 0 ? 0 : remainingMinutes;
   }
 
   @override
   void initState() {
-    fetchOrderDetails();
+    startFetchingOrderDetails();
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 1));
     _animationController.forward();
@@ -616,714 +590,1470 @@ class _OrderDetailsState extends State<OrderDetails>
   }
 
   @override
+  void dispose() {
+    stopFetchingOrderDetails();
+    _orderDetailsStreamController.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor(),
-      appBar: AppBar(
-        elevation: 0,
         backgroundColor: backgroundColor(),
-        title: Text(
-          'Order Details',
-          style: cardTitleStyle20(),
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+              onPressed: () async {
+                return Navigator.pop(context, "true");
+              }),
+          backgroundColor: backgroundColor(),
+          title: Text(
+            'Order Details',
+            style: cardTitleStyle20(),
+          ),
         ),
-      ),
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-              color: orangeColor(),
-            ))
-          : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        Column(
+        // body:
+        // isLoading
+        //     ? Center(
+        //         child: CircularProgressIndicator(
+        //         color: orangeColor(),
+        //       ))
+        //     : Container(
+        //         padding: const EdgeInsets.symmetric(horizontal: 10),
+        //         child: Column(
+        //           children: [
+        //             Expanded(
+        //               child: ListView(
+        //                 children: [
+        //                   Column(
+        //                     children: [
+        //                       SizedBox(
+        //                           child: Card(
+        //                               shadowColor: Colors.black,
+        //                               color: const Color.fromRGBO(64, 68, 81, 1),
+        //                               shape: RoundedRectangleBorder(
+        //                                 borderRadius: BorderRadius.circular(15.0),
+        //                               ),
+        //                               child: Padding(
+        //                                   padding: const EdgeInsets.all(10.0),
+        //                                   child: Column(
+        //                                       mainAxisAlignment:
+        //                                           MainAxisAlignment.start,
+        //                                       children: [
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Your Order',
+        //                                                 style: mTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 orderData['order_status']
+        //                                                     .toString(),
+        //                                                 style: cardTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         const Divider(
+        //                                           height: 20,
+        //                                           color: Colors.white,
+        //                                           indent: 10,
+        //                                           endIndent: 10,
+        //                                         ),
+        //                                         Align(
+        //                                             alignment:
+        //                                                 Alignment.centerLeft,
+        //                                             child: Padding(
+        //                                               padding: const EdgeInsets
+        //                                                       .symmetric(
+        //                                                   horizontal: 7.0),
+        //                                               child: Text(
+        //                                                 orderData['order_detail']
+        //                                                         [0]['menu_items']
+        //                                                     [0]['name'],
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             )),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 '${orderData['order_detail'][0]['quantity']} X ₹ ' +
+        //                                                     orderData['order_detail']
+        //                                                                 [0]
+        //                                                             ['item_price']
+        //                                                         .toString(),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 '₹ ' +
+        //                                                     orderData['order_detail']
+        //                                                                 [0]
+        //                                                             ['item_price']
+        //                                                         .toString(),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         const Divider(
+        //                                           height: 20,
+        //                                           color: Colors.white,
+        //                                           indent: 10,
+        //                                           endIndent: 10,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Item Total',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 '₹ ' +
+        //                                                     orderData['order_detail']
+        //                                                                 [0]
+        //                                                             ['item_price']
+        //                                                         .toString(),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Discount',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 orderData['coupon']
+        //                                                             .toString() ==
+        //                                                         'null'
+        //                                                     ? '₹ 0'
+        //                                                     : '₹ ' +
+        //                                                         orderData[
+        //                                                                 'coupon_amount']
+        //                                                             .toString(),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         const Divider(
+        //                                           height: 20,
+        //                                           color: Colors.white,
+        //                                           indent: 10,
+        //                                           endIndent: 10,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'You will get',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 orderData['order_earning_summary']
+        //                                                             .toString() ==
+        //                                                         "null"
+        //                                                     ? ""
+        //                                                     : "₹ " +
+        //                                                         orderData['order_earning_summary']
+        //                                                                 [
+        //                                                                 'owner_earning_amount']
+        //                                                             .toString(),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         const Divider(
+        //                                           height: 20,
+        //                                           color: Colors.white,
+        //                                           indent: 10,
+        //                                           endIndent: 10,
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Align(
+        //                                             alignment:
+        //                                                 Alignment.centerLeft,
+        //                                             child: Padding(
+        //                                               padding: const EdgeInsets
+        //                                                       .symmetric(
+        //                                                   horizontal: 8.0),
+        //                                               child: Text(
+        //                                                 "Order Details",
+        //                                                 style: mTextStyle16(),
+        //                                               ),
+        //                                             )),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Divider(
+        //                                           thickness: 1,
+        //                                           height: 20,
+        //                                           color: orangeColor(),
+        //                                           indent: 10,
+        //                                           endIndent: 10,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Order Number',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 orderData['order_no'],
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Payment Type',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 'Bank',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Date',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 getFormatedDate(orderData[
+        //                                                     'created_at']),
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Phone No.',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               Text(
+        //                                                 orderData['user']
+        //                                                     ['mobile_number'],
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                         Padding(
+        //                                           padding:
+        //                                               const EdgeInsets.symmetric(
+        //                                                   horizontal: 8.0),
+        //                                           child: Row(
+        //                                             mainAxisAlignment:
+        //                                                 MainAxisAlignment
+        //                                                     .spaceBetween,
+        //                                             crossAxisAlignment:
+        //                                                 CrossAxisAlignment.center,
+        //                                             children: [
+        //                                               Text(
+        //                                                 'Deliver To',
+        //                                                 style: cTextStyle16(),
+        //                                               ),
+        //                                               SizedBox(
+        //                                                 width: 200,
+        //                                                 child: Text(
+        //                                                   '${orderData['user_address']['address'] + ' ' + orderData['user_address']['area'] + ' ' + orderData['user_address']['city']['name'] + ' ' + orderData['user_address']['pin_code']}',
+        //                                                   textAlign:
+        //                                                       TextAlign.right,
+        //                                                   maxLines: 5,
+        //                                                   overflow: TextOverflow
+        //                                                       .ellipsis,
+        //                                                   style: cTextStyle16(),
+        //                                                 ),
+        //                                               ),
+        //                                             ],
+        //                                           ),
+        //                                         ),
+        //                                         const SizedBox(
+        //                                           height: 5,
+        //                                         ),
+        //                                       ])))),
+        //                       const SizedBox(height: 25),
+        //                       SizedBox(
+        //                           height: 50,
+        //                           width: MediaQuery.of(context).size.width,
+        //                           child: InkWell(
+        //                             onTap: () async {
+        //                               final phoneNumber =
+        //                                   orderData['user']['mobile_number'];
+        //                               final Uri launchUri = Uri(
+        //                                 scheme: 'tel',
+        //                                 path: phoneNumber,
+        //                               );
+        //                               await launchUrl(launchUri);
+        //                             },
+        //                             child: Card(
+        //                                 shadowColor: Colors.black,
+        //                                 color: orangeColor(),
+        //                                 shape: RoundedRectangleBorder(
+        //                                   borderRadius:
+        //                                       BorderRadius.circular(10.0),
+        //                                 ),
+        //                                 child: Align(
+        //                                   alignment: Alignment.center,
+        //                                   child: Text(
+        //                                     'Call to ${orderData['user']['name']} (' +
+        //                                         orderData['user']
+        //                                             ['mobile_number'] +
+        //                                         ')',
+        //                                     style: mTextStyle14(),
+        //                                   ),
+        //                                 )),
+        //                           )),
+        //                       const SizedBox(
+        //                         height: 10,
+        //                       ),
+        //                       // isShowPreparingButton
+        //                       //     ? FadeTransition(
+        //                       //         opacity: _animationController,
+        //                       //         child: Container(
+        //                       //             height: 90,
+        //                       //             child: Padding(
+        //                       //                 padding: EdgeInsets.only(
+        //                       //                     left: 20,
+        //                       //                     right: 20,
+        //                       //                     bottom: 20,
+        //                       //                     top: 20),
+        //                       //                 child: Container(
+        //                       //                     height: 40,
+        //                       //                     // width: MediaQuery.of(context).size.width / 2,
+        //                       //                     decoration: BoxDecoration(
+        //                       //                         color: isTimeoutFinished
+        //                       //                             ? Colors.red
+        //                       //                             : Colors.green,
+        //                       //                         borderRadius:
+        //                       //                             BorderRadius.all(
+        //                       //                                 Radius.circular(
+        //                       //                                     10)),
+        //                       //                         border: Border.all(
+        //                       //                             color: isTimeoutFinished
+        //                       //                                 ? Colors.red
+        //                       //                                 : Colors.green)),
+        //                       //                     child: ElevatedButton(
+        //                       //                         onPressed: () async {
+        //                       //                           if (isTimeoutFinished) {
+        //                       //                             var orderList =
+        //                       //                                 orderData[
+        //                       //                                         'order_detail']
+        //                       //                                     as List;
+        //                       //                             setState(() {
+        //                       //                               isShowPreparingButton =
+        //                       //                                   false;
+        //                       //                             });
+        //                       //                             await fetchOrderDetails(
+        //                       //                                 isFromPreparingButton:
+        //                       //                                     true);
+        //                       //                           }
+        //                       //                         },
+        //                       //                         child: Row(
+        //                       //                           mainAxisAlignment:
+        //                       //                               MainAxisAlignment
+        //                       //                                   .center,
+        //                       //                           children: [
+        //                       //                             Text(
+        //                       //                               'key_Order_Ready'.tr,
+        //                       //                               style: const TextStyle(
+        //                       //                                   color:
+        //                       //                                       Colors.white,
+        //                       //                                   fontSize: 20,
+        //                       //                                   fontFamily:
+        //                       //                                       'Roboto',
+        //                       //                                   fontWeight:
+        //                       //                                       FontWeight
+        //                       //                                           .w700),
+        //                       //                             ),
+        //                       //                           ],
+        //                       //                         ))))))
+        //                       isShowDeliveredOrderButton
+        //                           ? SizedBox(
+        //                               height: 50,
+        //                               width: MediaQuery.of(context).size.width,
+        //                               child: InkWell(
+        //                                   onTap: () async {
+        //                                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+        //                                     // await preparedOrder();
+        //                                     viewVerifyOTPSheet(context);
+        //                                     setState(() {});
+        //                                   },
+        //                                   child: Card(
+        //                                       shadowColor: Colors.black,
+        //                                       color: Colors.green,
+        //                                       shape: RoundedRectangleBorder(
+        //                                         borderRadius:
+        //                                             BorderRadius.circular(10.0),
+        //                                       ),
+        //                                       child: Align(
+        //                                         alignment: Alignment.center,
+        //                                         child: Text(
+        //                                           'key_order_has_picked'.tr,
+        //                                           style: mTextStyle16(),
+        //                                         ),
+        //                                       ))))
+        //                           : SizedBox(),
+        //                       isShowPreparingButton
+        //                           ? SizedBox(
+        //                               height: 50,
+        //                               width: MediaQuery.of(context).size.width,
+        //                               child: InkWell(
+        //                                   onTap: () async {
+        //                                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+        //                                     // await preparedOrder();
+        //                                     fetchOrderDetails(
+        //                                         isFromPreparingButton: true);
+        //                                     setState(() {});
+        //                                   },
+        //                                   child: Card(
+        //                                       shadowColor: Colors.black,
+        //                                       color: orangeColor(),
+        //                                       shape: RoundedRectangleBorder(
+        //                                         borderRadius:
+        //                                             BorderRadius.circular(10.0),
+        //                                       ),
+        //                                       child: Align(
+        //                                         alignment: Alignment.center,
+        //                                         child: isShowPreparingButton
+        //                                             ? Row(
+        //                                                 mainAxisAlignment:
+        //                                                     MainAxisAlignment
+        //                                                         .center,
+        //                                                 crossAxisAlignment:
+        //                                                     CrossAxisAlignment
+        //                                                         .center,
+        //                                                 children: [
+        //                                                   Text(
+        //                                                     'key_Order_Ready'.tr,
+        //                                                     style: mTextStyle16(),
+        //                                                   ),
+        //                                                   SizedBox(
+        //                                                     width: 15,
+        //                                                   ),
+        //                                                   TimerWidget(
+        //                                                     //minutes: minutesFromApiResponse,
+        //                                                     minutes:
+        //                                                         calculateRemainingMinutes(
+        //                                                             orderData[
+        //                                                                 'order_preparing_time']),
+        //                                                   ),
+        //                                                 ],
+        //                                               )
+        //                                             // ? BlinkText(
+        //                                             //     'key_Order_Ready'.tr +
+        //                                             //         "   " +
+        //                                             //         formatDuration(
+        //                                             //             _countdownSeconds),
+        //                                             //     style: mTextStyle16(),
+        //                                             //     endColor: orangeColor(),
+        //                                             //   )
+        //                                             : Text(
+        //                                                 'key_Order_Ready'.tr +
+        //                                                     "   " +
+        //                                                     formatDuration(
+        //                                                         _countdownSeconds),
+        //                                                 style: mTextStyle16(),
+        //                                               ),
+        //                                       ))))
+        //                           : SizedBox(),
+        //                       const SizedBox(height: 15),
+        //                     ],
+        //                   ),
+        //                   const SizedBox(
+        //                     height: 10,
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //             isShowAcceptButton
+        //                 ? Align(
+        //                     alignment: Alignment.bottomCenter,
+        //                     child: Container(
+        //                         width: double.infinity,
+        //                         padding: EdgeInsets.all(10.0),
+        //                         decoration: BoxDecoration(
+        //                           color: cardColor(),
+        //                           borderRadius: const BorderRadius.only(
+        //                             topLeft: Radius.circular(20),
+        //                             topRight: Radius.circular(20),
+        //                           ),
+        //                         ),
+        //                         child: Column(children: [
+        //                           Align(
+        //                             alignment: Alignment.centerLeft,
+        //                             child: Padding(
+        //                               padding: const EdgeInsets.symmetric(
+        //                                   horizontal: 8.0),
+        //                               child: Text(
+        //                                 'key_Set_food_prepration_time'.tr,
+        //                                 style: TextStyle(
+        //                                     fontWeight: FontWeight.w700,
+        //                                     fontSize: 15.0,
+        //                                     color: orangeColor()),
+        //                               ),
+        //                             ),
+        //                           ),
+        //                           const SizedBox(
+        //                             height: 5,
+        //                           ),
+        //                           Text(
+        //                             '${_selectedMinutes.toInt()} minutes',
+        //                             textAlign: TextAlign.center,
+        //                             style: TextStyle(fontSize: 18.0),
+        //                           ),
+        //                           Slider(
+        //                             activeColor: orangeColor(),
+        //                             value: _selectedMinutes,
+        //                             min: 1.0,
+        //                             max: 60.0,
+        //                             divisions: 59,
+        //                             onChanged: (value) {
+        //                               setState(() {
+        //                                 _selectedMinutes = value;
+        //                               });
+        //                             },
+        //                           ),
+        //                           Row(
+        //                             mainAxisAlignment:
+        //                                 MainAxisAlignment.spaceAround,
+        //                             children: [
+        //                               SizedBox(
+        //                                   height: 45,
+        //                                   width:
+        //                                       MediaQuery.of(context).size.width *
+        //                                           0.42,
+        //                                   child: InkWell(
+        //                                     onTap: () async {
+        //                                       fetchOrderDetails(
+        //                                           isFromCancelButton: true);
+        //                                     },
+        //                                     child: Card(
+        //                                         shadowColor: Colors.black,
+        //                                         color: Colors.redAccent,
+        //                                         shape: RoundedRectangleBorder(
+        //                                           borderRadius:
+        //                                               BorderRadius.circular(10.0),
+        //                                         ),
+        //                                         child: Align(
+        //                                           alignment: Alignment.center,
+        //                                           child: Text(
+        //                                             'key_CANCEL'.tr,
+        //                                             style: mTextStyle14(),
+        //                                           ),
+        //                                         )),
+        //                                   )),
+        //                               SizedBox(
+        //                                   height: 45,
+        //                                   width:
+        //                                       MediaQuery.of(context).size.width *
+        //                                           0.42,
+        //                                   child: InkWell(
+        //                                     onTap: () async {
+        //                                       fetchOrderDetails(
+        //                                           isFromAcceptButton: true);
+        //                                       setState(() {});
+        //                                       //setState(() {});
+        //                                       // print(
+        //                                       //     "selected minutes ${_selectedMinutes.toInt()}");
+        //                                     },
+        //                                     child: Card(
+        //                                         shadowColor: Colors.black,
+        //                                         color: Colors.green,
+        //                                         shape: RoundedRectangleBorder(
+        //                                           borderRadius:
+        //                                               BorderRadius.circular(10.0),
+        //                                         ),
+        //                                         child: Align(
+        //                                           alignment: Alignment.center,
+        //                                           child: Text(
+        //                                             'key_ACCEPT'.tr,
+        //                                             style: mTextStyle14(),
+        //                                           ),
+        //                                         )),
+        //                                   )),
+        //                             ],
+        //                           ),
+        //                           const SizedBox(
+        //                             height: 5,
+        //                           ),
+        //                         ])),
+        //                   )
+        //                 : const SizedBox(),
+        //           ],
+        //         ),
+        //       ),
+         body:
+        StreamBuilder<String>(
+          stream: orderDetailsStream,
+          builder: (BuildContext context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                color: orangeColor(),
+              )); // Display a loading indicator while waiting for data
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}'); // Handle error state
+            } else {
+              if (snapshot.hasData) {
+                final orderData = json.decode(snapshot.data!);
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
                           children: [
-                            SizedBox(
-                                child: Card(
-                                    shadowColor: Colors.black,
-                                    color: const Color.fromRGBO(64, 68, 81, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      'Your Order',
-                                                      style: mTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_status']
-                                                          .toString(),
-                                                      style: cardTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 7.0),
-                                                    child: Text(
-                                                      orderData['order_detail']
-                                                              [0]['menu_items']
-                                                          [0]['name'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      '${orderData['order_detail'][0]['quantity']} X ₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      '₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Item Total',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      '₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Discount',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['coupon']
-                                                                  .toString() ==
-                                                              'null'
-                                                          ? '₹ 0'
-                                                          : '₹ ' +
-                                                              orderData[
-                                                                      'coupon_amount']
-                                                                  .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'You will get',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_earning_summary']
-                                                                  .toString() ==
-                                                              "null"
-                                                          ? ""
-                                                          : "₹ " +
-                                                              orderData['order_earning_summary']
-                                                                      [
-                                                                      'owner_earning_amount']
-                                                                  .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: Text(
-                                                      "Order Details",
-                                                      style: mTextStyle16(),
-                                                    ),
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(
-                                                thickness: 1,
-                                                height: 20,
-                                                color: orangeColor(),
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Order Number',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_no'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Payment Type',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      'Bank',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Date',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      getFormatedDate(orderData[
-                                                          'created_at']),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Phone No.',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['user']
-                                                          ['mobile_number'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'Deliver To',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 200,
-                                                      child: Text(
-                                                        '${orderData['user_address']['address'] + ' ' + orderData['user_address']['area'] + ' ' + orderData['user_address']['city']['name'] + ' ' + orderData['user_address']['pin_code']}',
-                                                        textAlign:
-                                                            TextAlign.right,
-                                                        maxLines: 5,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: cTextStyle16(),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                            ])))),
-                            const SizedBox(height: 25),
-                            SizedBox(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                child: InkWell(
-                                  onTap: () async {
-                                    final phoneNumber =
-                                        orderData['user']['mobile_number'];
-                                    final Uri launchUri = Uri(
-                                      scheme: 'tel',
-                                      path: phoneNumber,
-                                    );
-                                    await launchUrl(launchUri);
-                                  },
-                                  child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Call to ${orderData['user']['name']} (' +
-                                              orderData['user']
-                                                  ['mobile_number'] +
-                                              ')',
-                                          style: mTextStyle14(),
+                            Column(
+                              children: [
+                                SizedBox(
+                                    child: Card(
+                                        shadowColor: Colors.black,
+                                        color:
+                                            const Color.fromRGBO(64, 68, 81, 1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
                                         ),
-                                      )),
-                                )),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            // isShowPreparingButton
-                            //     ? FadeTransition(
-                            //         opacity: _animationController,
-                            //         child: Container(
-                            //             height: 90,
-                            //             child: Padding(
-                            //                 padding: EdgeInsets.only(
-                            //                     left: 20,
-                            //                     right: 20,
-                            //                     bottom: 20,
-                            //                     top: 20),
-                            //                 child: Container(
-                            //                     height: 40,
-                            //                     // width: MediaQuery.of(context).size.width / 2,
-                            //                     decoration: BoxDecoration(
-                            //                         color: isTimeoutFinished
-                            //                             ? Colors.red
-                            //                             : Colors.green,
-                            //                         borderRadius:
-                            //                             BorderRadius.all(
-                            //                                 Radius.circular(
-                            //                                     10)),
-                            //                         border: Border.all(
-                            //                             color: isTimeoutFinished
-                            //                                 ? Colors.red
-                            //                                 : Colors.green)),
-                            //                     child: ElevatedButton(
-                            //                         onPressed: () async {
-                            //                           if (isTimeoutFinished) {
-                            //                             var orderList =
-                            //                                 orderData[
-                            //                                         'order_detail']
-                            //                                     as List;
-                            //                             setState(() {
-                            //                               isShowPreparingButton =
-                            //                                   false;
-                            //                             });
-                            //                             await fetchOrderDetails(
-                            //                                 isFromPreparingButton:
-                            //                                     true);
-                            //                           }
-                            //                         },
-                            //                         child: Row(
-                            //                           mainAxisAlignment:
-                            //                               MainAxisAlignment
-                            //                                   .center,
-                            //                           children: [
-                            //                             Text(
-                            //                               'key_Order_Ready'.tr,
-                            //                               style: const TextStyle(
-                            //                                   color:
-                            //                                       Colors.white,
-                            //                                   fontSize: 20,
-                            //                                   fontFamily:
-                            //                                       'Roboto',
-                            //                                   fontWeight:
-                            //                                       FontWeight
-                            //                                           .w700),
-                            //                             ),
-                            //                           ],
-                            //                         ))))))
-                            isShowDeliveredOrderButton
-                                ? SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: InkWell(
-                                        onTap: () async {
-                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
-                                          // await preparedOrder();
-                                          viewVerifyOTPSheet(context);
-                                          setState(() {});
-                                        },
-                                        child: Card(
-                                            shadowColor: Colors.black,
-                                            color: Colors.green,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'key_order_has_picked'.tr,
-                                                style: mTextStyle16(),
-                                              ),
-                                            ))))
-                                : SizedBox(),
-                            isShowPreparingButton
-                                ? SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: InkWell(
-                                        onTap: () async {
-                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
-                                          // await preparedOrder();
-                                          fetchOrderDetails(
-                                              isFromPreparingButton: true);
-                                          setState(() {});
-                                        },
-                                        child: Card(
-                                            shadowColor: Colors.black,
-                                            color: orangeColor(),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: isShowPreparingButton
-                                                  ? Row(
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .center,
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'Your Order',
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData[
+                                                                  'order_status']
+                                                              .toString(),
+                                                          style:
+                                                              cardTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    7.0),
+                                                        child: Text(
+                                                          orderData['order_detail']
+                                                                      [0]
+                                                                  ['menu_items']
+                                                              [0]['name'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          'key_Order_Ready'.tr,
-                                                          style: mTextStyle16(),
+                                                          '${orderData['order_detail'][0]['quantity']} X ₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
                                                         ),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        TimerWidget(
-                                                          //minutes: minutesFromApiResponse,
-                                                          minutes:
-                                                              calculateRemainingMinutes(
-                                                                  orderData[
-                                                                      'order_preparing_time']),
+                                                        Text(
+                                                          '₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
                                                         ),
                                                       ],
-                                                    )
-                                                  // ? BlinkText(
-                                                  //     'key_Order_Ready'.tr +
-                                                  //         "   " +
-                                                  //         formatDuration(
-                                                  //             _countdownSeconds),
-                                                  //     style: mTextStyle16(),
-                                                  //     endColor: orangeColor(),
-                                                  //   )
-                                                  : Text(
-                                                      'key_Order_Ready'.tr +
-                                                          "   " +
-                                                          formatDuration(
-                                                              _countdownSeconds),
-                                                      style: mTextStyle16(),
                                                     ),
-                                            ))))
-                                : SizedBox(),
-                            const SizedBox(height: 15),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Item Total',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          '₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Discount',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['coupon']
+                                                                      .toString() ==
+                                                                  'null'
+                                                              ? '₹ 0'
+                                                              : '₹ ' +
+                                                                  orderData[
+                                                                          'coupon_amount']
+                                                                      .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'You will get',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['order_earning_summary']
+                                                                      .toString() ==
+                                                                  "null"
+                                                              ? ""
+                                                              : "₹ " +
+                                                                  orderData['order_earning_summary']
+                                                                          [
+                                                                          'owner_earning_amount']
+                                                                      .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    8.0),
+                                                        child: Text(
+                                                          "Order Details",
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    height: 20,
+                                                    color: orangeColor(),
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Order Number',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['order_no'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Payment Type',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          'Bank',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Date',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          getFormatedDate(
+                                                              orderData[
+                                                                  'created_at']),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Phone No.',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['user']
+                                                              ['mobile_number'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'Deliver To',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 200,
+                                                          child: Text(
+                                                            '${orderData['user_address']['address'] + ' ' + orderData['user_address']['area'] + ' ' + orderData['user_address']['city']['name'] + ' ' + orderData['user_address']['pin_code']}',
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            maxLines: 5,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style:
+                                                                cTextStyle16(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                ])))),
+                                const SizedBox(height: 25),
+                                SizedBox(
+                                    height: 50,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final phoneNumber =
+                                            orderData['user']['mobile_number'];
+                                        final Uri launchUri = Uri(
+                                          scheme: 'tel',
+                                          path: phoneNumber,
+                                        );
+                                        await launchUrl(launchUri);
+                                      },
+                                      child: Card(
+                                          shadowColor: Colors.black,
+                                          color: orangeColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'Call to ${orderData['user']['name']} (' +
+                                                  orderData['user']
+                                                      ['mobile_number'] +
+                                                  ')',
+                                              style: mTextStyle14(),
+                                            ),
+                                          )),
+                                    )),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                // isShowPreparingButton
+                                //     ? FadeTransition(
+                                //         opacity: _animationController,
+                                //         child: Container(
+                                //             height: 90,
+                                //             child: Padding(
+                                //                 padding: EdgeInsets.only(
+                                //                     left: 20,
+                                //                     right: 20,
+                                //                     bottom: 20,
+                                //                     top: 20),
+                                //                 child: Container(
+                                //                     height: 40,
+                                //                     // width: MediaQuery.of(context).size.width / 2,
+                                //                     decoration: BoxDecoration(
+                                //                         color: isTimeoutFinished
+                                //                             ? Colors.red
+                                //                             : Colors.green,
+                                //                         borderRadius:
+                                //                             BorderRadius.all(
+                                //                                 Radius.circular(
+                                //                                     10)),
+                                //                         border: Border.all(
+                                //                             color: isTimeoutFinished
+                                //                                 ? Colors.red
+                                //                                 : Colors.green)),
+                                //                     child: ElevatedButton(
+                                //                         onPressed: () async {
+                                //                           if (isTimeoutFinished) {
+                                //                             var orderList =
+                                //                                 orderData[
+                                //                                         'order_detail']
+                                //                                     as List;
+                                //                             setState(() {
+                                //                               isShowPreparingButton =
+                                //                                   false;
+                                //                             });
+                                //                             await fetchOrderDetails(
+                                //                                 isFromPreparingButton:
+                                //                                     true);
+                                //                           }
+                                //                         },
+                                //                         child: Row(
+                                //                           mainAxisAlignment:
+                                //                               MainAxisAlignment
+                                //                                   .center,
+                                //                           children: [
+                                //                             Text(
+                                //                               'key_Order_Ready'.tr,
+                                //                               style: const TextStyle(
+                                //                                   color:
+                                //                                       Colors.white,
+                                //                                   fontSize: 20,
+                                //                                   fontFamily:
+                                //                                       'Roboto',
+                                //                                   fontWeight:
+                                //                                       FontWeight
+                                //                                           .w700),
+                                //                             ),
+                                //                           ],
+                                //                         ))))))
+                                isShowDeliveredOrderButton
+                                    ? SizedBox(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: InkWell(
+                                            onTap: () async {
+                                              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+                                              // await preparedOrder();
+                                              viewVerifyOTPSheet(context);
+                                              setState(() {});
+                                            },
+                                            child: Card(
+                                                shadowColor: Colors.black,
+                                                color: Colors.green,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    'key_order_has_picked'.tr,
+                                                    style: mTextStyle16(),
+                                                  ),
+                                                ))))
+                                    : SizedBox(),
+                                isShowPreparingButton
+                                    ? SizedBox(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: InkWell(
+                                            onTap: () async {
+                                              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+                                              // await preparedOrder();
+                                              fetchOrderDetails(
+                                                  isFromPreparingButton: true);
+                                              setState(() {});
+                                            },
+                                            child: Card(
+                                                shadowColor: Colors.black,
+                                                color: orangeColor(),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: isShowPreparingButton
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              'key_Order_Ready'
+                                                                  .tr,
+                                                              style:
+                                                                  mTextStyle16(),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 15,
+                                                            ),
+                                                            TimerWidget(
+                                                              //minutes: minutesFromApiResponse,
+                                                              minutes:
+                                                                  calculateRemainingMinutes(
+                                                                      orderData[
+                                                                          'order_preparing_time']),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      // ? BlinkText(
+                                                      //     'key_Order_Ready'.tr +
+                                                      //         "   " +
+                                                      //         formatDuration(
+                                                      //             _countdownSeconds),
+                                                      //     style: mTextStyle16(),
+                                                      //     endColor: orangeColor(),
+                                                      //   )
+                                                      : Text(
+                                                          'key_Order_Ready'.tr +
+                                                              "   " +
+                                                              formatDuration(
+                                                                  _countdownSeconds),
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                ))))
+                                    : SizedBox(),
+                                const SizedBox(height: 15),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                  ),
-                  isShowAcceptButton
-                      ? Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                color: cardColor(),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                              ),
-                              child: Column(children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Text(
-                                      'key_Set_food_prepration_time'.tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15.0,
-                                          color: orangeColor()),
+                      ),
+                      isShowAcceptButton
+                          ? Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                  width: double.infinity,
+                                  padding: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    color: cardColor(),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '${_selectedMinutes.toInt()} minutes',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 18.0),
-                                ),
-                                Slider(
-                                  activeColor: orangeColor(),
-                                  value: _selectedMinutes,
-                                  min: 1.0,
-                                  max: 60.0,
-                                  divisions: 59,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedMinutes = value;
-                                    });
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    SizedBox(
-                                        height: 45,
-                                        width:
-                                            MediaQuery.of(context).size.width *
+                                  child: Column(children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Text(
+                                          'key_Set_food_prepration_time'.tr,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 15.0,
+                                              color: orangeColor()),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      '${_selectedMinutes.toInt()} minutes',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 18.0),
+                                    ),
+                                    Slider(
+                                      activeColor: orangeColor(),
+                                      value: _selectedMinutes,
+                                      min: 1.0,
+                                      max: 60.0,
+                                      divisions: 59,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _selectedMinutes = value;
+                                        });
+                                      },
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        SizedBox(
+                                            height: 45,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.42,
-                                        child: InkWell(
-                                          onTap: () async {
-                                            fetchOrderDetails(
-                                                isFromCancelButton: true);
-                                          },
-                                          child: Card(
-                                              shadowColor: Colors.black,
-                                              color: Colors.redAccent,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'key_CANCEL'.tr,
-                                                  style: mTextStyle14(),
-                                                ),
-                                              )),
-                                        )),
-                                    SizedBox(
-                                        height: 45,
-                                        width:
-                                            MediaQuery.of(context).size.width *
+                                            child: InkWell(
+                                              onTap: () async {
+                                                fetchOrderDetails(
+                                                    isFromCancelButton: true);
+                                              },
+                                              child: Card(
+                                                  shadowColor: Colors.black,
+                                                  color: Colors.redAccent,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'key_CANCEL'.tr,
+                                                      style: mTextStyle14(),
+                                                    ),
+                                                  )),
+                                            )),
+                                        SizedBox(
+                                            height: 45,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.42,
-                                        child: InkWell(
-                                          onTap: () async {
-                                            fetchOrderDetails(
-                                                isFromAcceptButton: true);
-                                            setState(() {});
-                                            //setState(() {});
-                                            // print(
-                                            //     "selected minutes ${_selectedMinutes.toInt()}");
-                                          },
-                                          child: Card(
-                                              shadowColor: Colors.black,
-                                              color: Colors.green,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'key_ACCEPT'.tr,
-                                                  style: mTextStyle14(),
-                                                ),
-                                              )),
-                                        )),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                              ])),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-            ),
-    );
+                                            child: InkWell(
+                                              onTap: () async {
+                                                fetchOrderDetails(
+                                                    isFromAcceptButton: true);
+                                                setState(() {});
+                                                //setState(() {});
+                                                // print(
+                                                //     "selected minutes ${_selectedMinutes.toInt()}");
+                                              },
+                                              child: Card(
+                                                  shadowColor: Colors.black,
+                                                  color: Colors.green,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'key_ACCEPT'.tr,
+                                                      style: mTextStyle14(),
+                                                    ),
+                                                  )),
+                                            )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                  ])),
+                            )
+                          : const SizedBox(),
+                    ],
+                  ),
+                );
+              } else {
+                return Text(
+                    'No data available'); // Display a message when no data is available
+              }
+            }
+          },
+        ));
   }
 }

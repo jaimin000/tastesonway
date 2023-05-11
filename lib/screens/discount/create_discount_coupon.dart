@@ -5,6 +5,7 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+
 class CreateDiscountCoupon extends StatefulWidget {
   const CreateDiscountCoupon({Key? key}) : super(key: key);
 
@@ -50,18 +51,18 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                           height: 189.19,
                           //margin: EdgeInsets.only(left: 82.87, top: 55.24),
                         ),
-                        Positioned(
-                          left: -343,
-                          top: 130.78,
-                          child: Container(
-                            width: 1003.91,
-                            height: 1037.91,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(39, 42, 50, 1),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
+                        // Positioned(
+                        //   left: -343,
+                        //   top: 130.78,
+                        //   child: Container(
+                        //     width: 1003.91,
+                        //     height: 1037.91,
+                        //     decoration: const BoxDecoration(
+                        //       color: Color.fromRGBO(39, 42, 50, 1),
+                        //       shape: BoxShape.circle,
+                        //     ),
+                        //   ),
+                        // ),
                         Positioned(
                           top: 100,
                           right: 105,
