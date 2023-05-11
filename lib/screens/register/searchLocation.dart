@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+ 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -190,7 +190,7 @@ class _SearchLocationState extends State<SearchLocation> {
           ),
         ),
         body:
-        _isLoading? Center(child: SpinKitFadingCircle(color: orangeColor(),)):InkWell(
+        _isLoading? Center(child: CircularProgressIndicator(color: orangeColor(),)):InkWell(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu2.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
@@ -95,7 +94,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
       body:
       _isLoading ?
       Center(
-        child: SpinKitFadingCircle(
+        child: CircularProgressIndicator(
           color: orangeColor(),
         ),
       ) : SingleChildScrollView(

@@ -7,58 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:823346082634:android:73fc3e2ec96a55967607b3",
-        "android_client_info": {
-          "package_name": "com.example.tasteonway"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "823346082634-j718hmucol6jv9h55is8rmlerqan3pnp.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.tasteonway",
-            "certificate_hash": "b776fe6ab72b10060f4dee20efd205cac1401487"
-          }
-        },
-        {
-          "client_id": "823346082634-4ve94ko8hhcj6adnuq1js2lur31ni2nf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDhaIPpQoSUbSjq_4z0I0vovMTCVOOu-3c"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "823346082634-4ve94ko8hhcj6adnuq1js2lur31ni2nf.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "823346082634-m2asrbhn03n5jiq575odd3fltgkek68j.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.testing.tastesonway.ios"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:823346082634:android:965aebd99f93d1f07607b3",
+        "mobilesdk_app_id": "1:823346082634:android:014ab98c2dec4a447607b3",
         "android_client_info": {
           "package_name": "com.testing.tastesonway.ios.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "823346082634-f7nc6slgb14kit0kmbtjne2ket6f1gas.apps.googleusercontent.com",
+          "client_id": "823346082634-qq856ln6fdlik6pok6pm3djqggv5t6i7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.testing.tastesonway.ios.android",
@@ -83,7 +39,7 @@
               "client_type": 3
             },
             {
-              "client_id": "823346082634-m2asrbhn03n5jiq575odd3fltgkek68j.apps.googleusercontent.com",
+              "client_id": "823346082634-ik11id54f52bumadup4bt7fusbhsv8hq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.testing.tastesonway.ios"

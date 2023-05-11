@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
@@ -315,7 +314,7 @@ class _EditImgItemState extends State<EditImgItem> {
       ),
       body:_isLoading ?
       Center(
-        child: SpinKitFadingCircle(
+        child: CircularProgressIndicator(
           color: orangeColor(),
         ),
       ) : Container(

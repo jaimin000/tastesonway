@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tastesonway/screens/menu/image%20menu/create_img_menu2.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../utils/sharedpreferences.dart';
@@ -97,7 +96,7 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
       body:
       _isLoading ?
       Center(
-        child: SpinKitFadingCircle(
+        child: CircularProgressIndicator(
           color: orangeColor(),
         ),
       ) : SingleChildScrollView(

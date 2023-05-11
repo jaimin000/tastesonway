@@ -1,14 +1,15 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
+import '../../utils/timer.dart';
 import 'order_details.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 
 class YourOrders extends StatefulWidget {
   const YourOrders({Key? key}) : super(key: key);
@@ -20,6 +21,21 @@ class YourOrders extends StatefulWidget {
 class _YourOrdersState extends State<YourOrders> {
   List orderData = [];
   bool isLoading = true;
+  // late Timer _timer;
+
+  int calculateRemainingMinutes(String futureTime) {
+    print(futureTime);
+    final currentTime = DateTime.now();
+    final apiTime = DateTime.parse(futureTime);
+
+    final remainingTime = apiTime.difference(currentTime);
+    final remainingSeconds = remainingTime.inSeconds;
+
+    print(remainingSeconds);
+    return remainingSeconds < 0 ? 0 : remainingSeconds;
+
+  }
+
   String getFormatedDate(String date) {
     var tempDate = DateFormat("MMM dd, yyyy hh:mm:ss a").parse(date);
 
@@ -27,7 +43,7 @@ class _YourOrdersState extends State<YourOrders> {
   }
 
   Future<void> fetchOrder() async {
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGV2LWFwaS50YXN0ZXNvbndheS5jb21cL2FwaVwvdjJcL2tpdGNoZW4tb3duZXItbG9naW4tcmVnaXN0cmF0aW9uIiwiaWF0IjoxNjgyNjU5NTAwLCJleHAiOjE2ODQ1Nzk1MDAsIm5iZiI6MTY4MjY1OTUwMCwianRpIjoiazVvbWNFN3FBSVNjSHA4SyIsInN1YiI6MTM3LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.oCSoJBQvPhVeqGstefU-W085MADkmYZ7NNFBKYwpOhk";
+    String token = await Sharedprefrences.getToken();
     final response = await http.post(
       Uri.parse("$baseUrl/kitchen-owner-order-list"),
       headers: {'Authorization': 'Bearer $token'},
@@ -39,6 +55,7 @@ class _YourOrdersState extends State<YourOrders> {
       setState(() {
          orderData = jsonData['data']['orderList']['data']  as List;
       });
+      //print("orderData $orderData");
     } else {
       isLoading=false;
       setState(() {
@@ -53,6 +70,12 @@ class _YourOrdersState extends State<YourOrders> {
   void initState() {
     fetchOrder();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -73,7 +96,7 @@ class _YourOrdersState extends State<YourOrders> {
           ),
         ],
       ),
-      body: isLoading?Center(child: SpinKitFadingCircle(color: orangeColor(),)):Container(
+      body: isLoading?Center(child: CircularProgressIndicator(color: orangeColor(),)):Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView.builder(
           itemCount: orderData.length,
@@ -166,6 +189,7 @@ class _YourOrdersState extends State<YourOrders> {
                                       ),
                                     ],
                                   ),
+                                  orderData[index]['order_preparing_time'] != null  ? orderData[index]['order_status'].toString() =="Preparing" ?
                                   SizedBox(
                                       height: 35,
                                       width: MediaQuery.of(context).size.width * 0.45,
@@ -177,11 +201,15 @@ class _YourOrdersState extends State<YourOrders> {
                                           ),
                                           child: Align(
                                             alignment: Alignment.center,
-                                            child: Text(
-                                              '${'key_Order_Ready'.tr} (2:25)',
-                                              style: mTextStyle14(),
+                                            child:TimerWidget(
+                                              //minutes: minutesFromApiResponse,
+                                              minutes: calculateRemainingMinutes(orderData[index]['order_preparing_time']),
                                             ),
-                                          ))),
+                                            // Text(
+                                            //   '${'key_Order_Ready'.tr} (${calculateRemainingTime(orderData[index]['order_preparing_time'].toString())})',
+                                            //   style: mTextStyle14(),
+                                            // ),
+                                          ))):SizedBox():SizedBox(),
                                 ],
                               ),
                             ),
