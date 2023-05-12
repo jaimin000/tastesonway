@@ -29,7 +29,7 @@ class _OrderDetailsState extends State<OrderDetails>
   bool isShowPreparingButton = false;
   bool isShowDeliveredOrderButton = false;
   String verificationId = "";
-  double _selectedMinutes = 1;
+  double _selectedMinutes = 5;
   bool timeOut = false;
   int _countdownSeconds = 00;
   Timer? _fetchTimer;
@@ -174,7 +174,7 @@ class _OrderDetailsState extends State<OrderDetails>
         }
         if (isFromDeliveryButton) {
           isShowDeliveredOrderButton = false;
-              updateOrderStatus(5);
+              //updateOrderStatus(5);
         }
       } else {
         isShowAcceptButton = false;
@@ -402,7 +402,7 @@ class _OrderDetailsState extends State<OrderDetails>
         height: 150,
         decoration: BoxDecoration(
           color: backgroundColor(),
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -455,7 +455,7 @@ class _OrderDetailsState extends State<OrderDetails>
             'Confirm Cancellation',
             style: TextStyle(color: orangeColor()),
           ),
-          content: Text('Are you sure you want to cancel?'),
+          content: const Text('Are you sure you want to cancel?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -557,7 +557,7 @@ class _OrderDetailsState extends State<OrderDetails>
                             vertical: 8.0, horizontal: 30),
                         child: PinCodeTextField(
                           appContext: context,
-                          pastedTextStyle: TextStyle(
+                          pastedTextStyle: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                           length: 6,
@@ -668,7 +668,7 @@ class _OrderDetailsState extends State<OrderDetails>
     fetchOrderDetails();
     startFetchingOrderDetails();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _animationController.forward();
     super.initState();
   }
@@ -697,7 +697,12 @@ class _OrderDetailsState extends State<OrderDetails>
           style: cardTitleStyle20(),
         ),
       ),
-      body: isLoading
+      body: WillPopScope(
+    onWillPop: () async {
+    Navigator.pop(context, "true");
+    return true;
+    },
+    child:isLoading
           ? Center(
               child: CircularProgressIndicator(
               color: orangeColor(),
@@ -1204,18 +1209,20 @@ class _OrderDetailsState extends State<OrderDetails>
                                                 style: mTextStyle16(),
                                               ),
                                             ))))
-                                : SizedBox(),
+                                : const SizedBox(),
                             isShowPreparingButton
                                 ? SizedBox(
                                     height: 50,
                                     width: MediaQuery.of(context).size.width,
                                     child: InkWell(
                                         onTap: () async {
+                                          if(_countdownSeconds == 0){
                                           // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
                                           // await preparedOrder();
                                           fetchOrderDetails(
                                               isFromPreparingButton: true);
                                           setState(() {});
+                                          }
                                         },
                                         child: Card(
                                             shadowColor: Colors.black,
@@ -1239,7 +1246,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                           'key_Order_Ready'.tr,
                                                           style: mTextStyle16(),
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           width: 15,
                                                         ),
                                                         TimerWidget(
@@ -1267,7 +1274,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       style: mTextStyle16(),
                                                     ),
                                             ))))
-                                : SizedBox(),
+                                : const SizedBox(),
                             const SizedBox(height: 15),
                           ],
                         ),
@@ -1282,7 +1289,7 @@ class _OrderDetailsState extends State<OrderDetails>
                           alignment: Alignment.bottomCenter,
                           child: Container(
                               width: double.infinity,
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
                                 color: cardColor(),
                                 borderRadius: const BorderRadius.only(
@@ -1311,12 +1318,12 @@ class _OrderDetailsState extends State<OrderDetails>
                                 Text(
                                   '${_selectedMinutes.toInt()} minutes',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 18.0),
+                                  style: const TextStyle(fontSize: 18.0),
                                 ),
                                 Slider(
                                   activeColor: orangeColor(),
                                   value: _selectedMinutes,
-                                  min: 1.0,
+                                  min: 5.0,
                                   max: 60.0,
                                   divisions: 59,
                                   onChanged: (value) {
@@ -1394,6 +1401,7 @@ class _OrderDetailsState extends State<OrderDetails>
                 ],
               ),
             ),
+      )
     );
 
     // body:

@@ -11,7 +11,8 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:video_compress/video_compress.dart';
 
 class Stories extends StatefulWidget {
-  const Stories({Key? key}) : super(key: key);
+  final String photoUrl;
+  Stories({required this.photoUrl});
 
   @override
   State<Stories> createState() => _StoriesState();
@@ -385,9 +386,8 @@ class _StoriesState extends State<Stories> {
                             CircleAvatar(
                               radius: 38,
                               backgroundColor: orangeColor(),
-                              child: const CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800'),
+                              child:  CircleAvatar(
+                                backgroundImage: NetworkImage(widget.photoUrl),
                                 radius: 35,
                               ),
                             ),

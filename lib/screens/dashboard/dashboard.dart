@@ -33,6 +33,11 @@ class _DashboardState extends State<Dashboard> {
   int earningWeek = 0;
   int earningMonth = 0;
   int earningSummary = 0;
+  String profilePhoto = "";
+  String userName = "";
+  final currentTime = DateTime.now();
+  String greeting = "";
+
 
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
@@ -41,6 +46,13 @@ class _DashboardState extends State<Dashboard> {
         headers: {'Authorization': 'Bearer $token',
         },
     );
+  if (currentTime.hour < 12) {
+  greeting = 'Good Morning';
+  } else if (currentTime.hour < 18) {
+  greeting = 'Good Afternoon';
+  } else {
+  greeting = 'Good Evening';
+  }
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       setState(() {
@@ -61,8 +73,29 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+  Future fetchProfile() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.get(
+      Uri.parse("$baseUrl/get-kitchen-owner-profile"),
+      headers: {'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      setState(() {
+        var profileData = jsonData['data'];
+        profilePhoto = profileData['avatar'];
+        userName = profileData['name'];
+        // print('this is profile photo '+profilePhoto);
+      });
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
   @override
   void initState() {
+    fetchProfile();
     fetchData();
     super.initState();
   }
@@ -81,16 +114,16 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Good Morning",
-                  style: TextStyle(
+                 Text(
+                  greeting,
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 12,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  "Sania Fraser",
+                  userName,
                   style: mTextStyle20(),
                 ),
               ],
@@ -105,10 +138,11 @@ class _DashboardState extends State<Dashboard> {
                 //   MaterialPageRoute(builder: (context) => const Profile()),
                 // );
               },
-              child: const CircleAvatar(
+              child:  CircleAvatar(
                 backgroundImage:
                 NetworkImage(
-                    'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
+                    profilePhoto
+                ),
               ),
             ),
           ],
@@ -121,9 +155,9 @@ class _DashboardState extends State<Dashboard> {
             const SizedBox(
               height: 15,
             ),
-            const SizedBox(
+             SizedBox(
               height: 105,
-              child: Stories(),
+              child: Stories(photoUrl:profilePhoto,),
             ),
             const SizedBox(
               height: 25,
