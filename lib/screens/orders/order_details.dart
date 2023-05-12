@@ -693,7 +693,7 @@ class _OrderDetailsState extends State<OrderDetails>
             }),
         backgroundColor: backgroundColor(),
         title: Text(
-          'Order Details',
+          'key_Order_Details'.tr,
           style: cardTitleStyle20(),
         ),
       ),
@@ -737,7 +737,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      'Your Order',
+                                                      'key_Your_Order'.tr,
                                                       style: mTextStyle16(),
                                                     ),
                                                     Text(
@@ -825,7 +825,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Item Total',
+                                                      'key_Item_Total'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -854,7 +854,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Discount',
+                                                      'key_discount'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -895,7 +895,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'You will get',
+                                                      'key_You_will_get'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -933,7 +933,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                             .symmetric(
                                                         horizontal: 8.0),
                                                     child: Text(
-                                                      "Order Details",
+                                                      "key_Order_Details".tr,
                                                       style: mTextStyle16(),
                                                     ),
                                                   )),
@@ -959,7 +959,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Order Number',
+                                                      'key_Order_Number'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -984,7 +984,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Payment Type',
+                                                      'key_Payment_Type'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -1009,7 +1009,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Date',
+                                                      'key_Date'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -1035,7 +1035,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Phone No.',
+                                                      'key_Phone_Number'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     Text(
@@ -1061,7 +1061,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       CrossAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      'Deliver To',
+                                                      'key_Deliver_to'.tr,
                                                       style: cTextStyle16(),
                                                     ),
                                                     SizedBox(
@@ -1107,7 +1107,7 @@ class _OrderDetailsState extends State<OrderDetails>
                                       child: Align(
                                         alignment: Alignment.center,
                                         child: Text(
-                                          'Call to ${orderData['user']['name']} (' +
+                                          'key_Call_to'.tr+ ' ${orderData['user']['name']} (' +
                                               orderData['user']
                                                   ['mobile_number'] +
                                               ')',
