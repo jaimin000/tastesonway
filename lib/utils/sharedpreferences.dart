@@ -72,6 +72,16 @@ class Sharedprefrences {
     return prefs.getString('ShortCode');
   }
 
+  static Future<bool> saveAddressID(String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setString('AddressID', value);
+  }
+
+  static Future<String?> getAddressID() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('AddressID');
+  }
+
   static Future<void> setLanguagePreference(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('language', locale.languageCode);

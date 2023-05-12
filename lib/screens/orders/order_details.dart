@@ -36,7 +36,9 @@ class _OrderDetailsState extends State<OrderDetails>
   Timer? _timer;
   int secondsLeft = 300;
   bool isTimeoutFinished = false;
+  String cancelReason = '';
   late AnimationController _animationController;
+  TextEditingController cancelOrderController = TextEditingController();
 
   StreamController<String> _orderDetailsStreamController =
       StreamController<String>();
@@ -122,7 +124,7 @@ class _OrderDetailsState extends State<OrderDetails>
           });
         }
         if (isFromAcceptButton || isFromCancelButton) {
-          showOrderCancelledDialog();
+          // showOrderCancelledDialog();
           setState(() {
             isLoading = false;
           });
@@ -150,7 +152,7 @@ class _OrderDetailsState extends State<OrderDetails>
         if (isFromPreparingButton) {
           isShowPreparingButton = false;
           // sendOTP(orderID);
-           updateOrderStatus(8);
+          updateOrderStatus(8);
           setState(() {
             isLoading = true;
           });
@@ -174,7 +176,7 @@ class _OrderDetailsState extends State<OrderDetails>
         }
         if (isFromDeliveryButton) {
           isShowDeliveredOrderButton = false;
-              //updateOrderStatus(5);
+          //updateOrderStatus(5);
         }
       } else {
         isShowAcceptButton = false;
@@ -197,16 +199,15 @@ class _OrderDetailsState extends State<OrderDetails>
     }
   }
 
-  //api
-
   Future<void> updateOrderStatus(int id) async {
     String token = await Sharedprefrences.getToken();
     Map<String, dynamic> bodyData = {};
-    String showMessage ='';
+    String showMessage = '';
     if (id == 6) {
       bodyData = {
         "order_id": widget.id.toString(),
         "order_status": id,
+        'order_cancel_message': cancelReason
       };
       showMessage = 'Order Cancelled Successfully';
     } else if (id == 8) {
@@ -257,110 +258,6 @@ class _OrderDetailsState extends State<OrderDetails>
       });
     }
   }
-
-  // Future<void> acceptOrder() async {
-  //   String token = await Sharedprefrences.getToken();
-  //   Map<String, dynamic> bodyData = {
-  //     "order_id": widget.id.toString(),
-  //     "order_status": "2",
-  //     "order_preparing_time": _selectedMinutes.toInt().toString(),
-  //   };
-  //   final response = await http.post(
-  //     Uri.parse("$baseUrl/update-order-status"),
-  //     headers: {
-  //       'Authorization': 'Bearer $token',
-  //       "Content-Type": "application/json",
-  //       'accept': 'application/json',
-  //     },
-  //     body: jsonEncode(bodyData),
-  //   );
-  //   print(response.body);
-  //   if (response.statusCode == 200) {
-  //     final jsonData = json.decode(response.body);
-  //     ScaffoldSnackbar.of(context).show('Order Accepted Successfully');
-  //     fetchOrderDetails(isFromCancelButton: true);
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   } else {
-  //     print('Request failed with status: ${response.statusCode}.');
-  //     ScaffoldSnackbar.of(context)
-  //         .show('Something Went Wrong Please Try Again!');
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-  //
-  // Future<void> cancelOrder() async {
-  //   String token = await Sharedprefrences.getToken();
-  //   Map<String, dynamic> bodyData = {
-  //     "order_id": widget.id.toString(),
-  //     "order_status": "6"
-  //   };
-  //   final response = await http.post(
-  //     Uri.parse("$baseUrl/update-order-status"),
-  //     headers: {
-  //       'Authorization': 'Bearer $token',
-  //       "Content-Type": "application/json",
-  //       'accept': 'application/json',
-  //     },
-  //     body: jsonEncode(bodyData),
-  //   );
-  //   print(response.body);
-  //   if (response.statusCode == 200) {
-  //     final jsonData = json.decode(response.body);
-  //     print(jsonData);
-  //     ScaffoldSnackbar.of(context).show(jsonData['message']);
-  //     fetchOrderDetails(isFromCancelButton: true);
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //     //print("orderData $orderData");
-  //   } else {
-  //     print('Request failed with status: ${response.statusCode}.');
-  //     ScaffoldSnackbar.of(context)
-  //         .show('Something Went Wrong Please Try Again!');
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-  //
-  // Future<void> preparedOrder() async {
-  //   String token = await Sharedprefrences.getToken();
-  //   Map<String, dynamic> bodyData = {
-  //     "order_id": widget.id.toString(),
-  //     "order_status": "8",
-  //     'otp_verification_id': verificationId
-  //   };
-  //   final response = await http.post(
-  //     Uri.parse("$baseUrl/update-order-status"),
-  //     headers: {
-  //       'Authorization': 'Bearer $token',
-  //       "Content-Type": "application/json",
-  //       'accept': 'application/json',
-  //     },
-  //     body: jsonEncode(bodyData),
-  //   );
-  //   // print(widget.id);
-  //   print(response.body);
-  //   if (response.statusCode == 200) {
-  //     final jsonData = json.decode(response.body);
-  //     fetchOrderDetails(isFromCancelButton: true);
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //     //print("orderData $orderData");
-  //   } else {
-  //     print('Request failed with status: ${response.statusCode}.');
-  //     ScaffoldSnackbar.of(context)
-  //         .show('Something Went Wrong Please Try Again!');
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
 
   Future<void> verifyOtp(String otp) async {
     String token = await Sharedprefrences.getToken();
@@ -444,7 +341,124 @@ class _OrderDetailsState extends State<OrderDetails>
         builder: (BuildContext context) => errorDialog);
   }
 
-  //widgets
+  // void showCancelConfirmationDialog(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         backgroundColor: cardColor(),
+  //         title: Text(
+  //           'key_Cancel_Order'.tr,
+  //           style: TextStyle(color: orangeColor()),
+  //         ),
+  //         content: Text('key_are_you_sure_cancel_order'.tr),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.pop(context);
+  //               setState(() {}); // Close the dialog
+  //             },
+  //             child: Text(
+  //               'key_NO'.tr,
+  //               style: TextStyle(color: orangeColor()),
+  //             ),
+  //           ),
+  //           TextButton(
+  //             onPressed: () async {
+  //               Navigator.of(context).pop();
+  //               CancellationReasonDialog(context);
+  //               // await updateOrderStatus(6);
+  //               // ScaffoldSnackbar.of(context).show('Order Cancelled');
+  //               // setState(() {});
+  //             },
+  //             child: Text(
+  //               'key_YES'.tr,
+  //               style: TextStyle(color: orangeColor()),
+  //             ),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  // CancellationReasonDialog(BuildContext context) async {
+  //   var errorDialog = Dialog(
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+  //     //this right here
+  //     child: SizedBox(
+  //       height: 272.0,
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: <Widget>[
+  //           Padding(
+  //             padding: EdgeInsets.all(20.0),
+  //             child: Text(
+  //               'key_enter_cancel_order_reason'.tr,
+  //               style: cardTextStyle12(),
+  //             ),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+  //             child: TextField(
+  //               cursorColor: orangeColor(),
+  //               maxLines: 3,
+  //               decoration:   InputDecoration(
+  //                 enabledBorder:  const OutlineInputBorder(
+  //                     borderSide:  BorderSide(color: Colors.grey)
+  //                 ),
+  //                 focusedBorder:  OutlineInputBorder(
+  //                     borderSide:  BorderSide(color: orangeColor())
+  //                 ),
+  //               ),
+  //               controller: cancelOrderController,
+  //             ),
+  //           ),
+  //           cancelOrderController.text == ''
+  //               ? Padding(
+  //               padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+  //               child: Text(
+  //                 'key_Please_enter_cancel_order_reason'.tr,
+  //                 style: mTextStyle14(),
+  //               ))
+  //               : Container(),
+  //           Padding(
+  //               padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+  //               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+  //                 ElevatedButton(
+  //                   style: ElevatedButton.styleFrom(
+  //                     primary: orangeColor(), // Background color
+  //                   ),
+  //                   onPressed: () {
+  //                     cancelReason = cancelOrderController.text;
+  //                     if (cancelOrderController.text != '') {
+  //                       Navigator.pop(context);
+  //                       updateOrderStatus(6);
+  //                        //ScaffoldSnackbar.of(context).show('Order Cancelled');
+  //                       //setState(() {});
+  //                       // updateOrderStatus(
+  //                       //     int.parse(orderList[0]['order_id'].toString()), '6',
+  //                       //     cancelReason: cancelOrderController.text);
+  //                     }
+  //                   },
+  //                   child: Center(
+  //                       child: Text(
+  //                         'key_Submit'.tr,
+  //                         style: mTextStyle14()
+  //                       )),
+  //                 ),
+  //               ])),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  //    showDialog(
+  //       context: context,
+  //       useRootNavigator: true,
+  //       barrierDismissible: false,
+  //       builder: (BuildContext context) => errorDialog);
+  // }
+
   void showCancelConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -452,30 +466,65 @@ class _OrderDetailsState extends State<OrderDetails>
         return AlertDialog(
           backgroundColor: cardColor(),
           title: Text(
-            'Confirm Cancellation',
-            style: TextStyle(color: orangeColor()),
+            'key_Cancel_Order'.tr,
+            style: cardTextStyle16(),
           ),
-          content: const Text('Are you sure you want to cancel?'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+               Text('key_are_you_sure_cancel_order'.tr,style: mTextStyle16(),),
+              const SizedBox(height: 10,),
+              TextField(
+                cursorColor: orangeColor(),
+                maxLines: 3,
+                decoration: InputDecoration(
+                  enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: orangeColor())),
+                ),
+                controller: cancelOrderController,
+              ),
+              SizedBox(height: 5,),
+              cancelOrderController.text == ''
+                  ? Text(
+                    'key_Please_enter_cancel_order_reason'.tr,
+                    textAlign: TextAlign.start,
+                    style:const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                    ),
+                  )
+                  : const SizedBox(height: 5,),
+            ],
+          ),
           actions: [
             TextButton(
               onPressed: () {
-                //Navigator.pop(context,"true");
-                setState(() {}); // Close the dialog
+                Navigator.pop(context);
               },
               child: Text(
-                'No',
-                style: TextStyle(color: orangeColor()),
+                'key_Cancel'.tr,
+                style: TextStyle(color: Colors.white),
               ),
             ),
             TextButton(
               onPressed: () async {
-                await updateOrderStatus(6);
-                ScaffoldSnackbar.of(context).show('Order Cancelled');
-                Navigator.of(context).pop(); // Close the dialog
-                setState(() {});
+                cancelReason = cancelOrderController.text;
+                if (cancelOrderController.text != '') {
+                  Navigator.pop(context);
+                  updateOrderStatus(6);
+                }
+                // Navigator.of(context).pop();
+                // if (cancelReason.isNotEmpty) {
+                //   // Perform cancellation logic here
+                //   // await updateOrderStatus(6);
+                //   // ScaffoldSnackbar.of(context).show('Order Cancelled');
+                //   // setState(() {});
+                // }
               },
               child: Text(
-                'Yes',
+                'key_Submit'.tr,
                 style: TextStyle(color: orangeColor()),
               ),
             ),
@@ -683,726 +732,759 @@ class _OrderDetailsState extends State<OrderDetails>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor(),
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-            onPressed: () async {
-              return Navigator.pop(context, "true");
-            }),
         backgroundColor: backgroundColor(),
-        title: Text(
-          'key_Order_Details'.tr,
-          style: cardTitleStyle20(),
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+              onPressed: () async {
+                return Navigator.pop(context, "true");
+              }),
+          backgroundColor: backgroundColor(),
+          title: Text(
+            'key_Order_Details'.tr,
+            style: cardTitleStyle20(),
+          ),
         ),
-      ),
-      body: WillPopScope(
-    onWillPop: () async {
-    Navigator.pop(context, "true");
-    return true;
-    },
-    child:isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-              color: orangeColor(),
-            ))
-          : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        Column(
+        body: WillPopScope(
+          onWillPop: () async {
+            Navigator.pop(context, "true");
+            return true;
+          },
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                  color: orangeColor(),
+                ))
+              : Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
                           children: [
-                            SizedBox(
-                                child: Card(
-                                    shadowColor: Colors.black,
-                                    color: const Color.fromRGBO(64, 68, 81, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      'key_Your_Order'.tr,
-                                                      style: mTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_status']
-                                                          .toString(),
-                                                      style: cardTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 7.0),
-                                                    child: Text(
-                                                      orderData['order_detail']
-                                                              [0]['menu_items']
-                                                          [0]['name'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      '${orderData['order_detail'][0]['quantity']} X ₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      '₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Item_Total'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      '₹ ' +
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['item_price']
-                                                              .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_discount'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['coupon']
-                                                                  .toString() ==
-                                                              'null'
-                                                          ? '₹ 0'
-                                                          : '₹ ' +
-                                                              orderData[
-                                                                      'coupon_amount']
-                                                                  .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_You_will_get'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_earning_summary']
-                                                                  .toString() ==
-                                                              "null"
-                                                          ? ""
-                                                          : "₹ " +
-                                                              orderData['order_earning_summary']
-                                                                      [
-                                                                      'owner_earning_amount']
-                                                                  .toString(),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              const Divider(
-                                                height: 20,
-                                                color: Colors.white,
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: Text(
-                                                      "key_Order_Details".tr,
-                                                      style: mTextStyle16(),
-                                                    ),
-                                                  )),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(
-                                                thickness: 1,
-                                                height: 20,
-                                                color: orangeColor(),
-                                                indent: 10,
-                                                endIndent: 10,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Order_Number'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['order_no'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Payment_Type'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      'Bank',
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Date'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      getFormatedDate(orderData[
-                                                          'created_at']),
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Phone_Number'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    Text(
-                                                      orderData['user']
-                                                          ['mobile_number'],
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      'key_Deliver_to'.tr,
-                                                      style: cTextStyle16(),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 200,
-                                                      child: Text(
-                                                        '${orderData['user_address']['address'] + ' ' + orderData['user_address']['area'] + ' ' + orderData['user_address']['city']['name'] + ' ' + orderData['user_address']['pin_code']}',
-                                                        textAlign:
-                                                            TextAlign.right,
-                                                        maxLines: 5,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: cTextStyle16(),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                            ])))),
-                            const SizedBox(height: 25),
-                            SizedBox(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                child: InkWell(
-                                  onTap: () async {
-                                    final phoneNumber =
-                                        orderData['user']['mobile_number'];
-                                    final Uri launchUri = Uri(
-                                      scheme: 'tel',
-                                      path: phoneNumber,
-                                    );
-                                    await launchUrl(launchUri);
-                                  },
-                                  child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'key_Call_to'.tr+ ' ${orderData['user']['name']} (' +
-                                              orderData['user']
-                                                  ['mobile_number'] +
-                                              ')',
-                                          style: mTextStyle14(),
+                            Column(
+                              children: [
+                                SizedBox(
+                                    child: Card(
+                                        shadowColor: Colors.black,
+                                        color:
+                                            const Color.fromRGBO(64, 68, 81, 1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
                                         ),
-                                      )),
-                                )),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            // isShowPreparingButton
-                            //     ? FadeTransition(
-                            //         opacity: _animationController,
-                            //         child: Container(
-                            //             height: 90,
-                            //             child: Padding(
-                            //                 padding: EdgeInsets.only(
-                            //                     left: 20,
-                            //                     right: 20,
-                            //                     bottom: 20,
-                            //                     top: 20),
-                            //                 child: Container(
-                            //                     height: 40,
-                            //                     // width: MediaQuery.of(context).size.width / 2,
-                            //                     decoration: BoxDecoration(
-                            //                         color: isTimeoutFinished
-                            //                             ? Colors.red
-                            //                             : Colors.green,
-                            //                         borderRadius:
-                            //                             BorderRadius.all(
-                            //                                 Radius.circular(
-                            //                                     10)),
-                            //                         border: Border.all(
-                            //                             color: isTimeoutFinished
-                            //                                 ? Colors.red
-                            //                                 : Colors.green)),
-                            //                     child: ElevatedButton(
-                            //                         onPressed: () async {
-                            //                           if (isTimeoutFinished) {
-                            //                             var orderList =
-                            //                                 orderData[
-                            //                                         'order_detail']
-                            //                                     as List;
-                            //                             setState(() {
-                            //                               isShowPreparingButton =
-                            //                                   false;
-                            //                             });
-                            //                             await fetchOrderDetails(
-                            //                                 isFromPreparingButton:
-                            //                                     true);
-                            //                           }
-                            //                         },
-                            //                         child: Row(
-                            //                           mainAxisAlignment:
-                            //                               MainAxisAlignment
-                            //                                   .center,
-                            //                           children: [
-                            //                             Text(
-                            //                               'key_Order_Ready'.tr,
-                            //                               style: const TextStyle(
-                            //                                   color:
-                            //                                       Colors.white,
-                            //                                   fontSize: 20,
-                            //                                   fontFamily:
-                            //                                       'Roboto',
-                            //                                   fontWeight:
-                            //                                       FontWeight
-                            //                                           .w700),
-                            //                             ),
-                            //                           ],
-                            //                         ))))))
-                            isShowDeliveredOrderButton
-                                ? SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: InkWell(
-                                        onTap: () async {
-                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
-                                          // await preparedOrder();
-                                          viewVerifyOTPSheet(context);
-                                          setState(() {});
-                                        },
-                                        child: Card(
-                                            shadowColor: Colors.black,
-                                            color: Colors.green,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'key_order_has_picked'.tr,
-                                                style: mTextStyle16(),
-                                              ),
-                                            ))))
-                                : const SizedBox(),
-                            isShowPreparingButton
-                                ? SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: InkWell(
-                                        onTap: () async {
-                                          if(_countdownSeconds == 0){
-                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
-                                          // await preparedOrder();
-                                          fetchOrderDetails(
-                                              isFromPreparingButton: true);
-                                          setState(() {});
-                                          }
-                                        },
-                                        child: Card(
-                                            shadowColor: Colors.black,
-                                            color: orangeColor(),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: isShowPreparingButton
-                                                  ? Row(
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .center,
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'key_Your_Order'.tr,
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData[
+                                                                  'order_status']
+                                                              .toString(),
+                                                          style:
+                                                              cardTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    7.0),
+                                                        child: Text(
+                                                          orderData['order_detail']
+                                                                      [0]
+                                                                  ['menu_items']
+                                                              [0]['name'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          'key_Order_Ready'.tr,
-                                                          style: mTextStyle16(),
+                                                          '${orderData['order_detail'][0]['quantity']} X ₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
                                                         ),
-                                                        const SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        TimerWidget(
-                                                          //minutes: minutesFromApiResponse,
-                                                          minutes:
-                                                              calculateRemainingMinutes(
-                                                                  orderData[
-                                                                      'order_preparing_time']),
+                                                        Text(
+                                                          '₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
                                                         ),
                                                       ],
-                                                    )
-                                                  // ? BlinkText(
-                                                  //     'key_Order_Ready'.tr +
-                                                  //         "   " +
-                                                  //         formatDuration(
-                                                  //             _countdownSeconds),
-                                                  //     style: mTextStyle16(),
-                                                  //     endColor: orangeColor(),
-                                                  //   )
-                                                  : Text(
-                                                      'key_Order_Ready'.tr +
-                                                          "   " +
-                                                          formatDuration(
-                                                              _countdownSeconds),
-                                                      style: mTextStyle16(),
                                                     ),
-                                            ))))
-                                : const SizedBox(),
-                            const SizedBox(height: 15),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Item_Total'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          '₹ ' +
+                                                              orderData['order_detail']
+                                                                          [0][
+                                                                      'item_price']
+                                                                  .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_discount'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['coupon']
+                                                                      .toString() ==
+                                                                  'null'
+                                                              ? '₹ 0'
+                                                              : '₹ ' +
+                                                                  orderData[
+                                                                          'coupon_amount']
+                                                                      .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_You_will_get'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['order_earning_summary']
+                                                                      .toString() ==
+                                                                  "null"
+                                                              ? ""
+                                                              : "₹ " +
+                                                                  orderData['order_earning_summary']
+                                                                          [
+                                                                          'owner_earning_amount']
+                                                                      .toString(),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  const Divider(
+                                                    height: 20,
+                                                    color: Colors.white,
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    8.0),
+                                                        child: Text(
+                                                          "key_Order_Details"
+                                                              .tr,
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                      )),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Divider(
+                                                    thickness: 1,
+                                                    height: 20,
+                                                    color: orangeColor(),
+                                                    indent: 10,
+                                                    endIndent: 10,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Order_Number'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['order_no'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Payment_Type'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          'Bank',
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Date'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          getFormatedDate(
+                                                              orderData[
+                                                                  'created_at']),
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Phone_Number'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        Text(
+                                                          orderData['user']
+                                                              ['mobile_number'],
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          'key_Deliver_to'.tr,
+                                                          style: cTextStyle16(),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 200,
+                                                          child: Text(
+                                                            '${orderData['user_address']['address'] + ' ' + orderData['user_address']['area'] + ' ' + orderData['user_address']['city']['name'] + ' ' + orderData['user_address']['pin_code']}',
+                                                            textAlign:
+                                                                TextAlign.right,
+                                                            maxLines: 5,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style:
+                                                                cTextStyle16(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                ])))),
+                                const SizedBox(height: 25),
+                                SizedBox(
+                                    height: 50,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final phoneNumber =
+                                            orderData['user']['mobile_number'];
+                                        final Uri launchUri = Uri(
+                                          scheme: 'tel',
+                                          path: phoneNumber,
+                                        );
+                                        await launchUrl(launchUri);
+                                      },
+                                      child: Card(
+                                          shadowColor: Colors.black,
+                                          color: orangeColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'key_Call_to'.tr +
+                                                  ' ${orderData['user']['name']} (' +
+                                                  orderData['user']
+                                                      ['mobile_number'] +
+                                                  ')',
+                                              style: mTextStyle14(),
+                                            ),
+                                          )),
+                                    )),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                // isShowPreparingButton
+                                //     ? FadeTransition(
+                                //         opacity: _animationController,
+                                //         child: Container(
+                                //             height: 90,
+                                //             child: Padding(
+                                //                 padding: EdgeInsets.only(
+                                //                     left: 20,
+                                //                     right: 20,
+                                //                     bottom: 20,
+                                //                     top: 20),
+                                //                 child: Container(
+                                //                     height: 40,
+                                //                     // width: MediaQuery.of(context).size.width / 2,
+                                //                     decoration: BoxDecoration(
+                                //                         color: isTimeoutFinished
+                                //                             ? Colors.red
+                                //                             : Colors.green,
+                                //                         borderRadius:
+                                //                             BorderRadius.all(
+                                //                                 Radius.circular(
+                                //                                     10)),
+                                //                         border: Border.all(
+                                //                             color: isTimeoutFinished
+                                //                                 ? Colors.red
+                                //                                 : Colors.green)),
+                                //                     child: ElevatedButton(
+                                //                         onPressed: () async {
+                                //                           if (isTimeoutFinished) {
+                                //                             var orderList =
+                                //                                 orderData[
+                                //                                         'order_detail']
+                                //                                     as List;
+                                //                             setState(() {
+                                //                               isShowPreparingButton =
+                                //                                   false;
+                                //                             });
+                                //                             await fetchOrderDetails(
+                                //                                 isFromPreparingButton:
+                                //                                     true);
+                                //                           }
+                                //                         },
+                                //                         child: Row(
+                                //                           mainAxisAlignment:
+                                //                               MainAxisAlignment
+                                //                                   .center,
+                                //                           children: [
+                                //                             Text(
+                                //                               'key_Order_Ready'.tr,
+                                //                               style: const TextStyle(
+                                //                                   color:
+                                //                                       Colors.white,
+                                //                                   fontSize: 20,
+                                //                                   fontFamily:
+                                //                                       'Roboto',
+                                //                                   fontWeight:
+                                //                                       FontWeight
+                                //                                           .w700),
+                                //                             ),
+                                //                           ],
+                                //                         ))))))
+                                isShowDeliveredOrderButton
+                                    ? SizedBox(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: InkWell(
+                                            onTap: () async {
+                                              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+                                              // await preparedOrder();
+                                              viewVerifyOTPSheet(context);
+                                              setState(() {});
+                                            },
+                                            child: Card(
+                                                shadowColor: Colors.black,
+                                                color: Colors.green,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    'key_order_has_picked'.tr,
+                                                    style: mTextStyle16(),
+                                                  ),
+                                                ))))
+                                    : const SizedBox(),
+                                isShowPreparingButton
+                                    ? SizedBox(
+                                        height: 50,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: InkWell(
+                                            onTap: () async {
+                                              if (_countdownSeconds == 0) {
+                                                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderDetails(id: widget.id)));
+                                                // await preparedOrder();
+                                                fetchOrderDetails(
+                                                    isFromPreparingButton:
+                                                        true);
+                                                setState(() {});
+                                              }
+                                            },
+                                            child: Card(
+                                                shadowColor: Colors.black,
+                                                color: orangeColor(),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: isShowPreparingButton
+                                                      ? Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              'key_Order_Ready'
+                                                                  .tr,
+                                                              style:
+                                                                  mTextStyle16(),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 15,
+                                                            ),
+                                                            TimerWidget(
+                                                              //minutes: minutesFromApiResponse,
+                                                              minutes:
+                                                                  calculateRemainingMinutes(
+                                                                      orderData[
+                                                                          'order_preparing_time']),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      // ? BlinkText(
+                                                      //     'key_Order_Ready'.tr +
+                                                      //         "   " +
+                                                      //         formatDuration(
+                                                      //             _countdownSeconds),
+                                                      //     style: mTextStyle16(),
+                                                      //     endColor: orangeColor(),
+                                                      //   )
+                                                      : Text(
+                                                          'key_Order_Ready'.tr +
+                                                              "   " +
+                                                              formatDuration(
+                                                                  _countdownSeconds),
+                                                          style: mTextStyle16(),
+                                                        ),
+                                                ))))
+                                    : const SizedBox(),
+                                const SizedBox(height: 15),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    ),
-                  ),
-                  isShowAcceptButton
-                      ? Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                color: cardColor(),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                              ),
-                              child: Column(children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Text(
-                                      'key_Set_food_prepration_time'.tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15.0,
-                                          color: orangeColor()),
+                      ),
+                      isShowAcceptButton
+                          ? Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    color: cardColor(),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '${_selectedMinutes.toInt()} minutes',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 18.0),
-                                ),
-                                Slider(
-                                  activeColor: orangeColor(),
-                                  value: _selectedMinutes,
-                                  min: 5.0,
-                                  max: 60.0,
-                                  divisions: 59,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedMinutes = value;
-                                    });
-                                  },
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    SizedBox(
-                                        height: 45,
-                                        width:
-                                            MediaQuery.of(context).size.width *
+                                  child: Column(children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Text(
+                                          'key_Set_food_prepration_time'.tr,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 15.0,
+                                              color: orangeColor()),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      '${_selectedMinutes.toInt()} minutes',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 18.0),
+                                    ),
+                                    Slider(
+                                      activeColor: orangeColor(),
+                                      value: _selectedMinutes,
+                                      min: 5.0,
+                                      max: 60.0,
+                                      divisions: 59,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _selectedMinutes = value;
+                                        });
+                                      },
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        SizedBox(
+                                            height: 45,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.42,
-                                        child: InkWell(
-                                          onTap: () async {
-                                            fetchOrderDetails(
-                                                isFromCancelButton: true);
-                                          },
-                                          child: Card(
-                                              shadowColor: Colors.black,
-                                              color: Colors.redAccent,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'key_CANCEL'.tr,
-                                                  style: mTextStyle14(),
-                                                ),
-                                              )),
-                                        )),
-                                    SizedBox(
-                                        height: 45,
-                                        width:
-                                            MediaQuery.of(context).size.width *
+                                            child: InkWell(
+                                              onTap: () async {
+                                                fetchOrderDetails(
+                                                    isFromCancelButton: true);
+                                              },
+                                              child: Card(
+                                                  shadowColor: Colors.black,
+                                                  color: Colors.redAccent,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'key_CANCEL'.tr,
+                                                      style: mTextStyle14(),
+                                                    ),
+                                                  )),
+                                            )),
+                                        SizedBox(
+                                            height: 45,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
                                                 0.42,
-                                        child: InkWell(
-                                          onTap: () async {
-                                            fetchOrderDetails(
-                                                isFromAcceptButton: true);
-                                            setState(() {});
-                                            //setState(() {});
-                                            // print(
-                                            //     "selected minutes ${_selectedMinutes.toInt()}");
-                                          },
-                                          child: Card(
-                                              shadowColor: Colors.black,
-                                              color: Colors.green,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'key_ACCEPT'.tr,
-                                                  style: mTextStyle14(),
-                                                ),
-                                              )),
-                                        )),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                              ])),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-            ),
-      )
-    );
+                                            child: InkWell(
+                                              onTap: () async {
+                                                fetchOrderDetails(
+                                                    isFromAcceptButton: true);
+                                                setState(() {});
+                                                //setState(() {});
+                                                // print(
+                                                //     "selected minutes ${_selectedMinutes.toInt()}");
+                                              },
+                                              child: Card(
+                                                  shadowColor: Colors.black,
+                                                  color: Colors.green,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'key_ACCEPT'.tr,
+                                                      style: mTextStyle14(),
+                                                    ),
+                                                  )),
+                                            )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                  ])),
+                            )
+                          : const SizedBox(),
+                    ],
+                  ),
+                ),
+        ));
 
     // body:
 

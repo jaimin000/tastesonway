@@ -9,7 +9,6 @@ import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'package:tastesonway/utils/theme_data.dart';
-import '../../utils/sharedpreferences.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
