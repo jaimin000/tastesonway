@@ -1,13 +1,15 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
+import '../../models/dropdown.dart';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
+import 'package:collection/collection.dart';
 
 class ViewAddress extends StatefulWidget {
   const ViewAddress({Key? key}) : super(key: key);
@@ -18,23 +20,37 @@ class ViewAddress extends StatefulWidget {
 
 class _ViewAddressState extends State<ViewAddress> {
   Map addressData = {};
+  Map updatedAddressData = {};
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   bool isEditable = false;
   var locality;
+  var state;
   var subLocality;
+  var addressType;
   double latitide = 0;
   double longtude = 0;
   String addressID = '';
+  String cityId = '';
+  String stateId = '';
+  int type = 1;
 
-  bool saveAsHome = false;
-  bool saveAsOffice = false;
-  bool saveAsOther = false;
 
   TextEditingController officeAddress = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController pincodeController = TextEditingController();
   TextEditingController landmarkController = TextEditingController();
+
+  List<DropdownItem> _dropdownStates = [];
+  List<DropdownItem> _dropdownCities = [];
+  List<DropdownItem> _dropdownArea = [];
+
+  DropdownItem? _selectedState;
+  DropdownItem? _selectedCity;
+  DropdownItem? _selectedArea;
+
+  String item1 = "";
+  String item2 = "";
 
   changeLocationData() async {
     var getSubLocality = await Sharedprefrences.getSubLocality();
@@ -67,6 +83,19 @@ class _ViewAddressState extends State<ViewAddress> {
       pincodeController.text = addressData['pin_code'].toString();
       subLocality = addressData['area'].toString();
       locality = addressData['city']['name'].toString();
+      state = addressData['state']['name'].toString();
+      addressType = addressData['address_type'].toString();
+      print(state);
+      if (addressType == 'Other') {
+        type = 3;
+        setState(() {});
+      } else if (addressType == 'Work') {
+        type = 2;
+        setState(() {});
+      } else {
+        type = 1;
+        setState(() {});
+      }
       if (addressData['latitude'].toString() != 'null') {
         latitide = double.parse(addressData['latitude'].toString());
       }
@@ -74,19 +103,6 @@ class _ViewAddressState extends State<ViewAddress> {
         longtude = double.parse(addressData['longitude'].toString());
       }
       addressID = addressData['id'].toString();
-      if (addressData['address_type'].toString() == 'Home') {
-        saveAsHome = true;
-        saveAsOffice = false;
-        saveAsOther = false;
-      } else if (addressData['address_type'].toString() == 'Work') {
-        saveAsHome = false;
-        saveAsOffice = true;
-        saveAsOther = false;
-      } else {
-        saveAsHome = false;
-        saveAsOffice = false;
-        saveAsOther = true;
-      }
       await Sharedprefrences.saveAddressID(addressID);
       setState(() {
         isLoading = false;
@@ -103,96 +119,189 @@ class _ViewAddressState extends State<ViewAddress> {
   }
 
   Future<void> updateAddress(String addressID) async {
-    // if (_formKey.currentState.validate()) {
-    //   setState(() {
-    //     isLoading = true;
-    //   });
-    //   var area = subLocality.toString();
-    //   // String area = "ddemo";
-    //   var cityName = locality.toString();
-    //   var address = addressController.text;
-    //   var landMark = landmarkController.text ?? '';
-    //
-    //   var pincode = int.parse(pincodeController.text);
-    //   var latitude = latitide.toString();
-    //   var longitude = longtude.toString();
-    //   int addressType;
-    //   if (saveAsHome == true) {
-    //     addressType = 1;
-    //   } else if (saveAsOffice == true) {
-    //     addressType = 2;
-    //   } else {
-    //     addressType = 3;
-    //   }
-    //   // await _repository
-    //   //     .addAddressStore(
-    //   //     cityName,
-    //   //     address,
-    //   //     area,
-    //   //     landMark,
-    //   //     pincode,
-    //   //     latitude,
-    //   //     longitude,
-    //   //     addressType,
-    //   //     officeAddress.text,
-    //   //     addressID)
-    //   //     .then((value) async {
-    //   //   print(value.statusCode);
-    //   //   dynamic status = value.body;
-    //   //   dynamic user = jsonDecode(status.toString());
-    //   //   if (value.statusCode != 200) {
-    //   //     if (value.statusCode == 401) {
-    //   //       dynamic status = value.body;
-    //   //       dynamic responseJson = jsonDecode(status.toString());
-    //   //       if (responseJson['message']
-    //   //           .toString()
-    //   //           .contains(Constant.maintenance)) {
-    //   //         setState(() {
-    //   //           isServicePresent = true;
-    //   //           _isLoading = false;
-    //   //         });
-    //   //       } else {
-    //   //         var prefManager = await SharedPreferences.getInstance();
-    //   //         await prefManager.clear();
-    //   //
-    //   //         await Navigator.of(context).pushAndRemoveUntil(
-    //   //             MaterialPageRoute(builder: (context) => LanguageScreen()),
-    //   //                 (Route<dynamic> route) => false);
-    //   //       }
-    //   //     } else {
-    //   //       dynamic message = user['message'];
-    //   //       // state(() {
-    //   //       SnackBarWidget.show(context, message.toString());
-    //   //       // isShowStoreAddresssLoader = false;
-    //   //       // });
-    //   //       setState(() {
-    //   //         _isLoading = false;
-    //   //       });
-    //   //     }
-    //   //   } else {
-    //   //     setState(() {
-    //   //       _isLoading = false;
-    //   //       isEdittable = false;
-    //   //       isServicePresent = false;
-    //   //     });
-    //   //     var addressId = user['data']['id'];
-    //   //     await Sharedprefrences.saveAddressID(addressId.toString());
-    //   //     // Sharedprefrences.isHasAddressSave(true);
-    //   //     // Sharedprefrences.setTempLocation(false);
-    //   //     // Sharedprefrences.isHasAddressSave(true);
-    //   //     //var id=user['data'][0]['id'];
-    //   //     // state(() {
-    //   //     //   isShowStoreAddresssLoader = false;
-    //   //     // });
-    //   //   }
-    //   // });
-    // }
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      var area = subLocality.toString();
+      var cityName = locality.toString();
+      var address = addressController.text;
+      var landMark = landmarkController.text ?? '';
+      var pincode = int.parse(pincodeController.text);
+      var latitude = latitide.toString();
+      var longitude = longtude.toString();
+      String token = await Sharedprefrences.getToken();
+      final response = await http.post(
+        Uri.parse("$baseUrl/create-or-update-address"),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+        body: {
+          "city_id": "$cityId",
+          "state_id": "$stateId",
+          "address_id": "$addressID",
+          "office_name": "${officeAddress.text}",
+          "city_id": "1",
+          "address": "$address",
+          "area": "$area",
+          "land_mark": "$landMark",
+          "pin_code": "$pincode",
+          "address_type": "1",
+          "latitude": "$latitude",
+          "longitude": "$longitude",
+          "address_type": "$type",
+        },
+      );
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        var message = jsonData['message'];
+        updatedAddressData = jsonData['data'];
+        print(updatedAddressData);
+        ScaffoldSnackbar.of(context).show(message);
+        setState(() {
+          isLoading = false;
+        });
+      } else {
+        print('Request failed with status: ${response.statusCode}.');
+        ScaffoldSnackbar.of(context)
+            .show('Something Went Wrong Please try again!');
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<List<DropdownItem>> fetchStates() async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+        await http.post(Uri.parse("$baseUrl/get-states"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "country_id": "1"
+    });
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final statesData = data['data'];
+      //print("statesData: $statesData");
+      List<DropdownItem> items = [];
+
+      if (statesData is List) {
+        // API response is an array
+        for (var item in statesData) {
+          items
+              .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+        }
+      } else if (statesData is Map<String, dynamic>) {
+        // API response is a single object
+        items.add(DropdownItem(
+            id: statesData['id'].toString(), name: statesData['name']));
+      }
+      //print("items $items");
+      return items;
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  Future<List<DropdownItem>> fetchCities(String stateId) async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+        await http.post(Uri.parse("$baseUrl/get-cities"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "state_id": stateId
+    });
+    print(response);
+    print(response.body);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final cityData = data['data'];
+      print("cityData: $cityData");
+      List<DropdownItem> items = [];
+
+      if (cityData is List) {
+        // API response is an array
+        for (var item in cityData) {
+          items
+              .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+        }
+        setState(() {
+        });
+      } else if (cityData is Map<String, dynamic>) {
+        // API response is a single object
+        items.add(DropdownItem(
+            id: cityData['id'].toString(), name: cityData['name']));
+        setState(() {
+        });
+      }
+      print("items $items");
+        _dropdownCities = items;
+      setState(() {
+      });
+      return items;
+
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  Future<List<DropdownItem>> fetchCityArea(String cityId) async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+        await http.post(Uri.parse("$baseUrl/get-city-area"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "city_id": "$cityId"
+    });
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final cityAreaData = data['data'];
+      print("cityAreaData: $cityAreaData");
+      List<DropdownItem> items = [];
+
+      if (cityAreaData is List) {
+        // API response is an array
+        for (var item in cityAreaData) {
+          items
+              .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+        }
+      } else if (cityAreaData is Map<String, dynamic>) {
+        // API response is a single object
+        items.add(DropdownItem(
+            id: cityAreaData['id'].toString(), name: cityAreaData['name']));
+      }
+      // print("items $items");
+      setState(() {
+        // Update the city list in the UI
+        _dropdownArea = items;
+      });
+      return items;
+      setState(() {});
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
   }
 
   @override
   void initState() {
     fetchAddress();
     super.initState();
+    fetchStates().then((items) {
+      setState(() {
+        _dropdownStates = items;
+      });
+    });
+    fetchCities("11").then((items) {
+      setState(() {
+        _dropdownCities = items;
+      });
+    });
+    fetchCityArea("1").then((items) {
+      setState(() {
+        _dropdownArea = items;
+      });
+    });
   }
 
   @override
@@ -336,12 +445,14 @@ class _ViewAddressState extends State<ViewAddress> {
                                                           bottom: 5),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.all(
+                                                          const BorderRadius
+                                                                  .all(
                                                               Radius.circular(
                                                                   6)),
-                                                      color: Color(0xFFF0F0F0),
+                                                      color: const Color(
+                                                          0xFFF0F0F0),
                                                       border: Border.all(
-                                                          color: Color(
+                                                          color: const Color(
                                                               0xFFDFDFDF))),
                                                   child: Center(
                                                       child: Text(
@@ -370,8 +481,8 @@ class _ViewAddressState extends State<ViewAddress> {
                                     }
                                     return null;
                                   },
-                                  style: const TextStyle(
-                                      color: Colors.white), //<-- SEE HERE
+                                  style: const TextStyle(color: Colors.white),
+                                  //<-- SEE HERE
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.all(10.0),
@@ -401,8 +512,8 @@ class _ViewAddressState extends State<ViewAddress> {
                                     }
                                     return null;
                                   },
-                                  style: const TextStyle(
-                                      color: Colors.white), //<-- SEE HERE
+                                  style: const TextStyle(color: Colors.white),
+                                  //<-- SEE HERE
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.all(10.0),
@@ -419,14 +530,166 @@ class _ViewAddressState extends State<ViewAddress> {
                               const SizedBox(
                                 height: 10,
                               ),
+                              // DropdownButtonFormField<DropdownItem>(
+                              //   value: _selectedState,
+                              //   onChanged: isEditable
+                              //       ? (newValue) {
+                              //       stateId = "${_selectedState?.id}";
+                              //       _selectedState = newValue;
+                              //           // .firstWhere((item) => item.name == newValue);
+                              //       print("stateId $stateId");
+                              //     fetchCities("$stateId").then((value){
+                              //       setState((){});
+                              //       });
+                              //   }
+                              //       : null,
+                              //   items: _dropdownStates.map((item) {
+                              //     return DropdownMenuItem<DropdownItem>(
+                              //       value: item,
+                              //       child: Text("${item.name}"),
+                              //     );
+                              //   }).toList(),
+                              //   decoration: InputDecoration(
+                              //     border: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //       borderSide: BorderSide.none,
+                              //     ), // Remove the border
+                              //     filled: true,
+                              //     hintText: state,
+                              //     fillColor: inputColor(), // Set the background color
+                              //     contentPadding: const EdgeInsets.symmetric(
+                              //       horizontal: 16.0,
+                              //       vertical: 12.0,
+                              //     ), // Adjust the content padding
+                              //   ),
+                              // ),
+
+                              DropdownButtonFormField<DropdownItem>(
+                                value: _selectedState,
+                                onChanged: isEditable
+                                    ? (newValue) {
+                                  setState(() {
+                                    stateId = "${newValue?.id}";
+                                    _selectedState = newValue;
+                                    print("stateId $stateId");
+                                  });
+
+                                  fetchCities(stateId).then((value) {
+                                    setState(() {});
+                                  });
+                                }
+                                    : null,
+                                items: _dropdownStates.map((item1) {
+                                  return DropdownMenuItem<DropdownItem>(
+                                    value: item1,
+                                    child: Text("${item1.name}"),
+                                  );
+                                }).toList(),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide.none,
+                                  ), // Remove the border
+                                  filled: true,
+                                  hintText: state,
+                                  fillColor: inputColor(), // Set the background color
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                    vertical: 12.0,
+                                  ), // Adjust the content padding
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 10,
+                              ),
+
+                              DropdownButtonFormField<DropdownItem>(
+                                value:_selectedCity != null ? _selectedCity : _dropdownCities.firstOrNull,
+                                onChanged: isEditable
+                                    ? (newValue) {
+                                        setState(() {
+                                          cityId =
+                                              {_selectedCity?.id}.toString();
+                                          _selectedCity = _dropdownCities
+                                              .firstWhere((item) =>
+                                                  item.name == newValue);
+                                          print(_selectedCity?.id);
+                                          // _selectedArea = null;
+                                        });
+                                        fetchCityArea("${_selectedCity?.id}")
+                                            .then((value) => setState(() {}));
+                                      }
+                                    : null,
+                                items: _dropdownCities.isEmpty
+                                    ? null // No items in the dropdown
+                                    : _dropdownCities.map((item) {
+                                        return DropdownMenuItem<DropdownItem>(
+                                          value: item,
+                                          child: Text("${item.name}"),
+                                        );
+                                      }).toList(),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide:
+                                          BorderSide.none), // Remove the border
+                                  filled: true,
+                                  hintText: locality,
+                                  fillColor:
+                                      inputColor(), // Set the background color
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 16.0,
+                                      vertical:
+                                          12.0), // Adjust the content padding
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              DropdownButtonFormField<DropdownItem>(
+                                value: _selectedArea,
+                                onChanged: isEditable ? (newValue) {
+                                  setState(() {
+                                    _selectedArea = _dropdownArea.firstWhere(
+                                        (item) => item.name == newValue);
+                                    print("area id :${_selectedArea?.name}");
+                                  });
+                                }:null,
+                                items: _dropdownArea.isEmpty
+                                    ? null // No items in the dropdown
+                                    : _dropdownArea.map((item) {
+                                        return DropdownMenuItem<DropdownItem>(
+                                          value: item,
+                                          child: Text("${item.name}"),
+                                        );
+                                      }).toList(),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide:
+                                          BorderSide.none), // Remove the border
+                                  filled: true,
+                                  hintText: subLocality,
+                                  fillColor:
+                                      inputColor(), // Set the background color
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 16.0,
+                                      vertical:
+                                          12.0), // Adjust the content padding
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               SizedBox(
                                 height: 45,
                                 width: MediaQuery.of(context).size.width,
                                 child: TextFormField(
                                   enabled: isEditable,
                                   controller: landmarkController,
-                                  style: const TextStyle(
-                                      color: Colors.white), //<-- SEE HERE
+                                  style: const TextStyle(color: Colors.white),
+                                  //<-- SEE HERE
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.all(10.0),
@@ -453,8 +716,8 @@ class _ViewAddressState extends State<ViewAddress> {
                                     }
                                     return null;
                                   },
-                                  style: const TextStyle(
-                                      color: Colors.white), //<-- SEE HERE
+                                  style: const TextStyle(color: Colors.white),
+                                  //<-- SEE HERE
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.all(10.0),
@@ -474,20 +737,28 @@ class _ViewAddressState extends State<ViewAddress> {
                               SizedBox(
                                   height: 50,
                                   width: MediaQuery.of(context).size.width,
-                                  child: Card(
-                                      shadowColor: Colors.black,
-                                      color: orangeColor(),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'Proceed',
-                                          style: mTextStyle14(),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (isEditable) {
+                                        updateAddress(addressID);
+                                        isEditable = false;
+                                      }
+                                    },
+                                    child: Card(
+                                        shadowColor: Colors.black,
+                                        color: orangeColor(),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
                                         ),
-                                      ))),
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'key_Save_Address'.tr,
+                                            style: mTextStyle14(),
+                                          ),
+                                        )),
+                                  )),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -505,61 +776,97 @@ class _ViewAddressState extends State<ViewAddress> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Card(
-                                    shadowColor: Colors.black,
-                                    color: orangeColor(),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: SizedBox(
-                                      width: 80,
-                                      height: 35,
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'key_Home'.tr,
-                                            style: mTextStyle16(),
-                                          )),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Card(
-                                    shadowColor: Colors.black,
-                                    color: const Color.fromRGBO(53, 56, 66, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: SizedBox(
-                                      width: 80,
-                                      height: 35,
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'key_Work'.tr,
-                                            style: mTextStyle16(),
-                                          )),
+                                  InkWell(
+                                    onTap: () {
+                                      if (isEditable) {
+                                        setState(() {
+                                          type = 1;
+                                        });
+                                      }
+                                    },
+                                    child: Card(
+                                      shadowColor: Colors.black,
+                                      color: type == 1
+                                          ? orangeColor()
+                                          : const Color.fromRGBO(53, 56, 66, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: SizedBox(
+                                        width: 80,
+                                        height: 35,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'key_Home'.tr,
+                                              style: mTextStyle16(),
+                                            )),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
                                     width: 5,
                                   ),
-                                  Card(
-                                    shadowColor: Colors.black,
-                                    color: const Color.fromRGBO(53, 56, 66, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
+                                  InkWell(
+                                    onTap: () {
+                                      if (isEditable) {
+                                        setState(() {
+                                          type = 2;
+                                        });
+                                      }
+                                    },
+                                    child: Card(
+                                      shadowColor: Colors.black,
+                                      color: type == 2
+                                          ? orangeColor()
+                                          : const Color.fromRGBO(53, 56, 66, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: SizedBox(
+                                        width: 80,
+                                        height: 35,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'key_Work'.tr,
+                                              style: mTextStyle16(),
+                                            )),
+                                      ),
                                     ),
-                                    child: SizedBox(
-                                      width: 80,
-                                      height: 35,
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'key_Other'.tr,
-                                            style: mTextStyle16(),
-                                          )),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      if (isEditable) {
+                                        setState(() {
+                                          type = 3;
+                                        });
+                                      }
+                                    },
+                                    child: Card(
+                                      shadowColor: Colors.black,
+                                      color: type == 3
+                                          ? orangeColor()
+                                          : const Color.fromRGBO(53, 56, 66, 1),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: SizedBox(
+                                        width: 80,
+                                        height: 35,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              'key_Other'.tr,
+                                              style: mTextStyle16(),
+                                            )),
+                                      ),
                                     ),
                                   ),
                                 ],
