@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/screens/discount/choose_promo.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:http/http.dart' as http;
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
 
 
 class CreateDiscountCoupon extends StatefulWidget {
@@ -15,7 +20,35 @@ class CreateDiscountCoupon extends StatefulWidget {
 
 class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
   int _current = 0;
+  List couponData=[];
 
+  void fetchCoupon() async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+    await http.post(Uri.parse("$baseUrl/get-coupons"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "kitchen_owner_id":"${await getOwnerId()}",
+    });
+    print(getOwnerId());
+    if (response.statusCode == 200) {
+      couponData.clear();
+      final data = json.decode(response.body);
+      final coupondata = data['data']['data'];
+      for (int i=0; i<coupondata.length;i++){
+        couponData.add(coupondata);
+      }
+      print(couponData);
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  @override
+  void initState() {
+    fetchCoupon();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +143,8 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                       _current = i;
                     });
                   }),
-              items: [
+              items:
+              [
                 SizedBox(
                   width:300,
                   child:Card(
@@ -153,91 +187,6 @@ class _CreateDiscountCouponState extends State<CreateDiscountCoupon> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width:300,
-                  child:Card(
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin:const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("key_bestoffer".tr,style: cardTextStyle12(),),
-                          Text("Cashback Upto ₹ 100 \nUse Code TRYME",style: cTextStyle18(),),
-                          const Divider(
-                            height: 20,
-                            endIndent: 5,
-                            indent: 5,
-                            color: Colors.white,
-                          ),
-                          Text("Valid On Orders Above ₹ 400 ",style: cTextStyle14(),),
-                          Text("You can use this ode on first order ",style: cTextStyle14(),),
-                          Text("Valid from today till 26th Nov 2022",style: cTextStyle14(),),
-                          const SizedBox(height:10),
-                          SizedBox(height: 35,
-                            width:double.infinity,
-                            child: Card(color: const Color.fromRGBO(105, 111, 130, 1),child: Center(
-                              child: Text("key_in_review".tr,
-                                textAlign: TextAlign.center,
-                                style: mTextStyle16(),
-                              ),
-                            ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width:300,
-                  child:Card(
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      margin:const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("key_bestoffer".tr,style: cardTextStyle12(),),
-                          Text("Cashback Upto ₹ 100 \nUse Code TRYME",style: cTextStyle18(),),
-                          const Divider(
-                            height: 20,
-                            endIndent: 5,
-                            indent: 5,
-                            color: Colors.white,
-                          ),
-                          Text("Valid On Orders Above ₹ 400 ",style: cTextStyle14(),),
-                          Text("You can use this ode on first order ",style: cTextStyle14(),),
-                          Text("Valid from today till 26th Nov 2022",style: cTextStyle14(),),
-                          const SizedBox(height:10),
-                          SizedBox(height: 35,
-                            width:double.infinity,
-                            child: Card(color: const Color.fromRGBO(105, 111, 130, 1),child: Center(
-                              child: Text("key_in_review".tr,
-                                textAlign: TextAlign.center,
-                                style: mTextStyle16(),
-                              ),
-                            ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
               ],
             ),
             const SizedBox(

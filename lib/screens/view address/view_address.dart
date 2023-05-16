@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:http/http.dart' as http;
@@ -33,6 +32,7 @@ class _ViewAddressState extends State<ViewAddress> {
   String addressID = '';
   String cityId = '';
   String stateId = '';
+  String areaName = '';
   int type = 1;
 
 
@@ -48,9 +48,6 @@ class _ViewAddressState extends State<ViewAddress> {
   DropdownItem? _selectedState;
   DropdownItem? _selectedCity;
   DropdownItem? _selectedArea;
-
-  String item1 = "";
-  String item2 = "";
 
   changeLocationData() async {
     var getSubLocality = await Sharedprefrences.getSubLocality();
@@ -85,6 +82,9 @@ class _ViewAddressState extends State<ViewAddress> {
       locality = addressData['city']['name'].toString();
       state = addressData['state']['name'].toString();
       addressType = addressData['address_type'].toString();
+      stateId = addressData['state_id'].toString();
+      cityId = addressData['city_id'].toString();
+      areaName = addressData['area'].toString();
       print(state);
       if (addressType == 'Other') {
         type = 3;
@@ -131,26 +131,28 @@ class _ViewAddressState extends State<ViewAddress> {
       var latitude = latitide.toString();
       var longitude = longtude.toString();
       String token = await Sharedprefrences.getToken();
+      Map body = {
+        "city_id": cityId == null ? '' : cityId,
+        "state_id": stateId == null ? '':stateId,
+        "area": areaName == null ? '' : areaName,
+        "address_id": "$addressID",
+        "office_name": "${officeAddress.text}",
+        "address": "$address",
+        "land_mark": "$landMark",
+        "pin_code": "$pincode",
+        "address_type": "1",
+        "latitude": "$latitude",
+        "longitude": "$longitude",
+        "address_type": "$type",
+      };
+
+      print(body);
       final response = await http.post(
         Uri.parse("$baseUrl/create-or-update-address"),
         headers: {
           'Authorization': 'Bearer $token',
         },
-        body: {
-          "city_id": "$cityId",
-          "state_id": "$stateId",
-          "address_id": "$addressID",
-          "office_name": "${officeAddress.text}",
-          "city_id": "1",
-          "address": "$address",
-          "area": "$area",
-          "land_mark": "$landMark",
-          "pin_code": "$pincode",
-          "address_type": "1",
-          "latitude": "$latitude",
-          "longitude": "$longitude",
-          "address_type": "$type",
-        },
+        body: body
       );
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
@@ -161,13 +163,15 @@ class _ViewAddressState extends State<ViewAddress> {
         setState(() {
           isLoading = false;
         });
+        Navigator.pop(context);
       } else {
         print('Request failed with status: ${response.statusCode}.');
         ScaffoldSnackbar.of(context)
-            .show('Something Went Wrong Please try again!');
+            .show('we are currently available in 3 places Prahlad Nagar, Paldi, University Area.');
         setState(() {
           isLoading = false;
         });
+        Navigator.pop(context);
       }
     }
   }
@@ -175,7 +179,7 @@ class _ViewAddressState extends State<ViewAddress> {
   Future<List<DropdownItem>> fetchStates() async {
     String token = await Sharedprefrences.getToken();
     final response =
-        await http.post(Uri.parse("$baseUrl/get-states"), headers: {
+    await http.post(Uri.parse("$baseUrl/get-states"), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
       "country_id": "1"
@@ -183,7 +187,6 @@ class _ViewAddressState extends State<ViewAddress> {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final statesData = data['data'];
-      //print("statesData: $statesData");
       List<DropdownItem> items = [];
 
       if (statesData is List) {
@@ -197,7 +200,6 @@ class _ViewAddressState extends State<ViewAddress> {
         items.add(DropdownItem(
             id: statesData['id'].toString(), name: statesData['name']));
       }
-      //print("items $items");
       return items;
     } else {
       throw Exception('Failed to fetch data from API');
@@ -207,17 +209,14 @@ class _ViewAddressState extends State<ViewAddress> {
   Future<List<DropdownItem>> fetchCities(String stateId) async {
     String token = await Sharedprefrences.getToken();
     final response =
-        await http.post(Uri.parse("$baseUrl/get-cities"), headers: {
+    await http.post(Uri.parse("$baseUrl/get-cities"), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
       "state_id": stateId
     });
-    print(response);
-    print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final cityData = data['data'];
-      print("cityData: $cityData");
       List<DropdownItem> items = [];
 
       if (cityData is List) {
@@ -236,7 +235,7 @@ class _ViewAddressState extends State<ViewAddress> {
         });
       }
       print("items $items");
-        _dropdownCities = items;
+      _dropdownCities = items;
       setState(() {
       });
       return items;
@@ -249,7 +248,7 @@ class _ViewAddressState extends State<ViewAddress> {
   Future<List<DropdownItem>> fetchCityArea(String cityId) async {
     String token = await Sharedprefrences.getToken();
     final response =
-        await http.post(Uri.parse("$baseUrl/get-city-area"), headers: {
+    await http.post(Uri.parse("$baseUrl/get-city-area"), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
       "city_id": "$cityId"
@@ -277,7 +276,6 @@ class _ViewAddressState extends State<ViewAddress> {
         _dropdownArea = items;
       });
       return items;
-      setState(() {});
     } else {
       throw Exception('Failed to fetch data from API');
     }
@@ -290,18 +288,20 @@ class _ViewAddressState extends State<ViewAddress> {
     fetchStates().then((items) {
       setState(() {
         _dropdownStates = items;
+        _dropdownCities = [];
+        _dropdownArea=[];
       });
     });
-    fetchCities("11").then((items) {
-      setState(() {
-        _dropdownCities = items;
-      });
-    });
-    fetchCityArea("1").then((items) {
-      setState(() {
-        _dropdownArea = items;
-      });
-    });
+    // fetchCities("11").then((items) {
+    //   setState(() {
+    //     _dropdownCities = items;
+    //   });
+    // });
+    // fetchCityArea("1").then((items) {
+    //   setState(() {
+    //     _dropdownArea = items;
+    //   });
+    // });
   }
 
   @override
@@ -313,576 +313,574 @@ class _ViewAddressState extends State<ViewAddress> {
         backgroundColor: backgroundColor(),
         title: isEditable
             ? Text(
-                'key_Edit_Address'.tr,
-                style: cardTitleStyle20(),
-              )
+          'key_Edit_Address'.tr,
+          style: cardTitleStyle20(),
+        )
             : Text(
-                'key_View_Address'.tr,
-                style: cardTitleStyle20(),
-              ),
+          'key_View_Address'.tr,
+          style: cardTitleStyle20(),
+        ),
         actions: [
           !isEditable
               ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isEditable = true;
-                    });
-                  },
-                  icon: const Icon(Icons.edit),
-                )
+            onPressed: () {
+              setState(() {
+                isEditable = true;
+                _dropdownArea = [];
+                _dropdownCities=[];
+              });
+            },
+            icon: const Icon(Icons.edit),
+          )
               : SizedBox(),
         ],
       ),
       body: isLoading
           ? Center(
-              child: CircularProgressIndicator(color: orangeColor()),
-            )
+        child: CircularProgressIndicator(color: orangeColor()),
+      )
           : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: cardColor(),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Container(
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Text(
-                                  'Basic Details',
-                                  style: mTextStyle18(),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      flex: 2,
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.location_pin,
-                                            color: orangeColor(),
-                                            size: 30,
-                                          ),
-                                          Expanded(
-                                              child: InkWell(
-                                                  onTap: () {
-                                                    if (isEditable) {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  SearchLocation())).then(
-                                                          (value) {
-                                                        if (value == 'true') {
-                                                          changeLocationData();
-                                                          // Navigator.pop(context);
-                                                          // getUserLocation();
-                                                        }
-                                                      });
-                                                    }
-                                                  },
-                                                  child: Text(
-                                                    subLocality != null
-                                                        ? subLocality.toString()
-                                                        : '',
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: mTextStyle18(),
-                                                  ))),
-                                        ],
-                                      )),
-                                  Expanded(
-                                      child: InkWell(
-                                          onTap: () {
-                                            if (isEditable) {
-                                              Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              SearchLocation()))
-                                                  .then((value) {
-                                                if (value == 'true') {
-                                                  changeLocationData();
-                                                  // Navigator.pop(context);
-                                                  // getUserLocation();
-                                                }
-                                              });
-                                            }
-                                          },
-                                          child: isEditable
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20,
-                                                          right: 20,
-                                                          top: 5,
-                                                          bottom: 5),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                                  .all(
-                                                              Radius.circular(
-                                                                  6)),
-                                                      color: const Color(
-                                                          0xFFF0F0F0),
-                                                      border: Border.all(
-                                                          color: const Color(
-                                                              0xFFDFDFDF))),
-                                                  child: Center(
-                                                      child: Text(
-                                                    'key_Change'.tr,
-                                                    style: const TextStyle(
-                                                        color:
-                                                            Color(0xFFF85649)),
-                                                  )))
-                                              : Container()))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              SizedBox(
-                                height: 45,
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  controller: officeAddress,
-                                  enabled: isEditable,
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'key_Please_enter_Kitchen_Owner_Name'
-                                          .tr;
-                                    }
-                                    return null;
-                                  },
-                                  style: const TextStyle(color: Colors.white),
-                                  //<-- SEE HERE
-                                  cursorColor: Colors.white,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(10.0),
-                                    fillColor: inputColor(),
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                    hintText: 'key_Kitchen_Owner_Name'.tr,
-                                    hintStyle: inputTextStyle16(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                height: 45,
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  enabled: isEditable,
-                                  controller: addressController,
-                                  keyboardType: TextInputType.text,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'key_Please_enter_Address'.tr;
-                                    }
-                                    return null;
-                                  },
-                                  style: const TextStyle(color: Colors.white),
-                                  //<-- SEE HERE
-                                  cursorColor: Colors.white,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(10.0),
-                                    fillColor: inputColor(),
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                    hintText: 'key_Address'.tr,
-                                    hintStyle: inputTextStyle16(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              // DropdownButtonFormField<DropdownItem>(
-                              //   value: _selectedState,
-                              //   onChanged: isEditable
-                              //       ? (newValue) {
-                              //       stateId = "${_selectedState?.id}";
-                              //       _selectedState = newValue;
-                              //           // .firstWhere((item) => item.name == newValue);
-                              //       print("stateId $stateId");
-                              //     fetchCities("$stateId").then((value){
-                              //       setState((){});
-                              //       });
-                              //   }
-                              //       : null,
-                              //   items: _dropdownStates.map((item) {
-                              //     return DropdownMenuItem<DropdownItem>(
-                              //       value: item,
-                              //       child: Text("${item.name}"),
-                              //     );
-                              //   }).toList(),
-                              //   decoration: InputDecoration(
-                              //     border: OutlineInputBorder(
-                              //       borderRadius: BorderRadius.circular(10),
-                              //       borderSide: BorderSide.none,
-                              //     ), // Remove the border
-                              //     filled: true,
-                              //     hintText: state,
-                              //     fillColor: inputColor(), // Set the background color
-                              //     contentPadding: const EdgeInsets.symmetric(
-                              //       horizontal: 16.0,
-                              //       vertical: 12.0,
-                              //     ), // Adjust the content padding
-                              //   ),
-                              // ),
-
-                              DropdownButtonFormField<DropdownItem>(
-                                value: _selectedState,
-                                onChanged: isEditable
-                                    ? (newValue) {
-                                  setState(() {
-                                    stateId = "${newValue?.id}";
-                                    _selectedState = newValue;
-                                    print("stateId $stateId");
-                                  });
-
-                                  fetchCities(stateId).then((value) {
-                                    setState(() {});
-                                  });
-                                }
-                                    : null,
-                                items: _dropdownStates.map((item1) {
-                                  return DropdownMenuItem<DropdownItem>(
-                                    value: item1,
-                                    child: Text("${item1.name}"),
-                                  );
-                                }).toList(),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide.none,
-                                  ), // Remove the border
-                                  filled: true,
-                                  hintText: state,
-                                  fillColor: inputColor(), // Set the background color
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0,
-                                    vertical: 12.0,
-                                  ), // Adjust the content padding
-                                ),
-                              ),
-
-                              const SizedBox(
-                                height: 10,
-                              ),
-
-                              DropdownButtonFormField<DropdownItem>(
-                                value:_selectedCity != null ? _selectedCity : _dropdownCities.firstOrNull,
-                                onChanged: isEditable
-                                    ? (newValue) {
-                                        setState(() {
-                                          cityId =
-                                              {_selectedCity?.id}.toString();
-                                          _selectedCity = _dropdownCities
-                                              .firstWhere((item) =>
-                                                  item.name == newValue);
-                                          print(_selectedCity?.id);
-                                          // _selectedArea = null;
-                                        });
-                                        fetchCityArea("${_selectedCity?.id}")
-                                            .then((value) => setState(() {}));
-                                      }
-                                    : null,
-                                items: _dropdownCities.isEmpty
-                                    ? null // No items in the dropdown
-                                    : _dropdownCities.map((item) {
-                                        return DropdownMenuItem<DropdownItem>(
-                                          value: item,
-                                          child: Text("${item.name}"),
-                                        );
-                                      }).toList(),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide:
-                                          BorderSide.none), // Remove the border
-                                  filled: true,
-                                  hintText: locality,
-                                  fillColor:
-                                      inputColor(), // Set the background color
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 16.0,
-                                      vertical:
-                                          12.0), // Adjust the content padding
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              DropdownButtonFormField<DropdownItem>(
-                                value: _selectedArea,
-                                onChanged: isEditable ? (newValue) {
-                                  setState(() {
-                                    _selectedArea = _dropdownArea.firstWhere(
-                                        (item) => item.name == newValue);
-                                    print("area id :${_selectedArea?.name}");
-                                  });
-                                }:null,
-                                items: _dropdownArea.isEmpty
-                                    ? null // No items in the dropdown
-                                    : _dropdownArea.map((item) {
-                                        return DropdownMenuItem<DropdownItem>(
-                                          value: item,
-                                          child: Text("${item.name}"),
-                                        );
-                                      }).toList(),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide:
-                                          BorderSide.none), // Remove the border
-                                  filled: true,
-                                  hintText: subLocality,
-                                  fillColor:
-                                      inputColor(), // Set the background color
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 16.0,
-                                      vertical:
-                                          12.0), // Adjust the content padding
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                height: 45,
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  enabled: isEditable,
-                                  controller: landmarkController,
-                                  style: const TextStyle(color: Colors.white),
-                                  //<-- SEE HERE
-                                  cursorColor: Colors.white,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(10.0),
-                                    fillColor: inputColor(),
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                    hintText: 'key_Landmark'.tr,
-                                    hintStyle: inputTextStyle16(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              SizedBox(
-                                height: 45,
-                                width: MediaQuery.of(context).size.width,
-                                child: TextFormField(
-                                  enabled: isEditable,
-                                  controller: pincodeController,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'key_Please_enter_pincode'.tr;
-                                    }
-                                    return null;
-                                  },
-                                  style: const TextStyle(color: Colors.white),
-                                  //<-- SEE HERE
-                                  cursorColor: Colors.white,
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.all(10.0),
-                                    fillColor: inputColor(),
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide.none),
-                                    hintText: 'key_pincode'.tr,
-                                    hintStyle: inputTextStyle16(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                  height: 50,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: InkWell(
-                                    onTap: () {
-                                      if (isEditable) {
-                                        updateAddress(addressID);
-                                        isEditable = false;
-                                      }
-                                    },
-                                    child: Card(
-                                        shadowColor: Colors.black,
-                                        color: orangeColor(),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'key_Save_Address'.tr,
-                                            style: mTextStyle14(),
-                                          ),
-                                        )),
-                                  )),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: Text(
-                                  'key_Address_Type'.tr,
-                                  style: mTextStyle18(),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      if (isEditable) {
-                                        setState(() {
-                                          type = 1;
-                                        });
-                                      }
-                                    },
-                                    child: Card(
-                                      shadowColor: Colors.black,
-                                      color: type == 1
-                                          ? orangeColor()
-                                          : const Color.fromRGBO(53, 56, 66, 1),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 35,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'key_Home'.tr,
-                                              style: mTextStyle16(),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      if (isEditable) {
-                                        setState(() {
-                                          type = 2;
-                                        });
-                                      }
-                                    },
-                                    child: Card(
-                                      shadowColor: Colors.black,
-                                      color: type == 2
-                                          ? orangeColor()
-                                          : const Color.fromRGBO(53, 56, 66, 1),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 35,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'key_Work'.tr,
-                                              style: mTextStyle16(),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      if (isEditable) {
-                                        setState(() {
-                                          type = 3;
-                                        });
-                                      }
-                                    },
-                                    child: Card(
-                                      shadowColor: Colors.black,
-                                      color: type == 3
-                                          ? orangeColor()
-                                          : const Color.fromRGBO(53, 56, 66, 1),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: 80,
-                                        height: 35,
-                                        child: Align(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'key_Other'.tr,
-                                              style: mTextStyle16(),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                            ],
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 25,
+              ),
+              Card(
+                shadowColor: Colors.black,
+                color: cardColor(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    margin: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Text(
+                            'Basic Details',
+                            style: mTextStyle18(),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                flex: 2,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_pin,
+                                      color: orangeColor(),
+                                      size: 30,
+                                    ),
+                                    Expanded(
+                                        child: InkWell(
+                                            onTap: () {
+                                              if (isEditable) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SearchLocation())).then(
+                                                        (value) {
+                                                      if (value == 'true') {
+                                                        changeLocationData();
+                                                        // Navigator.pop(context);
+                                                        // getUserLocation();
+                                                      }
+                                                    });
+                                              }
+                                            },
+                                            child: Text(
+                                              subLocality != null
+                                                  ? subLocality.toString()
+                                                  : '',
+                                              maxLines: 1,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              style: mTextStyle18(),
+                                            ))),
+                                  ],
+                                )),
+                            Expanded(
+                                child: InkWell(
+                                    onTap: () {
+                                      if (isEditable) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SearchLocation()))
+                                            .then((value) {
+                                          if (value == 'true') {
+                                            changeLocationData();
+                                            // Navigator.pop(context);
+                                            // getUserLocation();
+                                          }
+                                        });
+                                      }
+                                    },
+                                    child: isEditable
+                                        ? Container(
+                                        padding:
+                                        const EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            top: 5,
+                                            bottom: 5),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            const BorderRadius
+                                                .all(
+                                                Radius.circular(
+                                                    6)),
+                                            color: const Color(
+                                                0xFFF0F0F0),
+                                            border: Border.all(
+                                                color: const Color(
+                                                    0xFFDFDFDF))),
+                                        child: Center(
+                                            child: Text(
+                                              'key_Change'.tr,
+                                              style: const TextStyle(
+                                                  color:
+                                                  Color(0xFFF85649)),
+                                            )))
+                                        : Container()))
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            controller: officeAddress,
+                            enabled: isEditable,
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'key_Please_enter_Kitchen_Owner_Name'
+                                    .tr;
+                              }
+                              return null;
+                            },
+                            style: const TextStyle(color: Colors.white),
+                            //<-- SEE HERE
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_Kitchen_Owner_Name'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            enabled: isEditable,
+                            controller: addressController,
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'key_Please_enter_Address'.tr;
+                              }
+                              return null;
+                            },
+                            style: const TextStyle(color: Colors.white),
+                            //<-- SEE HERE
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_Address'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        // DropdownButtonFormField<DropdownItem>(
+                        //   value: _selectedState,
+                        //   onChanged: isEditable
+                        //       ? (newValue) {
+                        //       stateId = "${_selectedState?.id}";
+                        //       _selectedState = newValue;
+                        //           // .firstWhere((item) => item.name == newValue);
+                        //       print("stateId $stateId");
+                        //     fetchCities("$stateId").then((value){
+                        //       setState((){});
+                        //       });
+                        //   }
+                        //       : null,
+                        //   items: _dropdownStates.map((item) {
+                        //     return DropdownMenuItem<DropdownItem>(
+                        //       value: item,
+                        //       child: Text("${item.name}"),
+                        //     );
+                        //   }).toList(),
+                        //   decoration: InputDecoration(
+                        //     border: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(10),
+                        //       borderSide: BorderSide.none,
+                        //     ), // Remove the border
+                        //     filled: true,
+                        //     hintText: state,
+                        //     fillColor: inputColor(), // Set the background color
+                        //     contentPadding: const EdgeInsets.symmetric(
+                        //       horizontal: 16.0,
+                        //       vertical: 12.0,
+                        //     ), // Adjust the content padding
+                        //   ),
+                        // ),
+
+                        DropdownButtonFormField<DropdownItem>(
+                          value: _selectedState,
+                          onChanged: isEditable
+                              ? (newValue) {
+                            setState(() {
+                              stateId = "${newValue?.id}";
+                              _selectedState = newValue;
+                              _dropdownCities =[];
+                              _dropdownArea =[];
+                              print("stateId $stateId");
+                            });
+
+                            fetchCities(stateId).then((value) {
+                              setState(() {});
+                            });
+                          }
+                              : null,
+                          items:_dropdownStates.isNotEmpty? _dropdownStates.map((item1) {
+                            return DropdownMenuItem<DropdownItem>(
+                              value: item1,
+                              child: Text("${item1.name}"),
+                            );
+                          }).toList():[],
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ), // Remove the border
+                            filled: true,
+                            hintText: state,
+                            fillColor: inputColor(), // Set the background color
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 12.0,
+                            ), // Adjust the content padding
+                          ),
+                        ),
+
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        DropdownButtonFormField<DropdownItem>(
+                          value:_selectedCity != null ? _selectedCity : _dropdownCities.firstOrNull,
+                          onChanged: isEditable
+                              ? (newValue) {
+                            setState(() {
+                              cityId = "${newValue?.id}";
+                              _selectedCity = newValue;
+                              print("cityId $cityId");
+                            });
+                            fetchCityArea("${_selectedCity?.id}")
+                                .then((value) => setState(() {}));
+                          }
+                              : null,
+                          items: _dropdownCities.isNotEmpty
+                               // No items in the dropdown
+                              ? _dropdownCities.map((item2) {
+                            return DropdownMenuItem<DropdownItem>(
+                              value: item2,
+                              child: Text("${item2.name}"),
+                            );
+                          }).toList() : [],
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide.none), // Remove the border
+                            filled: true,
+                            hintText: locality,
+                            fillColor:
+                            inputColor(), // Set the background color
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical:
+                                12.0), // Adjust the content padding
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        DropdownButtonFormField<DropdownItem>(
+                          value: _selectedArea,
+                          onChanged: isEditable ? (newValue) {
+                            setState(() {
+                              areaName = "${newValue?.name}";
+                              _selectedArea = newValue;
+                              print("areaname $areaName ");
+                            });
+                          }:null,
+                          items: _dropdownArea.isNotEmpty
+                              ? _dropdownArea.map((item3) {
+                            return DropdownMenuItem<DropdownItem>(
+                              value: item3,
+                              child: Text("${item3.name}"),
+                            );
+                          }).toList():[],
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide.none), // Remove the border
+                            filled: true,
+                            hintText: subLocality,
+                            fillColor:
+                            inputColor(), // Set the background color
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical:
+                                12.0), // Adjust the content padding
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            enabled: isEditable,
+                            controller: landmarkController,
+                            style: const TextStyle(color: Colors.white),
+                            //<-- SEE HERE
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_Landmark'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            enabled: isEditable,
+                            controller: pincodeController,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'key_Please_enter_pincode'.tr;
+                              }
+                              return null;
+                            },
+                            style: const TextStyle(color: Colors.white),
+                            //<-- SEE HERE
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10.0),
+                              fillColor: inputColor(),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none),
+                              hintText: 'key_pincode'.tr,
+                              hintStyle: inputTextStyle16(),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: InkWell(
+                              onTap: () async {
+                                if (isEditable) {
+                                  updateAddress(addressID);
+                                }
+                              },
+                              child: Card(
+                                  shadowColor: Colors.black,
+                                  color: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10.0),
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'key_Save_Address'.tr,
+                                      style: mTextStyle14(),
+                                    ),
+                                  )),
+                            )),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Text(
+                            'key_Address_Type'.tr,
+                            style: mTextStyle18(),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                if (isEditable) {
+                                  setState(() {
+                                    type = 1;
+                                  });
+                                }
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: type == 1
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width: 80,
+                                  height: 35,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Home'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                if (isEditable) {
+                                  setState(() {
+                                    type = 2;
+                                  });
+                                }
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: type == 2
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width: 80,
+                                  height: 35,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Work'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                if (isEditable) {
+                                  setState(() {
+                                    type = 3;
+                                  });
+                                }
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: type == 3
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width: 80,
+                                  height: 35,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Other'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
