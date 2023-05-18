@@ -575,6 +575,8 @@ class _ViewAddressState extends State<ViewAddress> {
                               _selectedState = newValue;
                               _dropdownCities =[];
                               _dropdownArea =[];
+                              cityId = "";
+                              areaName = "";
                               print("stateId $stateId");
                             });
 
@@ -614,6 +616,7 @@ class _ViewAddressState extends State<ViewAddress> {
                               ? (newValue) {
                             setState(() {
                               cityId = "${newValue?.id}";
+                              areaName = "";
                               _selectedCity = newValue;
                               print("cityId $cityId");
                             });

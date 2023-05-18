@@ -8,7 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tastesonway/screens/contact%20us/contactus.dart';
 import 'package:tastesonway/screens/fssai/fssai.dart';
 import 'package:tastesonway/screens/my%20website/my_website.dart';
-import 'package:tastesonway/screens/discount/create_discount_coupon.dart';
+import 'package:tastesonway/screens/discount/discount_page.dart';
 import 'package:tastesonway/screens/faq/faq.dart';
 import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
@@ -198,7 +198,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => CreateDiscountCoupon()));
+                                builder: (BuildContext context) => DiscountPage()));
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
