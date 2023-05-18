@@ -248,6 +248,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_coupan_value'.tr;
+                              }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'key_pls_number_only'.tr;
                               }
                             },
                             style: const TextStyle(color: Colors.white),
@@ -274,6 +276,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_coupan_Upto_Amount'.tr;
+                              }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'key_pls_number_only'.tr;
                               }
                             },
                             style: const TextStyle(color: Colors.white),
@@ -300,6 +304,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_Valid_per_User'.tr;
+                              }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'key_pls_number_only'.tr;
                               }
                             },
                             style: const TextStyle(color: Colors.white),
@@ -326,6 +332,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_Total_no_User'.tr;
+                              }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'key_pls_number_only'.tr;
                               }
                             },
                             style: const TextStyle(color: Colors.white),
@@ -350,6 +358,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_Please_enter_Minimum_Order_Value'.tr;
+                              }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                return 'key_pls_number_only'.tr;
                               }
                             },
                             style: const TextStyle(color: Colors.white),
@@ -401,36 +411,16 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                       DateFormat('dd-MM-yyyy')
                                           .format(couponStartDate),
                                       textAlign: TextAlign.center,
-                                      style: inputTextStyle16(),
+                                      style: isStartDateSelected
+                                          ? const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ):inputTextStyle16(),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     _selectEndDate(context);
-                            //   },
-                            //   child: SizedBox(
-                            //     height: 40,
-                            //     width: MediaQuery.of(context).size.width * 0.4,
-                            //     child: Container(
-                            //       decoration: BoxDecoration(
-                            //         color: const Color.fromRGBO(37, 40, 48, 1),
-                            //         borderRadius: BorderRadius.circular(10.0),
-                            //       ),
-                            //       child: Padding(
-                            //         padding: const EdgeInsets.all(8.0),
-                            //         child: Text(
-                            //           DateFormat('dd-MM-yyyy')
-                            //               .format(couponEndDate),
-                            //           textAlign: TextAlign.center,
-                            //           style: inputTextStyle16(),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
                             InkWell(
                               onTap: () {
                                 _selectEndDate(context);
@@ -448,7 +438,11 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                     child: Text(
                                       DateFormat('dd-MM-yyyy').format(couponEndDate),
                                       textAlign: TextAlign.center,
-                                      style: inputTextStyle16(),
+                                      style: isEndDateSelected
+                                          ? const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ):inputTextStyle16(),
                                     ),
                                   ),
                                 ),
@@ -489,7 +483,6 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                       context,
                                       MaterialPageRoute(builder: (context) => const DiscountPage()),
                                     );
-
                                   }
                                 }
 

@@ -5,6 +5,7 @@ class Languages extends Translations {
   Map<String, Map<String, String>> get keys =>
       {
         'en_US': {
+          "key_pls_number_only":"Please Enter Numbers Only",
           "key_choose_language":"Choose Language",
           "key_select_your_language":"Select Your Language",
           "key_continue":"Continue",
@@ -609,6 +610,7 @@ class Languages extends Translations {
           "key_select_issue_type": "Select Issue Type"
         },
         'hi_IN': {
+          "key_pls_number_only":"कृपया केवल संख्याएँ दर्ज करें",
           "key_choose_language":"भाषा चुनें",
           "key_select_your_language":"अपनी भाषा चुनें",
           "key_continue":"आगे बढे",
@@ -1193,6 +1195,7 @@ class Languages extends Translations {
 
         },
         'gj_IN':{
+          "key_pls_number_only":"કૃપા કરીને ફક્ત નંબરો જ દાખલ કરો",
           "key_choose_language":"ભાષા પસંદ કરો",
           "key_select_your_language":"તમારી ભાષા પસંદ કરો",
           "key_continue":"આગળ વધો",

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,9 @@ import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'package:tastesonway/utils/theme_data.dart';
+import 'package:http/http.dart' as http;
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -24,13 +29,60 @@ class _SettingState extends State<Setting> {
     'हिंदी',
     'ગુજરાતી',
   ];
-  bool _switchValue = true;
+  bool ownerAvailable = false;
   late Locale _currentLocale;
+
+  void getOwnerAvaibility() async {
+    const url =
+        "$baseUrl/kitchen-owner-login-registration";
+
+    final tokenResponse = await http.post(Uri.parse(url), body: {
+      "language_id": "1",
+      "mobile_number": "8487854544",
+      "device_token":
+      "emov0vGxQzCdZ52WfImQj_:APA91bF80ycUzwgUTnz4RoYpSuG4E1KRvQ8Sif7Gjwhv9CPWGumADxeEaJ0FZyurK3dVG5UYwM7Z5QYYIFLqMR0A1KRbXb_-XwmpeA9Tyg17JD01a52V36jSYmQnQ03lbc3ninBgUZt",
+      "device_id": "51689555c4cf988a",
+      "platform": "1",
+      "gender": "1",
+      "referral_code": "a5265bb5",
+      "short_code": "IN",
+      "country_code": "91"
+    });
+    final json = jsonDecode(tokenResponse.body);
+    final data = json['data'][0]['user_availability'];
+    ownerAvailable = data == 'true';
+    setState(() {
+    });
+  }
+
+  void updateOwnerAvaibility(int status) async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+    await http.post(Uri.parse("$baseUrl/update-kitchen-owner-availability"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "user_availability":"$status"
+    });
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Your availability is updated successfully.!')),
+      );
+      print(data['message']);
+
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Something Went Wrong Please Try Again!')),
+      );
+      throw Exception('Failed to fetch data from API');
+    }
+  }
 
 
   @override
   void initState() {
     super.initState();
+    getOwnerAvaibility();
     _getCurrentLocale();
   }
 
@@ -94,11 +146,12 @@ class _SettingState extends State<Setting> {
                       child: CupertinoSwitch(
                           thumbColor: Colors.black,
                           activeColor: Colors.green,
-                          value: _switchValue,
+                          value: ownerAvailable,
                           onChanged: (bool? value) {
                             setState(() {
-                              _switchValue = value ?? false;
+                              ownerAvailable = value ?? false;
                             });
+                            updateOwnerAvaibility(ownerAvailable ? 1 : 2);
                           }),
                     ),
                   ],

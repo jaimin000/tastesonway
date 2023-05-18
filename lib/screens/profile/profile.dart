@@ -17,6 +17,7 @@ import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
+import '../orders/yourorders.dart';
 import '../tutorials/tutorials.dart';
 import '../bank/banking_details.dart';
 
@@ -333,7 +334,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => ReceivedOrders()));
+                                builder: (BuildContext context) => YourOrders()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(

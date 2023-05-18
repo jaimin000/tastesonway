@@ -4,6 +4,7 @@ import '../utils/sharedpreferences.dart';
 
 var message;
 var ownerId;
+bool isOwnerAvailable = false;
 
 const localUrl = "http://192.168.1.26:24/api/v2";
 const devUrl = "https://dev-api.tastesonway.com/api/v2";
@@ -36,7 +37,6 @@ Future<String> getToken() async {
   return message;
 }
 
-
 Future<int> getOwnerId() async {
   const url =
       "$baseUrl/kitchen-owner-login-registration";
@@ -59,3 +59,4 @@ Future<int> getOwnerId() async {
   await Sharedprefrences.setId(ownerId);
   return ownerId;
 }
+

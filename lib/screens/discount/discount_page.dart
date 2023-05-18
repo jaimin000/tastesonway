@@ -204,7 +204,6 @@ class _DiscountPageState extends State<DiscountPage> {
                     items: apiData.map((item) {
                       bool couponActive = item.couponActive == 'Yes' ? true : false;
                       return SizedBox(
-                        width: 325,
                         child: Card(
                           color: const Color.fromRGBO(53, 56, 66, 1),
                           shape: RoundedRectangleBorder(
@@ -227,15 +226,19 @@ class _DiscountPageState extends State<DiscountPage> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                  const EditCoupon()),
+                                                  builder: (context) => EditCoupon(isFixedData: item.type == '% Off'?false:true,data: item)),
                                             );
                                           },
-                                          child: Text(
-                                            item.type == "% Off"
-                                                ? "${item.couponValue} ${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}" : "${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}",
-                                              style: cTextStyle18(),
+                                          child: Container(
+                                            constraints:  BoxConstraints(
+                                              maxWidth: MediaQuery.of(context).size.width*0.5, // Set the maximum width as desired
                                             ),
+                                            child: Text(
+                                              item.type == "% Off"
+                                                  ? "${item.couponValue} ${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}" : "${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}",
+                                                style: cTextStyle18(),
+                                              ),
+                                          ),
                                         ),
                                         Transform.scale(
                                           scale: 0.8,

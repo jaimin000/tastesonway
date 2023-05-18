@@ -444,19 +444,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 180,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text("$totalMenu", style: cTextStyle36()),
-                              Text(
-                                'key_Your_Menus'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text("$totalMenu", style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_Your_Menus'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -464,19 +467,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 180,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text("$totalMenuItem", style: cTextStyle36()),
-                              Text(
-                                'key_Items_In_Menu'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text("$totalMenuItem", style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_Items_In_Menu'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -484,19 +490,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 180,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('$theme', style: cTextStyle36()),
-                              Text(
-                                'key_My_Menu_Designs'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('$theme', style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_My_Menu_Designs'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                   ],
                 ),
@@ -655,19 +664,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('$todayOrder', style: cTextStyle36()),
-                              Text(
-                                'key_Today'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('$todayOrder', style: cTextStyle36()),
+                                const SizedBox(width: 15,),
+                                Text(
+                                  'key_Today'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -675,19 +687,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('$tommorrowOrder', style: cTextStyle36()),
-                              Text(
-                                'key_Tomorrow'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('$tommorrowOrder', style: cTextStyle36()),
+                                const SizedBox(width: 15,),
+                                Text(
+                                  'key_Tomorrow'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -695,19 +710,23 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('$laterOrder', style: cTextStyle36()),
-                              Text(
-                                'key_Later'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            width: 150,
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('$laterOrder', style: cTextStyle36()),
+                                SizedBox(width: 15,),
+                                Text(
+                                  'key_Later'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                   ],
                 ),
@@ -841,19 +860,22 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 250,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
-                              Text(
-                                'key_This_Week'.tr,
-                                style: cTextStyle18(),
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_This_Week'.tr,
+                                  style: cTextStyle18(),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -861,20 +883,23 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 220,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                              Text(
-                                'key_This_Month'.tr,
-                                style: cTextStyle18(),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_This_Month'.tr,
+                                  style: cTextStyle18(),
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Card(
                       shadowColor: Colors.black,
@@ -882,20 +907,23 @@ class _DashboardState extends State<Dashboard> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: SizedBox(
-                          width: 220,
-                          height: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                              Text(
-                                'key_Total'.tr,
-                                style: cTextStyle18(),
-                                overflow: TextOverflow.clip,
-                              )
-                            ],
-                          )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                            height: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
+                                SizedBox(width: 10,),
+                                Text(
+                                  'key_Total'.tr,
+                                  style: cTextStyle18(),
+                                  overflow: TextOverflow.clip,
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                   ],
                 ),
