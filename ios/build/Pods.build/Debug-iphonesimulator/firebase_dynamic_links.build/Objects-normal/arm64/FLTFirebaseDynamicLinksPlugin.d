@@ -53,6 +53,17 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLink.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLinks.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseDynamicLinks/FirebaseDynamicLinks/Sources/Public/FirebaseDynamicLinks/FIRDynamicLinksCommon.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Public/FirebaseInstallations/FirebaseInstallations.h \
+  /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseInstallations.build/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FirebaseInstallations/FirebaseInstallations-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Public/FirebaseInstallations/FIRInstallations.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Public/FirebaseInstallations/FIRInstallationsAuthTokenResult.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseInstallations/FirebaseInstallations/Source/Library/Public/FirebaseInstallations/FIRInstallationsErrors.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseMessaging/FirebaseMessaging/Sources/Public/FirebaseMessaging/FirebaseMessaging.h \
+  /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseMessaging.build/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FirebaseMessaging/FirebaseMessaging-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseMessaging/FirebaseMessaging/Sources/Public/FirebaseMessaging/FIRMessaging.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseMessaging/FirebaseMessaging/Sources/Public/FirebaseMessaging/FIRMessagingExtensionHelper.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/firebase_core.build/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \

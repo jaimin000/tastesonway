@@ -12,7 +12,6 @@ import 'package:tastesonway/screens/discount/discount_page.dart';
 import 'package:tastesonway/screens/faq/faq.dart';
 import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
-import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
@@ -199,7 +198,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => DiscountPage()));
+                                builder: (BuildContext context) => const DiscountPage()));
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -233,7 +232,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => MyWebsite()));
+                                builder: (BuildContext context) => const MyWebsite()));
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -266,7 +265,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => Fssai()));
+                                builder: (BuildContext context) => const Fssai()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -300,7 +299,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => BankingDetails()));
+                                builder: (BuildContext context) => const BankingDetails()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -334,7 +333,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => YourOrders()));
+                                builder: (BuildContext context) => const YourOrders()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -368,7 +367,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => MenuItems()));
+                                builder: (BuildContext context) => const MenuItems()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -402,7 +401,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => MenuDesign()));
+                                builder: (BuildContext context) => const MenuDesign()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -533,7 +532,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => FAQ()));
+                                builder: (BuildContext context) => const FAQ()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(builder: (context) => const FAQ()),
@@ -565,7 +564,7 @@ class _ProfileState extends State<Profile> {
                       onTap: () {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => Setting()));
+                                builder: (BuildContext context) => const Setting()));
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(

@@ -1,15 +1,10 @@
 import 'dart:io';
-import 'dart:async';
-import 'dart:typed_data';
 import 'dart:convert';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/theme_category_model.dart';
 import 'package:tastesonway/utils/utilities.dart';
 import '../../../apiServices/api_service.dart';
@@ -19,7 +14,6 @@ import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
-import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -56,7 +50,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
 
   Future getTheme(BuildContext context, int index) async {
     name = await Sharedprefrences.getMenuName();
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-theme'),
       headers: {'Authorization': 'Bearer $token'},
@@ -93,16 +87,15 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
   }
 
   Future<void> Menu() async {
-    String token = await getToken();
-    int ownerId = await getOwnerId();
-    print('ownerid $ownerId');
+    String token =  await Sharedprefrences.getToken();
+    String? ownerId = await Sharedprefrences.getId();
     final response =
         await http.post(Uri.parse('$baseUrl/get-menu-item'), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
       'menu_id': '${widget.imageMenuId}',
       'category_id': '1',
-      'business_owner_id': ownerId.toString()
+      'business_owner_id': ownerId
     });
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
@@ -399,7 +392,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
   }
 
   shareImages(String shortUrl) async {
-    print("images " + images.length.toString());
+    print("images ${images.length}");
     await Share.shareFiles(images,
         text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n',
         subject: 'Share Menu Image');
@@ -460,7 +453,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     imageMenuLink = imageLink;
     debugPrint("this is menuid ${widget.imageMenuId}");
     debugPrint("this is theme id $backgroundImageId");
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response =
     await http.post(Uri.parse('$baseUrl/create-or-update-menu'), headers: {
       'Authorization': 'Bearer $token',
@@ -1048,8 +1041,9 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                                                                 ImageChunkEvent?
                                                                     loadingProgress) {
                                                           if (loadingProgress ==
-                                                              null)
+                                                              null) {
                                                             return child;
+                                                          }
                                                           return Center(
                                                             child:
                                                                 CircularProgressIndicator(

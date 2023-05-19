@@ -30,7 +30,7 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
 
   Future getMenuId() async  {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final url = Uri.parse(
       "$baseUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};

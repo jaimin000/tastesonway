@@ -4,6 +4,7 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../models/MenuItemModel.dart';
+import '../../utils/sharedpreferences.dart';
 
 class MenuItems extends StatefulWidget {
   const MenuItems({Key? key}) : super(key: key);
@@ -18,13 +19,13 @@ class _MenuItemsState extends State<MenuItems> {
   List<MenuItemModel> menuItemList = [];
 
   Future getMenuItem() async {
-    int ownerId = await getOwnerId();
-    String token = await getToken();
+    String? ownerId = await Sharedprefrences.getId();
+    String token = await Sharedprefrences.getToken();
     final response =
         await http.post(Uri.parse('$baseUrl/get-menu-item'), headers: {
       'Authorization': 'Bearer $token'
     }, body: {
-      'business_owner_id': "$ownerId",
+      'business_owner_id': ownerId,
     });
     if (response.statusCode == 200) {
       _isLoading = false;
@@ -140,7 +141,7 @@ class _MenuItemsState extends State<MenuItems> {
                                                     .name,
                                                 style: mTextStyle20(),
                                               ),
-                                              SizedBox(height: 5,),
+                                              const SizedBox(height: 5,),
                                               Text(
                                                 '₹ ${menuItemList[index].price}',
                                                 style: cTextStyle18(),

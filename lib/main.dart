@@ -4,29 +4,41 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
-import 'package:tastesonway/screens/orders/order_details.dart';
-import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
-import 'package:tastesonway/screens/register/questions.dart';
-import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/languages.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
-import 'package:url_launcher/link.dart';
 import 'screens/menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+
+  // String? token = await FirebaseMessaging.instance.getToken();
+  // print('Device token: $token');
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -97,13 +109,13 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               primaryColor: orangeColor(),
               brightness: Brightness.dark,
-              accentColor: orangeColor(),
               fontFamily: 'Poppins',
+              accentColor: orangeColor(),
             ),
             home: isUser == "null" ? const LanguageScreen() : const Home(),
           );
         } else {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
       },
     );
@@ -125,7 +137,7 @@ class _HomeState extends State<Home> {
   final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> fourthTabNavKey = GlobalKey<NavigatorState>();
   CupertinoTabController tabController = CupertinoTabController(initialIndex: 0);
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
 
   @override
   void initState() {
@@ -140,7 +152,7 @@ class _HomeState extends State<Home> {
           isDeviceConnected = await InternetConnectionChecker().hasConnection;
           if (!isDeviceConnected && isAlertSet == false) {
             showDialogBox();
-            NoInternetScreen();
+            const NoInternetScreen();
             setState(() => isAlertSet = true);
           }
         },
@@ -166,7 +178,6 @@ class _HomeState extends State<Home> {
         theme: ThemeData(
           primaryColor: orangeColor(),
           brightness: Brightness.dark,
-          accentColor: orangeColor(),
           fontFamily: 'Poppins',
         ),
         home: WillPopScope(

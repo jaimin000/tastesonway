@@ -3,12 +3,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:story_view/story_view.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
 
 class ViewStories extends StatefulWidget {
   String image;
   int id;
   String media_type;
-  ViewStories(this.image, this.id,this.media_type);
+  ViewStories(this.image, this.id,this.media_type, {Key? key}) : super(key: key);
 
   @override
   State<ViewStories> createState() => _ViewStoriesState();
@@ -26,7 +27,7 @@ class _ViewStoriesState extends State<ViewStories> {
 
   //delete story
   Future DeleteData() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.delete(
       Uri.parse('$storyUrl/owners/delete-story'),
       headers: {'Authorization': 'Bearer $token'},

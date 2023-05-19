@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/models/MenuItemModel.dart';
 import 'package:tastesonway/screens/menu/text%20menu/add_new_item.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu3.dart';
 import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
+import 'package:tastesonway/utils/sharedpreferences.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
@@ -28,14 +28,14 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   // final List<int> myList = [53, 54];
 
   Future<void> getMenu() async {
-    String token = await getToken();
-    int ownerId = await getOwnerId();
+    String token =  await Sharedprefrences.getToken();
+    String? ownerId = await Sharedprefrences.getId();
     final response = await http.post(
       Uri.parse(
            //'http://192.168.1.26:24/api/v2/get-menu-item'),
           '$baseUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
-      body: {'business_owner_id': '$ownerId'},
+      body: {'business_owner_id': ownerId},
     );
     if (response.statusCode == 200) {
       isLoading = false;
@@ -69,7 +69,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   }
 
   Future<void> AddMultipleMenuId() async{
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     setState(() {
       isLoading = true;
     });

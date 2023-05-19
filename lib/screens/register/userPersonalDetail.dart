@@ -68,7 +68,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: orangeColor(), // Background color
+              backgroundColor: orangeColor(), // Background color
             ),
             onPressed: () => Navigator.pop(context),
             child:  Text('key_OKAY'.tr),

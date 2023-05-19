@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/screens/register/landing%20screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/sharedpreferences.dart';
@@ -33,6 +31,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
     _getCurrentLocale();
   }
   Future<void> _getCurrentLocale() async {
+    print(await Sharedprefrences.getRefreshToken());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? languageCode = prefs.getString('language');
     String? countryCode = prefs.getString('country');
@@ -333,27 +332,27 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
+                              backgroundColor: Colors.red,
                             ),
                             onPressed: () async{
                               int languageId;
-                              if (selectedEnglish == true) {
+                              if (selectedHindi == true) {
                                 languageId = 1;
                                 languageCode = 'hi';
                                 countryCode = 'IN';
                               }
                               else if (selectedGujarati == true) {
-                                languageId = 3;
-                                languageCode = 'en';
-                                countryCode = 'US';
-
-                              } else {
                                 languageId = 2;
                                 languageCode = 'gj';
                                 countryCode = 'IN';
+
+                              } else {
+                                languageId = 3;
+                                languageCode = 'en';
+                                countryCode = 'US';
                               }
                               print('this is languageId $languageId');
-                              await Sharedprefrences.setLanguagePreference(Locale('$languageCode','$countryCode'));
+                              await Sharedprefrences.setLanguagePreference(Locale(languageCode,countryCode));
                               print(await Sharedprefrences.getLanguagePreference());
                               //await Sharedprefrences.setLanguageId(languageId);
                               // print(await Sharedprefrences.getLanguageId());

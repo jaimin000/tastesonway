@@ -27,5 +27,6 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkMessageCode.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkURLSession.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Reachability/Public/GoogleUtilities/GULReachabilityChecker.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/UserDefaults/Public/GoogleUtilities/GULUserDefaults.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Extension/FIRAppInternal.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Sources/Public/FirebaseCore/FIRApp.h

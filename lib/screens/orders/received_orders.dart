@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tastesonway/screens/orders/order_details.dart';
 import '../../utils/theme_data.dart';
 
 class ReceivedOrders extends StatefulWidget {

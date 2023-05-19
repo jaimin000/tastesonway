@@ -24,7 +24,7 @@ class _SearchLocationState extends State<SearchLocation> {
   final _controller = TextEditingController();
   final Places.GoogleMapsPlaces _places = Places.GoogleMapsPlaces(
       apiKey: 'AIzaSyAgAXZ8dszokAmE1E9rm9LHlIt1IOd0NSI');
-  var uuid = Uuid();
+  var uuid = const Uuid();
   List<dynamic> predictions = [];
   bool _isLoading = false;
   bool isServicePresent = false;
@@ -75,39 +75,37 @@ class _SearchLocationState extends State<SearchLocation> {
     setState(() {
       _isLoading = true;
     });
-    if (placeId != null && description != null) {
-      try {
-        var detail =
-        await _places.getDetailsByPlaceId(placeId);
-        var lat = detail.result.geometry?.location.lat;
-        var lng = detail.result.geometry?.location.lng;
-        List<Placemark> placemarks = await placemarkFromCoordinates(lat!, lng!);
-        print(placemarks);
-        // var address = await Geocoder.local.findAddressesFromQuery(description);
-        // List<Location> locations = await locationFromAddress(description);
-        await Sharedprefrences.setTempLocation(true);
-        if (placemarks.first.subLocality != null) {
-          await Sharedprefrences.setSubLocality(
-              placemarks.first.subLocality.toString());
-        } else {
-          await Sharedprefrences.setSubLocality(
-              placemarks.first.name.toString());
-        }
-        await Sharedprefrences.setLocality(
-            placemarks.first.locality.toString());
-        await Sharedprefrences.setTempLat(lat!);
-        await Sharedprefrences.setTempLog(lng!);
-        Navigator.pop(context, 'true');
-      } catch (e) {
-        print('Error occured: $e');
-        setState(() {
-          _isLoading = false;
-        });
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
+    try {
+      var detail =
+      await _places.getDetailsByPlaceId(placeId);
+      var lat = detail.result.geometry?.location.lat;
+      var lng = detail.result.geometry?.location.lng;
+      List<Placemark> placemarks = await placemarkFromCoordinates(lat!, lng!);
+      print(placemarks);
+      // var address = await Geocoder.local.findAddressesFromQuery(description);
+      // List<Location> locations = await locationFromAddress(description);
+      await Sharedprefrences.setTempLocation(true);
+      if (placemarks.first.subLocality != null) {
+        await Sharedprefrences.setSubLocality(
+            placemarks.first.subLocality.toString());
+      } else {
+        await Sharedprefrences.setSubLocality(
+            placemarks.first.name.toString());
       }
+      await Sharedprefrences.setLocality(
+          placemarks.first.locality.toString());
+      await Sharedprefrences.setTempLat(lat);
+      await Sharedprefrences.setTempLog(lng);
+      Navigator.pop(context, 'true');
+    } catch (e) {
+      print('Error occured: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -137,7 +135,7 @@ class _SearchLocationState extends State<SearchLocation> {
     if (tempLocation) {
       setState(() {
         _currentAddress =
-        "${getSubLocality} ${getLocality}";
+        "$getSubLocality $getLocality";
       });
     }
     try {

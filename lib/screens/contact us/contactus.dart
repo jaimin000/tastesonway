@@ -5,6 +5,7 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
 
 
@@ -19,7 +20,7 @@ class ContactUs extends StatelessWidget {
   );
 
   Future<String> getCallback() async {
-    var token = await getToken();
+    var token = await Sharedprefrences.getToken();
     const url = "$baseUrl/create-request-callback";
     final tokenResponse = await http.post(Uri.parse(url),headers: {
       'Authorization': 'Bearer $token'

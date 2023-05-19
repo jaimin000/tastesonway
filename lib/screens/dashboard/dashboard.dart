@@ -38,7 +38,6 @@ class _DashboardState extends State<Dashboard> {
   final currentTime = DateTime.now();
   String greeting = "";
 
-
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
@@ -68,7 +67,12 @@ class _DashboardState extends State<Dashboard> {
          earningMonth = dashboardData['total_earning_summary_of_month'];
          earningSummary = dashboardData['total_earning_summary'];
       });
-    } else {
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }
+    else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -88,7 +92,13 @@ class _DashboardState extends State<Dashboard> {
         userName = profileData['name'];
         // print('this is profile photo '+profilePhoto);
       });
-    } else {
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchProfile();
+    }
+    else {
+      print('refresh token failed');
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -452,7 +462,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text("$totalMenu", style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_Your_Menus'.tr,
                                   style: cTextStyle18(),
@@ -475,7 +485,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text("$totalMenuItem", style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_Items_In_Menu'.tr,
                                   style: cTextStyle18(),
@@ -498,7 +508,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text('$theme', style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_My_Menu_Designs'.tr,
                                   style: cTextStyle18(),
@@ -719,7 +729,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text('$laterOrder', style: cTextStyle36()),
-                                SizedBox(width: 15,),
+                                const SizedBox(width: 15,),
                                 Text(
                                   'key_Later'.tr,
                                   style: cTextStyle18(),
@@ -868,7 +878,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_This_Week'.tr,
                                   style: cTextStyle18(),
@@ -891,7 +901,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_This_Month'.tr,
                                   style: cTextStyle18(),
@@ -915,7 +925,7 @@ class _DashboardState extends State<Dashboard> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                                SizedBox(width: 10,),
+                                const SizedBox(width: 10,),
                                 Text(
                                   'key_Total'.tr,
                                   style: cTextStyle18(),

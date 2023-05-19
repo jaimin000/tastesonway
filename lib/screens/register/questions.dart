@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
  
 import 'package:get/get.dart';
-import 'package:tastesonway/main.dart';
 import 'package:tastesonway/models/hearAboutModel.dart';
 import 'package:tastesonway/screens/register/cuisines.dart';
 import '../../apiServices/api_service.dart';
@@ -29,7 +28,7 @@ class _QuestionsState extends State<Questions> {
   List<HearAboutModel> question3items = [];
 
   Future<void> getQuestion() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-owner-opinion'),
       headers: {'Authorization': 'Bearer $token'},
@@ -73,7 +72,7 @@ class _QuestionsState extends State<Questions> {
               children: [
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    physics: const ScrollPhysics(),
                     itemCount: question1items.length,
                     itemBuilder: (BuildContext context, int index) {
                       return RadioListTile(
@@ -161,7 +160,7 @@ class _QuestionsState extends State<Questions> {
               children: [
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    physics: const ScrollPhysics(),
                     itemCount: question3items.length,
                     itemBuilder: (BuildContext context, int index) {
                       return RadioListTile(
@@ -235,7 +234,7 @@ class _QuestionsState extends State<Questions> {
               Container(
                   color: cardColor(),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                     'key_We_are_Committed'.tr,
                     ),
@@ -251,12 +250,12 @@ class _QuestionsState extends State<Questions> {
                       ),
                   )
                   : SingleChildScrollView(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height / 1.6,
                         child: PageView(
                           controller: pageController,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           onPageChanged: (index) {
                             setState(() {
                               pageChanged = index;

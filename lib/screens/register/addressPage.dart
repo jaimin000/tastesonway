@@ -111,11 +111,11 @@ class _AddressPageState extends State<AddressPage> {
         headers: {'Authorization': 'Bearer $token',
         },
         body: {
-          "city_name": "$locality",
-          "area":"$sublocality",
-          "address": "$address",
-          "land_mark": "$landmark",
-          "pin_code": "$pincode",
+          "city_name": locality,
+          "area":sublocality,
+          "address": address,
+          "land_mark": landmark,
+          "pin_code": pincode,
           "address_type": "$type",
           "latitude":"${latLng.latitude}",
           "longitude":"${latLng.longitude}"
@@ -212,7 +212,7 @@ class _AddressPageState extends State<AddressPage> {
                         ),
                         child: Text(
                           'key_Edit'.tr,
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         onPressed: () {
                           Navigator.push(

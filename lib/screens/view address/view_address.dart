@@ -132,17 +132,17 @@ class _ViewAddressState extends State<ViewAddress> {
       var longitude = longtude.toString();
       String token = await Sharedprefrences.getToken();
       Map body = {
-        "city_id": cityId == null ? '' : cityId,
-        "state_id": stateId == null ? '':stateId,
-        "area": areaName == null ? '' : areaName,
-        "address_id": "$addressID",
-        "office_name": "${officeAddress.text}",
-        "address": "$address",
-        "land_mark": "$landMark",
+        "city_id": cityId ?? '',
+        "state_id": stateId ?? '',
+        "area": areaName ?? '',
+        "address_id": addressID,
+        "office_name": officeAddress.text,
+        "address": address,
+        "land_mark": landMark,
         "pin_code": "$pincode",
         "address_type": "1",
-        "latitude": "$latitude",
-        "longitude": "$longitude",
+        "latitude": latitude,
+        "longitude": longitude,
         "address_type": "$type",
       };
 
@@ -251,7 +251,7 @@ class _ViewAddressState extends State<ViewAddress> {
     await http.post(Uri.parse("$baseUrl/get-city-area"), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
-      "city_id": "$cityId"
+      "city_id": cityId
     });
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -332,7 +332,7 @@ class _ViewAddressState extends State<ViewAddress> {
             },
             icon: const Icon(Icons.edit),
           )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
       body: isLoading
@@ -398,7 +398,7 @@ class _ViewAddressState extends State<ViewAddress> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            SearchLocation())).then(
+                                                            const SearchLocation())).then(
                                                         (value) {
                                                       if (value == 'true') {
                                                         changeLocationData();
@@ -427,7 +427,7 @@ class _ViewAddressState extends State<ViewAddress> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SearchLocation()))
+                                                    const SearchLocation()))
                                             .then((value) {
                                           if (value == 'true') {
                                             changeLocationData();
@@ -611,7 +611,7 @@ class _ViewAddressState extends State<ViewAddress> {
                         ),
 
                         DropdownButtonFormField<DropdownItem>(
-                          value:_selectedCity != null ? _selectedCity : _dropdownCities.firstOrNull,
+                          value:_selectedCity ?? _dropdownCities.firstOrNull,
                           onChanged: isEditable
                               ? (newValue) {
                             setState(() {
@@ -641,7 +641,7 @@ class _ViewAddressState extends State<ViewAddress> {
                             hintText: locality,
                             fillColor:
                             inputColor(), // Set the background color
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16.0,
                                 vertical:
                                 12.0), // Adjust the content padding
@@ -675,7 +675,7 @@ class _ViewAddressState extends State<ViewAddress> {
                             hintText: subLocality,
                             fillColor:
                             inputColor(), // Set the background color
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16.0,
                                 vertical:
                                 12.0), // Adjust the content padding

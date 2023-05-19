@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:tastesonway/main.dart';
 import '../../apiServices/api_service.dart';
 import '../../models/cuisines.dart';
+import '../../utils/sharedpreferences.dart';
 import '../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,8 +16,8 @@ class Cuisines extends StatefulWidget {
 }
 
 class _CuisinesState extends State<Cuisines> {
-  List<CuisineModel> _foodItems = [];
-  List<String> _selectedItems = [];
+  final List<CuisineModel> _foodItems = [];
+  final List<String> _selectedItems = [];
 
   void _onItemSelect(item) {
     setState(() {
@@ -30,7 +31,7 @@ class _CuisinesState extends State<Cuisines> {
   }
 
   Future fetchData() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('https://dev-api.tastesonway.com/api/owners/get-cuisines'),
       headers: {'Authorization': 'Bearer $token'},

@@ -16,7 +16,7 @@ class BankDetails extends StatefulWidget {
   String bankIfsc;
 
   BankDetails(
-      this.id,this.bankName, this.bankHolderName, this.bankAccNumber, this.bankIfsc);
+      this.id,this.bankName, this.bankHolderName, this.bankAccNumber, this.bankIfsc, {Key? key}) : super(key: key);
   @override
   State<BankDetails> createState() => _BankDetailsState();
 }
@@ -43,10 +43,10 @@ class _BankDetailsState extends State<BankDetails> {
         },
         body: {
           "id":"${widget.id}",
-          "bank_acc_number": "${accNumController.text}",
-          "bank_name": "${bankNameController.text}",
-          "account_holder_name": "${nameController.text}",
-          "bank_ifsc_code": "${ifscController.text}",
+          "bank_acc_number": accNumController.text,
+          "bank_name": bankNameController.text,
+          "account_holder_name": nameController.text,
+          "bank_ifsc_code": ifscController.text,
           "transaction_type": "1"
         });
     if (response.statusCode == 200) {

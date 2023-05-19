@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
-import '../text menu/create_text_menu2.dart';
 import 'create_img_menu2.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,14 +20,14 @@ class EditImgItem extends StatefulWidget {
   final String description;
   final int price;
 
-  const EditImgItem({
+  const EditImgItem({Key? key, 
     required this.id,
     required this.menu_id,
     required this.name,
     required this.type,
     required this.price,
     required this.description,
-  });
+  }) : super(key: key);
 
   @override
   State<EditImgItem> createState() => _EditImgItemState();
@@ -153,7 +153,7 @@ class _EditImgItemState extends State<EditImgItem> {
 
     print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
 
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     print(token);
     try {
       final request = http.MultipartRequest(
@@ -257,7 +257,7 @@ class _EditImgItemState extends State<EditImgItem> {
 
   Future DeleteMenuItem() async {
     print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     print(token);
     try {
       final request = http.MultipartRequest(
@@ -293,7 +293,7 @@ class _EditImgItemState extends State<EditImgItem> {
         backgroundColor: backgroundColor(),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
               color: Colors.white,
             ),

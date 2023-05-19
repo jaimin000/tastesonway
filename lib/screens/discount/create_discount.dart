@@ -12,7 +12,7 @@ import 'discount_page.dart';
 class CreateDiscount extends StatefulWidget {
   final isFixedData;
 
-  CreateDiscount({required this.isFixedData});
+  const CreateDiscount({Key? key, required this.isFixedData}) : super(key: key);
 
   @override
   State<CreateDiscount> createState() => _CreateDiscountState();
@@ -178,6 +178,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               if (value == null || value.isEmpty) {
                                 return 'key_please_enter_coupan_name'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -226,7 +227,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                       return DropdownMenuItem(
                                         value: items,
                                         child: Text(
-                                          "${items}% off",
+                                          "$items% off",
                                           style: inputTextStyle16(),
                                         ),
                                       );
@@ -251,6 +252,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -279,6 +281,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -307,6 +310,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -335,6 +339,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -361,6 +366,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -471,12 +477,12 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                 if (_formKey.currentState!.validate()) {
                                   if (!isEndDateSelected || !isStartDateSelected) {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Please select Start Date and End Date')),
+                                      const SnackBar(content: Text('Please select Start Date and End Date')),
                                     );
                                   } else {
                                     _formKey.currentState?.save();
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Coupon added Successfully!')),
+                                      const SnackBar(content: Text('Coupon added Successfully!')),
                                     );
                                     CreateCoupon();
                                     Navigator.pushReplacement(

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tastesonway/models/MenuItemModel.dart';
 import 'package:tastesonway/screens/menu/image%20menu/edit_item.dart';
 import '../../../apiServices/api_service.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import 'add_new_item.dart';
@@ -28,8 +28,8 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
   final List<int> myList = [53, 54];
 
   Future<void> getMenu() async {
-    String token = await getToken();
-    int ownerId = await getOwnerId();
+    String token = await Sharedprefrences.getToken();
+    String? ownerId = await Sharedprefrences.getId();
     setState(() {
       isLoading = true;
     });
@@ -38,7 +38,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
         //'http://192.168.1.26:24/api/v2/get-menu-item'),
           '$baseUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
-      body: {'business_owner_id': '$ownerId'},
+      body: {'business_owner_id': ownerId},
     );
     if (response.statusCode == 200) {
       isLoading = false;
@@ -69,7 +69,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
   }
 
   Future<void> AddMultipleMenuId() async{
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     setState(() {
       isLoading = true;
     });

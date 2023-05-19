@@ -26,6 +26,7 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkMessageCode.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Network/Public/GoogleUtilities/GULNetworkURLSession.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/Reachability/Public/GoogleUtilities/GULReachabilityChecker.h \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleUtilities/GoogleUtilities/UserDefaults/Public/GoogleUtilities/GULUserDefaults.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseCore/Extension/FirebaseCoreInternal.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FirebaseCore/FirebaseCore-umbrella.h \

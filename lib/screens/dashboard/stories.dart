@@ -7,12 +7,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/view%20stories.dart';
+import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:video_compress/video_compress.dart';
 
 class Stories extends StatefulWidget {
   final String photoUrl;
-  Stories({required this.photoUrl});
+  const Stories({Key? key, required this.photoUrl}) : super(key: key);
 
   @override
   State<Stories> createState() => _StoriesState();
@@ -81,7 +82,7 @@ class _StoriesState extends State<Stories> {
   }
 
   void createImgStory() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     try {
       await _pickImage(ImageSource.camera);
       const url = "$storyUrl/owners/create-story";
@@ -248,7 +249,7 @@ class _StoriesState extends State<Stories> {
   }
 
   Future<String> uploadVideo() async {
-        String token = await getToken();
+        String token = await Sharedprefrences.getToken();
     try {
       await _pickVideo(ImageSource.camera);
 
@@ -281,7 +282,7 @@ class _StoriesState extends State<Stories> {
   List<dynamic> data = [];
 
   Future fetchData() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$storyUrl/owners/my-stories'),
       headers: {'Authorization': 'Bearer $token'},
@@ -294,7 +295,7 @@ class _StoriesState extends State<Stories> {
       });
       }
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      print('Request failed in stories with status : ${response.statusCode}.');
     }
   }
 

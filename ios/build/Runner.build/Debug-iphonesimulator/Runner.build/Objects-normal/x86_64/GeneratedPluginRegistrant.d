@@ -75,6 +75,17 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FIRDynamicLinks.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FIRDynamicLinksCommon.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseDynamicLinks/FirebaseDynamicLinks.framework/Headers/FirebaseDynamicLinks.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Headers/FirebaseInstallations-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Headers/FirebaseInstallations.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Headers/FIRInstallations.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Headers/FIRInstallationsAuthTokenResult.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseInstallations/FirebaseInstallations.framework/Headers/FIRInstallationsErrors.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseMessaging/FirebaseMessaging.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseMessaging/FirebaseMessaging.framework/Headers/FirebaseMessaging-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseMessaging/FirebaseMessaging.framework/Headers/FirebaseMessaging.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseMessaging/FirebaseMessaging.framework/Headers/FIRMessaging.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/FirebaseMessaging/FirebaseMessaging.framework/Headers/FIRMessagingExtensionHelper.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Firebase/CoreOnly/Sources/Firebase.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_core/firebase_core.framework/Headers/firebase_core-umbrella.h \
@@ -91,6 +102,9 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Headers/FLTFirebaseDynamicLinksPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_dynamic_links/firebase_dynamic_links.framework/Headers/firebase_dynamic_links-umbrella.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_messaging/firebase_messaging.framework/Headers/FLTFirebaseMessagingPlugin.h \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_messaging/firebase_messaging.framework/Modules/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/firebase_messaging/firebase_messaging.framework/Headers/firebase_messaging-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/InAppWebViewFlutterPlugin.h \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/flutter_inappwebview/flutter_inappwebview.framework/Headers/flutter_inappwebview-umbrella.h \

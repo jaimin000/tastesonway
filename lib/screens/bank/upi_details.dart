@@ -12,7 +12,7 @@ import '../../utils/snackbar.dart';
 class UPIDetails extends StatefulWidget {
   final id;
   final upiId;
-  const UPIDetails(this.id,this.upiId);
+  const UPIDetails(this.id,this.upiId, {Key? key}) : super(key: key);
   @override
   State<UPIDetails> createState() => _UPIDetailsState();
 }

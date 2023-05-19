@@ -12,6 +12,8 @@ class Tutorials extends StatelessWidget {
   List<TutorialModel> tutorialList = [];
   List<TutorialFAQQuestionModel> tutorialFAQList = [];
 
+  Tutorials({Key? key}) : super(key: key);
+
   youtubePlayer() {
     _controller = YoutubePlayerController(
       initialVideoId: 'iLnmTe5Q2Qw',

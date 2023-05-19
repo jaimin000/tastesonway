@@ -144,7 +144,7 @@ class _ReviewHistoryState extends State<ReviewHistory> {
                           ),
                           const SizedBox(height:5),
                           Text(
-                            'Your '+ orderHistory[index]['review_type'] + ' is in Review',
+                            '${'Your '+ orderHistory[index]['review_type']} is in Review',
                             style: cTextStyle16(),
                           ),
                           const SizedBox(height:5),
@@ -156,7 +156,7 @@ class _ReviewHistoryState extends State<ReviewHistory> {
                           ),
                           const SizedBox(height:5),
                           Text(
-                            'You have changed '+ orderHistory[index]['review_type'] + ' Details, our team will Review it and get back to you!',
+                            '${'You have changed '+ orderHistory[index]['review_type']} Details, our team will Review it and get back to you!',
                             style: cTextStyle16(),
                           ),
                           const SizedBox(height:10),

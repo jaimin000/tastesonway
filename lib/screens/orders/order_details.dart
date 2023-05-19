@@ -15,7 +15,7 @@ import '../../utils/timer.dart';
 class OrderDetails extends StatefulWidget {
   final int id;
 
-  OrderDetails({required this.id});
+  const OrderDetails({Key? key, required this.id}) : super(key: key);
 
   @override
   State<OrderDetails> createState() => _OrderDetailsState();
@@ -40,7 +40,7 @@ class _OrderDetailsState extends State<OrderDetails>
   late AnimationController _animationController;
   TextEditingController cancelOrderController = TextEditingController();
 
-  StreamController<String> _orderDetailsStreamController =
+  final StreamController<String> _orderDetailsStreamController =
       StreamController<String>();
 
   Stream<String> get orderDetailsStream => _orderDetailsStreamController.stream;
@@ -321,7 +321,7 @@ class _OrderDetailsState extends State<OrderDetails>
                       setState(() {});
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: orangeColor(), // Background color
+                      backgroundColor: orangeColor(), // Background color
                     ),
                     child: Center(
                         child: Text(
@@ -485,7 +485,7 @@ class _OrderDetailsState extends State<OrderDetails>
                 ),
                 controller: cancelOrderController,
               ),
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               cancelOrderController.text == ''
                   ? Text(
                     'key_Please_enter_cancel_order_reason'.tr,
@@ -505,7 +505,7 @@ class _OrderDetailsState extends State<OrderDetails>
               },
               child: Text(
                 'key_Cancel'.tr,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
             TextButton(
@@ -848,19 +848,15 @@ class _OrderDetailsState extends State<OrderDetails>
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          '${orderData['order_detail'][0]['quantity']} X ₹ ' +
-                                                              orderData['order_detail']
+                                                          '${orderData['order_detail'][0]['quantity']} X ₹ ${orderData['order_detail']
                                                                           [0][
-                                                                      'item_price']
-                                                                  .toString(),
+                                                                      'item_price']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                         Text(
-                                                          '₹ ' +
-                                                              orderData['order_detail']
+                                                          '₹ ${orderData['order_detail']
                                                                           [0][
-                                                                      'item_price']
-                                                                  .toString(),
+                                                                      'item_price']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -892,11 +888,9 @@ class _OrderDetailsState extends State<OrderDetails>
                                                           style: cTextStyle16(),
                                                         ),
                                                         Text(
-                                                          '₹ ' +
-                                                              orderData['order_detail']
+                                                          '₹ ${orderData['order_detail']
                                                                           [0][
-                                                                      'item_price']
-                                                                  .toString(),
+                                                                      'item_price']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -926,10 +920,8 @@ class _OrderDetailsState extends State<OrderDetails>
                                                                       .toString() ==
                                                                   'null'
                                                               ? '₹ 0'
-                                                              : '₹ ' +
-                                                                  orderData[
-                                                                          'coupon_amount']
-                                                                      .toString(),
+                                                              : '₹ ${orderData[
+                                                                          'coupon_amount']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -968,11 +960,9 @@ class _OrderDetailsState extends State<OrderDetails>
                                                                       .toString() ==
                                                                   "null"
                                                               ? ""
-                                                              : "₹ " +
-                                                                  orderData['order_earning_summary']
+                                                              : "₹ ${orderData['order_earning_summary']
                                                                           [
-                                                                          'owner_earning_amount']
-                                                                      .toString(),
+                                                                          'owner_earning_amount']}",
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -1183,11 +1173,9 @@ class _OrderDetailsState extends State<OrderDetails>
                                           child: Align(
                                             alignment: Alignment.center,
                                             child: Text(
-                                              'key_Call_to'.tr +
-                                                  ' ${orderData['user']['name']} (' +
+                                              '${'${'key_Call_to'.tr} ${orderData['user']['name']} (' +
                                                   orderData['user']
-                                                      ['mobile_number'] +
-                                                  ')',
+                                                      ['mobile_number']})',
                                               style: mTextStyle14(),
                                             ),
                                           )),
@@ -1346,10 +1334,8 @@ class _OrderDetailsState extends State<OrderDetails>
                                                       //     endColor: orangeColor(),
                                                       //   )
                                                       : Text(
-                                                          'key_Order_Ready'.tr +
-                                                              "   " +
-                                                              formatDuration(
-                                                                  _countdownSeconds),
+                                                          "${'key_Order_Ready'.tr}   ${formatDuration(
+                                                                  _countdownSeconds)}",
                                                           style: mTextStyle16(),
                                                         ),
                                                 ))))

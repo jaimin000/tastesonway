@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu2.dart';
+import 'package:tastesonway/utils/sharedpreferences.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
 
   Future getMenuId() async  {
     print(DateFormat('dd-MM-yyyy').format(menuExpiryDate));
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final url = Uri.parse(
       "$baseUrl/create-or-update-menu");
     final headers= {'Authorization': 'Bearer $token'};
@@ -330,6 +331,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                       MaterialPageRoute(builder: (context) => const CreateTextMenu2()),
                                     );
                                   } catch (e) {
+                                    print(e);
                                     setState(() {
                                       _isLoading = false;
                                     });

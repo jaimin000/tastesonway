@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
  
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,16 +23,15 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
   List menuList = [];
 
   Future<void> Menu() async {
-    String token = await getToken();
-    int ownerId = await getOwnerId();
-    // print('ownerid $ownerId');
+    String token = await Sharedprefrences.getToken();
+    String? ownerId = await Sharedprefrences.getId();
     final response =
         await http.post(Uri.parse('$baseUrl/get-menu-item'), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
       'menu_id': menuId.toString(),
       'category_id': '1',
-      'business_owner_id': ownerId.toString()
+      'business_owner_id': ownerId
     });
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
@@ -44,8 +45,8 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
   }
 
   Future<void> UpdateMenu() async {
-    debugPrint("this is menuid"+menuId.toString());
-    String token = await getToken();
+    debugPrint("this is menuid$menuId");
+    String token = await Sharedprefrences.getToken();
     final response =
         await http.post(Uri.parse('$baseUrl/create-or-update-menu'), headers: {
       'Authorization': 'Bearer $token',

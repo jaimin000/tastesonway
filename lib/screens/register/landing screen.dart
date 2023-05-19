@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tastesonway/screens/register/language%20screen.dart';
-import 'package:tastesonway/screens/register/userPersonalDetail.dart';
-import 'package:tastesonway/screens/signup/signup.dart';
+import 'package:tastesonway/screens/register/signup.dart';
 import '../../utils/theme_data.dart';
 import 'package:page_indicator/page_indicator.dart';
 
@@ -26,7 +24,7 @@ class _LandingScreenState extends State<LandingScreen> {
       children: <Widget>[
         Expanded(
           flex: 12,
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: PageIndicatorContainer(
               length: 3,
@@ -180,13 +178,13 @@ class _LandingScreenState extends State<LandingScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
+                        backgroundColor: Colors.red,
                       ),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Signup()),
+                                builder: (context) => const Signup()),
                           );
                           //Sharedprefrences.isFirstTimeSet(false);
                         },

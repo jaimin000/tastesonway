@@ -27,13 +27,13 @@ class _DiscountPageState extends State<DiscountPage> {
 
   void fetchCoupon() async {
     String token = await Sharedprefrences.getToken();
+   String? ownerId = await Sharedprefrences.getId();
     final response =
         await http.post(Uri.parse("$baseUrl/get-coupons"), headers: {
       'Authorization': 'Bearer $token',
     }, body: {
-      "kitchen_owner_id": "${await getOwnerId()}",
+      "kitchen_owner_id": ownerId,
     });
-    print(getOwnerId());
     if (response.statusCode == 200) {
       setState(() {
         isLoading = false;
@@ -57,7 +57,12 @@ class _DiscountPageState extends State<DiscountPage> {
           couponActive: couponData['coupon_active'],
         );
       }).toList();
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      await getNewToken(context);
+      fetchCoupon();
+    }
+    else {
       setState(() {
         isLoading = true;
       });
@@ -106,13 +111,14 @@ class _DiscountPageState extends State<DiscountPage> {
           style: cardTitleStyle20(),
         ),
       ),
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: orangeColor(),
-              ),
-            )
-          : SingleChildScrollView(
+      body:
+      // isLoading
+      //     ? Center(
+      //         child: CircularProgressIndicator(
+      //           color: orangeColor(),
+      //         ),
+      //       ) :
+           SingleChildScrollView(
               child: Column(
                 // shrinkWrap: true,
                 // scrollDirection: Axis.vertical,

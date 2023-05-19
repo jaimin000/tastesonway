@@ -269,6 +269,7 @@ class _EditCouponState extends State<EditCoupon> {
                               if (value == null || value.isEmpty) {
                                 return 'key_please_enter_coupan_name'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -319,7 +320,7 @@ class _EditCouponState extends State<EditCoupon> {
                                             return DropdownMenuItem(
                                               value: items,
                                               child: Text(
-                                                "${items}% off",
+                                                "$items% off",
                                                 style: inputTextStyle16(),
                                               ),
                                             );
@@ -347,6 +348,7 @@ class _EditCouponState extends State<EditCoupon> {
                                     else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                       return 'key_pls_number_only'.tr;
                                     }
+                                    return null;
                                   },
                                   style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
@@ -377,6 +379,7 @@ class _EditCouponState extends State<EditCoupon> {
                               else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -407,6 +410,7 @@ class _EditCouponState extends State<EditCoupon> {
                               else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -436,6 +440,7 @@ class _EditCouponState extends State<EditCoupon> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -464,6 +469,7 @@ class _EditCouponState extends State<EditCoupon> {
                               }else if(!RegExp(r'^[0-9]+$').hasMatch(value)) {
                                 return 'key_pls_number_only'.tr;
                               }
+                              return null;
                             },
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,

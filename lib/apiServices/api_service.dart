@@ -1,62 +1,50 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../screens/register/language screen.dart';
 import '../utils/sharedpreferences.dart';
-
-var message;
-var ownerId;
-bool isOwnerAvailable = false;
 
 const localUrl = "http://192.168.1.26:24/api/v2";
 const devUrl = "https://dev-api.tastesonway.com/api/v2";
 const storyUrl = "https://dev-api.tastesonway.com/api";
 const liveUrl = "https://api.tastesonway.com/api/v2";
 
-const baseUrl = devUrl;
+const baseUrl = localUrl;
 
-Future<String> getToken() async {
-  const url =
-  // "http://192.168.1.26:24/api/users/kitchen-owner-login-registration";
-  //"https://dev-api.tastesonway.com/api/v2/kitchen-owner-login-registration";
-      "$baseUrl/kitchen-owner-login-registration";
-
-  final tokenResponse = await http.post(Uri.parse(url), body: {
-    "language_id": "1",
-    "mobile_number": "8487854544",
-    "device_token":
-    "emov0vGxQzCdZ52WfImQj_:APA91bF80ycUzwgUTnz4RoYpSuG4E1KRvQ8Sif7Gjwhv9CPWGumADxeEaJ0FZyurK3dVG5UYwM7Z5QYYIFLqMR0A1KRbXb_-XwmpeA9Tyg17JD01a52V36jSYmQnQ03lbc3ninBgUZt",
-    "device_id": "51689555c4cf988a",
-    "platform": "1",
-    "gender": "1",
-    "referral_code": "a5265bb5",
-    "short_code": "IN",
-    "country_code": "91"
+Future<void> getNewToken(BuildContext context) async {
+  String token = await Sharedprefrences.getToken();
+  final response =
+  await http.post(Uri.parse('$baseUrl/refresh-token'),
+      headers: {
+    'Authorization': 'Bearer $token',
+  }, body: {
+    "refresh_token": await Sharedprefrences.getRefreshToken()
   });
-  final json = jsonDecode(tokenResponse.body);
-  message = (json['data'][0]['token']).toString();
-  await Sharedprefrences.setToken(message);
-  return message;
+  if (response.statusCode == 200) {
+    print(response.body);
+    final json = jsonDecode(response.body);
+    String newtoken = json['data']['original']['access_token'].toString();
+   await Sharedprefrences.setRefreshToken(newtoken);
+   print("refresh token setted $newtoken");
+    // return token;
+  }else {
+    print(response.body);
+    print("from else");
+    final json = jsonDecode(response.body);
+    print(json['message']);
+    print('Request failed with status: ${response.statusCode}.');
+    print("going back to the login");
+    final SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    sharedPreferences.remove('user');
+    await FirebaseAuth.instance.signOut();
+    print("refresh token failed");
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+        CupertinoPageRoute(
+            builder: (context) => const LanguageScreen()),
+            (route) => false);
+  }
 }
-
-Future<int> getOwnerId() async {
-  const url =
-      "$baseUrl/kitchen-owner-login-registration";
-
-  final tokenResponse = await http.post(Uri.parse(url), body: {
-    "language_id": "1",
-    "mobile_number": "8487854544",
-    "device_token":
-    "emov0vGxQzCdZ52WfImQj_:APA91bF80ycUzwgUTnz4RoYpSuG4E1KRvQ8Sif7Gjwhv9CPWGumADxeEaJ0FZyurK3dVG5UYwM7Z5QYYIFLqMR0A1KRbXb_-XwmpeA9Tyg17JD01a52V36jSYmQnQ03lbc3ninBgUZt",
-    "device_id": "51689555c4cf988a",
-    "platform": "1",
-    "gender": "1",
-    "referral_code": "a5265bb5",
-    "short_code": "IN",
-    "country_code": "91"
-  });
-  final json = jsonDecode(tokenResponse.body);
-  ownerId = json['data'][0]['id'];
-  print(ownerId);
-  await Sharedprefrences.setId(ownerId);
-  return ownerId;
-}
-

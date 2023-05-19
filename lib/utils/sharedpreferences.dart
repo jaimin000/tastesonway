@@ -13,14 +13,23 @@ class Sharedprefrences {
     return prefs.getString('BearerToken');
   }
 
+  static Future<bool> setRefreshToken(value) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.setString('BearerToken', value.toString());
+  }
+  static Future<dynamic> getRefreshToken() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return prefs.getString('BearerToken');
+  }
+
   static Future<bool> setId(value) async {
     final prefs = await SharedPreferences.getInstance();
-
     return prefs.setString('Userid', value.toString());
   }
-  static Future<dynamic> getId() async {
+  static Future<String?> getId() async {
     final prefs = await SharedPreferences.getInstance();
-
     return prefs.getString('Userid');
   }
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
@@ -81,7 +80,7 @@ class _YourOrdersState extends State<YourOrders> {
       setState(() {});
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Something Went Wrong Please try again !')));
+          const SnackBar(content: Text('Something Went Wrong Please try again !')));
     }
   }
 
@@ -191,11 +190,9 @@ class _YourOrdersState extends State<YourOrders> {
                                                 style: mTextStyle16(),
                                               ),
                                               Text(
-                                                '₹ ' +
-                                                    orderData[index]
+                                                '₹ ${orderData[index]
                                                                 ['order_detail']
-                                                            [0]['item_price']
-                                                        .toString(),
+                                                            [0]['item_price']}',
                                                 style: cTextStyle16(),
                                               ),
                                             ],
@@ -276,8 +273,8 @@ class _YourOrdersState extends State<YourOrders> {
                                                             //   style: mTextStyle14(),
                                                             // ),
                                                           )))
-                                                  : SizedBox()
-                                              : SizedBox(),
+                                                  : const SizedBox()
+                                              : const SizedBox(),
                                         ],
                                       ),
                                     ),

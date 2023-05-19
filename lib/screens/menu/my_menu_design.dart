@@ -25,7 +25,7 @@ class _MenuDesignState extends State<MenuDesign> {
 
   Future getTheme(BuildContext context, int index) async {
     name = await Sharedprefrences.getMenuName();
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-theme'),
       headers: {'Authorization': 'Bearer $token'},
@@ -285,7 +285,7 @@ class _MenuDesignState extends State<MenuDesign> {
                                   bottom: 0,
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
-                                    padding: EdgeInsets.all(3),
+                                    padding: const EdgeInsets.all(3),
                                     color: Colors.white60,
                                     child: Text(
                                       image[index].name ?? 'test',

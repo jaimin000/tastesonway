@@ -45,7 +45,7 @@ class ChoosePromo extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>  CreateDiscount(isFixedData: false)),
+                      builder: (context) =>  const CreateDiscount(isFixedData: false)),
                 );
               },
               child: Card(
@@ -102,7 +102,7 @@ class ChoosePromo extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CreateDiscount(isFixedData: true)),
+                      builder: (context) => const CreateDiscount(isFixedData: true)),
                 );
               },
               child: Card(

@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:tastesonway/screens/signup/signup.dart';
+import 'package:tastesonway/screens/register/signup.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
 class NoInternetScreen extends StatelessWidget {
+  const NoInternetScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,13 +18,13 @@ class NoInternetScreen extends StatelessWidget {
             const SizedBox(height: 16),
              Text(
               'key_No_Internet_connection_found'.tr,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: orangeColor(),
+                backgroundColor: orangeColor(),
               ),
               onPressed: () => _checkInternetConnectivity(context),
               child:  Text('key_Try_Again'.tr),
@@ -37,7 +39,7 @@ class NoInternetScreen extends StatelessWidget {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Signup()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Signup()));
       }
     } on SocketException catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(

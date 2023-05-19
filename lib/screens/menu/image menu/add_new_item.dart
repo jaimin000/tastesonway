@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
+import '../../../utils/sharedpreferences.dart';
 import '../../../utils/theme_data.dart';
 import 'create_img_menu2.dart';
 import 'package:http/http.dart' as http;
@@ -137,7 +138,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
 
   //api call
   Future CreateMenuItem() async {
-    String token = await getToken();
+    String token = await Sharedprefrences.getToken();
     try {
       final request = http.MultipartRequest(
         'POST',
@@ -206,7 +207,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
             return AlertDialog(
               backgroundColor: cardColor(),
               title: Text('Error',style: TextStyle(color: orangeColor()),),
-              content: Text('Name Already Exists :\nPlease try again with different name'),
+              content: const Text('Name Already Exists :\nPlease try again with different name'),
               actions: [
                 ElevatedButton(
                   style: ButtonStyle(
@@ -215,7 +216,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -561,7 +562,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                                   }else{
                                   ScaffoldMessenger.of(context).showSnackBar(
                                      SnackBar(
-                                      content: Text('key_please_select_Image'.tr,style: TextStyle(color: Colors.red),),
+                                      content: Text('key_please_select_Image'.tr,style: const TextStyle(color: Colors.red),),
                                     ),
                                   );
                                 }
