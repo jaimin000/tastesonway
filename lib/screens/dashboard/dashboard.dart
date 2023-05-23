@@ -70,12 +70,12 @@ class _DashboardState extends State<Dashboard> {
       });
     // }else if(response.statusCode == 401) {
     //   print("refresh token called");
-    //   getNewToken(context);
+    //   bool tokenRefreshed = await getNewToken(context);
     //   fetchData();
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchData();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchData():null;
     }
     else {
       print('Request failed with status: ${response.statusCode}.');
@@ -99,8 +99,8 @@ class _DashboardState extends State<Dashboard> {
       });
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchProfile();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ? fetchProfile():  null;
     }
     else {
       print('refresh token failed');

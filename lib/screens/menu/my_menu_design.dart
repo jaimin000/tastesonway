@@ -52,8 +52,8 @@ class _MenuDesignState extends State<MenuDesign> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getTheme(context, index);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getTheme(context, index):null;
     }else {
       setState(() {
         _isLoading = false;

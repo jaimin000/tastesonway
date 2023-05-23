@@ -109,8 +109,8 @@ class _ViewAddressState extends State<ViewAddress> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchAddress();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchAddress():null;
     }else {
       setState(() {
         isLoading = false;
@@ -171,8 +171,8 @@ class _ViewAddressState extends State<ViewAddress> {
       }
       else if(response.statusCode == 401) {
         print("refresh token called");
-        getNewToken(context);
-        updateAddress(addressID);
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?updateAddress(addressID):null;
       }else {
         print('Request failed with status: ${response.statusCode}.');
         ScaffoldSnackbar.of(context)

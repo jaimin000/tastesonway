@@ -67,8 +67,8 @@ class _SearchLocationState extends State<SearchLocation> {
         }
       } else if(allPalcesResponse.statusCode == 401) {
         print("refresh token called");
-        getNewToken(context);
-        autoCompleteSearch(value);
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?autoCompleteSearch(value):null;
       }else {
         throw Exception('Failed to fetch suggestion');
       }

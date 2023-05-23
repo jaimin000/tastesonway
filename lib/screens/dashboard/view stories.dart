@@ -48,8 +48,8 @@ class _ViewStoriesState extends State<ViewStories> {
       Navigator.pop(context);
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      DeleteData();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ? DeleteData() : null;
     }else {
       print(widget.id);
       print('Request failed with status: ${response.statusCode}.');

@@ -43,8 +43,8 @@ class _MenuItemsState extends State<MenuItems> {
       setState(() {});
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getMenuItem();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getMenuItem():null;
     }else {
       setState(() {
         _isLoading = false;

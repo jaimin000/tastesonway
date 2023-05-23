@@ -243,7 +243,11 @@ class _SignupState extends State<Signup> {
 
   Future registerOwner() async {
     int platform;
-    if (Platform.isAndroid) {platform = 1;} else {platform = 2;}
+    if (Platform.isAndroid) {
+      platform = 1;
+    } else {
+      platform = 2;
+    }
     int gender = await Sharedprefrences.getGender() == "Male" ? 1 : 2;
 
     dynamic languageId = await Sharedprefrences.getLanguageId();
@@ -253,40 +257,41 @@ class _SignupState extends State<Signup> {
     dynamic deviceToken = await FirebaseMessaging.instance.getToken();
     dynamic deviceId = getDeviceId();
 
-    final response = await http.post(
-        Uri.parse("$baseUrl/kitchen-owner-login-registration"),
-        body: {
-          "language_id": languageId.toString(),
-          "mobile_number": mobileNumber.toString(),
-          "short_code": shortCode.toString(),
-          "country_code": countryCode.toString(),
-          "device_token": deviceToken.toString(),
-          "device_id": deviceId.toString(),
-          "platform": "$platform",
-          "gender": "$gender",
-          "referral_code": "a5265bb5"
-        });
+      final response = await http.post(
+          Uri.parse("$baseUrl/kitchen-owner-login-registration"),
+          body: {
+            "language_id": languageId.toString(),
+            "mobile_number": mobileNumber.toString(),
+            "short_code": shortCode.toString(),
+            "country_code": countryCode.toString(),
+            "device_token": deviceToken.toString(),
+            "device_id": deviceId.toString(),
+            "platform": "$platform",
+            "gender": "$gender",
+            "referral_code": "a5265bb5"
+          });
 
-    if (response.statusCode == 200) {
-      print(response.body);
-      final json = jsonDecode(response.body);
-      var token = (json['data'][0]['token']).toString();
-      await Sharedprefrences.setToken(token);
-      var refreshToken = (json['data'][0]['refresh_token']).toString();
-      await Sharedprefrences.setRefreshToken(refreshToken);
-      var ownerId = json['data'][0]['id'];
-      await Sharedprefrences.setId(ownerId);
-      print("token: ${await Sharedprefrences.getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
-    }else if(response.statusCode == 401) {
-      print("refresh token called");
-      getNewToken(context);
-      registerOwner();
+      if (response.statusCode == 200) {
+        print(response.body);
+        final json = jsonDecode(response.body);
+        var token = (json['data'][0]['token']).toString();
+        await Sharedprefrences.setToken(token);
+        var refreshToken = (json['data'][0]['refresh_token']).toString();
+        await Sharedprefrences.setRefreshToken(refreshToken);
+        var ownerId = json['data'][0]['id'];
+        await Sharedprefrences.setId(ownerId);
+        print("token: ${await Sharedprefrences
+            .getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
+      } else if (response.statusCode == 401) {
+        print("refresh token called in register owner");
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? registerOwner() : null;
+      }
+      else {
+        print(response.body);
+        print('Request failed with status: ${response.statusCode}.');
+      }
     }
-    else {
-      print(response.body);
-      print('Request failed with status: ${response.statusCode}.');
-    }
-  }
 
 
   Future<void> decidePath() async {
@@ -318,8 +323,8 @@ class _SignupState extends State<Signup> {
         );
       }else if(response.statusCode == 401) {
         print("refresh token called");
-        getNewToken(context);
-        decidePath();
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?decidePath():null;
       } else {
         await Navigator.pushReplacement(
           context,

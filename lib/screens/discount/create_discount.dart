@@ -115,8 +115,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      CreateCoupon();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ? CreateCoupon() : null;
     }else {
       setState(() {
         isLoading = true;

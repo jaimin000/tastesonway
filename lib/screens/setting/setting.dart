@@ -55,8 +55,8 @@ class _SettingState extends State<Setting> {
     setState(() {});
   }else if(tokenResponse.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getOwnerAvaibility();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getOwnerAvaibility():null;
     }
     else{
       print("failed with:${tokenResponse.statusCode}");
@@ -80,8 +80,8 @@ class _SettingState extends State<Setting> {
 
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      updateOwnerAvaibility(status);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?updateOwnerAvaibility(status):null;
     }else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Something Went Wrong Please Try Again!')),

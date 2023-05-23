@@ -73,14 +73,12 @@ String device_id = '';
 //   return ownerId;
 // }
 
-Future<void> getNewToken(BuildContext context) async {
-
+Future<bool> getNewToken(BuildContext context) async {
   String token = await Sharedprefrences.getToken();
   String refreshToken = await Sharedprefrences.getRefreshToken();
   print("this is refresh $refreshToken");
 
-  final response =
-      await http.post(Uri.parse('$baseUrl/refresh-token'), headers: {
+  final response = await http.post(Uri.parse('$baseUrl/refresh-token'), headers: {
     'Authorization': 'Bearer $token',
   }, body: {
     "refresh_token": refreshToken
@@ -89,20 +87,21 @@ Future<void> getNewToken(BuildContext context) async {
   if (response.statusCode == 200) {
     print(response.body);
     final json = jsonDecode(response.body);
-    String newtoken = json['data']['original']['access_token'].toString();
-    await Sharedprefrences.setToken(newtoken);
-    // return token;
+    String newToken = json['data']['original']['access_token'].toString();
+    await Sharedprefrences.setToken(newToken);
+    return true;
   } else if (response.statusCode == 401) {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.remove('user');
     await FirebaseAuth.instance.signOut();
     print("refresh token failed");
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
         CupertinoPageRoute(builder: (context) => const LanguageScreen()),
-        (route) => false);
+            (route) => false);
+    return false;
   } else {
     print('Request failed with status: ${response.statusCode}.');
+    return false;
   }
 }
 

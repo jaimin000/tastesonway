@@ -47,8 +47,8 @@ class _ProfileState extends State<Profile> {
       });
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchData();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchData():null;
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }

@@ -77,8 +77,8 @@ class _YourOrdersState extends State<YourOrders> {
       //print("orderData $orderData");
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchOrder();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchOrder():null;
     }else {
       isLoading = false;
       setState(() {});

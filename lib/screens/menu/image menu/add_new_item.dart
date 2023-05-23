@@ -202,8 +202,8 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
       }
       else if(response.statusCode == 401) {
         print("refresh token called");
-        getNewToken(context);
-        CreateMenuItem();
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?CreateMenuItem():null;
       }else {
         print(json);
         showDialog(

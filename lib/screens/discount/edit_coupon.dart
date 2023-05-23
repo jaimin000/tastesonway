@@ -131,8 +131,8 @@ class _EditCouponState extends State<EditCoupon> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      updateCoupon();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?updateCoupon():null;
     }
     else {
       setState(() {
@@ -165,8 +165,8 @@ class _EditCouponState extends State<EditCoupon> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      deleteCoupon();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?deleteCoupon():null;
     }
     else {
       setState(() {

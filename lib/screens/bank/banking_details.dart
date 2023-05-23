@@ -52,8 +52,8 @@ class _BankingDetailsState extends State<BankingDetails> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getBankDetails();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ? getBankDetails() : null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

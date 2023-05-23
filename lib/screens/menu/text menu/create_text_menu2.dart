@@ -62,8 +62,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getMenu();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getMenu():null;
     }
     else {
       isLoading = false;
@@ -100,8 +100,8 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      AddMultipleMenuId();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?AddMultipleMenuId():null;
     }
     else {
       print('Request failed with status: ${response.statusCode}.');

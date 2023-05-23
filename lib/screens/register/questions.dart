@@ -51,8 +51,8 @@ class _QuestionsState extends State<Questions> {
       print(hearAbout);
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getQuestion();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getQuestion():null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -211,8 +211,8 @@ class _QuestionsState extends State<Questions> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchData();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchData():null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

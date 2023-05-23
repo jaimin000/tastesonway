@@ -36,8 +36,8 @@ class _ReviewHistoryState extends State<ReviewHistory> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchHistory();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchHistory():null;
     }else {
       setState(() {
         isLoading = false;
@@ -66,8 +66,8 @@ class _ReviewHistoryState extends State<ReviewHistory> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      deleteHistory(id);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?deleteHistory(id):null;
     }else {
       isLoading =false;
       print('Request failed with status: ${response.statusCode}.');

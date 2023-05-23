@@ -45,8 +45,8 @@ Future setUpi() async {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      setUpi();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ? setUpi() : null;
     }
     else {
       isLoading = false;

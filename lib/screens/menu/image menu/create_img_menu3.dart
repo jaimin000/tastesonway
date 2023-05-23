@@ -80,8 +80,8 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      getTheme(context, index);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?getTheme(context, index):null;
     }
     else {
       setState(() {
@@ -109,8 +109,8 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      Menu();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?Menu() : null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
@@ -454,8 +454,8 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
 
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      addMenuImage(pictures);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?addMenuImage(pictures):null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
@@ -485,8 +485,8 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
 
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      UpdateMenu(imageLink);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?UpdateMenu(imageLink):null;
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);

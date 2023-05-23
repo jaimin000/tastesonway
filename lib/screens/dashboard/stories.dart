@@ -297,8 +297,8 @@ class _StoriesState extends State<Stories> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchData();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchData() : null;
     }
     else {
       print('Request failed in stories with status : ${response.statusCode}.');

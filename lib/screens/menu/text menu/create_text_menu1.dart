@@ -56,8 +56,8 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
       }
       else if(response.statusCode == 401) {
         print("refresh token called");
-        getNewToken(context);
-        getMenuId();
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?getMenuId():null;
       }
       else {
         //  AlertDialog(

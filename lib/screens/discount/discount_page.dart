@@ -59,13 +59,13 @@ class _DiscountPageState extends State<DiscountPage> {
       }).toList();
     // } else if(response.statusCode == 401) {
     //   print("refresh token called");
-    //   await getNewToken(context);
+    //   await bool tokenRefreshed = await getNewToken(context);
     //   fetchCoupon();
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchCoupon();
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchCoupon() : null;
     }
     else {
       setState(() {
@@ -92,8 +92,8 @@ class _DiscountPageState extends State<DiscountPage> {
       print(data);
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      getNewToken(context);
-      fetchCouponStatus(id);
+      bool tokenRefreshed = await getNewToken(context);
+      tokenRefreshed ?fetchCouponStatus(id):null;
     }
     else {
       setState(() {
