@@ -18,6 +18,8 @@ class CreateTextMenu3 extends StatefulWidget {
 }
 
 class _CreateTextMenu3State extends State<CreateTextMenu3> {
+  int refreshCounter = 0;
+
   var menuId;
 
   List menuList = [];
@@ -38,9 +40,10 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
       menuList = (json['data'][1]['data']);
       // print(menuList);
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? Menu() : null;
+      tokenRefreshed ? Menu() : null;}
     }
     else {
       print('Request failed with status: ${response.statusCode}.');
@@ -67,9 +70,10 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
       return ScaffoldSnackbar.of(context).show(json['message']);
 
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? UpdateMenu() : null;
+      tokenRefreshed ? UpdateMenu() : null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);

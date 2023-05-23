@@ -20,6 +20,7 @@ class EditCoupon extends StatefulWidget {
 
 class _EditCouponState extends State<EditCoupon> {
   final _formKey = GlobalKey<FormState>();
+  int refreshCounter = 0;
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController perUserController = TextEditingController();
@@ -131,8 +132,11 @@ class _EditCouponState extends State<EditCoupon> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?updateCoupon():null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? updateCoupon() : null;
+      }
     }
     else {
       setState(() {
@@ -165,8 +169,11 @@ class _EditCouponState extends State<EditCoupon> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?deleteCoupon():null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? deleteCoupon() : null;
+      }
     }
     else {
       setState(() {

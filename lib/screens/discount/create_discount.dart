@@ -27,6 +27,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
   final TextEditingController couponUptoAmountController = TextEditingController();
   final TextEditingController minOrderController = TextEditingController();
   final TextEditingController couponValueController = TextEditingController();
+  int refreshCounter = 0;
 
   bool isLoading = true;
   bool isEndDateSelected = false;
@@ -115,8 +116,11 @@ class _CreateDiscountState extends State<CreateDiscount> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? CreateCoupon() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? CreateCoupon() : null;
+      }
     }else {
       setState(() {
         isLoading = true;

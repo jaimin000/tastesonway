@@ -18,6 +18,8 @@ class ViewAddress extends StatefulWidget {
 }
 
 class _ViewAddressState extends State<ViewAddress> {
+  int refreshCounter = 0;
+
   Map addressData = {};
   Map updatedAddressData = {};
   bool isLoading = false;
@@ -108,9 +110,10 @@ class _ViewAddressState extends State<ViewAddress> {
         isLoading = false;
       });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchAddress():null;
+      tokenRefreshed ?fetchAddress():null;}
     }else {
       setState(() {
         isLoading = false;
@@ -123,6 +126,7 @@ class _ViewAddressState extends State<ViewAddress> {
   }
 
   Future<void> updateAddress(String addressID) async {
+
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
@@ -170,9 +174,10 @@ class _ViewAddressState extends State<ViewAddress> {
         Navigator.pop(context);
       }
       else if(response.statusCode == 401) {
-        print("refresh token called");
+        print("refresh token called");if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?updateAddress(addressID):null;
+        tokenRefreshed ?updateAddress(addressID):null;}
       }else {
         print('Request failed with status: ${response.statusCode}.');
         ScaffoldSnackbar.of(context)

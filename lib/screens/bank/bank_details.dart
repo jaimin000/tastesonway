@@ -27,7 +27,8 @@ class _BankDetailsState extends State<BankDetails> {
   bool showDetails = false;
   final _formKey = GlobalKey<FormState>();
   List<String> bankList = [];
-  List<String> _suggestions = [];
+  List<String> _suggestions = [];  int refreshCounter = 0;
+
   final TextEditingController bankNameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController accNumController = TextEditingController();
@@ -59,8 +60,11 @@ class _BankDetailsState extends State<BankDetails> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? setBankDetails() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? setBankDetails() : null;
+      }
     }
     else {
       isLoading=false;
@@ -95,8 +99,11 @@ class _BankDetailsState extends State<BankDetails> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? getBanks() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? getBanks() : null;
+      }
     }else {
       isLoading=false;
       print('Request failed with status: ${response.statusCode}.');

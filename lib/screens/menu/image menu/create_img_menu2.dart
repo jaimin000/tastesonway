@@ -26,8 +26,11 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
   late int menuId;
   List<String> menuItemId = [];
   final List<int> myList = [53, 54];
+  int refreshCounter = 0;
+
 
   Future<void> getMenu() async {
+
     String token = await Sharedprefrences.getToken();
     String? ownerId = await Sharedprefrences.getId();
     setState(() {
@@ -65,8 +68,11 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getMenu():null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? getMenu() : null;
+      }
     }
     else {
       print('Request failed with status: ${response.statusCode}.');
@@ -99,8 +105,11 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
       print(json['message']);
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?AddMultipleMenuId():null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? AddMultipleMenuId() : null;
+      }
     }
     else {
       print('Request failed with status: ${response.statusCode}.');

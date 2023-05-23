@@ -37,7 +37,8 @@ class _DashboardState extends State<Dashboard> {
   String profilePhoto = "";
   String userName = "";
   final currentTime = DateTime.now();
-  String greeting = "";
+  String greeting = "";  int refreshCounter = 0;
+
 
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
@@ -74,8 +75,14 @@ class _DashboardState extends State<Dashboard> {
     //   fetchData();
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? fetchData() : null;
+        }
+      }
     }
     else {
       print('Request failed with status: ${response.statusCode}.');
@@ -99,8 +106,11 @@ class _DashboardState extends State<Dashboard> {
       });
     }else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? fetchProfile():  null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? fetchProfile() : null;
+      }
     }
     else {
       print('refresh token failed');

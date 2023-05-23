@@ -18,6 +18,8 @@ class YourOrders extends StatefulWidget {
 }
 
 class _YourOrdersState extends State<YourOrders> {
+  int refreshCounter = 0;
+
   List orderData = [];
   bool isLoading = true;
   // late Timer _timer;
@@ -76,9 +78,10 @@ class _YourOrdersState extends State<YourOrders> {
       });
       //print("orderData $orderData");
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchOrder():null;
+      tokenRefreshed ?fetchOrder():null;}
     }else {
       isLoading = false;
       setState(() {});

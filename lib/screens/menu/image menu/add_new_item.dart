@@ -21,6 +21,7 @@ class AddNewImgItem extends StatefulWidget {
 }
 
 class _AddNewImgItemState extends State<AddNewImgItem> {
+  int refreshCounter = 0;
 
   bool _switchValue = true;
   int step = 1;
@@ -202,8 +203,11 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
       }
       else if(response.statusCode == 401) {
         print("refresh token called");
-        bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?CreateMenuItem():null;
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? CreateMenuItem() : null;
+        }
       }else {
         print(json);
         showDialog(

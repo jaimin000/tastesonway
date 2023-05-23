@@ -28,6 +28,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  int refreshCounter = 0;
+
   String name ="";
   String profile ="";
 
@@ -46,9 +48,10 @@ class _ProfileState extends State<Profile> {
         profile = profileData['avatar'];
       });
     }else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      tokenRefreshed ?fetchData():null;}
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }

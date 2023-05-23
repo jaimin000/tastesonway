@@ -14,6 +14,8 @@ class MenuItems extends StatefulWidget {
 }
 
 class _MenuItemsState extends State<MenuItems> {
+  int refreshCounter = 0;
+
   bool _isLoading = true;
   late List<dynamic> menuData = [];
   List<MenuItemModel> menuItemList = [];
@@ -42,9 +44,10 @@ class _MenuItemsState extends State<MenuItems> {
 
       setState(() {});
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getMenuItem():null;
+      tokenRefreshed ?getMenuItem():null;}
     }else {
       setState(() {
         _isLoading = false;

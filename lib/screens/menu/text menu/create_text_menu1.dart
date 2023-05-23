@@ -17,6 +17,8 @@ class CreateTextMenu extends StatefulWidget {
 }
 
 class _CreateTextMenuState extends State<CreateTextMenu> {
+  int refreshCounter = 0;
+
   bool isPermanentMenu = true;
   late String menuName;
   late int menuId;
@@ -55,9 +57,10 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         return menuId;
       }
       else if(response.statusCode == 401) {
-        print("refresh token called");
+        print("refresh token called");if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?getMenuId():null;
+        tokenRefreshed ?getMenuId():null;}
       }
       else {
         //  AlertDialog(

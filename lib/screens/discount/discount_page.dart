@@ -23,7 +23,8 @@ class _DiscountPageState extends State<DiscountPage> {
   int _current = 0;
   List apiData = [];
   int couponStatus = 2;
-  bool isLoading = true;
+  bool isLoading = true;  int refreshCounter = 0;
+
 
   void fetchCoupon() async {
     String token = await Sharedprefrences.getToken();
@@ -64,8 +65,11 @@ class _DiscountPageState extends State<DiscountPage> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchCoupon() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? fetchCoupon() : null;
+      }
     }
     else {
       setState(() {
@@ -92,8 +96,11 @@ class _DiscountPageState extends State<DiscountPage> {
       print(data);
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchCouponStatus(id):null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? fetchCouponStatus(id) : null;
+      }
     }
     else {
       setState(() {

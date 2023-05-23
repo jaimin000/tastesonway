@@ -22,7 +22,8 @@ class Stories extends StatefulWidget {
 class _StoriesState extends State<Stories> {
   //create story
   late File _image;
-  late File _video;
+  late File _video;  int refreshCounter = 0;
+
 
 
   Future<void> _pickImage(ImageSource source) async {
@@ -297,8 +298,11 @@ class _StoriesState extends State<Stories> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? fetchData() : null;
+      }
     }
     else {
       print('Request failed in stories with status : ${response.statusCode}.');

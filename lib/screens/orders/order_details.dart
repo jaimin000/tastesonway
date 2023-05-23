@@ -23,6 +23,8 @@ class OrderDetails extends StatefulWidget {
 
 class _OrderDetailsState extends State<OrderDetails>
     with TickerProviderStateMixin {
+  int refreshCounter = 0;
+
   Map<String, dynamic> orderData = {};
   bool isLoading = true;
   bool isShowAcceptButton = false;
@@ -190,9 +192,10 @@ class _OrderDetailsState extends State<OrderDetails>
       }
       // print("orderData $orderData");
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchOrderDetails():null;
+      tokenRefreshed ?fetchOrderDetails():null;}
     }else {
       ScaffoldSnackbar.of(context)
           .show('Something Went Wrong Please Try Again!');
@@ -255,9 +258,10 @@ class _OrderDetailsState extends State<OrderDetails>
       });
     }
     else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?updateOrderStatus(id):null;
+      tokenRefreshed ?updateOrderStatus(id):null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)
@@ -292,9 +296,10 @@ class _OrderDetailsState extends State<OrderDetails>
         isLoading = false;
       });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?verifyOtp(otp):null;
+      tokenRefreshed ?verifyOtp(otp):null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)

@@ -23,6 +23,8 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
+  int refreshCounter = 0;
+
   String selectedlang = 'Eng';
   var languages = [
     'Eng',
@@ -54,9 +56,10 @@ class _SettingState extends State<Setting> {
     ownerAvailable = data == 'true';
     setState(() {});
   }else if(tokenResponse.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getOwnerAvaibility():null;
+      tokenRefreshed ?getOwnerAvaibility():null;}
     }
     else{
       print("failed with:${tokenResponse.statusCode}");
@@ -79,9 +82,10 @@ class _SettingState extends State<Setting> {
       print(data['message']);
 
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?updateOwnerAvaibility(status):null;
+      tokenRefreshed ?updateOwnerAvaibility(status):null;}
     }else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Something Went Wrong Please Try Again!')),

@@ -50,6 +50,7 @@ class _SignupState extends State<Signup> {
   bool agree = false;
   bool showAgreeMessage = false;
   int _selectedIndex = 0;
+  int refreshCounter = 0;
   var profileStatus;
   var profileAddress;
   var ownerId;
@@ -284,8 +285,11 @@ class _SignupState extends State<Signup> {
             .getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
       } else if (response.statusCode == 401) {
         print("refresh token called in register owner");
+        if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
         tokenRefreshed ? registerOwner() : null;
+        }
       }
       else {
         print(response.body);
@@ -322,9 +326,10 @@ class _SignupState extends State<Signup> {
           ),
         );
       }else if(response.statusCode == 401) {
-        print("refresh token called");
+        print("refresh token called");if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?decidePath():null;
+        tokenRefreshed ?decidePath():null;}
       } else {
         await Navigator.pushReplacement(
           context,

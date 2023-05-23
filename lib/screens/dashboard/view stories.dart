@@ -18,6 +18,7 @@ class ViewStories extends StatefulWidget {
 class _ViewStoriesState extends State<ViewStories> {
   //get story
   final StoryController controller = StoryController();
+  int refreshCounter = 0;
 
   @override
   void dispose() {
@@ -48,8 +49,11 @@ class _ViewStoriesState extends State<ViewStories> {
       Navigator.pop(context);
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? DeleteData() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? DeleteData() : null;
+      }
     }else {
       print(widget.id);
       print('Request failed with status: ${response.statusCode}.');

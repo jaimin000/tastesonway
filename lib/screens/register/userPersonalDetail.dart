@@ -19,6 +19,8 @@ class userPersonalDetail extends StatefulWidget {
 }
 
 class _userPersonalDetailState extends State<userPersonalDetail> {
+  int refreshCounter = 0;
+
   String name = "";
   String email = "";
   String pincode = "";
@@ -108,9 +110,10 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
           print(data);
         });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      tokenRefreshed ?fetchData():null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

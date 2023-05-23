@@ -18,6 +18,8 @@ class CreateImgMenu extends StatefulWidget {
 }
 
 class _CreateImgMenuState extends State<CreateImgMenu> {
+  int refreshCounter = 0;
+
   bool isPermanentMenu = true;
   late String menuName;
   late int menuId;
@@ -57,8 +59,11 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
       }
       else if(response.statusCode == 401) {
         print("refresh token called");
-        bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?getMenuId():null;
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? getMenuId() : null;
+        }
       }
       else {
         //  AlertDialog(

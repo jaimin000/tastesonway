@@ -16,6 +16,8 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
+  int refreshCounter = 0;
+
   int Radio1 = 0;
   int Radio2 = 0;
   bool isLoading = true;
@@ -50,9 +52,10 @@ class _QuestionsState extends State<Questions> {
       setState(() {});
       print(hearAbout);
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getQuestion():null;
+      tokenRefreshed ?getQuestion():null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -189,6 +192,7 @@ class _QuestionsState extends State<Questions> {
       );
 
   Future fetchData() async {
+
     String token = await Sharedprefrences.getToken();
     final response = await http.post(
         Uri.parse('https://dev-api.tastesonway.com/api/v2/kitchen-owner-update-profile'),
@@ -210,9 +214,10 @@ class _QuestionsState extends State<Questions> {
         print(data);
       });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      tokenRefreshed ?fetchData():null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

@@ -21,6 +21,7 @@ class AddNewItem extends StatefulWidget {
 }
 
 class _AddNewItemState extends State<AddNewItem> {
+  int refreshCounter = 0;
 
   bool _switchValue = true;
   int step = 1;
@@ -201,8 +202,10 @@ class _AddNewItemState extends State<AddNewItem> {
         );
       }else if(response.statusCode == 401) {
         print("refresh token called");
+        if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?CreateMenuItem():null;
+        tokenRefreshed ?CreateMenuItem():null;}
       }
       else {
         print(json);

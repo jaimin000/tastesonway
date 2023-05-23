@@ -21,6 +21,8 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
+  int refreshCounter = 0;
+
   late GoogleMapController _mapController;
   bool _isLoading = true;
   bool _isLocationConfirm = false;
@@ -129,9 +131,10 @@ class _AddressPageState extends State<AddressPage> {
           print(data);
         });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      tokenRefreshed ?fetchData():null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

@@ -16,6 +16,8 @@ class MenuDesign extends StatefulWidget {
 }
 
 class _MenuDesignState extends State<MenuDesign> {
+  int refreshCounter = 0;
+
   bool _isLoading = true;
   int selectedIndex = 0;
   String name = "";
@@ -52,8 +54,11 @@ class _MenuDesignState extends State<MenuDesign> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getTheme(context, index):null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? getTheme(context, index) : null;
+      }
     }else {
       setState(() {
         _isLoading = false;

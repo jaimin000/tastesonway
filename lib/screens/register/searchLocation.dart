@@ -21,6 +21,8 @@ class SearchLocation extends StatefulWidget {
 }
 
 class _SearchLocationState extends State<SearchLocation> {
+  int refreshCounter = 0;
+
   final _controller = TextEditingController();
   final Places.GoogleMapsPlaces _places = Places.GoogleMapsPlaces(
       apiKey: 'AIzaSyAgAXZ8dszokAmE1E9rm9LHlIt1IOd0NSI');
@@ -66,9 +68,10 @@ class _SearchLocationState extends State<SearchLocation> {
           });
         }
       } else if(allPalcesResponse.statusCode == 401) {
-        print("refresh token called");
+        print("refresh token called");if (refreshCounter == 0) {
+          refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?autoCompleteSearch(value):null;
+        tokenRefreshed ?autoCompleteSearch(value):null;}
       }else {
         throw Exception('Failed to fetch suggestion');
       }

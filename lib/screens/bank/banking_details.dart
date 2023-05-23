@@ -21,7 +21,8 @@ class _BankingDetailsState extends State<BankingDetails> {
   String bankName = "";
   String bankHolderName = "";
   String bankAccNumber = "";
-  String bankIfsc = "";
+  String bankIfsc = "";  int refreshCounter = 0;
+
 
   Future getBankDetails() async {
     String token = await Sharedprefrences.getToken();
@@ -52,8 +53,11 @@ class _BankingDetailsState extends State<BankingDetails> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? getBankDetails() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? getBankDetails() : null;
+      }
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

@@ -18,6 +18,8 @@ class CreateTextMenu2 extends StatefulWidget {
 }
 
 class _CreateTextMenu2State extends State<CreateTextMenu2> {
+  int refreshCounter = 0;
+
   bool _checkAll = false;
   bool isPermanentMenu = true;
   bool isLoading = true;
@@ -61,9 +63,10 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       });
     }
     else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getMenu():null;
+      tokenRefreshed ?getMenu():null;}
     }
     else {
       isLoading = false;
@@ -99,9 +102,10 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       print(json['message']);
     }
     else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?AddMultipleMenuId():null;
+      tokenRefreshed ?AddMultipleMenuId():null;}
     }
     else {
       print('Request failed with status: ${response.statusCode}.');

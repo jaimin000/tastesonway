@@ -30,6 +30,8 @@ class CreateImgMenu3 extends StatefulWidget {
 }
 
 class _CreateImgMenu3State extends State<CreateImgMenu3> {
+  int refreshCounter = 0;
+
   List<ThemeImageModel> image = <ThemeImageModel>[];
   String backgroundImage = "";
   int backgroundImageId = 1;
@@ -80,8 +82,11 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?getTheme(context, index):null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? getTheme(context, index) : null;
+      }
     }
     else {
       setState(() {
@@ -109,8 +114,11 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?Menu() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? Menu() : null;
+      }
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
@@ -454,8 +462,11 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
 
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?addMenuImage(pictures):null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? addMenuImage(pictures) : null;
+      }
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
@@ -485,8 +496,10 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
 
     } else if(response.statusCode == 401) {
       print("refresh token called");
+      if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?UpdateMenu(imageLink):null;
+      tokenRefreshed ?UpdateMenu(imageLink):null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);

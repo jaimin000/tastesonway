@@ -16,6 +16,8 @@ class Cuisines extends StatefulWidget {
 }
 
 class _CuisinesState extends State<Cuisines> {
+  int refreshCounter = 0;
+
   final List<CuisineModel> _foodItems = [];
   final List<String> _selectedItems = [];
 
@@ -49,9 +51,10 @@ class _CuisinesState extends State<Cuisines> {
         setState(() {});
       }
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;
+      tokenRefreshed ?fetchData():null;}
     }else {
       print('Request failed with status: ${response.statusCode}.');
     }

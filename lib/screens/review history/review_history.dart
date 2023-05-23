@@ -15,6 +15,8 @@ class ReviewHistory extends StatefulWidget {
 }
 
 class _ReviewHistoryState extends State<ReviewHistory> {
+  int refreshCounter = 0;
+
 
   List orderHistory = [];
   bool isLoading = true;
@@ -35,9 +37,10 @@ class _ReviewHistoryState extends State<ReviewHistory> {
         print(orderHistory);
       });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchHistory():null;
+      tokenRefreshed ?fetchHistory():null;}
     }else {
       setState(() {
         isLoading = false;
@@ -65,9 +68,10 @@ class _ReviewHistoryState extends State<ReviewHistory> {
       setState(() {
       });
     } else if(response.statusCode == 401) {
-      print("refresh token called");
+      print("refresh token called");if (refreshCounter == 0) {
+        refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?deleteHistory(id):null;
+      tokenRefreshed ?deleteHistory(id):null;}
     }else {
       isLoading =false;
       print('Request failed with status: ${response.statusCode}.');

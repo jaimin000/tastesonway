@@ -21,9 +21,10 @@ class _UPIDetailsState extends State<UPIDetails> {
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController upiIdController = TextEditingController();
-  bool showDetails = false;
+  bool showDetails = false;  int refreshCounter = 0;
 
-Future setUpi() async {
+
+  Future setUpi() async {
   isLoading = true;
   String token = await Sharedprefrences.getToken();
     final response = await http.post(
@@ -45,8 +46,11 @@ Future setUpi() async {
       });
     } else if(response.statusCode == 401) {
       print("refresh token called");
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ? setUpi() : null;
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? setUpi() : null;
+      }
     }
     else {
       isLoading = false;
