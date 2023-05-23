@@ -49,7 +49,12 @@ class _BankingDetailsState extends State<BankingDetails> {
           : bankData['bank_ifsc_code'];
       print(id);
       setState(() {});
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getBankDetails();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }

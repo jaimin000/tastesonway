@@ -36,9 +36,9 @@ class _SignupState extends State<Signup> {
   TextEditingController phoneController = TextEditingController();
   User? user;
   FirebaseAuth auth = FirebaseAuth.instance;
+  late String otpCode;
   bool otpVisibility = false;
   String verificationID = "";
-  late String otpCode;
   String phoneCode = "91";
   String countryCode = "IN";
   bool isLoading = false;
@@ -241,43 +241,67 @@ class _SignupState extends State<Signup> {
   //   }
   // }
 
-  Future<void> registerOwner() async {
-    const url = "$baseUrl/kitchen-owner-login-registration";
+  Future registerOwner() async {
     int platform;
-    if (Platform.isAndroid) {
-      platform = 1;
-    } else {
-      platform = 2;
-    }
+    if (Platform.isAndroid) {platform = 1;} else {platform = 2;}
     int gender = await Sharedprefrences.getGender() == "Male" ? 1 : 2;
-    final tokenResponse = await http.post(Uri.parse(url), body: {
-      "language_id": await Sharedprefrences.getLanguageId().toString(),
-      "mobile_number": await Sharedprefrences.getMobileNumber().toString(),
-      "device_token": await FirebaseMessaging.instance.getToken(),
-      "device_id": "51689555c4cf988a",
-      "platform": platform,
-      "gender": gender,
-      "referral_code": "a5265bb5",
-      "short_code": await Sharedprefrences.getShortCode(),
-      "country_code": await Sharedprefrences.getCountryCode()
-    });
-    final json = jsonDecode(tokenResponse.body);
-    var token = (json['data'][0]['token']).toString();
-    await Sharedprefrences.setToken(token);
-    var refreshToken = (json['data'][0]['refresh_token']).toString();
-    await Sharedprefrences.setRefreshToken(refreshToken);
-    var ownerId = json['data'][0]['id'];
-    await Sharedprefrences.setId(ownerId);
+
+    dynamic languageId = await Sharedprefrences.getLanguageId();
+    dynamic mobileNumber = await Sharedprefrences.getMobileNumber();
+    dynamic shortCode = await Sharedprefrences.getShortCode();
+    dynamic countryCode = await Sharedprefrences.getCountryCode();
+    dynamic deviceToken = await FirebaseMessaging.instance.getToken();
+    dynamic deviceId = getDeviceId();
+
+    final response = await http.post(
+        Uri.parse("$baseUrl/kitchen-owner-login-registration"),
+        body: {
+          "language_id": languageId.toString(),
+          "mobile_number": mobileNumber.toString(),
+          "short_code": shortCode.toString(),
+          "country_code": countryCode.toString(),
+          "device_token": deviceToken.toString(),
+          "device_id": deviceId.toString(),
+          "platform": "$platform",
+          "gender": "$gender",
+          "referral_code": "a5265bb5"
+        });
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      final json = jsonDecode(response.body);
+      var token = (json['data'][0]['token']).toString();
+      await Sharedprefrences.setToken(token);
+      var refreshToken = (json['data'][0]['refresh_token']).toString();
+      await Sharedprefrences.setRefreshToken(refreshToken);
+      var ownerId = json['data'][0]['id'];
+      await Sharedprefrences.setId(ownerId);
+      print("token: ${await Sharedprefrences.getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      registerOwner();
+    }
+    else {
+      print(response.body);
+      print('Request failed with status: ${response.statusCode}.');
+    }
   }
 
+
   Future<void> decidePath() async {
+    dynamic languageId = await Sharedprefrences.getLanguageId();
+    dynamic mobileNumber = await Sharedprefrences.getMobileNumber();
+    dynamic shortCode = await Sharedprefrences.getShortCode();
+    dynamic countryCode = await Sharedprefrences.getCountryCode();
+
     final response = await http.post(
       Uri.parse('$baseUrl/kitchen-owner-login-registration'),
       body: {
-        "language_id": '3',
-        "mobile_number": '8780530654',
-        "short_code": 'IN',
-        "country_code": '91',
+        "language_id": languageId.toString(),
+        "mobile_number": mobileNumber.toString(),
+        "short_code": shortCode.toString(),
+        "country_code": countryCode.toString()
       },
     );
 
@@ -285,8 +309,6 @@ class _SignupState extends State<Signup> {
       final jsonData = json.decode(response.body);
       profileStatus = jsonData['data'][0]['status'];
       profileAddress = jsonData['data'][0]['owner_address'];
-      print("profileStatus is $profileStatus & address is $profileAddress");
-      print("ownerid is $ownerId");
       if (profileStatus == 1 && profileAddress == null) {
         Navigator.pushReplacement(
           context,
@@ -294,6 +316,10 @@ class _SignupState extends State<Signup> {
             builder: (context) => const userPersonalDetail(),
           ),
         );
+      }else if(response.statusCode == 401) {
+        print("refresh token called");
+        getNewToken(context);
+        decidePath();
       } else {
         await Navigator.pushReplacement(
           context,
@@ -303,6 +329,7 @@ class _SignupState extends State<Signup> {
         );
       }
     } else {
+      print(response.body);
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -580,7 +607,6 @@ class _SignupState extends State<Signup> {
     await Sharedprefrences.setCountryCode(phoneCode);
     await Sharedprefrences.setMobileNumber(phoneController.text);
     await Sharedprefrences.setShortCode(countryCode);
-    // print("this is complete data: $countryCode, $phoneController.text, $phoneCode");
     setState(() {
       isLoading = true;
     });
@@ -589,7 +615,6 @@ class _SignupState extends State<Signup> {
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential).then((value) {
           print("You are logged in successfully");
-          registerOwner();
         });
       },
       verificationFailed: (FirebaseAuthException e) {
@@ -607,6 +632,7 @@ class _SignupState extends State<Signup> {
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
+    registerOwner();
   }
 
   void verifyOTP() async {

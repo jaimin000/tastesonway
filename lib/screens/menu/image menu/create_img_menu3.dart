@@ -78,7 +78,12 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       setState(() {
         _isLoading = false;
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getTheme(context, index);
+    }
+    else {
       setState(() {
         _isLoading = false;
       });
@@ -101,7 +106,12 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       final json = jsonDecode(response.body);
       menuList = (json['data'][1]['data']);
       print("menulist :$menuList");
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      Menu();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       print(json['message']);
@@ -442,7 +452,11 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       print(json['data'][0].toString());
       print(json['message']);
 
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      addMenuImage(pictures);
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       print(json['message']);
@@ -469,7 +483,11 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
       print(json['message']);
       return ScaffoldSnackbar.of(context).show(json['message']);
 
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      UpdateMenu(imageLink);
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       return ScaffoldSnackbar.of(context).show(json['message']);

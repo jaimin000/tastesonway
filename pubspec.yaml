@@ -74,6 +74,8 @@ dependencies:
   timer_count_down: ^2.2.2
   snippet_coder_utils: ^1.0.14
   firebase_messaging: ^13.1.0
+  device_info_plus: ^9.0.1
+
 
 dev_dependencies:
   flutter_test:

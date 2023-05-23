@@ -1,5 +1,4 @@
 import 'dart:convert';
- 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -10,6 +9,7 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:google_maps_webservice/places.dart' as Places;
 import 'dart:async';
 import 'package:uuid/uuid.dart';
+import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 
 
@@ -65,7 +65,11 @@ class _SearchLocationState extends State<SearchLocation> {
             predictions = [];
           });
         }
-      } else {
+      } else if(allPalcesResponse.statusCode == 401) {
+        print("refresh token called");
+        getNewToken(context);
+        autoCompleteSearch(value);
+      }else {
         throw Exception('Failed to fetch suggestion');
       }
     });

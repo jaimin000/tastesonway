@@ -46,7 +46,11 @@ class _ViewStoriesState extends State<ViewStories> {
       );
       print("Story Deleted Successfully");
       Navigator.pop(context);
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      DeleteData();
+    }else {
       print(widget.id);
       print('Request failed with status: ${response.statusCode}.');
     }

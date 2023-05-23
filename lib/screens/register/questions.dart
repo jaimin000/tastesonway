@@ -49,7 +49,11 @@ class _QuestionsState extends State<Questions> {
       checkboxSelect = List<bool>.filled(question2list.length, false);
       setState(() {});
       print(hearAbout);
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getQuestion();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -205,7 +209,11 @@ class _QuestionsState extends State<Questions> {
         var data = jsonData['data'];
         print(data);
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }

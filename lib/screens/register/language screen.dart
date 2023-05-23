@@ -31,7 +31,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
     _getCurrentLocale();
   }
   Future<void> _getCurrentLocale() async {
-    print(await Sharedprefrences.getRefreshToken());
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? languageCode = prefs.getString('language');
     String? countryCode = prefs.getString('country');
@@ -353,6 +352,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                               }
                               print('this is languageId $languageId');
                               await Sharedprefrences.setLanguagePreference(Locale(languageCode,countryCode));
+                              await Sharedprefrences.setLanguageId(languageId);
                               print(await Sharedprefrences.getLanguagePreference());
                               //await Sharedprefrences.setLanguageId(languageId);
                               // print(await Sharedprefrences.getLanguageId());

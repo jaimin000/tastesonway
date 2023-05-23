@@ -107,7 +107,11 @@ class _ViewAddressState extends State<ViewAddress> {
       setState(() {
         isLoading = false;
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchAddress();
+    }else {
       setState(() {
         isLoading = false;
         isEditable = true;
@@ -164,7 +168,12 @@ class _ViewAddressState extends State<ViewAddress> {
           isLoading = false;
         });
         Navigator.pop(context);
-      } else {
+      }
+      else if(response.statusCode == 401) {
+        print("refresh token called");
+        getNewToken(context);
+        updateAddress(addressID);
+      }else {
         print('Request failed with status: ${response.statusCode}.');
         ScaffoldSnackbar.of(context)
             .show('we are currently available in 3 places Prahlad Nagar, Paldi, University Area.');

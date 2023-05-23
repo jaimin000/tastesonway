@@ -199,7 +199,12 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
             );
           },
         );
-      } else {
+      }
+      else if(response.statusCode == 401) {
+        print("refresh token called");
+        getNewToken(context);
+        CreateMenuItem();
+      }else {
         print(json);
         showDialog(
           context: context,

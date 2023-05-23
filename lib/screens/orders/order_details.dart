@@ -189,7 +189,11 @@ class _OrderDetailsState extends State<OrderDetails>
         }
       }
       // print("orderData $orderData");
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchOrderDetails();
+    }else {
       ScaffoldSnackbar.of(context)
           .show('Something Went Wrong Please Try Again!');
       print('Request failed with status: ${response.statusCode}.');
@@ -249,7 +253,12 @@ class _OrderDetailsState extends State<OrderDetails>
       setState(() {
         isLoading = false;
       });
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      updateOrderStatus(id);
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)
           .show('Something Went Wrong Please Try Again!');
@@ -282,7 +291,11 @@ class _OrderDetailsState extends State<OrderDetails>
       setState(() {
         isLoading = false;
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      verifyOtp(otp);
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)
           .show('Something Went Wrong Please Try Again!');

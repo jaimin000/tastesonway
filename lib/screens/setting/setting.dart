@@ -48,12 +48,20 @@ class _SettingState extends State<Setting> {
       "short_code": "IN",
       "country_code": "91"
     });
+    if (tokenResponse.statusCode == 200) {
     final json = jsonDecode(tokenResponse.body);
     final data = json['data'][0]['user_availability'];
     ownerAvailable = data == 'true';
-    setState(() {
-    });
-  }
+    setState(() {});
+  }else if(tokenResponse.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getOwnerAvaibility();
+    }
+    else{
+      print("failed with:${tokenResponse.statusCode}");
+    }
+}
 
   void updateOwnerAvaibility(int status) async {
     String token = await Sharedprefrences.getToken();
@@ -70,7 +78,11 @@ class _SettingState extends State<Setting> {
       );
       print(data['message']);
 
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      updateOwnerAvaibility(status);
+    }else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Something Went Wrong Please Try Again!')),
       );

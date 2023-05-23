@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/no%20internet/nointernet.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';

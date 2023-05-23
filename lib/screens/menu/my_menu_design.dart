@@ -50,7 +50,11 @@ class _MenuDesignState extends State<MenuDesign> {
       setState(() {
         _isLoading = false;
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getTheme(context, index);
+    }else {
       setState(() {
         _isLoading = false;
       });

@@ -128,7 +128,13 @@ class _EditCouponState extends State<EditCoupon> {
         const SnackBar(content: Text('Coupon Edited Successfully!')),
       );
       print(data);
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      updateCoupon();
+    }
+    else {
       setState(() {
         isLoading = true;
       });
@@ -156,7 +162,13 @@ class _EditCouponState extends State<EditCoupon> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Coupon deleted Successfully!')),
       );
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      deleteCoupon();
+    }
+    else {
       setState(() {
         isLoading = true;
       });

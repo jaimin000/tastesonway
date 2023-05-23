@@ -43,7 +43,12 @@ Future setUpi() async {
       ScaffoldSnackbar.of(context).show(profileData);
       setState(() {
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      setUpi();
+    }
+    else {
       isLoading = false;
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context).show('Something Went Wrong Please try again!');

@@ -75,7 +75,11 @@ class _YourOrdersState extends State<YourOrders> {
         orderData = jsonData['data']['orderList']['data'] as List;
       });
       //print("orderData $orderData");
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchOrder();
+    }else {
       isLoading = false;
       setState(() {});
       print('Request failed with status: ${response.statusCode}.');

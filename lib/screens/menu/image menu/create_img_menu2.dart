@@ -63,6 +63,11 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
       setState(() {
       });
     }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getMenu();
+    }
     else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -92,6 +97,10 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
       });
       final json = jsonDecode(response.body);
       print(json['message']);
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      AddMultipleMenuId();
     }
     else {
       print('Request failed with status: ${response.statusCode}.');

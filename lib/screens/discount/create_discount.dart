@@ -112,6 +112,11 @@ class _CreateDiscountState extends State<CreateDiscount> {
       });
       final data = json.decode(response.body);
       print(data);
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      CreateCoupon();
     }else {
       setState(() {
         isLoading = true;

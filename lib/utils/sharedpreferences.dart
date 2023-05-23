@@ -16,12 +16,12 @@ class Sharedprefrences {
   static Future<bool> setRefreshToken(value) async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.setString('BearerToken', value.toString());
+    return prefs.setString('RefreshToken', value.toString());
   }
   static Future<dynamic> getRefreshToken() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString('BearerToken');
+    return prefs.getString('RefreshToken');
   }
 
   static Future<bool> setId(value) async {

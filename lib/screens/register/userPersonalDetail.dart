@@ -9,6 +9,8 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart'as http;
 
+import '../../apiServices/api_service.dart';
+
 class userPersonalDetail extends StatefulWidget {
   const userPersonalDetail({Key? key}) : super(key: key);
 
@@ -105,7 +107,11 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
           var data = jsonData['data'];
           print(data);
         });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }

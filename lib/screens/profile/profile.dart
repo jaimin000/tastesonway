@@ -45,6 +45,10 @@ class _ProfileState extends State<Profile> {
         name = profileData['name'];
         profile = profileData['avatar'];
       });
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
     } else {
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -75,6 +79,7 @@ class _ProfileState extends State<Profile> {
         SliverList(
             delegate: SliverChildListDelegate([
           ListView(
+            clipBehavior: Clip.none,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,

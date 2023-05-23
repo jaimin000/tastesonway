@@ -48,7 +48,11 @@ class _CuisinesState extends State<Cuisines> {
             .forEach((json) => _foodItems.add(CuisineModel.fromJson(json)));
         setState(() {});
       }
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }

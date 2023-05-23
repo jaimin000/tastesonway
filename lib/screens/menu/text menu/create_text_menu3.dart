@@ -37,7 +37,12 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
       final json = jsonDecode(response.body);
       menuList = (json['data'][1]['data']);
       // print(menuList);
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      Menu();
+    }
+    else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       print(json['message']);
@@ -61,7 +66,11 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
       print(json['message']);
       return ScaffoldSnackbar.of(context).show(json['message']);
 
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      UpdateMenu();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
       final json = jsonDecode(response.body);
       return ScaffoldSnackbar.of(context).show(json['message']);

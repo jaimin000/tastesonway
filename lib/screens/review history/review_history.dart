@@ -34,7 +34,11 @@ class _ReviewHistoryState extends State<ReviewHistory> {
         orderHistory = data['data'].toList();
         print(orderHistory);
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchHistory();
+    }else {
       setState(() {
         isLoading = false;
       });
@@ -60,7 +64,11 @@ class _ReviewHistoryState extends State<ReviewHistory> {
           .show('Review History Deleted Successfully!');
       setState(() {
       });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      deleteHistory(id);
+    }else {
       isLoading =false;
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)

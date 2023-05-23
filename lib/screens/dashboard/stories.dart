@@ -294,7 +294,13 @@ class _StoriesState extends State<Stories> {
         data = jsonData['data'];
       });
       }
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }
+    else {
       print('Request failed in stories with status : ${response.statusCode}.');
     }
   }

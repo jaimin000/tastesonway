@@ -53,7 +53,13 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
         final json = jsonDecode(response.body);
         menuId = json['data']['id'];
         return menuId;
-      } else {
+      }
+      else if(response.statusCode == 401) {
+        print("refresh token called");
+        getNewToken(context);
+        getMenuId();
+      }
+      else {
         //  AlertDialog(
         //   title: Text('Error'),
         //   content: Text('Failed to load data'),

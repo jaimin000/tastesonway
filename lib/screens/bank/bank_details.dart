@@ -56,7 +56,13 @@ class _BankDetailsState extends State<BankDetails> {
       debugPrint(profileData);
       ScaffoldSnackbar.of(context).show(profileData);
       setState(() {});
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      setBankDetails();
+    }
+    else {
       isLoading=false;
       print('Request failed with status: ${response.statusCode}.');
       ScaffoldSnackbar.of(context)
@@ -86,7 +92,12 @@ class _BankDetailsState extends State<BankDetails> {
         print(bankList);
         setState(() {});
       }
-    } else {
+    }
+    else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      getBanks();
+    }else {
       isLoading=false;
       print('Request failed with status: ${response.statusCode}.');
       setState(() {

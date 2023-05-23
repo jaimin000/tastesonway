@@ -10,6 +10,7 @@ import 'package:tastesonway/screens/register/questions.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
+import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 
 class AddressPage extends StatefulWidget {
@@ -127,7 +128,11 @@ class _AddressPageState extends State<AddressPage> {
           var data = jsonData['data'];
           print(data);
         });
-    } else {
+    } else if(response.statusCode == 401) {
+      print("refresh token called");
+      getNewToken(context);
+      fetchData();
+    }else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }

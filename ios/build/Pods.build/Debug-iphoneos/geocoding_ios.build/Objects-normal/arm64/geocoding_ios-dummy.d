@@ -1,4 +1,0 @@
-dependencies: \
-  /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/geocoding_ios.build/module.modulemap \
-  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/geocoding_ios/geocoding_ios-dummy.m \
-  /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/geocoding_ios/geocoding_ios-prefix.pch

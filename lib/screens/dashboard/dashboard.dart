@@ -16,6 +16,7 @@ import '../../utils/theme_data.dart';
 import '../menu/image menu/create_img_menu1.dart';
 import 'package:http/http.dart' as http;
 
+
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -67,6 +68,10 @@ class _DashboardState extends State<Dashboard> {
          earningMonth = dashboardData['total_earning_summary_of_month'];
          earningSummary = dashboardData['total_earning_summary'];
       });
+    // }else if(response.statusCode == 401) {
+    //   print("refresh token called");
+    //   getNewToken(context);
+    //   fetchData();
     }else if(response.statusCode == 401) {
       print("refresh token called");
       getNewToken(context);
@@ -103,10 +108,12 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+
+
   @override
   void initState() {
-    fetchProfile();
-    fetchData();
+     fetchProfile();
+     fetchData();
     super.initState();
   }
 
