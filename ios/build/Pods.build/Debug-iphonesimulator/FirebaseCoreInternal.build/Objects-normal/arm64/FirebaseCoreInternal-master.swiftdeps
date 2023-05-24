@@ -1,0 +1,25 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "2e282717f8b62ea1a37109e9ca5affebc296419078e9e231b6f4a5aceaa57f48"
+build_start_time: [1684832665, 525491000]
+build_end_time: [1684832679, 54304000]
+inputs:
+  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift": [1684832651, 990717699]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : [1684832651, 991161743]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : [1684832651, 991442995]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : [1684832651, 991613455]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : [1684832651, 991924665]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : [1684832651, 990866700]
+  "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift": [1684832651, 990579739]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : [1684832651, 992081791]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : [1684832651, 991770373]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : [1684832651, 991039034]
+  ? "/Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : [1684832651, 991299578]

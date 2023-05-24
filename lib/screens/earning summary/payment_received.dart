@@ -2,9 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 
-class PaymentReceived extends StatelessWidget {
-  const PaymentReceived({Key? key}) : super(key: key);
+class PaymentReceived extends StatefulWidget {
+  final String quantity;
+  final String date;
+  final String deliveryDate;
+   final String name;
+   final String paymentStatus;
+   final String address;
+    final String yourEarning;
+    final String orderTotal;
+     final List orderDetail;
+    final String discount;
 
+  PaymentReceived(
+      {Key? key,
+        required this.quantity,
+        required this.date,
+        required this.deliveryDate,
+       required this.name,
+       required this.paymentStatus,
+       required this.address,
+        required this.yourEarning,
+        required this.orderTotal,
+         required this.orderDetail,
+        required this.discount,
+      }) : super(key: key);
+
+  @override
+  State<PaymentReceived> createState() => _PaymentReceivedState();
+}
+
+class _PaymentReceivedState extends State<PaymentReceived> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,13 +92,13 @@ class PaymentReceived extends StatelessWidget {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              '5th Dec 2022',
+                                              widget.date,
                                               style: cTextStyle16(),
                                               overflow: TextOverflow.clip,
                                             ),
                                           ),
                                           Text(
-                                            '1 ${'key_order'.tr}',
+                                            '${widget.quantity} ${'key_order'.tr}',
                                             style: cTextStyle16(),
                                           ),
                                         ],
@@ -99,13 +127,16 @@ class PaymentReceived extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          const CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'),
-                                            radius: 40,
+                                           CircleAvatar(
+                                             backgroundColor: orangeColor(),
+                                             radius: 40,
+                                             child: Text(
+                                               widget.name[0],
+                                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                                             ),
                                           ),
                                           Text(
-                                            'John Doe',
+                                            widget.name,
                                             style: cardTextStyle18(),
                                           ),
                                         ],
@@ -113,7 +144,7 @@ class PaymentReceived extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Card(
@@ -138,7 +169,7 @@ class PaymentReceived extends StatelessWidget {
                                           ),
                                           Flexible(
                                             child: Text(
-                                              'key_Payment_Received'.tr,
+                                              widget.paymentStatus,
                                               style: cardTextStyle16(),
                                               overflow: TextOverflow.clip,
                                             ),
@@ -148,7 +179,7 @@ class PaymentReceived extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Card(
@@ -158,7 +189,7 @@ class PaymentReceived extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Container(
-                                      height: 110,
+                                       height: 110,
                                       margin: const EdgeInsets.all(10),
                                       child: Column(
                                         mainAxisAlignment:
@@ -172,7 +203,7 @@ class PaymentReceived extends StatelessWidget {
                                           ),
                                           Flexible(
                                             child: Text(
-                                              '1002, Shivalik Abaise, Opp. Venus Atlantis, Anand nagar road, Ahmedabad  Gujarat.',
+                                              widget.address,
                                               style: cTextStyle14(),
                                               overflow: TextOverflow.clip,
                                             ),
@@ -182,7 +213,7 @@ class PaymentReceived extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Card(
@@ -206,7 +237,8 @@ class PaymentReceived extends StatelessWidget {
                                           ),
                                           Flexible(
                                             child: Text(
-                                              '5th Dec 2022, 14:42',
+                                              // '5th Dec 2022, 14:42',
+                                              widget.deliveryDate,
                                               style: cTextStyle16(),
                                               overflow: TextOverflow.clip,
                                             ),
@@ -216,7 +248,7 @@ class PaymentReceived extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Card(
@@ -225,99 +257,169 @@ class PaymentReceived extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
-                                    child: Container(
-                                      height: 30,
-                                      margin: const EdgeInsets.all(10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              'key_ORDER_AMOUNT'.tr,
-                                              style: cTextStyle16(),
-                                              overflow: TextOverflow.clip,
-                                            ),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(height: 8,),
+                                    Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            'Item Name',
+                                            style: cardTextStyle16(),
+                                            overflow: TextOverflow.clip,
                                           ),
-                                          Text(
-                                            '₹ 75',
-                                            style: cTextStyle16(),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Card(
-                                    shadowColor: Colors.black,
-                                    color: const Color.fromRGBO(37, 40, 48, 1),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Container(
-                                      height: 30,
-                                      margin: const EdgeInsets.all(10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              'key_TAX_CHARGES'.tr,
-                                              style: cTextStyle16(),
-                                              overflow: TextOverflow.clip,
-                                            ),
-                                          ),
-                                          Text(
-                                            '₹ 25',
-                                            style: cTextStyle16(),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Card(
-                                        shadowColor: Colors.black,
-                                        color:
-                                            const Color.fromRGBO(37, 40, 48, 1),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
                                         ),
-                                        child: Container(
-                                            height: 30,
-                                            margin: const EdgeInsets.all(10),
-                                            child: Row(
+                                        Text(
+                                          'Item Price',
+                                          style: cardTextStyle16(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                        SizedBox(
+                                          height: 150,
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: widget.orderDetail.length,
+                                              itemBuilder: (BuildContext context, int index) {
+                                            return Padding(
+                                              padding: const EdgeInsets.all(10.0),
+                                              child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                                 children: [
                                                   Flexible(
                                                     child: Text(
-                                                      'key_PAYMENT_AMOUNT'.tr,
+                                                      '${widget.orderDetail[index]['menu_items'][0]['name']}  X  ${widget.orderDetail[index]['quantity']} ',
                                                       style: cTextStyle16(),
-                                                      overflow:
-                                                          TextOverflow.clip,
+                                                      overflow: TextOverflow.clip,
                                                     ),
                                                   ),
                                                   Text(
-                                                    '₹ 100',
+                                                    '₹ ${widget.orderDetail[index]['item_price']}',
                                                     style: cTextStyle16(),
-                                                  )
-                                                ]))))
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+    }
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                    shadowColor: Colors.black,
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Container(
+                                      height: 30,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              'key_Total'.tr,
+                                              style: cTextStyle16(),
+                                              overflow: TextOverflow.clip,
+                                            ),
+                                          ),
+                                          Text(
+                                            '₹ ${widget.orderTotal}',
+                                            style: cTextStyle16(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                widget.discount != '0' ? const SizedBox(height: 5) : SizedBox(),
+                                widget.discount != '0' ? SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                    shadowColor: Colors.black,
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Container(
+                                      height: 30,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              'key_discounted_amount'.tr,
+                                              style: cTextStyle16(),
+                                              overflow: TextOverflow.clip,
+                                            ),
+                                          ),
+                                          Text(
+                                            '₹ ${widget.discount}',
+                                            style: cTextStyle16(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ) : SizedBox(),
+                                const SizedBox(height: 5),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                    shadowColor: Colors.black,
+                                    color: const Color.fromRGBO(37, 40, 48, 1),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Container(
+                                      height: 30,
+                                      margin: const EdgeInsets.all(10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              'key_Your_Earnings'.tr,
+                                              style: cTextStyle16(),
+                                              overflow: TextOverflow.clip,
+                                            ),
+                                          ),
+                                          Text(
+                                            '₹ ${widget.yourEarning}',
+                                            style: cTextStyle16(),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
                               ]))))
             ])));
   }

@@ -52,10 +52,11 @@ class _SignupState extends State<Signup> {
   int _selectedIndex = 0;
   int refreshCounter = 0;
   var profileStatus;
-  var profileAddress;
+  var ownerAddress;
   var ownerId;
   var token;
   var refreshToken;
+  String message = '';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -275,6 +276,7 @@ class _SignupState extends State<Signup> {
       if (response.statusCode == 200) {
         print(response.body);
         final json = jsonDecode(response.body);
+        message = json['message'].toString();
         var token = (json['data'][0]['token']).toString();
         await Sharedprefrences.setToken(token);
         var refreshToken = (json['data'][0]['refresh_token']).toString();
@@ -292,6 +294,8 @@ class _SignupState extends State<Signup> {
         }
       }
       else {
+        final json = jsonDecode(response.body);
+        message = json['message'].toString();
         print(response.body);
         print('Request failed with status: ${response.statusCode}.');
       }
@@ -317,28 +321,31 @@ class _SignupState extends State<Signup> {
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       profileStatus = jsonData['data'][0]['status'];
-      profileAddress = jsonData['data'][0]['owner_address'];
-      if (profileStatus == 1 && profileAddress == null) {
+      ownerAddress = jsonData['data'][0]['owner_address'];
+      print("aaaaaaaajlkjlkjalkjalaaajalkjdlkjalkfjlla");
+      print("profile status: $profileStatus,address: $ownerAddress");
+      if (profileStatus != 1 && ownerAddress != null) {
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const userPersonalDetail(),
-          ),
-        );
-      }else if(response.statusCode == 401) {
-        print("refresh token called");if (refreshCounter == 0) {
-          refreshCounter++;
-        bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?decidePath():null;}
-      } else {
-        await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const Home(),
           ),
         );
+      }else {
+        await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const userPersonalDetail(),
+          ),
+        );
       }
-    } else {
+    }else if(response.statusCode == 401) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ?decidePath():null;}
+    }  else {
       print(response.body);
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -668,7 +675,7 @@ class _SignupState extends State<Signup> {
         if (user != null) {
           registerOwner();
           Fluttertoast.showToast(
-            msg: "key_login_success".tr,
+            msg: message,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

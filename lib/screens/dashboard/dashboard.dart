@@ -770,14 +770,9 @@ class _DashboardState extends State<Dashboard> {
                   Text('key_Earning_Summary'.tr, style: mTextStyle20()),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const EarningSummary()),
-                      // );
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => const EarningSummary()));
+                              builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary)));
                     },
                     child: Row(
                       children: [
@@ -802,7 +797,7 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => const EarningSummary()));
+                        builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary)));
               },
               child: SizedBox(
                 height: 130,

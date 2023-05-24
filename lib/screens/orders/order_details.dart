@@ -92,6 +92,7 @@ class _OrderDetailsState extends State<OrderDetails>
       // setState(() {
       //   orderData = jsonData['data'];
       // });
+
       if (orderData['order_status'].toString() == 'Pending') {
         isShowAcceptButton = true;
         isShowPreparingButton = false;
