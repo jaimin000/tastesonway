@@ -21,7 +21,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   bool isLoading = true;
   int refreshCounter = 0;
   List earningData = [];
+  List filteredEarningData = [];
   String date = '';
+  String filterOption = 'pending';
   Map<String, dynamic> data = {};
 
   String url = '';
@@ -53,13 +55,17 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       earningData = widget.step == 2
           ? jsonData['data']['kitchenOwnerEarningAmountsListsTotal'] as List
           : jsonData['data']['kitchenOwnerEarningAmountsList']['data'] as List;
-      print(earningData);
+
+      widget.step != 2 ? filteredEarningData = earningData.where((data) =>
+      data['order_earning_summary']['payment_status'] == 'pending').toList() :
+      filteredEarningData = earningData;
 
       if (widget.step == 2) {
-        data = Map.from(earningData[0]);
+        data = Map.from(filteredEarningData[0]);
+        print(widget.step);
+        print(earningData);
       }
 
-      print(earningData);
       setState(() {
         isLoading = false;
       });
@@ -84,6 +90,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     final year = parts[1];
     return '$monthName $year';
   }
+
   static String formatDateString(String date) {
     DateTime parsedDate = DateTime.parse(date);
     String formattedDate = DateFormat("d MMM").format(parsedDate);
@@ -134,7 +141,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         final value = data.values.toList()[index];
                         return Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Card(
@@ -185,52 +192,63 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 button = 0;
                               });
                             },
-                            child: Card(
-                              shadowColor: Colors.black,
-                              color: button == 0
-                                  ? orangeColor()
-                                  : const Color.fromRGBO(53, 56, 66, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.3,
-                                height: 45,
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'key_Pending_Payment'.tr,
-                                      style: mTextStyle16(),
-                                    )),
+                            child: InkWell(
+                              onTap: () {
+                                button = 0;
+                                filterOption = 'pending';
+                                filteredEarningData = earningData.where((data) =>
+                                data['order_earning_summary']['payment_status'] == 'pending').toList();
+                                setState(() {});
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: button == 0
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2.3,
+                                  height: 45,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Pending_Payment'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
                               ),
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
+                            InkWell(
+                              onTap: () {
                                 button = 1;
-                              });
-                            },
-                            child: Card(
-                              shadowColor: Colors.black,
-                              color: button == 1
-                                  ? orangeColor()
-                                  : const Color.fromRGBO(53, 56, 66, 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.3,
-                                height: 45,
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      'key_Payment_Received'.tr,
-                                      style: mTextStyle16(),
-                                    )),
+                                filterOption = 'accepted';
+                                filteredEarningData = earningData.where((data) =>
+                                data['order_earning_summary']['payment_status'] == 'accepted').toList();
+                                setState(() {});
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: button == 1
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2.3,
+                                  height: 45,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Payment_Received'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                       const SizedBox(
@@ -239,10 +257,10 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       ListView.builder(
                           shrinkWrap: true,
                           physics: const ScrollPhysics(),
-                          itemCount: earningData.length,
+                          itemCount: filteredEarningData.length,
                           itemBuilder: (BuildContext context, int index) {
                             DateTime dateTime = DateFormat('yyyy-MM-dd').parse(
-                                earningData[index]['date_for_incoming_order']);
+                                filteredEarningData[index]['date_for_incoming_order']);
                             String date =
                                 DateFormat('dd-MM-yyyy').format(dateTime);
 
@@ -292,7 +310,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                                           style: mTextStyle16(),
                                                         ),
                                                         Text(
-                                                          '${earningData[index]['order_detail'].length} ${'key_order'.tr}',
+                                                          '${filteredEarningData[index]['order_detail'].length} ${'key_order'.tr}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -310,7 +328,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                                           style: mTextStyle16(),
                                                         ),
                                                         Text(
-                                                          '₹ ${earningData[index]['order_total']}',
+                                                          '₹ ${filteredEarningData[index]['order_total']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
@@ -330,15 +348,15 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                                         builder: (context) =>
                                                             PaymentReceived(
                                                               date: date,
-                                                              deliveryDate: (formatDateString(earningData[0]['date_for_incoming_order']) +', '+ earningData[0]['time_for_incoming_order']).toString(),
-                                                              quantity:(earningData[index]['order_detail'].length).toString(),
-                                                              name: earningData[index]['user']['name'],
-                                                              paymentStatus: earningData[index]['order_earning_summary']['payment_status'],
-                                                              address: "${earningData[index]['user_address']['address']} ${earningData[index]['user_address']['area']}, ${earningData[index]['user_address']['land_mark']} ${earningData[index]['user_address']['city']['name']}, ${earningData[index]['user_address']['pin_code']}",
-                                                              orderTotal: earningData[index]['order_total'].toString(),
-                                                              orderDetail: earningData[index]['order_detail'],
-                                                              discount: earningData[index]['coupon_amount'] == null ? "0" : earningData[index]['coupon_amount'].toString(),
-                                                              yourEarning: earningData[index]['order_earning_summary']['owner_earning_amount'].toString(),
+                                                              deliveryDate: (formatDateString(filteredEarningData[0]['date_for_incoming_order']) +', '+ filteredEarningData[0]['time_for_incoming_order']).toString(),
+                                                              quantity:(filteredEarningData[index]['order_detail'].length).toString(),
+                                                              name: filteredEarningData[index]['user']['name'],
+                                                              paymentStatus: filteredEarningData[index]['order_earning_summary']['payment_status'],
+                                                              address: "${filteredEarningData[index]['user_address']['address']} ${filteredEarningData[index]['user_address']['area']}, ${filteredEarningData[index]['user_address']['land_mark']} ${filteredEarningData[index]['user_address']['city']['name']}, ${filteredEarningData[index]['user_address']['pin_code']}",
+                                                              orderTotal: filteredEarningData[index]['order_total'].toString(),
+                                                              orderDetail: filteredEarningData[index]['order_detail'],
+                                                              discount: filteredEarningData[index]['coupon_amount'] == null ? "0" : filteredEarningData[index]['coupon_amount'].toString(),
+                                                              yourEarning: filteredEarningData[index]['order_earning_summary']['owner_earning_amount'].toString(),
                                                             )),
                                                   );
                                                 },

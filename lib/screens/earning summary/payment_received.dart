@@ -419,7 +419,6 @@ class _PaymentReceivedState extends State<PaymentReceived> {
                                     ),
                                   ),
                                 ),
-
                               ]))))
             ])));
   }
