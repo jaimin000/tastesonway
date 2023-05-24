@@ -188,36 +188,29 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         children: [
                           InkWell(
                             onTap: () {
-                              setState(() {
-                                button = 0;
-                              });
+                              button = 0;
+                              filterOption = 'pending';
+                              filteredEarningData = earningData.where((data) =>
+                              data['order_earning_summary']['payment_status'] == 'pending').toList();
+                              setState(() {});
                             },
-                            child: InkWell(
-                              onTap: () {
-                                button = 0;
-                                filterOption = 'pending';
-                                filteredEarningData = earningData.where((data) =>
-                                data['order_earning_summary']['payment_status'] == 'pending').toList();
-                                setState(() {});
-                              },
-                              child: Card(
-                                shadowColor: Colors.black,
-                                color: button == 0
-                                    ? orangeColor()
-                                    : const Color.fromRGBO(53, 56, 66, 1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2.3,
-                                  height: 45,
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'key_Pending_Payment'.tr,
-                                        style: mTextStyle16(),
-                                      )),
-                                ),
+                            child: Card(
+                              shadowColor: Colors.black,
+                              color: button == 0
+                                  ? orangeColor()
+                                  : const Color.fromRGBO(53, 56, 66, 1),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.3,
+                                height: 45,
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'key_Pending_Payment'.tr,
+                                      style: mTextStyle16(),
+                                    )),
                               ),
                             ),
                           ),
@@ -279,104 +272,104 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                         Stack(
                                           clipBehavior: Clip.none,
                                           children: [
-                                            Card(
-                                              shadowColor: Colors.black,
-                                              color: const Color.fromRGBO(
-                                                  64, 68, 81, 1),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              child: Container(
-                                                height: 100,
-                                                margin:
-                                                    const EdgeInsets.all(10),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceAround,
-                                                  children: [
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'key_Orders_Received'
-                                                              .tr,
-                                                          style: mTextStyle16(),
-                                                        ),
-                                                        Text(
-                                                          '${filteredEarningData[index]['order_detail'].length} ${'key_order'.tr}',
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'key_ORDER_AMOUNT'.tr,
-                                                          style: mTextStyle16(),
-                                                        ),
-                                                        Text(
-                                                          '₹ ${filteredEarningData[index]['order_total']}',
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PaymentReceived(
+                                                            date: date,
+                                                            deliveryDate: (formatDateString(filteredEarningData[0]['date_for_incoming_order']) +', '+ filteredEarningData[0]['time_for_incoming_order']).toString(),
+                                                            quantity:(filteredEarningData[index]['order_detail'].length).toString(),
+                                                            name: filteredEarningData[index]['user']['name'],
+                                                            paymentStatus: filteredEarningData[index]['order_earning_summary']['payment_status'],
+                                                            address: "${filteredEarningData[index]['user_address']['address']} ${filteredEarningData[index]['user_address']['area']}, ${filteredEarningData[index]['user_address']['land_mark']} ${filteredEarningData[index]['user_address']['city']['name']}, ${filteredEarningData[index]['user_address']['pin_code']}",
+                                                            orderTotal: filteredEarningData[index]['order_total'].toString(),
+                                                            orderDetail: filteredEarningData[index]['order_detail'],
+                                                            discount: filteredEarningData[index]['coupon_amount'] == null ? "0" : filteredEarningData[index]['coupon_amount'].toString(),
+                                                            yourEarning: filteredEarningData[index]['order_earning_summary']['owner_earning_amount'].toString(),
+                                                          )),
+                                                );
+                                              },
+                                              child: Card(
+                                                shadowColor: Colors.black,
+                                                color: const Color.fromRGBO(
+                                                    64, 68, 81, 1),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20.0),
+                                                ),
+                                                child: Container(
+                                                  height: 100,
+                                                  margin:
+                                                      const EdgeInsets.all(10),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'key_Orders_Received'
+                                                                .tr,
+                                                            style: mTextStyle16(),
+                                                          ),
+                                                          Text(
+                                                            '${filteredEarningData[index]['order_detail'].length} ${'key_order'.tr}',
+                                                            style: cTextStyle16(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            'key_ORDER_AMOUNT'.tr,
+                                                            style: mTextStyle16(),
+                                                          ),
+                                                          Text(
+                                                            '₹ ${filteredEarningData[index]['order_total']}',
+                                                            style: cTextStyle16(),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             Positioned(
                                               bottom: -10,
                                               right: 110,
-                                              child: InkWell(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PaymentReceived(
-                                                              date: date,
-                                                              deliveryDate: (formatDateString(filteredEarningData[0]['date_for_incoming_order']) +', '+ filteredEarningData[0]['time_for_incoming_order']).toString(),
-                                                              quantity:(filteredEarningData[index]['order_detail'].length).toString(),
-                                                              name: filteredEarningData[index]['user']['name'],
-                                                              paymentStatus: filteredEarningData[index]['order_earning_summary']['payment_status'],
-                                                              address: "${filteredEarningData[index]['user_address']['address']} ${filteredEarningData[index]['user_address']['area']}, ${filteredEarningData[index]['user_address']['land_mark']} ${filteredEarningData[index]['user_address']['city']['name']}, ${filteredEarningData[index]['user_address']['pin_code']}",
-                                                              orderTotal: filteredEarningData[index]['order_total'].toString(),
-                                                              orderDetail: filteredEarningData[index]['order_detail'],
-                                                              discount: filteredEarningData[index]['coupon_amount'] == null ? "0" : filteredEarningData[index]['coupon_amount'].toString(),
-                                                              yourEarning: filteredEarningData[index]['order_earning_summary']['owner_earning_amount'].toString(),
-                                                            )),
-                                                  );
-                                                },
-                                                child: SizedBox(
-                                                  height: 30,
-                                                  width: 120,
-                                                  child: Card(
-                                                    color: const Color.fromRGBO(
-                                                        53, 56, 66, 1),
-                                                    child: Center(
-                                                        child: Text(
-                                                      date,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontFamily: 'Poppins',
-                                                          color: orangeColor()),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    )),
-                                                  ),
+                                              child: SizedBox(
+                                                height: 30,
+                                                width: 120,
+                                                child: Card(
+                                                  color: const Color.fromRGBO(
+                                                      53, 56, 66, 1),
+                                                  child: Center(
+                                                      child: Text(
+                                                    date,
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontFamily: 'Poppins',
+                                                        color: orangeColor()),
+                                                    textAlign:
+                                                        TextAlign.center,
+                                                  )),
                                                 ),
                                               ),
                                             ),

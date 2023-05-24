@@ -1,6 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
+import '../../utils/snackbar.dart';
 import '../../utils/theme_data.dart';
+import 'package:http/http.dart' as http;
 
 class YourMenus extends StatefulWidget {
   const YourMenus({Key? key}) : super(key: key);
@@ -11,496 +16,242 @@ class YourMenus extends StatefulWidget {
 
 class _YourMenusState extends State<YourMenus> {
   int step = 0;
+  int refreshCounter = 0;
+  List menuList = [];
+  bool isLoading = true;
+
+  Future fetchMenu() async {
+    String token = await Sharedprefrences.getToken();
+    String? ownerId = await Sharedprefrences.getId();
+    final response =
+        await http.post(Uri.parse("$baseUrl/get-owner-menu"), headers: {
+      'Authorization': 'Bearer $token'
+    }, body: {
+      "business_owner_id": ownerId,
+    });
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      menuList = jsonData['data']['data'];
+      print(menuList);
+      setState(() {
+        isLoading = false;
+      });
+    } else if (response.statusCode == 401) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? fetchMenu() : null;
+      }
+    } else {
+      final jsonData = json.decode(response.body);
+      ScaffoldSnackbar.of(context).show(jsonData['message']);
+      print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    fetchMenu();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgetList = [
-      //text
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: TextField(
-                style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: orangeColor(),
-                  ),
-                  contentPadding: const EdgeInsets.all(10.0),
-                  fillColor: inputColor(),
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  hintText: 'key_Search_menu_item'.tr,
-                  hintStyle: inputTextStyle16(),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            SizedBox(
-              height: 120,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                shadowColor: Colors.black,
-                color: cardColor(),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          './assets/images/tea.jpg',
-                          height: 90,
-                          width: 95,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Masala Tea',
-                              style: mTextStyle20(),
-                            ),
-                            Text(
-                              '₹ 200',
-                              style: cTextStyle18(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 120,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                shadowColor: Colors.black,
-                color: cardColor(),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          './assets/images/tea.jpg',
-                          height: 90,
-                          width: 95,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Masala Tea',
-                              style: mTextStyle20(),
-                            ),
-                            Text(
-                              '₹ 200',
-                              style: cTextStyle18(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 120,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                shadowColor: Colors.black,
-                color: cardColor(),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          './assets/images/tea.jpg',
-                          height: 90,
-                          width: 95,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Masala Tea',
-                              style: mTextStyle20(),
-                            ),
-                            Text(
-                              '₹ 200',
-                              style: cTextStyle18(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      //image
-      Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              child: TextField(
-                style: const TextStyle(color: Colors.white), //<-- SEE HERE
-
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: orangeColor(),
-                  ),
-                  contentPadding: const EdgeInsets.all(10.0),
-                  fillColor: inputColor(),
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  hintText: 'key_Search_menu_item'.tr,
-                  hintStyle: inputTextStyle16(),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("key_Menu_Theme".tr, style: mTextStyle20()),
-                Row(
-                  children: [
-                    Text("key_all".tr, style: mTextStyle14()),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      './assets/images/Arrow - Right.png',
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: SizedBox(
-              height: 45,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Card(
-                    shadowColor: Colors.black,
-                    color: orangeColor(),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: 100,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Regular',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: 100,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Holi',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: 100,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Diwali',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: 100,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Navratri',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.53,
-            //width: MediaQuery.of(context).size.width,
-            child: GridView.count(
-              padding: const EdgeInsets.all(15),
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              children: [
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Continental.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Breakfast.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Grill Heaven.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Midnight Mojito.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Tandoori Tofu.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        './assets/images/your menus/Veggie Blast.png',
-                        fit: BoxFit.fill,
-                        height: 130,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    ];
     return Scaffold(
-      backgroundColor: backgroundColor(),
-      appBar: AppBar(
-        elevation: 0,
         backgroundColor: backgroundColor(),
-
-        title: Text(
-          'key_Your_Menus'.tr,
-          style: cardTitleStyle20(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: backgroundColor(),
+          title: Text(
+            'key_Your_Menus'.tr,
+            style: cardTitleStyle20(),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+        body: isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                color: orangeColor(),
+              ))
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        step = 0;
-                      });
-                    },
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: step == 0
-                          ? orangeColor()
-                          : const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            step = 0;
+                          });
+                        },
+                        child: Card(
+                          shadowColor: Colors.black,
+                          color: step == 0
+                              ? orangeColor()
+                              : const Color.fromRGBO(53, 56, 66, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.3,
+                            height: 45,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'key_Text_Menus'.tr,
+                                  style: mTextStyle16(),
+                                )),
+                          ),
+                        ),
                       ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.2,
-                        height: 45,
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'key_Text_Menus'.tr,
-                              style: mTextStyle16(),
-                            )),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            step = 1;
+                          });
+                        },
+                        child: Card(
+                          shadowColor: Colors.black,
+                          color: step == 1
+                              ? orangeColor()
+                              : const Color.fromRGBO(53, 56, 66, 1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.2,
+                            height: 45,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'key_Image_Menus'.tr,
+                                  style: mTextStyle16(),
+                                )),
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        step = 1;
-                      });
-                    },
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: step == 1
-                          ? orangeColor()
-                          : const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(children: [
+                      SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          style: const TextStyle(color: Colors.white),
+                          //<-- SEE HERE
+                          cursorColor: Colors.white,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(
+                              Icons.search,
+                              color: orangeColor(),
+                            ),
+                            contentPadding: const EdgeInsets.all(10.0),
+                            fillColor: inputColor(),
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none),
+                            hintText: 'key_Search_menu_item'.tr,
+                            hintStyle: inputTextStyle16(),
+                          ),
+                        ),
                       ),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.2,
-                        height: 45,
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'key_Image_Menus'.tr,
-                              style: mTextStyle16(),
-                            )),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            widgetList[step],
-          ],
-        ),
-      ),
-    );
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height*0.67,
+                        child: ListView.builder(
+                          itemCount: menuList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return SizedBox(
+                                height: 140,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                      shadowColor: Colors.black,
+                                      color: cardColor(),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0),
+                                      ),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.all(10),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  (menuList[index]['name']).toString().toUpperCase(),
+                                                  style: cTextStyle20(),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      height:30,
+                                                      width:30,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: Colors.white,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(4.0),
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          '${menuList[index]['menu_item_count']}',
+                                                          style: cardTextStyle16(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 10,),
+                                                    Text(
+                                                      'Items',
+                                                      style: mTextStyle16(),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Icon(Icons.remove_red_eye_rounded,size: 20,),
+                                                    SizedBox(width: 20,),
+                                                    Icon(Icons.share,size: 20,),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  menuList[index]['menu_review_status'] == 1?'Pending':menuList[index]['menu_review_status'] == 2?'Approved':'Rejected',
+                                                  style: cardTextStyle16(),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+
+                                  ));
+                            }),
+                      ),
+
+                    ]))
+              ]));
   }
 }

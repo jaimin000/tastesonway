@@ -46,6 +46,13 @@ TextStyle cTextStyle18() {
     color: Color.fromRGBO(142, 148, 164, 1),
   );
 }
+TextStyle cTextStyle20() {
+  return const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(142, 148, 164, 1),
+  );
+}
 
 TextStyle cTextStyle16() {
   return const TextStyle(
