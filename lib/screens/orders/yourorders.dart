@@ -45,7 +45,7 @@ class _YourOrdersState extends State<YourOrders> {
       MaterialPageRoute(builder: (context) => OrderDetails(id: index)),
     ).then((value) async {
       setState(() {
-        print("object$value");
+        print("object $value");
       });
 
     });
@@ -113,6 +113,12 @@ class _YourOrdersState extends State<YourOrders> {
         title: Text(
           'key_Your_Orders'.tr,
           style: cardTitleStyle20(),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,"true");
+          },
+          icon:const Icon(Icons.arrow_back_ios),
         ),
         actions: [
           IconButton(

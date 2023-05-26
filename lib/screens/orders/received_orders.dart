@@ -818,6 +818,12 @@ class _ReceivedOrdersState extends State<ReceivedOrders> {
           'key_Orders_Received'.tr,
           style: cardTitleStyle20(),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,"true");
+          },
+          icon:const Icon(Icons.arrow_back_ios),
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),

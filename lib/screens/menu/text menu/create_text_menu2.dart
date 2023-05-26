@@ -27,7 +27,6 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   late List<dynamic> menuData = [];
   late int menuId;
   List<String> menuItemId = [];
-  // final List<int> myList = [53, 54];
 
   Future<void> getMenu() async {
     String token =  await Sharedprefrences.getToken();
@@ -251,7 +250,13 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const AddNewItem()),
-                                );
+                                ).then((value) {
+                                  if (value == "true") {
+                                    setState(() {
+                                      getMenu();
+                                    });
+                                  }
+                                });
                               },
                               child: Card(
                                 shadowColor: Colors.black,
@@ -459,7 +464,13 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                           price:menuItemList[index].price,
                                                           description:menuItemList[index].description,
 
-                                                        ),),);
+                                                        ),),).then((value) {
+                                                      if(value=="true"){
+                                                        setState(() {
+                                                          getMenu();
+                                                        });
+                                                      }
+                                                    });
                                                   },
                                                   child: Stack(
                                                     clipBehavior: Clip.none, children: [

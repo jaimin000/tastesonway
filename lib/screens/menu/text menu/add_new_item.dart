@@ -119,7 +119,6 @@ class _AddNewItemState extends State<AddNewItem> {
     });
   }
 
-  //getting menu id from getx
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(

@@ -103,6 +103,12 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
           'key_Create_Image_Menu'.tr,
           style: cardTitleStyle20(),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,"true");
+          },
+          icon:const Icon(Icons.arrow_back_ios),
+        ),
       ),
       body:
       _isLoading ?
@@ -360,7 +366,7 @@ class _CreateImgMenuState extends State<CreateImgMenu> {
                                                 backgroundColor: MaterialStateProperty.all(orangeColor()),
                                               ),
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                Navigator.pop(context,"true");
                                               },
                                               child: const Text('OK'),
                                             ),

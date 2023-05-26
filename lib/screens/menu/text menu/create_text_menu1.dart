@@ -100,6 +100,12 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
           'key_Create_Text_Menu'.tr,
           style: cardTitleStyle20(),
         ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,"true");
+          },
+          icon:const Icon(Icons.arrow_back_ios),
+        ),
       ),
       body:
       _isLoading ?
@@ -357,7 +363,7 @@ class _CreateTextMenuState extends State<CreateTextMenu> {
                                                 backgroundColor: MaterialStateProperty.all(orangeColor()),
                                               ),
                                               onPressed: () {
-                                                Navigator.pop(context);
+                                                Navigator.pop(context,"true");
                                               },
                                               child: const Text('OK'),
                                             ),

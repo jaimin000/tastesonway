@@ -283,6 +283,12 @@ class _EditItemState extends State<EditItem> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,"true");
+          },
+          icon:const Icon(Icons.arrow_back_ios),
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -291,11 +297,11 @@ class _EditItemState extends State<EditItem> {
             ),
             onPressed: () async {
               await DeleteMenuItem();
+              ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
+              Navigator.pop(context,'true');
               setState(() {
                 _isLoading = false;
               });
-              ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
             },
           )
         ],

@@ -6,7 +6,7 @@ import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
-import 'package:tastesonway/screens/menu/your_menus.dart';
+import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
 import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
@@ -118,8 +118,6 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-
-
   @override
   void initState() {
      fetchProfile();
@@ -159,7 +157,13 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => const Profile()));
+                        builder: (BuildContext context) => const Profile())).then((value) {
+                  if(value=="true"){
+                    setState(() {
+                      fetchData();
+                    });
+                  }
+                });
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => const Profile()),
@@ -249,7 +253,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourOrders()));
+                                builder: (BuildContext context) => const YourOrders())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -282,7 +292,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourMenus()));
+                                builder: (BuildContext context) => const YourMenus())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -347,7 +363,13 @@ class _DashboardState extends State<Dashboard> {
                       // );
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) =>const YourMenus()));
+                              builder: (BuildContext context) =>const YourMenus())).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
                     },
                     child: Row(
                       children: [
@@ -384,7 +406,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const CreateTextMenu()));
+                                builder: (BuildContext context) => const CreateTextMenu())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -422,7 +450,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const CreateImgMenu()));
+                                builder: (BuildContext context) => const CreateImgMenu())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -549,7 +583,13 @@ class _DashboardState extends State<Dashboard> {
                 // );
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => const ReceivedOrders()));
+                        builder: (BuildContext context) => const ReceivedOrders())).then((value) {
+                  if(value=="true"){
+                    setState(() {
+                      fetchData();
+                    });
+                  }
+                });
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -566,7 +606,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourOrders()));
+                                builder: (BuildContext context) => const YourOrders())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Row(
                         children: [
@@ -609,7 +655,13 @@ class _DashboardState extends State<Dashboard> {
                           // );
                           Navigator.of(context, rootNavigator: true).push(
                               CupertinoPageRoute(
-                                  builder: (BuildContext context) => const YourOrders()));
+                                  builder: (BuildContext context) => const YourOrders())).then((value) {
+                            if(value=="true"){
+                              setState(() {
+                                fetchData();
+                              });
+                            }
+                          });
                         },
                         child: Container(
                           width: 300,
@@ -642,7 +694,13 @@ class _DashboardState extends State<Dashboard> {
                         // );
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
-                                builder: (BuildContext context) => const ReceivedOrders()));
+                                builder: (BuildContext context) => const ReceivedOrders())).then((value) {
+                          if(value=="true"){
+                            setState(() {
+                              fetchData();
+                            });
+                          }
+                        });
                       },
                       child: Card(
                         color: const Color.fromRGBO(53, 56, 66, 1),
@@ -772,7 +830,13 @@ class _DashboardState extends State<Dashboard> {
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary)));
+                              builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
                     },
                     child: Row(
                       children: [
@@ -797,7 +861,13 @@ class _DashboardState extends State<Dashboard> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary)));
+                        builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
+                  if(value=="true"){
+                    setState(() {
+                      fetchData();
+                    });
+                  }
+                });
               },
               child: SizedBox(
                 height: 130,
