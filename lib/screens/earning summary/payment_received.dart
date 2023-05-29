@@ -47,10 +47,9 @@ class _PaymentReceivedState extends State<PaymentReceived> {
         ),
         body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: ListView(children: [
-              const SizedBox(
-                height: 25,
-              ),
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+                children: [
               Card(
                   shadowColor: Colors.black,
                   color: cardColor(),
@@ -285,6 +284,7 @@ class _PaymentReceivedState extends State<PaymentReceived> {
                                         SizedBox(
                                           height: 150,
                                           child: ListView.builder(
+                                              physics: BouncingScrollPhysics(),
                                               shrinkWrap: true,
                                               itemCount: widget.orderDetail.length,
                                               itemBuilder: (BuildContext context, int index) {

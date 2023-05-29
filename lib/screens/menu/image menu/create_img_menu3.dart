@@ -531,6 +531,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
         ),
       ),
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           const SizedBox(
             height: 25,

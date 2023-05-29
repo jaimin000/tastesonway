@@ -290,6 +290,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
       ) : Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             const SizedBox(
               height: 25,
@@ -544,6 +545,7 @@ class _AddNewImgItemState extends State<AddNewImgItem> {
                         SizedBox(
                           height: Toppings.length * 70,
                           child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
                               itemCount:Toppings.length,
                               itemBuilder:(context,index){
                               return Toppings[index];

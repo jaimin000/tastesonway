@@ -85,7 +85,7 @@ class _ViewMenuState extends State<ViewMenu> {
           price: menuData[i]['amount'],
           image: menuData[i]['picture'],
           description: menuData[i]['description'] ?? "",
-          toppingName: menuData[i]['toppingName'] ?? "",
+          // toppingName: menuData[i]['toppingName'] ?? "",
           //     for (int j = 0; i < menuData[i]['item_ingridient'].length; j++) {
           // toppingName: menuData[i]['item_ingridient'][j]['name'] ?? "",
           // toppingPrice: menuData[i]['item_ingridient'][j]['price'] ?? "",
@@ -467,6 +467,7 @@ class _ViewMenuState extends State<ViewMenu> {
                                                     .height *
                                                 0.3,
                                             child: ListView.builder(
+                                                physics: BouncingScrollPhysics(),
                                                 itemCount: menuItemList.length,
                                                 shrinkWrap: true,
                                                 itemBuilder:
@@ -655,7 +656,8 @@ class _ViewMenuState extends State<ViewMenu> {
                             child: InkWell(
                               onTap: () {
                                 EditMenu(widget.menuId.toString(),type);
-                                // Navigator.pop(context,'true');
+                                Navigator.pop(context,'true');
+
                               },
                               child: Card(
                                   shadowColor: Colors.black,

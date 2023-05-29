@@ -18,14 +18,16 @@ class EditItem extends StatefulWidget {
   final String type;
   final String description;
   final int price;
+  final List<dynamic> menuItemIngredients;
 
-  const EditItem({Key? key, 
+  const EditItem({Key? key,
     required this.id,
     required this.menu_id,
     required this.name,
     required this.type,
     required this.price,
     required this.description,
+    required this.menuItemIngredients,
   }) : super(key: key);
 
   @override
@@ -42,6 +44,7 @@ class _EditItemState extends State<EditItem> {
   final TextEditingController descriptioncontroller = TextEditingController();
   final TextEditingController toppingNamecontroller = TextEditingController();
   final TextEditingController toppingPricecontroller = TextEditingController();
+
   int type =1;
   late File _image;
   List toppingPrice = [];
@@ -188,8 +191,8 @@ class _EditItemState extends State<EditItem> {
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pop(true);
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.pop(context,"true");
           });
           return AlertDialog(
             backgroundColor: cardColor(),
@@ -223,7 +226,7 @@ class _EditItemState extends State<EditItem> {
         context: context,
         builder: (BuildContext context) {
           Future.delayed(const Duration(seconds: 3), () {
-            Navigator.of(context).pop(true);
+            Navigator.pop(context,"true");
           });
           return AlertDialog(
             backgroundColor: cardColor(),
@@ -275,6 +278,10 @@ class _EditItemState extends State<EditItem> {
     namecontroller.text = widget.name;
     pricecontroller.text = widget.price.toString();
     descriptioncontroller.text = widget.description;
+    // for (int i=0; i< widget.menuItemIngredients.length; i++) {
+       //toppingName.add(widget.menuItemIngredients[i]['name']);
+       //toppingPrice.add(widget.menuItemIngredients[i]['price']);
+    // }
   }
   @override
   Widget build(BuildContext context) {
@@ -578,7 +585,7 @@ class _EditItemState extends State<EditItem> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
+                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CreateTextMenu2()),);
                                 }
                               },
                               child: Card(

@@ -145,6 +145,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             const SizedBox(
               height: 25,

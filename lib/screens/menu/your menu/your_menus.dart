@@ -135,6 +135,27 @@ class _YourMenusState extends State<YourMenus> {
         ));
   }
 
+  Widget buildNoData() => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SizedBox(height: 50,),
+      Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Image.asset(
+          'assets/images/dataNotFound.png',
+          width: 251,
+          height: 221,
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Text(
+        'key_Data_Not_Found'.tr,
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+    ],
+  );
 
   @override
   void initState() {
@@ -159,7 +180,9 @@ class _YourMenusState extends State<YourMenus> {
                 child: CircularProgressIndicator(
                 color: orangeColor(),
               ))
-            : Column(mainAxisSize: MainAxisSize.min, children: [
+            : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
                 const SizedBox(
                   height: 10,
                 ),
@@ -260,9 +283,10 @@ class _YourMenusState extends State<YourMenus> {
                       const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
+                      filteredMenuList.isNotEmpty ? SizedBox(
                         height: MediaQuery.of(context).size.height * 0.62,
                         child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             itemCount: filteredMenuList.length,
@@ -660,7 +684,7 @@ class _YourMenusState extends State<YourMenus> {
                                               ))),
                                     );
                             }),
-                      ),
+                      ) : buildNoData(),
                     ]))
               ]));
   }

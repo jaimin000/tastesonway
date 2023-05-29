@@ -38,7 +38,6 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
     });
     final response = await http.post(
       Uri.parse(
-        //'http://192.168.1.26:24/api/v2/get-menu-item'),
           '$baseUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': ownerId},
@@ -56,7 +55,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
           price: menuData[i]['amount'],
           image: menuData[i]['picture'],
           description: menuData[i]['description'] ?? "",
-          toppingName: menuData[i]['toppingName'] ?? "",
+          // toppingName: menuData[i]['toppingName'] ?? "",
           //     for (int j = 0; i < menuData[i]['item_ingridient'].length; j++) {
           // toppingName: menuData[i]['item_ingridient'][j]['name'] ?? "",
           // toppingPrice: menuData[i]['item_ingridient'][j]['price'] ?? "",
@@ -382,6 +381,7 @@ class _CreateImgMenu2State extends State<CreateImgMenu2> {
                                   : SizedBox(
                                 height: 300,
                                 child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
                                     itemCount: menuItemList.length,
                                     shrinkWrap: true,
                                     itemBuilder:

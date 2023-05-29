@@ -106,6 +106,7 @@ class _MyAppState extends State<MyApp> {
             locale: snapshot.data,
             translations: Languages(),
             theme: ThemeData(
+              shadowColor: Colors.transparent,
               primaryColor: orangeColor(),
               brightness: Brightness.dark,
               fontFamily: 'Poppins',

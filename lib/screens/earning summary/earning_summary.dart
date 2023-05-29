@@ -40,6 +40,7 @@ class _EarningSummaryState extends State<EarningSummary> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             const SizedBox(
               height: 25,

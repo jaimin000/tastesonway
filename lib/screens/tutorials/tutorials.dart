@@ -257,6 +257,7 @@ class Tutorials extends StatelessWidget {
                     ),
                   ),
                   ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       itemCount: tutorialList.questions.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext ctxt, int index) => Column(

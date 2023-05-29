@@ -135,6 +135,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         final month = data.keys.toList()[index];
@@ -178,6 +179,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               : Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: ListView(
+                    physics: BouncingScrollPhysics(),
                     children: [
                       const SizedBox(
                         height: 25,
@@ -248,8 +250,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         height: 10,
                       ),
                       ListView.builder(
+                          physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
-                          physics: const ScrollPhysics(),
                           itemCount: filteredEarningData.length,
                           itemBuilder: (BuildContext context, int index) {
                             DateTime dateTime = DateFormat('yyyy-MM-dd').parse(

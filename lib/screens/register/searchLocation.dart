@@ -303,6 +303,7 @@ class _SearchLocationState extends State<SearchLocation> {
                       ),
                       Expanded(
                         child: ListView.separated(
+                          physics: BouncingScrollPhysics(),
                           itemCount: predictions.length,
                           shrinkWrap: true,
                           separatorBuilder:

@@ -177,10 +177,13 @@ class _SettingState extends State<Setting> {
             const SizedBox(height: 15),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ViewAddress()),
-                );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => const ViewAddress()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const ViewAddress()),
+                // );
               },
               child: SizedBox(
                 height: 60,
@@ -260,10 +263,13 @@ class _SettingState extends State<Setting> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const YourOrders()),
-                );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => const YourOrders()));
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const YourOrders()),
+                // );
               },
               child: SizedBox(
                 height: 60,
@@ -291,11 +297,15 @@ class _SettingState extends State<Setting> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ReviewHistory()),
-                );
+                Navigator.of(context, rootNavigator: true).push(
+                    CupertinoPageRoute(
+                        builder: (BuildContext context) => const ReviewHistory()));
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const ReviewHistory()),
+                // );
               },
               child: SizedBox(
                 height: 60,

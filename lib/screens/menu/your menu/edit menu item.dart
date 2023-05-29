@@ -579,6 +579,7 @@ class _EditMenuItemState extends State<EditMenuItem> {
                                     _isLoading = false;
                                   });
                                   Get.back();
+                                  Navigator.pop(context,"true");
                                 }
                               },
                               child: Card(

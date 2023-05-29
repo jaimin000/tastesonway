@@ -84,6 +84,7 @@ class _BankingDetailsState extends State<BankingDetails> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [

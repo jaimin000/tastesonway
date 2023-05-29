@@ -81,7 +81,9 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: backgroundColor(),
-      body: CustomScrollView(slivers: <Widget>[
+      body: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: <Widget>[
         SliverAppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,

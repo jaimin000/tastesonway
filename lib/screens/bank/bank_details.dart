@@ -161,6 +161,7 @@ class _BankDetailsState extends State<BankDetails> {
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
               const SizedBox(
                 height: 25,
@@ -226,6 +227,7 @@ class _BankDetailsState extends State<BankDetails> {
                               ),
                             ),
                             ListView.builder(
+                              physics: BouncingScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: _suggestions.length,
                               itemBuilder: (BuildContext context, int index) {

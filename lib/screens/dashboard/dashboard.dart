@@ -179,150 +179,89 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 15,
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+           SizedBox(
+            height: 105,
+            child: Stories(photoUrl:profilePhoto,),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: TextField(
+              style: const TextStyle(color: Colors.white), //<-- SEE HERE
+              cursorColor: Colors.grey,
+              decoration: InputDecoration(
+                  fillColor: inputColor(),
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none),
+                  hintText: 'key_find_dishes'.tr,
+                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
+                  suffixIcon:
+                      Image.asset('./assets/images/dashboard/Filter.png')),
             ),
-             SizedBox(
-              height: 105,
-              child: Stories(photoUrl:profilePhoto,),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: TextField(
-                style: const TextStyle(color: Colors.white), //<-- SEE HERE
-                cursorColor: Colors.grey,
-                decoration: InputDecoration(
-                    fillColor: inputColor(),
-                    filled: true,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none),
-                    hintText: 'key_find_dishes'.tr,
-                    hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
-                    suffixIcon:
-                        Image.asset('./assets/images/dashboard/Filter.png')),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("key_Quick_Link".tr, style: mTextStyle20()),
-                  Row(
-                    children: [
-                      Text("key_all".tr, style: mTextStyle14()),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Image.asset(
-                        './assets/images/dashboard/Arrow - Right.png',
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            SizedBox(
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("key_Quick_Link".tr, style: mTextStyle20()),
+                Row(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const YourOrders()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourOrders())).then((value) {
-                          if(value=="true"){
-                            setState(() {
-                              fetchData();
-                            });
-                          }
-                        });
-                      },
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: SizedBox(
-                            width: 150,
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                    './assets/images/dashboard/food.png'),
-                                Text(
-                                  'key_Orders'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
+                    Text("key_all".tr, style: mTextStyle14()),
+                    const SizedBox(
+                      width: 5,
                     ),
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const YourMenus()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourMenus())).then((value) {
-                          if(value=="true"){
-                            setState(() {
-                              fetchData();
-                            });
-                          }
-                        });
-                      },
-                      child: Card(
-                        shadowColor: Colors.black,
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: SizedBox(
-                            width: 150,
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                    './assets/images/dashboard/menu.png'),
-                                Text(
-                                  'key_Menu'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
+                    Image.asset(
+                      './assets/images/dashboard/Arrow - Right.png',
+                      height: 20,
                     ),
-                    Card(
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const YourOrders()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => const YourOrders())).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
+                    },
+                    child: Card(
                       shadowColor: Colors.black,
                       color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
@@ -334,26 +273,16 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              Image.asset(
+                                  './assets/images/dashboard/food.png'),
                               Text(
-                                'key_other'.tr,
+                                'key_Orders'.tr,
                                 style: cTextStyle18(),
                               )
                             ],
                           )),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("key_Your_Menus".tr, style: mTextStyle20()),
+                  ),
                   InkWell(
                     onTap: () {
                       // Navigator.push(
@@ -363,7 +292,323 @@ class _DashboardState extends State<Dashboard> {
                       // );
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) =>const YourMenus())).then((value) {
+                              builder: (BuildContext context) => const YourMenus())).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
+                    },
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(53, 56, 66, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: SizedBox(
+                          width: 150,
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                  './assets/images/dashboard/menu.png'),
+                              Text(
+                                'key_Menu'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SizedBox(
+                        width: 150,
+                        height: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'key_other'.tr,
+                              style: cTextStyle18(),
+                            )
+                          ],
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("key_Your_Menus".tr, style: mTextStyle20()),
+                InkWell(
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const YourMenus()),
+                    // );
+                    Navigator.of(context, rootNavigator: true).push(
+                        CupertinoPageRoute(
+                            builder: (BuildContext context) =>const YourMenus())).then((value) {
+                      if(value=="true"){
+                        setState(() {
+                          fetchData();
+                        });
+                      }
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Text("key_all".tr, style: mTextStyle14()),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset(
+                        './assets/images/dashboard/Arrow - Right.png',
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          SizedBox(
+            height: 130,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const CreateTextMenu()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => const CreateTextMenu())).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
+                    },
+                    child: Card(
+                      color: const Color.fromRGBO(53, 56, 66, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Container(
+                        width: 330,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Rectangle 39389.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_Create_Text_Menu".tr,
+                                style: cardTextStyle20()),
+                          ),
+                        ),
+                      ), //
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const CreateImgMenu()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => const CreateImgMenu())).then((value) {
+                        if(value=="true"){
+                          setState(() {
+                            fetchData();
+                          });
+                        }
+                      });
+                    },
+                    child: Card(
+                      color: const Color.fromRGBO(53, 56, 66, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Container(
+                        width: 330,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Rectangle 39389.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_Create_Image_Menu".tr,
+                                style: cardTextStyle20()),
+                          ),
+                        ),
+                      ), //
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("$totalMenu", style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_Your_Menus'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text("$totalMenuItem", style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_Items_In_Menu'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('$theme', style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_My_Menu_Designs'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          InkWell(
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const ReceivedOrders()),
+              // );
+              Navigator.of(context, rootNavigator: true).push(
+                  CupertinoPageRoute(
+                      builder: (BuildContext context) => const ReceivedOrders())).then((value) {
+                if(value=="true"){
+                  setState(() {
+                    fetchData();
+                  });
+                }
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("key_Your_Orders".tr, style: mTextStyle20()),
+                  InkWell(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const YourOrders()),
+                      // );
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => const YourOrders())).then((value) {
                         if(value=="true"){
                           setState(() {
                             fetchData();
@@ -387,217 +632,24 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 25,
-            ),
-            SizedBox(
-              height: 130,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const CreateTextMenu()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const CreateTextMenu())).then((value) {
-                          if(value=="true"){
-                            setState(() {
-                              fetchData();
-                            });
-                          }
-                        });
-                      },
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_Create_Text_Menu".tr,
-                                  style: cardTextStyle20()),
-                            ),
-                          ),
-                        ), //
-                      ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          SizedBox(
+            height: 130,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Card(
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const CreateImgMenu()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const CreateImgMenu())).then((value) {
-                          if(value=="true"){
-                            setState(() {
-                              fetchData();
-                            });
-                          }
-                        });
-                      },
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_Create_Image_Menu".tr,
-                                  style: cardTextStyle20()),
-                            ),
-                          ),
-                        ), //
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text("$totalMenu", style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_Your_Menus'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text("$totalMenuItem", style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_Items_In_Menu'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('$theme', style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_My_Menu_Designs'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            InkWell(
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const ReceivedOrders()),
-                // );
-                Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                        builder: (BuildContext context) => const ReceivedOrders())).then((value) {
-                  if(value=="true"){
-                    setState(() {
-                      fetchData();
-                    });
-                  }
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("key_Your_Orders".tr, style: mTextStyle20()),
-                    InkWell(
+                    child: InkWell(
                       onTap: () {
                         // Navigator.push(
                         //   context,
@@ -614,223 +666,38 @@ class _DashboardState extends State<Dashboard> {
                           }
                         });
                       },
-                      child: Row(
-                        children: [
-                          Text("key_all".tr, style: mTextStyle14()),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Image.asset(
-                            './assets/images/dashboard/Arrow - Right.png',
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            SizedBox(
-              height: 130,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Card(
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const YourOrders()),
-                          // );
-                          Navigator.of(context, rootNavigator: true).push(
-                              CupertinoPageRoute(
-                                  builder: (BuildContext context) => const YourOrders())).then((value) {
-                            if(value=="true"){
-                              setState(() {
-                                fetchData();
-                              });
-                            }
-                          });
-                        },
-                        child: Container(
-                          width: 300,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Frame 48095724.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_view_orders".tr,
-                                  style: cardTextStyle20()),
-                            ),
+                      child: Container(
+                        width: 300,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Frame 48095724.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
                           ),
                         ),
-                      ), //
-                    ),
-                    InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const ReceivedOrders()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const ReceivedOrders())).then((value) {
-                          if(value=="true"){
-                            setState(() {
-                              fetchData();
-                            });
-                          }
-                        });
-                      },
-                      child: Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_view_orders".tr,
+                                style: cardTextStyle20()),
+                          ),
                         ),
-                        child: Container(
-                          width: 300,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Frame 48095724.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_view_received_orders".tr,
-                                  style: cardTextStyle20()),
-                            ),
-                          ),
-                        ), //
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('$todayOrder', style: cTextStyle36()),
-                                const SizedBox(width: 15,),
-                                Text(
-                                  'key_Today'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('$tommorrowOrder', style: cTextStyle36()),
-                                const SizedBox(width: 15,),
-                                Text(
-                                  'key_Tomorrow'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            width: 150,
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('$laterOrder', style: cTextStyle36()),
-                                const SizedBox(width: 15,),
-                                Text(
-                                  'key_Later'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('key_Earning_Summary'.tr, style: mTextStyle20()),
+                    ), //
+                  ),
                   InkWell(
                     onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const ReceivedOrders()),
+                      // );
                       Navigator.of(context, rootNavigator: true).push(
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
+                              builder: (BuildContext context) => const ReceivedOrders())).then((value) {
                         if(value=="true"){
                           setState(() {
                             fetchData();
@@ -838,194 +705,332 @@ class _DashboardState extends State<Dashboard> {
                         }
                       });
                     },
-                    child: Row(
-                      children: [
-                        Text("key_all".tr, style: mTextStyle14()),
-                        const SizedBox(
-                          width: 5,
+                    child: Card(
+                      color: const Color.fromRGBO(53, 56, 66, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Container(
+                        width: 300,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Frame 48095724.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
                         ),
-                        Image.asset(
-                          './assets/images/dashboard/Arrow - Right.png',
-                          height: 20,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_view_received_orders".tr,
+                                style: cardTextStyle20()),
+                          ),
                         ),
-                      ],
+                      ), //
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 25,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('$todayOrder', style: cTextStyle36()),
+                              const SizedBox(width: 15,),
+                              Text(
+                                'key_Today'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('$tommorrowOrder', style: cTextStyle36()),
+                              const SizedBox(width: 15,),
+                              Text(
+                                'key_Tomorrow'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          width: 150,
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('$laterOrder', style: cTextStyle36()),
+                              const SizedBox(width: 15,),
+                              Text(
+                                'key_Later'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                        builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
-                  if(value=="true"){
-                    setState(() {
-                      fetchData();
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('key_Earning_Summary'.tr, style: mTextStyle20()),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true).push(
+                        CupertinoPageRoute(
+                            builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
+                      if(value=="true"){
+                        setState(() {
+                          fetchData();
+                        });
+                      }
                     });
-                  }
-                });
-              },
-              child: SizedBox(
-                height: 130,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+                  },
+                  child: Row(
                     children: [
-                      Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389-1.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_Earning_Summary".tr,
-                                  style: cardTextStyle20()),
-                            ),
-                          ),
-                        ), //
-                      ),
+                      Text("key_all".tr, style: mTextStyle14()),
                       const SizedBox(
                         width: 5,
                       ),
-                      Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389-1.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text("key_Expenses_Summary".tr,
-                                  style: cardTextStyle20()),
-                            ),
-                          ),
-                        ), //
+                      Image.asset(
+                        './assets/images/dashboard/Arrow - Right.png',
+                        height: 20,
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 100,
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).push(
+                  CupertinoPageRoute(
+                      builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
+                if(value=="true"){
+                  setState(() {
+                    fetchData();
+                  });
+                }
+              });
+            },
+            child: SizedBox(
+              height: 130,
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0),
                 child: ListView(
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
                     Card(
-                      shadowColor: Colors.black,
                       color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_This_Week'.tr,
-                                  style: cTextStyle18(),
-                                )
-                              ],
-                            )),
-                      ),
+                      child: Container(
+                        width: 330,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Rectangle 39389-1.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_Earning_Summary".tr,
+                                style: cardTextStyle20()),
+                          ),
+                        ),
+                      ), //
+                    ),
+                    const SizedBox(
+                      width: 5,
                     ),
                     Card(
-                      shadowColor: Colors.black,
                       color: const Color.fromRGBO(53, 56, 66, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_This_Month'.tr,
-                                  style: cTextStyle18(),
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Card(
-                      shadowColor: Colors.black,
-                      color: const Color.fromRGBO(53, 56, 66, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                                const SizedBox(width: 10,),
-                                Text(
-                                  'key_Total'.tr,
-                                  style: cTextStyle18(),
-                                  overflow: TextOverflow.clip,
-                                )
-                              ],
-                            )),
-                      ),
+                      child: Container(
+                        width: 330,
+                        height: 130,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                './assets/images/dashboard/Rectangle 39389-1.png'),
+                            fit: BoxFit.fill,
+                            alignment: Alignment.topCenter,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text("key_Expenses_Summary".tr,
+                                style: cardTextStyle20()),
+                          ),
+                        ),
+                      ), //
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 25,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_This_Week'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_This_Month'.tr,
+                                style: cTextStyle18(),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                  Card(
+                    shadowColor: Colors.black,
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
+                              const SizedBox(width: 10,),
+                              Text(
+                                'key_Total'.tr,
+                                style: cTextStyle18(),
+                                overflow: TextOverflow.clip,
+                              )
+                            ],
+                          )),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+        ],
       ),
     );
   }

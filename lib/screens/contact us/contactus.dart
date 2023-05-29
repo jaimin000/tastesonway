@@ -46,6 +46,7 @@ class ContactUs extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [

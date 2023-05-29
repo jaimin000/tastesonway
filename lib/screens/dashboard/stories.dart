@@ -321,6 +321,7 @@ class _StoriesState extends State<Stories> {
       future: fetchData(),
       builder: (context, snapshot) {
         return ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: data.length + 1,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {

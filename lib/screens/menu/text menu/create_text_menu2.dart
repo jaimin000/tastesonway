@@ -27,13 +27,14 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
   late List<dynamic> menuData = [];
   late int menuId;
   List<String> menuItemId = [];
+  List toppingPrice = [];
+  List toppingName=[];
 
   Future<void> getMenu() async {
     String token =  await Sharedprefrences.getToken();
     String? ownerId = await Sharedprefrences.getId();
     final response = await http.post(
       Uri.parse(
-           //'http://192.168.1.26:24/api/v2/get-menu-item'),
           '$baseUrl/get-menu-item'),
       headers: {'Authorization': 'Bearer $token'},
       body: {'business_owner_id': ownerId},
@@ -42,22 +43,31 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
       isLoading = false;
       final json = jsonDecode(response.body);
       menuData = json['data'][1]['data'];
-      for (int i = 0; i < menuData.length; i++) {
+      // for (int i = 0; i < menuData.length; i++) {
+      //   menuItemList.add(MenuItemModel(
+      //     id: menuData[i]['id'],
+      //     menu_id: menuData[i]['menu_id'],
+      //     name: menuData[i]['name'],
+      //     type:menuData[i]['type'],
+      //     price: menuData[i]['amount'],
+      //     image: menuData[i]['picture'],
+      //     description: menuData[i]['description'] ?? "",
+      //     menuItemIngredients: menuData[i]['item_ingridient'] as List,
+      //   )
+      //   );
+      // }
+      menuData.forEach((item) {
         menuItemList.add(MenuItemModel(
-          id: menuData[i]['id'],
-          menu_id: menuData[i]['menu_id'],
-          name: menuData[i]['name'],
-          type:menuData[i]['type'],
-          price: menuData[i]['amount'],
-          image: menuData[i]['picture'],
-          description: menuData[i]['description'] ?? "",
-          toppingName: menuData[i]['toppingName'] ?? "",
-        //     for (int j = 0; i < menuData[i]['item_ingridient'].length; j++) {
-        // toppingName: menuData[i]['item_ingridient'][j]['name'] ?? "",
-        // toppingPrice: menuData[i]['item_ingridient'][j]['price'] ?? "",
-        // }
+          id: item['id'],
+          menu_id: item['menu_id'],
+          name: item['name'],
+          type: item['type'],
+          price: item['amount'],
+          image: item['picture'],
+          description: item['description'] ?? "",
+          menuItemIngredients: item['item_ingridient'],
         ));
-      }
+      });
       setState(() {
       });
     }
@@ -377,6 +387,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                   : SizedBox(
                                 height: MediaQuery.of(context).size.height*0.3,
                                     child: ListView.builder(
+                                        physics: const BouncingScrollPhysics(),
                                         itemCount: menuItemList.length,
                                         shrinkWrap: true,
                                         itemBuilder:
@@ -463,7 +474,7 @@ class _CreateTextMenu2State extends State<CreateTextMenu2> {
                                                           type:menuItemList[index].type.toString(),
                                                           price:menuItemList[index].price,
                                                           description:menuItemList[index].description,
-
+                                                            menuItemIngredients:menuItemList[index].menuItemIngredients,
                                                         ),),).then((value) {
                                                       if(value=="true"){
                                                         setState(() {

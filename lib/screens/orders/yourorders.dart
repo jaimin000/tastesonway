@@ -91,6 +91,29 @@ class _YourOrdersState extends State<YourOrders> {
     }
   }
 
+  Widget buildNoData() => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Center(
+          child: Image.asset(
+            'assets/images/emptyOrder.png',
+            width: 251,
+            height: 221,
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Text(
+        'key_You_don_t_have_any_upcoming_orders'.tr,
+        style: TextStyle(fontSize: 16, color: Colors.white))
+    ],
+  );
+
+
   @override
   void initState() {
     fetchOrder();
@@ -132,9 +155,10 @@ class _YourOrdersState extends State<YourOrders> {
               child: CircularProgressIndicator(
               color: orangeColor(),
             ))
-          : Container(
+          : orderData.isNotEmpty ? Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: orderData.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
@@ -326,7 +350,7 @@ class _YourOrdersState extends State<YourOrders> {
                   );
                 },
               ),
-            ),
+            ) : buildNoData(),
     );
   }
 }

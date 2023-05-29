@@ -18,7 +18,6 @@ class CreateTextMenu extends StatefulWidget {
 
 class _CreateTextMenuState extends State<CreateTextMenu> {
   int refreshCounter = 0;
-
   bool isPermanentMenu = true;
   late String menuName;
   late int menuId;

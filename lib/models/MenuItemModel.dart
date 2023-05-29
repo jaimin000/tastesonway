@@ -7,8 +7,7 @@ class MenuItemModel {
   String type;
   String description;
   bool isChecked;
-  String toppingName;
-  String toppingPrice;
+  List<dynamic> menuItemIngredients;
 
   MenuItemModel({
     this.id=0,
@@ -19,8 +18,7 @@ class MenuItemModel {
     this.price=0,
     this.image="",
     this.isChecked=false,
-    this.toppingName="",
-    this.toppingPrice="",
+    this.menuItemIngredients = const [],
   });
 
 }

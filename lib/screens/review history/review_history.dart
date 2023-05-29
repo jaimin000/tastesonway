@@ -118,6 +118,7 @@ class _ReviewHistoryState extends State<ReviewHistory> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child:
         ListView.builder(
+          physics: BouncingScrollPhysics(),
           itemCount: orderHistory.length,
             itemBuilder:(BuildContext context, int index){
             return Column(

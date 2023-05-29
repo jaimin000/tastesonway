@@ -358,10 +358,9 @@ class _ViewAddressState extends State<ViewAddress> {
         child: Form(
           key: _formKey,
           child: ListView(
+            physics: BouncingScrollPhysics(),
             children: [
-              const SizedBox(
-                height: 25,
-              ),
+
               Card(
                 shadowColor: Colors.black,
                 color: cardColor(),
@@ -893,6 +892,9 @@ class _ViewAddressState extends State<ViewAddress> {
                     ),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 25,
               ),
             ],
           ),

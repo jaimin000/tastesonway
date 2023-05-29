@@ -154,7 +154,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                     'A',
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 77,
+                                        fontSize: 70,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

@@ -325,14 +325,13 @@ class _SignupState extends State<Signup> {
       print("aaaaaaaajlkjlkjalkjalaaajalkjdlkjalkfjlla");
       print("profile status: $profileStatus,address: $ownerAddress");
       if (profileStatus != 1 && ownerAddress != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-        );
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const Home())
+          Get.offAll(Home());
       }else {
-        await Navigator.pushReplacement(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const userPersonalDetail(),
