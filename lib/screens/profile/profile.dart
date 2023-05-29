@@ -12,11 +12,13 @@ import 'package:tastesonway/screens/discount/discount_page.dart';
 import 'package:tastesonway/screens/faq/faq.dart';
 import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
+import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 import '../orders/yourorders.dart';
+import '../register/editProfile.dart';
 import '../tutorials/tutorials.dart';
 import '../bank/banking_details.dart';
 
@@ -31,7 +33,11 @@ class _ProfileState extends State<Profile> {
   int refreshCounter = 0;
 
   String name ="";
+  String email ="";
+  String pincode ="";
   String profile ="";
+  String gender= '1';
+  String dob ="";
 
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
@@ -42,10 +48,17 @@ class _ProfileState extends State<Profile> {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      setState(() {
+      print(response.body);
         var profileData = jsonData['data'];
         name = profileData['name'];
+        email = profileData['email'];
+         pincode = profileData['pin_code'].toString();
         profile = profileData['avatar'];
+         gender = profileData['gender'].toString();
+        dob = profileData['date_of_birth'].toString();
+        print(pincode);
+        print(dob);
+      setState(() {
       });
     }else if(response.statusCode == 401) {
       print("refresh token called");if (refreshCounter == 0) {
@@ -74,7 +87,17 @@ class _ProfileState extends State<Profile> {
           backgroundColor: Colors.transparent,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    EditPersonalDetail(
+                        profile:profile.toString(),
+                    name:name,
+                    email:email,
+                    gender:gender.toString(),
+                    pincode:pincode.toString(),
+                    dob:dob.toString(),
+                )));
+              },
               icon: const Icon(Icons.edit),
             ),
           ],

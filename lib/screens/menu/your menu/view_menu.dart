@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tastesonway/models/MenuItemModel.dart';
-import 'package:tastesonway/screens/menu/text%20menu/edit_item.dart';
+import 'package:tastesonway/screens/menu/your%20menu/edit%20menu%20item.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import '../../../apiServices/api_service.dart';
 import '../../../utils/theme_data.dart';
@@ -16,7 +16,8 @@ class ViewMenu extends StatefulWidget {
   final int status;
   final String menuName;
   final String date;
-  ViewMenu({required this.menuId,required this.status, required this.menuName, required this.date});
+  final String type;
+  ViewMenu({required this.menuId,required this.status, required this.menuName, required this.date, required this.type});
 
   @override
   State<ViewMenu> createState() => _ViewMenuState();
@@ -29,6 +30,7 @@ class _ViewMenuState extends State<ViewMenu> {
   List<MenuItemModel> menuItemList = [];
   late List<dynamic> menuData = [];
   int? menuId;
+  int type = 1;
   late String menuName;
   List<String> menuItemId = [];
   int isPermanent = 1;
@@ -139,6 +141,57 @@ class _ViewMenuState extends State<ViewMenu> {
     }
   }
 
+  Future EditMenu(String id,int type) async  {
+    String token = await Sharedprefrences.getToken();
+    final url = Uri.parse(
+        "$baseUrl/create-or-update-menu");
+    final headers= {'Authorization': 'Bearer $token'};
+    final body=  isPermanent == 2 ? {
+      "id": id,
+      "is_menu_completed": "1",
+      "is_permanent_menu": "$isPermanent",
+      "menu_review_status": "1",
+      "name": menuNameController.text.toString(),
+      "type": "$type",
+      "date_of_menu" : DateFormat('yyyy-MM-dd').format(menuExpiryDate)
+    }: {
+      "id": id,
+      "is_menu_completed": "1",
+      "is_permanent_menu": "$isPermanent",
+      "menu_review_status": "1",
+      "type": "$type",
+      "name": menuNameController.text.toString(),
+    };
+    try {
+      final response = await http.post(url, headers: headers, body: body);
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        print(json['message']);
+        ScaffoldMessenger.of(context).showSnackBar(
+           SnackBar(
+              content: Text(json['message'])),
+        );
+      }
+      else if(response.statusCode == 401) {
+        print("refresh token called");if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ?EditMenu(id,type):null;}
+      }
+      else {
+        final json = jsonDecode(response.body);
+        print('Request failed with status: ${response.statusCode}.');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(json['message'])),
+        );
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+    }
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -147,6 +200,7 @@ class _ViewMenuState extends State<ViewMenu> {
     menuNameController.text = widget.menuName;
     widget.status == 2 ? isPermanentMenu = false : true;
     menuExpiryDate = FormateDate(widget.date.toString());
+    type = widget.type == 'Image'? 2 : 1;
   }
 
   @override
@@ -479,7 +533,7 @@ class _ViewMenuState extends State<ViewMenu> {
                                                               MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                        EditItem(
+                                                                        EditMenuItem(
                                                                   id: menuItemList[
                                                                           index]
                                                                       .id,
@@ -500,16 +554,10 @@ class _ViewMenuState extends State<ViewMenu> {
                                                                       menuItemList[
                                                                               index]
                                                                           .description,
-                                                                ),
+
+                                                                )
                                                               ),
-                                                            ).then((value) {
-                                                              if (value ==
-                                                                  "true") {
-                                                                setState(() {
-                                                                  getMenuItem();
-                                                                });
-                                                              }
-                                                            }):null;
+                                                            ):null;
                                                           },
                                                           child: Stack(
                                                             clipBehavior:
@@ -604,19 +652,25 @@ class _ViewMenuState extends State<ViewMenu> {
                         ? SizedBox(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
-                            child: Card(
-                                shadowColor: Colors.black,
-                                color: orangeColor(),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'key_Proceed'.tr,
-                                    style: mTextStyle14(),
+                            child: InkWell(
+                              onTap: () {
+                                EditMenu(widget.menuId.toString(),type);
+                                // Navigator.pop(context,'true');
+                              },
+                              child: Card(
+                                  shadowColor: Colors.black,
+                                  color: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                )),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'key_Proceed'.tr,
+                                      style: mTextStyle14(),
+                                    ),
+                                  )),
+                            ),
                           )
                         : SizedBox(),
                   ],

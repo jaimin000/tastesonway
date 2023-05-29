@@ -275,6 +275,7 @@ class _YourMenusState extends State<YourMenus> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => ViewMenu(
+                                                  type:filteredMenuList[index]['type'],
                                                       menuName:
                                                           filteredMenuList[
                                                               index]['name'],
@@ -390,9 +391,6 @@ class _YourMenusState extends State<YourMenus> {
                                                             GestureDetector(
                                                                 onTap:
                                                                     () async {
-                                                                      setState(() {
-                                                                        isLoading = true;
-                                                                      });
                                                                       getMenuItem(
                                                                           filteredMenuList[
                                                                           index]
@@ -461,6 +459,7 @@ class _YourMenusState extends State<YourMenus> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => ViewMenu(
+                                                  type:filteredMenuList[index]['type'],
                                                       menuName:
                                                           filteredMenuList[
                                                               index]['name'],
@@ -554,7 +553,16 @@ class _YourMenusState extends State<YourMenus> {
                                                           children: [
                                                             GestureDetector(
                                                                 onTap:
-                                                                    () async {},
+                                                                    () async {
+                                                                      getMenuItem(
+                                                                          filteredMenuList[
+                                                                          index]
+                                                                          ['id']);
+                                                                      String text = "🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
+                                                                          "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                                                                          "📱 Sent from Tastes on Way app";
+                                                                      showTextMenuDialog(context,text);
+                                                                    },
                                                                 child: const Icon(
                                                                     Icons
                                                                         .remove_red_eye_sharp)),

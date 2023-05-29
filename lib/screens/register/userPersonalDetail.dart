@@ -8,7 +8,6 @@ import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart'as http;
-
 import '../../apiServices/api_service.dart';
 
 class userPersonalDetail extends StatefulWidget {
