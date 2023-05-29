@@ -102,10 +102,7 @@ flutter:
 #   To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/dashboard/
-     - assets/images/navbar/
-     - assets/images/your menus/
      - assets/images/
-     - assets/images/imagemenu/
      - assets/images/profile/
 
   # An image asset can refer to one or more resolution-specific "variants", see

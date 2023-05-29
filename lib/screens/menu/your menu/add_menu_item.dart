@@ -9,7 +9,6 @@ import '../../../utils/sharedpreferences.dart';
 import '../../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 
-
 class AddMenuItem extends StatefulWidget {
   final int menuId;
   const AddMenuItem({required this.menuId});
@@ -566,9 +565,8 @@ class _AddMenuItemState extends State<AddMenuItem> {
                                     setState(() {
                                       _isLoading = false;
                                     });
-                                    // Navigator.pushReplacement(context,
-                                    //   MaterialPageRoute(builder: (
-                                    //       context) => const CreateTextMenu2()),);
+                                    Get.back();
+                                    Navigator.pop(context,"true");
                                   }else{
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(

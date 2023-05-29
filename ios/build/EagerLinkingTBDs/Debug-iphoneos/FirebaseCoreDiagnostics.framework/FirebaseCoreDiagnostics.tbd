@@ -1,0 +1,14 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64-ios ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics'
+exports:
+  - targets:         [ arm64-ios ]
+    symbols:         [ _FIREncodeData, _FIREncodeString, _FIRMapFromServiceStringToTypeEnum, 
+                       _FIRPopulateProtoWithCommonInfoFromApp, _FIRPopulateProtoWithInfoFromUserInfoParams, 
+                       _FIRPopulateProtoWithInfoPlistValues, _FIRPopulateProtoWithInstalledServices, 
+                       _FirebaseCoreDiagnosticsVersionNumber, _FirebaseCoreDiagnosticsVersionString, 
+                       _kFIRCoreDiagnosticsHeartbeatDateFileName, _logs_proto_mobilesdk_ios_ICoreConfiguration_fields ]
+    objc-classes:    [ FIRCoreDiagnostics, FIRCoreDiagnosticsLog, PodsDummy_FirebaseCoreDiagnostics ]
+...

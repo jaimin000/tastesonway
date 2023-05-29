@@ -7,7 +7,6 @@ import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
 import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
-import 'package:tastesonway/screens/orders/received_orders.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
@@ -15,7 +14,6 @@ import '../../utils/sharedpreferences.dart';
 import '../../utils/theme_data.dart';
 import '../menu/image menu/create_img_menu1.dart';
 import 'package:http/http.dart' as http;
-
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -37,43 +35,40 @@ class _DashboardState extends State<Dashboard> {
   String profilePhoto = "";
   String userName = "";
   final currentTime = DateTime.now();
-  String greeting = "";  int refreshCounter = 0;
-
+  String greeting = "";
+  int refreshCounter = 0;
 
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
-        Uri.parse("$baseUrl/kitchen-owner-dashboard"),
-        headers: {'Authorization': 'Bearer $token',
-        },
+      Uri.parse("$baseUrl/kitchen-owner-dashboard"),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
     );
-  if (currentTime.hour < 12) {
-  greeting = 'Good Morning';
-  } else if (currentTime.hour < 18) {
-  greeting = 'Good Afternoon';
-  } else {
-  greeting = 'Good Evening';
-  }
+    if (currentTime.hour < 12) {
+      greeting = 'Good Morning';
+    } else if (currentTime.hour < 18) {
+      greeting = 'Good Afternoon';
+    } else {
+      greeting = 'Good Evening';
+    }
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       setState(() {
         var dashboardData = jsonData['data'];
         //print(dashboardData);
         totalMenu = dashboardData['total_menus'];
-         totalMenuItem = dashboardData['total_menu_items'];
-         theme = dashboardData['total_theme'];
-         todayOrder = dashboardData['total_today_order'];
-         tommorrowOrder = dashboardData['total_tomorrow_order'];
-         laterOrder = dashboardData['total_later_date'];
-         earningWeek = dashboardData['total_earning_summary_of_week'];
-         earningMonth = dashboardData['total_earning_summary_of_month'];
-         earningSummary = dashboardData['total_earning_summary'];
+        totalMenuItem = dashboardData['total_menu_items'];
+        theme = dashboardData['total_theme'];
+        todayOrder = dashboardData['total_today_order'];
+        tommorrowOrder = dashboardData['total_tomorrow_order'];
+        laterOrder = dashboardData['total_later_date'];
+        earningWeek = dashboardData['total_earning_summary_of_week'];
+        earningMonth = dashboardData['total_earning_summary_of_month'];
+        earningSummary = dashboardData['total_earning_summary'];
       });
-    // }else if(response.statusCode == 401) {
-    //   print("refresh token called");
-    //   bool tokenRefreshed = await getNewToken(context);
-    //   fetchData();
-    }else if(response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       print("refresh token called");
       if (refreshCounter == 0) {
         refreshCounter++;
@@ -83,8 +78,7 @@ class _DashboardState extends State<Dashboard> {
           tokenRefreshed ? fetchData() : null;
         }
       }
-    }
-    else {
+    } else {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -93,7 +87,8 @@ class _DashboardState extends State<Dashboard> {
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse("$baseUrl/get-kitchen-owner-profile"),
-      headers: {'Authorization': 'Bearer $token',
+      headers: {
+        'Authorization': 'Bearer $token',
       },
     );
     if (response.statusCode == 200) {
@@ -104,15 +99,14 @@ class _DashboardState extends State<Dashboard> {
         userName = profileData['name'];
         // print('this is profile photo '+profilePhoto);
       });
-    }else if(response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       print("refresh token called");
       if (refreshCounter == 0) {
         refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
         tokenRefreshed ? fetchProfile() : null;
       }
-    }
-    else {
+    } else {
       print('refresh token failed');
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -120,8 +114,8 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-     fetchProfile();
-     fetchData();
+    fetchProfile();
+    fetchData();
     super.initState();
   }
 
@@ -139,7 +133,7 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text(
+                Text(
                   greeting,
                   style: const TextStyle(
                       color: Colors.black,
@@ -155,10 +149,11 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                        builder: (BuildContext context) => const Profile())).then((value) {
-                  if(value=="true"){
+                Navigator.of(context, rootNavigator: true)
+                    .push(CupertinoPageRoute(
+                        builder: (BuildContext context) => const Profile()))
+                    .then((value) {
+                  if (value == "true") {
                     setState(() {
                       fetchData();
                     });
@@ -169,11 +164,8 @@ class _DashboardState extends State<Dashboard> {
                 //   MaterialPageRoute(builder: (context) => const Profile()),
                 // );
               },
-              child:  CircleAvatar(
-                backgroundImage:
-                NetworkImage(
-                    profilePhoto
-                ),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(profilePhoto),
               ),
             ),
           ],
@@ -185,9 +177,11 @@ class _DashboardState extends State<Dashboard> {
           const SizedBox(
             height: 15,
           ),
-           SizedBox(
+          SizedBox(
             height: 105,
-            child: Stories(photoUrl:profilePhoto,),
+            child: Stories(
+              photoUrl: profilePhoto,
+            ),
           ),
           const SizedBox(
             height: 25,
@@ -218,17 +212,25 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("key_Quick_Link".tr, style: mTextStyle20()),
-                Row(
-                  children: [
-                    Text("key_all".tr, style: mTextStyle14()),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Image.asset(
-                      './assets/images/dashboard/Arrow - Right.png',
-                      height: 20,
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true).push(
+                        CupertinoPageRoute(
+                            builder: (BuildContext context) =>
+                                const Profile()));
+                  },
+                  child: Row(
+                    children: [
+                      Text("key_all".tr, style: mTextStyle14()),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset(
+                        './assets/images/dashboard/Arrow - Right.png',
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -246,15 +248,12 @@ class _DashboardState extends State<Dashboard> {
                 children: [
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const YourOrders()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const YourOrders())).then((value) {
-                        if(value=="true"){
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const YourOrders()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -273,8 +272,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset(
-                                  './assets/images/dashboard/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png'),
                               Text(
                                 'key_Orders'.tr,
                                 style: cTextStyle18(),
@@ -285,15 +283,12 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const YourMenus()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const YourMenus())).then((value) {
-                        if(value=="true"){
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const YourMenus()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -312,8 +307,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset(
-                                  './assets/images/dashboard/menu.png'),
+                              Image.asset('./assets/images/dashboard/menu.png'),
                               Text(
                                 'key_Menu'.tr,
                                 style: cTextStyle18(),
@@ -322,24 +316,32 @@ class _DashboardState extends State<Dashboard> {
                           )),
                     ),
                   ),
-                  Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const Profile()));
+                    },
+                    child: Card(
+                      shadowColor: Colors.black,
+                      color: const Color.fromRGBO(53, 56, 66, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: SizedBox(
+                          width: 150,
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                'key_other'.tr,
+                                style: cTextStyle18(),
+                              )
+                            ],
+                          )),
                     ),
-                    child: SizedBox(
-                        width: 150,
-                        height: 100,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'key_other'.tr,
-                              style: cTextStyle18(),
-                            )
-                          ],
-                        )),
                   ),
                 ],
               ),
@@ -356,15 +358,12 @@ class _DashboardState extends State<Dashboard> {
                 Text("key_Your_Menus".tr, style: mTextStyle20()),
                 InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const YourMenus()),
-                    // );
-                    Navigator.of(context, rootNavigator: true).push(
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) =>const YourMenus())).then((value) {
-                      if(value=="true"){
+                    Navigator.of(context, rootNavigator: true)
+                        .push(CupertinoPageRoute(
+                            builder: (BuildContext context) =>
+                                const YourMenus()))
+                        .then((value) {
+                      if (value == "true") {
                         setState(() {
                           fetchData();
                         });
@@ -400,15 +399,12 @@ class _DashboardState extends State<Dashboard> {
                 children: [
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const CreateTextMenu()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const CreateTextMenu())).then((value) {
-                        if(value=="true"){
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CreateTextMenu()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -444,15 +440,13 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const CreateImgMenu()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const CreateImgMenu())).then((value) {
-                        if(value=="true"){
+
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const CreateImgMenu()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -515,7 +509,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text("$totalMenu", style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_Your_Menus'.tr,
                                 style: cTextStyle18(),
@@ -538,7 +534,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text("$totalMenuItem", style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_Items_In_Menu'.tr,
                                 style: cTextStyle18(),
@@ -561,7 +559,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text('$theme', style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_My_Menu_Designs'.tr,
                                 style: cTextStyle18(),
@@ -579,14 +579,12 @@ class _DashboardState extends State<Dashboard> {
           ),
           InkWell(
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ReceivedOrders()),
-              // );
-              Navigator.of(context, rootNavigator: true).push(
-                  CupertinoPageRoute(
-                      builder: (BuildContext context) => const ReceivedOrders())).then((value) {
-                if(value=="true"){
+              Navigator.of(context, rootNavigator: true)
+                  .push(CupertinoPageRoute(
+                      builder: (BuildContext context) =>
+                          const YourOrders()))
+                  .then((value) {
+                if (value == "true") {
                   setState(() {
                     fetchData();
                   });
@@ -601,15 +599,12 @@ class _DashboardState extends State<Dashboard> {
                   Text("key_Your_Orders".tr, style: mTextStyle20()),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const YourOrders()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const YourOrders())).then((value) {
-                        if(value=="true"){
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const YourOrders()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -651,15 +646,12 @@ class _DashboardState extends State<Dashboard> {
                     ),
                     child: InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const YourOrders()),
-                        // );
-                        Navigator.of(context, rootNavigator: true).push(
-                            CupertinoPageRoute(
-                                builder: (BuildContext context) => const YourOrders())).then((value) {
-                          if(value=="true"){
+                        Navigator.of(context, rootNavigator: true)
+                            .push(CupertinoPageRoute(
+                                builder: (BuildContext context) =>
+                                    const YourOrders()))
+                            .then((value) {
+                          if (value == "true") {
                             setState(() {
                               fetchData();
                             });
@@ -690,15 +682,12 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const ReceivedOrders()),
-                      // );
-                      Navigator.of(context, rootNavigator: true).push(
-                          CupertinoPageRoute(
-                              builder: (BuildContext context) => const ReceivedOrders())).then((value) {
-                        if(value=="true"){
+                      Navigator.of(context, rootNavigator: true)
+                          .push(CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                                  const YourOrders()))
+                          .then((value) {
+                        if (value == "true") {
                           setState(() {
                             fetchData();
                           });
@@ -761,7 +750,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text('$todayOrder', style: cTextStyle36()),
-                              const SizedBox(width: 15,),
+                              const SizedBox(
+                                width: 15,
+                              ),
                               Text(
                                 'key_Today'.tr,
                                 style: cTextStyle18(),
@@ -784,7 +775,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text('$tommorrowOrder', style: cTextStyle36()),
-                              const SizedBox(width: 15,),
+                              const SizedBox(
+                                width: 15,
+                              ),
                               Text(
                                 'key_Tomorrow'.tr,
                                 style: cTextStyle18(),
@@ -808,7 +801,9 @@ class _DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text('$laterOrder', style: cTextStyle36()),
-                              const SizedBox(width: 15,),
+                              const SizedBox(
+                                width: 15,
+                              ),
                               Text(
                                 'key_Later'.tr,
                                 style: cTextStyle18(),
@@ -832,10 +827,14 @@ class _DashboardState extends State<Dashboard> {
                 Text('key_Earning_Summary'.tr, style: mTextStyle20()),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context, rootNavigator: true).push(
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
-                      if(value=="true"){
+                    Navigator.of(context, rootNavigator: true)
+                        .push(CupertinoPageRoute(
+                            builder: (BuildContext context) => EarningSummary(
+                                week: earningWeek,
+                                month: earningMonth,
+                                total: earningSummary)))
+                        .then((value) {
+                      if (value == "true") {
                         setState(() {
                           fetchData();
                         });
@@ -863,10 +862,14 @@ class _DashboardState extends State<Dashboard> {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context, rootNavigator: true).push(
-                  CupertinoPageRoute(
-                      builder: (BuildContext context) => EarningSummary(week:earningWeek,month:earningMonth,total:earningSummary))).then((value) {
-                if(value=="true"){
+              Navigator.of(context, rootNavigator: true)
+                  .push(CupertinoPageRoute(
+                      builder: (BuildContext context) => EarningSummary(
+                          week: earningWeek,
+                          month: earningMonth,
+                          total: earningSummary)))
+                  .then((value) {
+                if (value == "true") {
                   setState(() {
                     fetchData();
                   });
@@ -965,8 +968,12 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹$earningWeek', overflow:TextOverflow.ellipsis,style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              Text('₹$earningWeek',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: cTextStyle36()),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_This_Week'.tr,
                                 style: cTextStyle18(),
@@ -988,8 +995,12 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹$earningMonth',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              Text('₹$earningMonth',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: cTextStyle36()),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_This_Month'.tr,
                                 style: cTextStyle18(),
@@ -1012,8 +1023,12 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('₹$earningSummary',overflow:TextOverflow.ellipsis, style: cTextStyle36()),
-                              const SizedBox(width: 10,),
+                              Text('₹$earningSummary',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: cTextStyle36()),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
                                 'key_Total'.tr,
                                 style: cTextStyle18(),

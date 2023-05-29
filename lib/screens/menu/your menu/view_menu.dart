@@ -417,6 +417,8 @@ class _ViewMenuState extends State<ViewMenu> {
                                       ).then((value) {
                                         if (value == "true") {
                                           setState(() {
+                                            menuItemList = [];
+                                            menuData=[];
                                             getMenuItem();
                                           });
                                         }
@@ -558,7 +560,15 @@ class _ViewMenuState extends State<ViewMenu> {
 
                                                                 )
                                                               ),
-                                                            ):null;
+                                                            ).then((value) {
+                                                              if (value == "true") {
+                                                                setState(() {
+                                                                  menuItemList = [];
+                                                                  menuData=[];
+                                                                  getMenuItem();
+                                                                });
+                                                              }
+                                                            }):null;
                                                           },
                                                           child: Stack(
                                                             clipBehavior:
