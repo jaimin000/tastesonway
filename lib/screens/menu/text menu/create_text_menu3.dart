@@ -222,6 +222,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.50,
                           child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                               itemCount: menuList.length,
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index) {

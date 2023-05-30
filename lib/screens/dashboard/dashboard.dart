@@ -184,27 +184,17 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: TextField(
-              style: const TextStyle(color: Colors.white), //<-- SEE HERE
-              cursorColor: Colors.grey,
-              decoration: InputDecoration(
-                  fillColor: inputColor(),
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none),
-                  hintText: 'key_find_dishes'.tr,
-                  hintStyle: const TextStyle(color: Colors.grey, fontSize: 18),
-                  suffixIcon:
-                      Image.asset('./assets/images/dashboard/Filter.png')),
-            ),
-          ),
+          // const Divider(
+          //   color: Colors.grey,
+          //   height: 1,
+          //   thickness: 1,
+          //   indent: 16,
+          //   endIndent: 16,
+          // ),
           const SizedBox(
-            height: 25,
+            height: 15,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -502,7 +492,7 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: SizedBox(
                           height: 100,
                           child: Row(
@@ -743,7 +733,7 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: SizedBox(
                           height: 100,
                           child: Row(
@@ -962,7 +952,7 @@ class _DashboardState extends State<Dashboard> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(15.0),
                       child: SizedBox(
                           height: 100,
                           child: Row(

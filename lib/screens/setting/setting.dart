@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +93,6 @@ class _SettingState extends State<Setting> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -164,10 +162,53 @@ class _SettingState extends State<Setting> {
                           activeColor: Colors.green,
                           value: ownerAvailable,
                           onChanged: (bool? value) {
-                            setState(() {
-                              ownerAvailable = value ?? false;
-                            });
-                            updateOwnerAvaibility(ownerAvailable ? 1 : 2);
+                            showDialog(
+                                context: context,
+                                builder:(BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: cardColor(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    title:Text(!ownerAvailable ? 'key_Start_receiving_orders'.tr : 'key_Kitchen_Closed'.tr, style:cardTextStyle18()),
+                                    content: Text(!ownerAvailable ? 'key_Are_you_sure_you_want_to_open_your_Kitchen'.tr: 'key_You_can_reopen_the_kitchen'.tr, style:mTextStyle14() ),
+                                    actions: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: fontColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(); // Close the dialog
+                                        },
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: orangeColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                        child: Text(!ownerAvailable ? 'key_Yes_Start'.tr : 'key_Yes_Close'.tr, style: mTextStyle14(),),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(); // Close the dialog
+                                          setState(() {
+                                            ownerAvailable = !ownerAvailable;
+                                          });
+                                          updateOwnerAvaibility(ownerAvailable ? 1 : 2);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                }
+                            );
+                            // setState(() {
+                            //   ownerAvailable = value ?? false;
+                            // });
+                            // updateOwnerAvaibility(ownerAvailable ? 1 : 2);
                           }),
                     ),
                   ],

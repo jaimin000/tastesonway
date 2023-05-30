@@ -179,7 +179,13 @@ class _DiscountPageState extends State<DiscountPage> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const ChoosePromo()),
-                                      );
+                                      ).then((value) {
+                                        if (value == "true") {
+                                          setState(() {
+                                            fetchCoupon();
+                                          });
+                                        }
+                                      });
                                     },
                                     child: Container(
                                       height: 110,
@@ -215,6 +221,8 @@ class _DiscountPageState extends State<DiscountPage> {
                   const SizedBox(
                     height: 35,
                   ),
+                  apiData.isNotEmpty ? const SizedBox() : const SizedBox(height:100),
+                  apiData.isNotEmpty ?
                   CarouselSlider(
                     options: CarouselOptions(
                       height: MediaQuery.of(context).size.height / 2.5,
@@ -250,7 +258,13 @@ class _DiscountPageState extends State<DiscountPage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) => EditCoupon(isFixedData: item.type == '% Off'?false:true,data: item)),
-                                            );
+                                            ).then((value) {
+                                              if (value == "true") {
+                                                setState(() {
+                                                  fetchCoupon();
+                                                });
+                                              }
+                                            });
                                           },
                                           child: Container(
                                             constraints:  BoxConstraints(
@@ -328,19 +342,25 @@ class _DiscountPageState extends State<DiscountPage> {
                         ),
                       );
                     }).toList(),
+                  ) : Padding(
+                    padding: const EdgeInsets.only(top:20.0),
+                    child: Text('key_No_running_promos'.tr,style: cardTextStyle18()),
                   ),
-
                   const SizedBox(
                     height: 10,
                   ),
-                  Center(
+                  apiData.isNotEmpty ? Center(
                       child: AnimatedSmoothIndicator(
                     activeIndex: _current,
                     count: apiData.length,
                     effect: WormEffect(
                       activeDotColor: orangeColor(),
                     ),
-                  )),
+                  )) : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('key_Create_promos_and_grow_your_business_now'.tr,
+                      style: mTextStyle16(),overflow: TextOverflow.clip,),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

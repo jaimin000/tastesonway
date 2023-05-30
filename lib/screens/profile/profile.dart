@@ -24,14 +24,12 @@ import '../bank/banking_details.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
-
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
   int refreshCounter = 0;
-
   String name ="";
   String email ="";
   String pincode ="";
@@ -232,11 +230,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const DiscountPage()));
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             const CreateDiscountCoupon()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -266,10 +259,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const MyWebsite()));
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const MyWebsite()));
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -299,11 +288,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const Fssai()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const Fssai()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -333,11 +317,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const BankingDetails()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const BankingDetails()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -367,11 +346,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const YourOrders()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const ReceivedOrders()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -401,11 +375,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const MenuItems()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const MenuItems()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -435,11 +404,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const MenuDesign()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const MenuDesign()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -469,11 +433,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => Tutorials()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => Tutorials()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -532,11 +491,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => ContactUs()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => ContactUs()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -566,10 +520,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const FAQ()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => const FAQ()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,
@@ -598,11 +548,6 @@ class _ProfileState extends State<Profile> {
                         Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute(
                                 builder: (BuildContext context) => const Setting()));
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const Setting()),
-                        // );
                       },
                       child: Card(
                         shadowColor: Colors.black,

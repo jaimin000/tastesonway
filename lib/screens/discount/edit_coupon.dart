@@ -224,11 +224,12 @@ class _EditCouponState extends State<EditCoupon> {
                       const SnackBar(
                           content: Text('Coupon Deleted Successfully!')),
                     );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DiscountPage()),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const DiscountPage()),
+                    // );
+                    Navigator.pop(context,'true');
                   },
                   icon: const Icon(Icons.delete),
                 )
@@ -601,12 +602,13 @@ class _EditCouponState extends State<EditCoupon> {
                                         content: Text(
                                             'Coupon Updated Successfully!')),
                                   );
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DiscountPage()),
-                                  );
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           const DiscountPage()),
+                                  // );
+                                  Navigator.pop(context,'true');
                                 }
                               },
                               child: Card(

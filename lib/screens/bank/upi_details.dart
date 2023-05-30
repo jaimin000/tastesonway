@@ -177,8 +177,9 @@ class _UPIDetailsState extends State<UPIDetails> {
                                   setState(() {
                                   });
                                   await setUpi();
-                                  Get.off(() => const BankingDetails());
-                                   return Future.value(true);
+                                  Navigator.pop(context,'true');
+                                  //Get.off(() => const BankingDetails());
+                                   //return Future.value(true);
                                 }
                               },
                               child: Card(

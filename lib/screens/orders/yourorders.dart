@@ -19,9 +19,9 @@ class YourOrders extends StatefulWidget {
 
 class _YourOrdersState extends State<YourOrders> {
   int refreshCounter = 0;
-
   List orderData = [];
   bool isLoading = true;
+  String filter = "all";
   // late Timer _timer;
 
   int calculateRemainingMinutes(String futureTime) {
@@ -63,12 +63,12 @@ class _YourOrdersState extends State<YourOrders> {
     return DateFormat('dd-MM-yyyy').format(tempDate);
   }
 
-  Future<void> fetchOrder() async {
+  Future<void> fetchOrder(filter) async {
     String token = await Sharedprefrences.getToken();
     final response = await http.post(
       Uri.parse("$baseUrl/kitchen-owner-order-list"),
       headers: {'Authorization': 'Bearer $token'},
-      body: {"date": "all"},
+      body: {"date": filter},
     );
     if (response.statusCode == 200) {
       isLoading = false;
@@ -81,7 +81,7 @@ class _YourOrdersState extends State<YourOrders> {
       print("refresh token called");if (refreshCounter == 0) {
         refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchOrder():null;}
+      tokenRefreshed ?fetchOrder(filter):null;}
     }else {
       isLoading = false;
       setState(() {});
@@ -104,19 +104,65 @@ class _YourOrdersState extends State<YourOrders> {
           ),
         ),
       ),
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       Text(
         'key_You_don_t_have_any_upcoming_orders'.tr,
-        style: TextStyle(fontSize: 16, color: Colors.white))
+        style: const TextStyle(fontSize: 16, color: Colors.white))
     ],
   );
 
+  Future<String?> showFilterDialog(BuildContext context) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: cardColor(),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          title: Text('Filter Orders',style: cardTextStyle16(),),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                filter = 'today';
+                fetchOrder(filter);
+                Navigator.pop(context, 'today');
+                setState(() {
+                });
+              },
+              child: Text('key_Today'.tr,style: mTextStyle14(),),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                filter = 'tomorrow';
+                fetchOrder(filter);
+                Navigator.pop(context, 'tomorrow');
+                setState(() {
+                });
+              },
+              child: Text('key_Tomorrow'.tr,style: mTextStyle14(),),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                filter = 'all';
+                fetchOrder(filter);
+                Navigator.pop(context, 'all');
+                setState(() {
+                });
+              },
+              child: Text('key_all'.tr,style: mTextStyle14(),),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   void initState() {
-    fetchOrder();
+    fetchOrder(filter);
     super.initState();
   }
 
@@ -145,7 +191,9 @@ class _YourOrdersState extends State<YourOrders> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showFilterDialog(context);
+            },
             icon: const Icon(Icons.filter_alt_outlined),
           ),
         ],
@@ -181,7 +229,7 @@ class _YourOrdersState extends State<YourOrders> {
                                 ).then((value) {
                                   if(value=="true"){
                                     setState(() {
-                                      fetchOrder();
+                                      fetchOrder(filter);
                                     });
                                   }
                                 });

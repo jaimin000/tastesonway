@@ -96,7 +96,13 @@ class _BankingDetailsState extends State<BankingDetails> {
                   MaterialPageRoute(
                       builder: (context) => BankDetails(
                          id,bankName, bankHolderName, bankAccNumber, bankIfsc)),
-                );
+                ).then((value) {
+                  if (value == "true") {
+                    setState(() {
+                      getBankDetails();
+                    });
+                  }
+                });
               },
               child: Card(
                 shadowColor: Colors.black,
@@ -152,7 +158,13 @@ class _BankingDetailsState extends State<BankingDetails> {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UPIDetails(id,upiId)));
+                    MaterialPageRoute(builder: (context) => UPIDetails(id,upiId))).then((value) {
+                  if (value == "true") {
+                    setState(() {
+                      getBankDetails();
+                    });
+                  }
+                });
               },
               child: Card(
                 shadowColor: Colors.black,

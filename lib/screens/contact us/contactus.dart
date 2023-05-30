@@ -8,7 +8,6 @@ import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
 
-
 class ContactUs extends StatelessWidget {
   ContactUs({Key? key}) : super(key: key);
 
@@ -29,7 +28,6 @@ class ContactUs extends StatelessWidget {
     message = (json['message']).toString();
     return message;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +88,47 @@ class ContactUs extends StatelessWidget {
             const SizedBox(height:10),
             InkWell(
               onTap: () async {
-                await getCallback();
-                ScaffoldSnackbar.of(context).show(message.toString());
+                showDialog(
+                    context: context,
+                    builder:(BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: cardColor(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        title:Text('key_Request_a_Callback'.tr, style:cardTextStyle18()),
+                        content: Text('key_Request_Callback_desc'.tr, style:mTextStyle14() ),
+                        actions: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: fontColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close the dialog
+                            },
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: orangeColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Text('key_Proceed'.tr, style: mTextStyle14(),),
+                            onPressed: () async {
+                              Navigator.of(context).pop(); // Close the dialog
+                              await getCallback();
+                              ScaffoldSnackbar.of(context).show(message.toString());
+                            },
+                          ),
+                        ],
+                      );
+                    }
+                );
               },
               child: Card(
                 shadowColor: Colors.black,

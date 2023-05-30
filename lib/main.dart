@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
@@ -19,7 +20,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -33,10 +33,6 @@ void main() async {
     provisional: false,
     sound: true,
   );
-  print('User granted permission: ${settings.authorizationStatus}');
-
-  // String? token = await FirebaseMessaging.instance.getToken();
-  // print('Device token: $token');
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -212,8 +208,8 @@ class _HomeState extends State<Home> {
   showDialogBox() => showCupertinoDialog<String>(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
-          title: const Text('No Connection'),
-          content: const Text('Please check your internet connectivity'),
+          title: Image.asset('assets/images/no_internet.png',width: 250,height: 400,),
+          content: Text('key_No_Internet_connection_found'.tr),
           actions: <Widget>[
             TextButton(
               onPressed: () async {
@@ -226,7 +222,7 @@ class _HomeState extends State<Home> {
                   setState(() => isAlertSet = true);
                 }
               },
-              child: const Text('OK'),
+              child: Text('key_Try_Again'.tr,style: const TextStyle(color: Color.fromRGBO(255, 114, 105, 1)),),
             ),
           ],
         ),

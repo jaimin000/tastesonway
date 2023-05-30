@@ -97,6 +97,31 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     return formattedDate;
   }
 
+  Widget buildNoData() => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 150,),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Image.asset(
+            'assets/images/dataNotFound.png',
+            width: 251,
+            height: 221,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          'key_Data_Not_Found'.tr,
+          style: mTextStyle16(),
+        ),
+      ],
+    ),
+  );
+
   @override
   void initState() {
     fetchData(widget.step);
@@ -132,7 +157,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               ),
             )
           : widget.step == 2
-              ? Container(
+              ?Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: ListView.builder(
                       physics: BouncingScrollPhysics(),
@@ -249,7 +274,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       const SizedBox(
                         height: 10,
                       ),
-                      ListView.builder(
+                      filteredEarningData.isNotEmpty ? ListView.builder(
                           physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: filteredEarningData.length,
@@ -387,10 +412,10 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                                 ),
                               ],
                             );
-                          }),
+                          }):buildNoData(),
                     ],
                   ),
-                ),
+      ),
     );
   }
 }

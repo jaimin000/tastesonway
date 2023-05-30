@@ -396,9 +396,10 @@ class _BankDetailsState extends State<BankDetails> {
                                   setState(() {
                                   });
                                   await setBankDetails();
-                                   Get.off(() => const BankingDetails());
+                                  Navigator.pop(context,'true');
+                                  //Get.off(() => const BankingDetails());
                                   //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BankingDetails()));
-                                  return Future.value(true);
+                                  //return Future.value(true);
                                 }
                               },
                               child: Card(
