@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
-options: "ee65f94fdf419d906d34d7d379b79d1c8825a2179897367d1bd7b6e1e8691922"
-build_start_time: [1685360937, 9512000]
-build_end_time: [1685360937, 44749000]
+options: "7d93ebf4bbd9487f385ae988905ccd3dc1b3f9e3cfc0335dbf8e275417243f90"
+build_start_time: [1685518151, 775670000]
+build_end_time: [1685518151, 829923000]
 inputs:
   "/Users/mac/.pub-cache/hosted/pub.dev/printing-5.10.3/ios/Classes/PrintJob.swift": !private [1681794599, 623632660]
   "/Users/mac/.pub-cache/hosted/pub.dev/printing-5.10.3/ios/Classes/PrintingPlugin.swift": !private [1681794599, 623348698]

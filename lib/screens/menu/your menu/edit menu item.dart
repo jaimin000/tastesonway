@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
-import 'package:tastesonway/screens/menu/your%20menu/view_menu.dart';
 import '../../../utils/sharedpreferences.dart';
 import '../../../utils/snackbar.dart';
 import '../../../utils/theme_data.dart';
@@ -145,9 +144,7 @@ class _EditMenuItemState extends State<EditMenuItem> {
 
   //api call
   Future UpdateMenuItem() async {
-    // print("this is selected item id ${widget.id}, ${widget.name} & ${widget.price}");
     String token = await Sharedprefrences.getToken();
-    print(token);
     try {
       final request = http.MultipartRequest(
         'POST',

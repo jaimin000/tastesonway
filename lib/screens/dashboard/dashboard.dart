@@ -5,15 +5,15 @@ import 'package:get/get.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
-import 'package:tastesonway/screens/menu/text%20menu/create_text_menu1.dart';
 import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
 import 'dart:core';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/theme_data.dart';
-import '../menu/image menu/create_img_menu1.dart';
 import 'package:http/http.dart' as http;
+
+import '../menu/text-image menu/create_menu1.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -262,7 +262,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/dashboard/food.png'),
+                              Image.asset('./assets/images/dashboard/food.png',width: 50,height: 50,),
                               Text(
                                 'key_Orders'.tr,
                                 style: cTextStyle18(),
@@ -392,7 +392,7 @@ class _DashboardState extends State<Dashboard> {
                       Navigator.of(context, rootNavigator: true)
                           .push(CupertinoPageRoute(
                               builder: (BuildContext context) =>
-                                  const CreateTextMenu()))
+                                  const CreateMenu1(type:1)))
                           .then((value) {
                         if (value == "true") {
                           setState(() {
@@ -434,7 +434,7 @@ class _DashboardState extends State<Dashboard> {
                       Navigator.of(context, rootNavigator: true)
                           .push(CupertinoPageRoute(
                               builder: (BuildContext context) =>
-                                  const CreateImgMenu()))
+                                  const CreateMenu1(type:2)))
                           .then((value) {
                         if (value == "true") {
                           setState(() {

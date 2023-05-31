@@ -606,7 +606,7 @@ class _ViewMenuState extends State<ViewMenu> {
                                                                   },
                                                                 ),
                                                               ),
-                                                              Positioned(
+                                                              isEditable ? Positioned(
                                                                 top: 45,
                                                                 right: 10,
                                                                 child: Card(
@@ -635,7 +635,7 @@ class _ViewMenuState extends State<ViewMenu> {
                                                                         )),
                                                                   ),
                                                                 ),
-                                                              ),
+                                                              ) : const SizedBox(),
                                                             ],
                                                           ),
                                                         ),
