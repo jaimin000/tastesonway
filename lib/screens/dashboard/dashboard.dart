@@ -297,7 +297,7 @@ class _DashboardState extends State<Dashboard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Image.asset('./assets/images/dashboard/menu.png'),
+                              Image.asset('./assets/images/dashboard/menu.png',width: 50,height: 50,),
                               Text(
                                 'key_Menu'.tr,
                                 style: cTextStyle18(),
@@ -421,8 +421,12 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_Create_Text_Menu".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_Create_Text_Menu".tr,
+                                  overflow: TextOverflow.clip,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //
@@ -463,8 +467,11 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_Create_Image_Menu".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_Create_Image_Menu".tr,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //
@@ -663,8 +670,12 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_view_orders".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_view_orders".tr,
+                                  overflow: TextOverflow.clip,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ),
@@ -704,8 +715,12 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_view_received_orders".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_view_received_orders".tr,
+                                  overflow: TextOverflow.clip,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //
@@ -894,8 +909,11 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_Earning_Summary".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_Earning_Summary".tr,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //
@@ -923,8 +941,11 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text("key_Expenses_Summary".tr,
-                                style: cardTextStyle20()),
+                            child: SizedBox(
+                              width: 150,
+                              child: Text("key_Expenses_Summary".tr,
+                                  style: cardTextStyle20()),
+                            ),
                           ),
                         ),
                       ), //

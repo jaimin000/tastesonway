@@ -12,7 +12,6 @@ import 'package:tastesonway/screens/discount/discount_page.dart';
 import 'package:tastesonway/screens/faq/faq.dart';
 import 'package:tastesonway/screens/menu/menu_items.dart';
 import 'package:tastesonway/screens/menu/my_menu_design.dart';
-import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
@@ -238,17 +237,15 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Coupon.png'),
+                                    './assets/images/profile/Coupon.png',height: 55,width: 55,),
                                 Text(
                                   'key_Create_a_Discount_Coupan'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -267,17 +264,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Website.png'),
+                                    './assets/images/profile/Website.png',height: 55,width: 55,),
                                 Text(
                                   'key_My_Website'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -296,17 +292,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Fssai.png'),
+                                    './assets/images/profile/Fssai.png',height: 55,width: 55,),
                                 Text(
                                   'key_Fssai_Registration'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -325,17 +320,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Bank Details.png'),
+                                    './assets/images/profile/Bank Details.png',height: 55,width: 55,),
                                 Text(
                                   'key_Bank_Details'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -354,17 +348,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Your Orders.png'),
+                                    './assets/images/profile/Your Orders.png',height: 65,width: 65,),
                                 Text(
                                   'key_Your_Orders'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -383,17 +376,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Menu Items.png'),
+                                    './assets/images/profile/Menu Items.png',height: 65,width: 65,),
                                 Text(
                                   'key_Menu_Items'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -412,17 +404,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/My Menu Design.png'),
+                                    './assets/images/profile/My Menu Design.png',height: 45,width: 45,),
                                 Text(
                                   'key_My_Menu_Designs'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -441,17 +432,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/VideoTutorials.png'),
+                                    './assets/images/profile/VideoTutorials.png',height: 55,width: 55,),
                                 Text(
                                   'key_Tutorials'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -470,17 +460,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Shares Taste on Way.png'),
+                                    './assets/images/profile/Share.png',height: 55,width: 55,),
                                 Text(
                                   'key_Share_Tastes_on_way'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -499,17 +488,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Contact Us.png'),
+                                    './assets/images/profile/Contact Us.png',height: 50,width: 50,),
                                 Text(
                                   'key_Contact_Us'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -528,16 +516,15 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Image.asset('./assets/images/profile/FAQ.png'),
+                                Image.asset('./assets/images/profile/FAQ.png',height: 55,width: 55,),
                                 Text(
                                   'key_FAQ'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),
@@ -556,17 +543,16 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: SizedBox(
-                            width: 140,
-                            height: 90,
+                            
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Image.asset(
-                                    './assets/images/profile/Settings.png'),
+                                    './assets/images/profile/Settings.png',height: 55,width: 55,),
                                 Text(
                                   'key_Settings'.tr,
                                   textAlign: TextAlign.center,
-                                  style: cTextStyle16(),
+                                  style: cTextStyle18(),
                                 )
                               ],
                             )),

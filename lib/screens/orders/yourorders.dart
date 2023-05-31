@@ -122,7 +122,7 @@ class _YourOrdersState extends State<YourOrders> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          title: Text('Filter Orders',style: cardTextStyle16(),),
+          title: Text('key_filter_order'.tr,style: cardTextStyle16(),),
           children: [
             SimpleDialogOption(
               onPressed: () {

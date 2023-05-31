@@ -214,6 +214,8 @@ class _EditMenuItemState extends State<EditMenuItem> {
           );
         },
       );
+      ScaffoldSnackbar.of(context)
+          .show(json['message']);
     } catch (e) {
       print(e);
       showDialog(
@@ -242,6 +244,8 @@ class _EditMenuItemState extends State<EditMenuItem> {
           );
         },
       );
+      ScaffoldSnackbar.of(context)
+          .show('Something Went Wrong Please Try Again!');
     }
   }
 

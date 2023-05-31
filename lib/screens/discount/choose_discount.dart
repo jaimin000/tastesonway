@@ -38,7 +38,7 @@ class ChoosePromo extends StatelessWidget {
             const SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("key_These_promos_will_run_all_on_items_in_your_outlet".tr,style: cardTitleStyle14(),),
+              child: Text("key_These_promos_will_run_all_on_items_in_your_outlet".tr,style: mTextStyle14(),),
             ),
             const SizedBox(height:25),
             InkWell(

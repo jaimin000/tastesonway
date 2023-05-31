@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tastesonway/screens/orders/history/orderhistory.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/view%20address/view_address.dart';
@@ -306,11 +307,7 @@ class _SettingState extends State<Setting> {
               onTap: () {
                 Navigator.of(context, rootNavigator: true).push(
                     CupertinoPageRoute(
-                        builder: (BuildContext context) => const YourOrders()));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const YourOrders()),
-                // );
+                        builder: (BuildContext context) => const OrderHistory()));
               },
               child: SizedBox(
                 height: 60,
@@ -325,7 +322,7 @@ class _SettingState extends State<Setting> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'key_Your_Orders'.tr,
+                        'key_Recived_Orders'.tr,
                         style: inputTextStyle16(),
                       ),
                     ),

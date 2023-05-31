@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'dart:async';
@@ -495,10 +497,13 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                       const SnackBar(content: Text('Coupon added Successfully!')),
                                     );
                                     CreateCoupon();
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const DiscountPage()),
-                                    );
+                                    // Navigator.pushReplacement(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => const DiscountPage()),
+                                    // );
+
+                                    Get.back();
+                                    Navigator.pop(context,'true');
                                   }
                                 }
 

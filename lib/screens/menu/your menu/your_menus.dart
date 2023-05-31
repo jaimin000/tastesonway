@@ -40,8 +40,8 @@ class _YourMenusState extends State<YourMenus> {
       final jsonData = json.decode(response.body);
       menuList = jsonData['data']['data'];
 
-      step == 0
-          ? filteredMenuList =
+
+          filteredMenuList = step == 0 ?
               menuList.where((data) => data['type'] == 'Text').toList()
           : menuList.where((data) => data['type'] == 'Image').toList();
 

@@ -5,6 +5,7 @@ class Languages extends Translations {
   Map<String, Map<String, String>> get keys =>
       {
         'en_US': {
+          "key_filter_order":"Filter Orders",
           "key_pls_number_only":"Please Enter Numbers Only",
           "key_choose_language":"Choose Language",
           "key_select_your_language":"Select Your Language",
@@ -135,8 +136,8 @@ class Languages extends Translations {
           "key_Create_and_share_beautiful_text": "Create and share beautiful text/image Menus on a daily basis",
           "key_Your_Menu": "Your Menu",
           "key_Designs": "Designs",
-          "key_Create_Text_Menu": "Create Text Menu",
-          "key_Create_Image_Menu": "Create Image Menu",
+          "key_Create_Text_Menu": "Create New Text Menu",
+          "key_Create_Image_Menu": "Create New Image Menu",
           "key_Your_Store": "Your Store",
           "key_Create_a_store_if_your_menu": "Create a store if your menu is always the same and does not change on a daily basis",
           "key_Create_Store": "Create Store",
@@ -538,7 +539,7 @@ class Languages extends Translations {
           "key_No_running_promos": "No Running Promos",
           "key_Create_promos_and_grow_your_business_now": "Create promos and grow your business now!",
           "key_NEW": "NEW",
-          "key_Create_a_Discount_Coupan": "Create a Discount Coupon",
+          "key_Create_a_Discount_Coupan": "Create Discount Coupon",
           "key_user_haven_t_rated_this_food_yet": "User haven't rated this food yet",
           "key_applicable_maximum": "Applicable maximum",
           "key_users": "users",
@@ -587,8 +588,8 @@ class Languages extends Translations {
           "key_date_range": "Date Range",
           "key_date_range_this_week": "Date Range This Week",
           "key_this_week": "This Week",
-          "key_last_week": "Last Week",
           "key_this_month": "This Month",
+          "key_last_week": "Last Week",
           "key_last_month": "Last Month",
           "key_last_three_month": "Last Three Month",
           "key_rewards": "Rewards",
@@ -613,6 +614,7 @@ class Languages extends Translations {
           "key_select_issue_type": "Select Issue Type"
         },
         'hi_IN': {
+          "key_filter_order":"फ़िल्टर ऑर्डर",
           "key_pls_number_only":"कृपया केवल संख्याएँ दर्ज करें",
           "key_choose_language":"भाषा चुनें",
           "key_select_your_language":"अपनी भाषा चुनें",
@@ -733,7 +735,9 @@ class Languages extends Translations {
           "key_Earning_Summary": "कमाई का सारांश",
           "key_For_orders_entered": "आपके लिए टेस्ट ऑन वै ऐप पर दर्ज किए गए आदेशों के लिए",
           "key_This_Week": "इस सप्ताह",
-          "key_This_Month": "इस महीने",
+          "key_this_month": "इस महीने",
+          "key_last_week": "पिछला सप्ताह",
+          "key_last_three_month": "पिछले तीन महीने",
           "key_last_month": "पिछला महीने",
           "key_Total": "संपूर्ण",
           "key_View_Earning_Summary": "देखें कमाई का सारांश",
@@ -1201,6 +1205,7 @@ class Languages extends Translations {
 
         },
         'gj_IN':{
+          "key_filter_order":"ફિલ્ટર ઓર્ડર",
           "key_pls_number_only":"કૃપા કરીને ફક્ત નંબરો જ દાખલ કરો",
           "key_choose_language":"ભાષા પસંદ કરો",
           "key_select_your_language":"તમારી ભાષા પસંદ કરો",
@@ -1322,9 +1327,10 @@ class Languages extends Translations {
           "key_Earning_Summary": "આવકનો સારાંશ",
           "key_For_orders_entered": "ટેસ્ટ ઓન વે એપ્લિકેશન પર તમારા દ્વારા દાખલ કરાયેલા ઓર્ડર માટે",
           "key_This_Week": "આ અઠવાડિયે",
-          "key_This_Month": "આ મહિને",
+          "key_this_month": "આ મહિને",
           "key_last_month":"છેલ્લા મહિને",
-          "key_last_month":"છેલ્લા મહિને",
+          "key_last_three_month":"છેલ્લા ત્રણ મહિના",
+          "key_last_week":"છેલ્લા અઠવાડિયે",
           "key_Total": "કુલ",
           "key_View_Earning_Summary": "આવકનો સારાંશ જુઓ",
           "key_Expenses_Summary": "ખર્ચ સારાંશ",
