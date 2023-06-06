@@ -6,7 +6,7 @@ install-name:    '@rpath/connectivity_plus.framework/connectivity_plus'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-ios-simulator ]
-    symbols:         [ _Swift50Overrides, _Swift51Overrides ]
+    symbols:         [ _Swift51Overrides ]
   - targets:         [ x86_64-ios-simulator, arm64-ios-simulator ]
     symbols:         [ '_$s17connectivity_plus16ConnectivityTypeO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s17connectivity_plus16ConnectivityTypeO4hash4intoys6HasherVz_tF', 

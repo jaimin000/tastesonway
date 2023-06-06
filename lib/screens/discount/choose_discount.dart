@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:tastesonway/screens/discount/create_discount.dart';
 import '../../utils/theme_data.dart';
 
-class ChoosePromo extends StatelessWidget {
-  const ChoosePromo({Key? key}) : super(key: key);
+class ChooseDiscount extends StatelessWidget {
+  const ChooseDiscount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

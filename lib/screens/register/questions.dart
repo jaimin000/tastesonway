@@ -52,7 +52,8 @@ class _QuestionsState extends State<Questions> {
       setState(() {});
       print(hearAbout);
     } else if(response.statusCode == 401) {
-      print("refresh token called");if (refreshCounter == 0) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
         refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
       tokenRefreshed ?getQuestion():null;}
@@ -192,10 +193,9 @@ class _QuestionsState extends State<Questions> {
       );
 
   Future fetchData() async {
-
     String token = await Sharedprefrences.getToken();
     final response = await http.post(
-        Uri.parse('https://dev-api.tastesonway.com/api/v2/kitchen-owner-update-profile'),
+        Uri.parse('$baseUrl/kitchen-owner-update-profile'),
         headers: {'Authorization': 'Bearer $token',
         },
         body: {

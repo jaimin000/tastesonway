@@ -371,7 +371,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                                 MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'key_Please_select_your_year_of_birth'.tr,
+                                    'key_Select_Your_Birth_Date'.tr,
                                     style: inputTextStyle16(),
                                   ),
                                   Text(
@@ -440,7 +440,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'key_Click_Proceed_Button'.tr,
+                                  'key_Proceed'.tr,
                                   style: mTextStyle14(),
                                 ),
                               )),

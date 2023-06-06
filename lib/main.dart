@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
-import 'package:tastesonway/screens/no%20internet/nointernet.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/languages.dart';
@@ -83,9 +82,11 @@ class _MyAppState extends State<MyApp> {
   Future getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var obtainedUser = sharedPreferences.getString('user');
+    String token = await Sharedprefrences.getToken() ?? "";
+
+    // var obtainedUser = sharedPreferences.getString('user');
     setState(() {
-      isUser = obtainedUser.toString();
+      isUser = token.toString();
     });
     print(isUser);
   }
@@ -108,7 +109,7 @@ class _MyAppState extends State<MyApp> {
               fontFamily: 'Poppins',
               accentColor: orangeColor(),
             ),
-            home: isUser == "null" ? const LanguageScreen() : const Home(),
+            home: isUser == "null" || isUser == ""   ? const LanguageScreen() : const Home(),
           );
         } else {
           return const CircularProgressIndicator();
@@ -148,7 +149,7 @@ class _HomeState extends State<Home> {
           isDeviceConnected = await InternetConnectionChecker().hasConnection;
           if (!isDeviceConnected && isAlertSet == false) {
             showDialogBox();
-            const NoInternetScreen();
+            // const NoInternetScreen();
             setState(() => isAlertSet = true);
           }
         },

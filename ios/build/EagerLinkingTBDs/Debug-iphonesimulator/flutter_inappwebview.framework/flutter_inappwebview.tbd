@@ -6,7 +6,7 @@ install-name:    '@rpath/flutter_inappwebview.framework/flutter_inappwebview'
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-ios-simulator ]
-    symbols:         [ _Swift50Overrides, _Swift51Overrides ]
+    symbols:         [ _Swift51Overrides ]
   - targets:         [ x86_64-ios-simulator, arm64-ios-simulator ]
     symbols:         [ '_$s10Foundation10URLRequestV20flutter_inappwebviewE13fromPluginMapACSDySSypSgG_tcfC', 
                        '_$s10Foundation10URLRequestV20flutter_inappwebviewE5toMapSDySSypSgGyF', 

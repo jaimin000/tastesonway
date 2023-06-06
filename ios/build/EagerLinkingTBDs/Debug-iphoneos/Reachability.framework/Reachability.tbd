@@ -105,9 +105,8 @@ exports:
                        '_$sSo26SCNetworkReachabilityFlagsV0B0E36isConnectionOnTrafficOrDemandFlagSetSbvpMV', 
                        '_$sSo26SCNetworkReachabilityFlagsV0B0E39isConnectionRequiredAndTransientFlagSetSbvg', 
                        '_$sSo26SCNetworkReachabilityFlagsV0B0E39isConnectionRequiredAndTransientFlagSetSbvpMV', 
-                       _ReachabilityVersionNumber, _ReachabilityVersionString, _Swift50Overrides, 
-                       _Swift51Overrides, __Z34_swiftoverride_class_getSuperclassPKN5swift14TargetMetadataINS_9InProcessEEE, 
-                       __ZN5swift34swift50override_conformsToProtocolEPKNS_14TargetMetadataINS_9InProcessEEEPKNS_24TargetProtocolDescriptorIS1_EEPFPKNS_18TargetWitnessTableIS1_EES4_S8_E, 
+                       _ReachabilityVersionNumber, _ReachabilityVersionString, _Swift51Overrides, 
+                       __Z34_swiftoverride_class_getSuperclassPKN5swift14TargetMetadataINS_9InProcessEEE, 
                        __ZN5swift39swift51override_conformsToSwiftProtocolEPKNS_14TargetMetadataINS_9InProcessEEEPKNS_24TargetProtocolDescriptorIS1_EEN7__swift9__runtime4llvm9StringRefEPFPKNS_35TargetProtocolConformanceDescriptorIS1_EES4_S8_SC_E ]
     objc-classes:    [ PodsDummy_ReachabilitySwift ]
 ...

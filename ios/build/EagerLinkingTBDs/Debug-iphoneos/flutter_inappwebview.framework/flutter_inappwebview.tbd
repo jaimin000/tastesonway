@@ -3217,8 +3217,7 @@ exports:
                        '_$sSo28NSURLAuthenticationChallengeC20flutter_inappwebviewE5toMapSDySSypSgGyF', 
                        '_$sSo7UIColorC20flutter_inappwebviewE9hexStringABSS_tcfC', 
                        '_$sSo7UIColorC20flutter_inappwebviewE9hexStringSSSgvg', '_$sSo7UIColorC20flutter_inappwebviewE9hexStringSSSgvpMV', 
-                       _Swift50Overrides, _Swift51Overrides, _flutter_inappwebviewVersionNumber, 
-                       _flutter_inappwebviewVersionString ]
+                       _Swift51Overrides, _flutter_inappwebviewVersionNumber, _flutter_inappwebviewVersionString ]
     objc-classes:    [ InAppWebViewFlutterPlugin, PodsDummy_flutter_inappwebview, 
                        _TtC20flutter_inappwebview10UserScript, _TtC20flutter_inappwebview10WebMessage, 
                        _TtC20flutter_inappwebview11LeakAvoider, _TtC20flutter_inappwebview12InAppWebView, 

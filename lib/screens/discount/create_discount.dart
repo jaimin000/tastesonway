@@ -89,7 +89,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
       "name":nameController.text.toString(),
       "type":"2",
       "coupon_value":couponValueController.text.toString(),
-      "coupon_upto_amount":couponUptoAmountController.text.toString(),
+      "coupon_upto_amount":couponValueController.text.toString(),
       "valid_per_user":perUserController.text.toString(),
       "total_no_user":noUserController.text.toString(),
       "start_date":DateFormat('yyyy-MM-dd').format(couponStartDate),
@@ -115,6 +115,9 @@ class _CreateDiscountState extends State<CreateDiscount> {
       });
       final data = json.decode(response.body);
       print(data);
+      ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text(data['message'])),
+      );
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
@@ -124,6 +127,9 @@ class _CreateDiscountState extends State<CreateDiscount> {
         tokenRefreshed ? CreateCoupon() : null;
       }
     }else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Something Went Wrong Please Try Again!'),
+          ));
       setState(() {
         isLoading = true;
       });
@@ -189,6 +195,8 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_please_enter_coupan_name'.tr;
+                              }else if (RegExp(r'[^\w\s]').hasMatch(value)) {
+                                return 'key_Special_characters_not_allowed'.tr;
                               }
                               return null;
                             },
@@ -257,6 +265,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                         ) : SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: couponValueController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -280,12 +289,13 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        widget.isFixedData ?SizedBox(): const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
+                        widget.isFixedData ? SizedBox(): SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: couponUptoAmountController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -315,6 +325,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: perUserController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -344,6 +355,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: noUserController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -371,6 +383,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: minOrderController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -493,15 +506,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
                                     );
                                   } else {
                                     _formKey.currentState?.save();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Coupon added Successfully!')),
-                                    );
                                     CreateCoupon();
-                                    // Navigator.pushReplacement(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => const DiscountPage()),
-                                    // );
-
                                     Get.back();
                                     Navigator.pop(context,'true');
                                   }

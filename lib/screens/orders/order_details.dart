@@ -11,6 +11,7 @@ import '../../utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import '../../utils/timer.dart';
+import '../bank/banking_details.dart';
 
 class OrderDetails extends StatefulWidget {
   final int id;
@@ -24,7 +25,7 @@ class OrderDetails extends StatefulWidget {
 class _OrderDetailsState extends State<OrderDetails>
     with TickerProviderStateMixin {
   int refreshCounter = 0;
-
+  List bankData = [];
   Map<String, dynamic> orderData = {};
   bool isLoading = true;
   bool isShowAcceptButton = false;
@@ -88,7 +89,6 @@ class _OrderDetailsState extends State<OrderDetails>
       final jsonData = json.decode(response.body);
       orderData = jsonData['data'];
       _orderDetailsStreamController.add(json.encode(orderData));
-
       // setState(() {
       //   orderData = jsonData['data'];
       // });
@@ -360,124 +360,6 @@ class _OrderDetailsState extends State<OrderDetails>
         builder: (BuildContext context) => errorDialog);
   }
 
-  // void showCancelConfirmationDialog(BuildContext context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         backgroundColor: cardColor(),
-  //         title: Text(
-  //           'key_Cancel_Order'.tr,
-  //           style: TextStyle(color: orangeColor()),
-  //         ),
-  //         content: Text('key_are_you_sure_cancel_order'.tr),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.pop(context);
-  //               setState(() {}); // Close the dialog
-  //             },
-  //             child: Text(
-  //               'key_NO'.tr,
-  //               style: TextStyle(color: orangeColor()),
-  //             ),
-  //           ),
-  //           TextButton(
-  //             onPressed: () async {
-  //               Navigator.of(context).pop();
-  //               CancellationReasonDialog(context);
-  //               // await updateOrderStatus(6);
-  //               // ScaffoldSnackbar.of(context).show('Order Cancelled');
-  //               // setState(() {});
-  //             },
-  //             child: Text(
-  //               'key_YES'.tr,
-  //               style: TextStyle(color: orangeColor()),
-  //             ),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
-  // CancellationReasonDialog(BuildContext context) async {
-  //   var errorDialog = Dialog(
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-  //     //this right here
-  //     child: SizedBox(
-  //       height: 272.0,
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: <Widget>[
-  //           Padding(
-  //             padding: EdgeInsets.all(20.0),
-  //             child: Text(
-  //               'key_enter_cancel_order_reason'.tr,
-  //               style: cardTextStyle12(),
-  //             ),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-  //             child: TextField(
-  //               cursorColor: orangeColor(),
-  //               maxLines: 3,
-  //               decoration:   InputDecoration(
-  //                 enabledBorder:  const OutlineInputBorder(
-  //                     borderSide:  BorderSide(color: Colors.grey)
-  //                 ),
-  //                 focusedBorder:  OutlineInputBorder(
-  //                     borderSide:  BorderSide(color: orangeColor())
-  //                 ),
-  //               ),
-  //               controller: cancelOrderController,
-  //             ),
-  //           ),
-  //           cancelOrderController.text == ''
-  //               ? Padding(
-  //               padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-  //               child: Text(
-  //                 'key_Please_enter_cancel_order_reason'.tr,
-  //                 style: mTextStyle14(),
-  //               ))
-  //               : Container(),
-  //           Padding(
-  //               padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-  //               child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-  //                 ElevatedButton(
-  //                   style: ElevatedButton.styleFrom(
-  //                     primary: orangeColor(), // Background color
-  //                   ),
-  //                   onPressed: () {
-  //                     cancelReason = cancelOrderController.text;
-  //                     if (cancelOrderController.text != '') {
-  //                       Navigator.pop(context);
-  //                       updateOrderStatus(6);
-  //                        //ScaffoldSnackbar.of(context).show('Order Cancelled');
-  //                       //setState(() {});
-  //                       // updateOrderStatus(
-  //                       //     int.parse(orderList[0]['order_id'].toString()), '6',
-  //                       //     cancelReason: cancelOrderController.text);
-  //                     }
-  //                   },
-  //                   child: Center(
-  //                       child: Text(
-  //                         'key_Submit'.tr,
-  //                         style: mTextStyle14()
-  //                       )),
-  //                 ),
-  //               ])),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  //    showDialog(
-  //       context: context,
-  //       useRootNavigator: true,
-  //       barrierDismissible: false,
-  //       builder: (BuildContext context) => errorDialog);
-  // }
-
   void showCancelConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -675,32 +557,6 @@ class _OrderDetailsState extends State<OrderDetails>
                 ))));
   }
 
-  // getRemainingTimes(String time) {
-  //   if (time != 'null') {
-  //     var parseDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(time);
-  //     var now = DateTime.now();
-  //     print(now.difference(parseDate));
-  //     var seconds = now.difference(parseDate).inSeconds;
-  //     print(seconds);
-  //     if (seconds.toString()[0] == '-') {
-  //       secondsLeft =
-  //           int.parse(seconds.toString().replaceAll(RegExp('-'), '')); // abc
-  //       print('withDash$secondsLeft');
-  //       _animationController.forward();
-  //       isTimeoutFinished = false;
-  //     } else {
-  //       final withoutEquals =
-  //           seconds.toString().replaceAll(RegExp('-'), ''); // abc
-  //       print('withoutDash$withoutEquals');
-  //       _animationController.repeat(reverse: true);
-  //       isTimeoutFinished = true;
-  //     }
-  //     if (mounted) {
-  //       setState(() {});
-  //     }
-  //   }
-  // }
-
   void startCountdown() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(oneSec, (timer) {
@@ -731,10 +587,37 @@ class _OrderDetailsState extends State<OrderDetails>
     return remainingMinutes < 0 ? 0 : remainingMinutes;
   }
 
+  Future getBankDetails() async {
+    String token = await Sharedprefrences.getToken();
+    final response = await http.get(
+      Uri.parse("$baseUrl/get-kitchen-owner-bank-detail"),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      bankData = jsonData['data'];
+      print('this is bank data: $bankData');
+      setState(() {});
+    } else if (response.statusCode == 401) {
+        print("refresh token called");
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? getBankDetails(): null;
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+
   @override
   void initState() {
     fetchOrderDetails();
     startFetchingOrderDetails();
+    getBankDetails();
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
     _animationController.forward();
@@ -781,6 +664,7 @@ class _OrderDetailsState extends State<OrderDetails>
                     children: [
                       Expanded(
                         child: ListView(
+                          physics: BouncingScrollPhysics(),
                           children: [
                             Column(
                               children: [
@@ -843,43 +727,32 @@ class _OrderDetailsState extends State<OrderDetails>
                                                                     .symmetric(
                                                                 horizontal:
                                                                     7.0),
-                                                        child: Text(
-                                                          orderData['order_detail']
-                                                                      [0]
-                                                                  ['menu_items']
-                                                              [0]['name'],
-                                                          style: cTextStyle16(),
+                                                        child: ListView.builder(
+                                                          shrinkWrap: true,
+                                                          itemCount: orderData['order_detail'].length,
+                                                          itemBuilder: (context, index) {
+                                                            final menuItem = orderData['order_detail'][index]['menu_items'][0];
+                                                            final quantity = orderData['order_detail'];
+                                                            return Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Text(
+                                                                  menuItem['name'],
+                                                                  style: cTextStyle16(),
+                                                                ),
+                                                                Text(
+                                                                  '${quantity[index]['quantity']} X ₹ ${orderData['order_detail']
+                                                                  [0][
+                                                                  'item_price']}',
+                                                                  style: cTextStyle16(),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
                                                         ),
                                                       )),
                                                   const SizedBox(
                                                     height: 5,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          '${orderData['order_detail'][0]['quantity']} X ₹ ${orderData['order_detail']
-                                                                          [0][
-                                                                      'item_price']}',
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                        Text(
-                                                          '₹ ${orderData['order_detail']
-                                                                          [0][
-                                                                      'item_price']}',
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                      ],
-                                                    ),
                                                   ),
                                                   const SizedBox(
                                                     height: 5,
@@ -907,46 +780,50 @@ class _OrderDetailsState extends State<OrderDetails>
                                                           style: cTextStyle16(),
                                                         ),
                                                         Text(
-                                                          '₹ ${orderData['order_detail']
-                                                                          [0][
-                                                                      'item_price']}',
+                                                          '₹ ${orderData['order_total']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                  const SizedBox(
+                                                  orderData['coupon']
+                                                      .toString() ==
+                                                      'null' ? SizedBox() :const SizedBox(
                                                     height: 5,
                                                   ),
-                                                  Padding(
+                                                  orderData['coupon']
+                                                      .toString() ==
+                                                      'null' ? SizedBox() : Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 8.0),
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                       crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
+                                                      CrossAxisAlignment
+                                                          .center,
                                                       children: [
                                                         Text(
-                                                          'key_discount'.tr,
+                                                          'key_DISCOUNT'.tr,
                                                           style: cTextStyle16(),
                                                         ),
                                                         Text(
                                                           orderData['coupon']
-                                                                      .toString() ==
-                                                                  'null'
+                                                              .toString() ==
+                                                              'null'
                                                               ? '₹ 0'
                                                               : '₹ ${orderData[
-                                                                          'coupon_amount']}',
+                                                          'coupon_amount']}',
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                  const SizedBox(
+                                                  orderData['coupon']
+                                                      .toString() ==
+                                                      'null' ? SizedBox() :const SizedBox(
                                                     height: 5,
                                                   ),
                                                   const SizedBox(
@@ -1040,39 +917,39 @@ class _OrderDetailsState extends State<OrderDetails>
                                                           'key_Order_Number'.tr,
                                                           style: cTextStyle16(),
                                                         ),
-                                                        Text(
+                                                        Text('#'+
                                                           orderData['order_no'],
                                                           style: cTextStyle16(),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                  const SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          'key_Payment_Type'.tr,
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                        Text(
-                                                          'Bank',
-                                                          style: cTextStyle16(),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
+                                                  // const SizedBox(
+                                                  //   height: 5,
+                                                  // ),
+                                                  // Padding(
+                                                  //   padding: const EdgeInsets
+                                                  //           .symmetric(
+                                                  //       horizontal: 8.0),
+                                                  //   child: Row(
+                                                  //     mainAxisAlignment:
+                                                  //         MainAxisAlignment
+                                                  //             .spaceBetween,
+                                                  //     crossAxisAlignment:
+                                                  //         CrossAxisAlignment
+                                                  //             .center,
+                                                  //     children: [
+                                                  //       Text(
+                                                  //         'key_Payment_Type'.tr,
+                                                  //         style: cTextStyle16(),
+                                                  //       ),
+                                                  //       Text(
+                                                  //         'Bank',
+                                                  //         style: cTextStyle16(),
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
                                                   const SizedBox(
                                                     height: 5,
                                                   ),
@@ -1455,9 +1332,23 @@ class _OrderDetailsState extends State<OrderDetails>
                                                 0.42,
                                             child: InkWell(
                                               onTap: () async {
-                                                fetchOrderDetails(
-                                                    isFromAcceptButton: true);
-                                                setState(() {});
+                                                if(bankData.isEmpty){
+                                                  Navigator.push(
+                                                    context,MaterialPageRoute(builder: (BuildContext context) => const BankingDetails())
+                                                  ).then((value) {
+                                                    if (value == "true") {
+                                                      setState(() {
+                                                        getBankDetails();
+                                                      });
+                                                    }
+                                                  });
+                                                  ScaffoldSnackbar.of(context).show("Please Add Bank Details First !");
+                                                }
+                                                else {
+                                                  fetchOrderDetails(
+                                                      isFromAcceptButton: true);
+                                                  setState(() {});
+                                                }
                                                 //setState(() {});
                                                 // print(
                                                 //     "selected minutes ${_selectedMinutes.toInt()}");

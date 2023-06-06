@@ -224,12 +224,52 @@ class _ViewMenuState extends State<ViewMenu> {
           isEditable
               ? IconButton(
                   onPressed: () async {
-                    await deleteMenuItem(widget.menuId.toString());
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Menu Deleted Successfully!')),
+                    showDialog(
+                        context: context,
+                        builder:(BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: cardColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            title:Text('key_Delete_Item'.tr, style:cardTextStyle18()),
+                            content: Text('key_are_you_sure_delete'.tr, style:mTextStyle14() ),
+                            actions: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: fontColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                child: Text('key_Proceed'.tr, style: mTextStyle14(),),
+                                onPressed: () async {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                  await deleteMenuItem(widget.menuId.toString());
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Menu Deleted Successfully!')),
+                                  );
+                                  Navigator.pop(context, "true");
+                                },
+                              ),
+                            ],
+                          );
+                        }
                     );
-                    Navigator.pop(context, "true");
+
                   },
                   icon: const Icon(Icons.delete),
                 )

@@ -35,7 +35,7 @@ class _CuisinesState extends State<Cuisines> {
   Future fetchData() async {
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
-      Uri.parse('https://dev-api.tastesonway.com/api/owners/get-cuisines'),
+      Uri.parse('$baseUrl/get-cuisines'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode == 200) {

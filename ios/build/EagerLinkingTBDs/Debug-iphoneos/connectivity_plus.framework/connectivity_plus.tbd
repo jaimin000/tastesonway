@@ -97,8 +97,7 @@ exports:
                        '_$s17connectivity_plus32ReachabilityConnectivityProviderCMn', 
                        '_$s17connectivity_plus32ReachabilityConnectivityProviderCN', 
                        '_$s17connectivity_plus32ReachabilityConnectivityProviderCfD', 
-                       _Swift50Overrides, _Swift51Overrides, _connectivity_plusVersionNumber, 
-                       _connectivity_plusVersionString ]
+                       _Swift51Overrides, _connectivity_plusVersionNumber, _connectivity_plusVersionString ]
     objc-classes:    [ ConnectivityPlusPlugin, PodsDummy_connectivity_plus, _TtC17connectivity_plus27SwiftConnectivityPlusPlugin, 
                        _TtC17connectivity_plus31PathMonitorConnectivityProvider, 
                        _TtC17connectivity_plus32ReachabilityConnectivityProvider ]

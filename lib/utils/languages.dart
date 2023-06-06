@@ -5,6 +5,8 @@ class Languages extends Translations {
   Map<String, Map<String, String>> get keys =>
       {
         'en_US': {
+          "key_SignIn/LogIn":"SignIn / LogIn",
+          "key_Special_characters_not_allowed":"Special Characters not Allowed",
           "key_filter_order":"Filter Orders",
           "key_pls_number_only":"Please Enter Numbers Only",
           "key_choose_language":"Choose Language",
@@ -203,6 +205,8 @@ class Languages extends Translations {
           "key_Select_Item_Image": "Select Item Image",
           "key_What_type_of_dish_is_this": "What type of dish is this?",
           "key_Veg_Only": "Veg Only",
+          "key_Veg": "Veg",
+          "key_Non_Veg": "Non Veg",
           "key_Add_Dish_Description": "Add Dish Description",
           "key_Describe_what_is_included": "(Describe what is included in one serving of a dish)",
           "key_Describe_more_about_the_dish": "Describe more about the dish? (Optional)",
@@ -470,6 +474,7 @@ class Languages extends Translations {
           "key_Yes_Close": "Yes, close",
           "key_Would_you_like_to_customize": "Would you like to customize your notification settings?",
           "key_Logout?": "Logout?",
+          'key_are_you_sure_logout':'Are You Sure You Want to Logout?',
           "key_You_can_not_logout": "You can not logout from our system, first you have to complete accepted or pending orders.",
           "key_Invalid_OTP": "Invalid OTP",
           "key_Invalid_phone_number": "Invalid phone number",
@@ -614,6 +619,8 @@ class Languages extends Translations {
           "key_select_issue_type": "Select Issue Type"
         },
         'hi_IN': {
+          "key_SignIn/LogIn":"साइन इन/लॉग इन",
+          "key_Special_characters_not_allowed":"विशेष वर्णों की अनुमति नहीं है",
           "key_filter_order":"फ़िल्टर ऑर्डर",
           "key_pls_number_only":"कृपया केवल संख्याएँ दर्ज करें",
           "key_choose_language":"भाषा चुनें",
@@ -818,6 +825,8 @@ class Languages extends Translations {
           "key_Select_Item_Image": "आइटम छवि का चयन करें",
           "key_What_type_of_dish_is_this": "यह किस प्रकार का व्यंजन है?",
           "key_Veg_Only": "शाकाहारी केवल",
+          "key_Veg": "शाकाहारी",
+          "key_Non_Veg": "मांसाहारी",
           "key_Add_Dish_Description": "डिश विवरण जोड़ें",
           "key_Describe_what_is_included": "(बताएं कि एक सर्विंगऑफ डिश में क्या शामिल है)",
           "key_Describe_more_about_the_dish": "पकवान के बारे में अधिक बताएं? (वैकल्पिक)",
@@ -1070,6 +1079,7 @@ class Languages extends Translations {
           "key_Yes_Close": "हाँ, बंद करें",
           "key_Would_you_like_to_customize": "क्या आप अपनी सूचना सेटिंग को अनुकूलित करना चाहेंगे?",
           "key_Logout?": "लॉग आउट?",
+          'key_are_you_sure_logout':'क्या आप लॉग आउट करना चाहते हैं?',
           "key_You_can_not_logout": "आप हमारे सिस्टम से लॉगआउट नहीं कर सकते, पहले आपको स्वीकृत या लंबित आदेशों को पूरा करना होगा।",
           "key_Please_enter_item_name": "कृपया आइटम का नाम दर्ज करें",
           "key_Please_enter_item_price": "कृपया आइटम का मूल्य दर्ज करें",
@@ -1205,6 +1215,8 @@ class Languages extends Translations {
 
         },
         'gj_IN':{
+          "key_SignIn/LogIn":"સાઇન ઇન/લોગ ઇન",
+          "key_Special_characters_not_allowed":"વિશિષ્ટ પાત્રોને મંજૂરી નથી",
           "key_filter_order":"ફિલ્ટર ઓર્ડર",
           "key_pls_number_only":"કૃપા કરીને ફક્ત નંબરો જ દાખલ કરો",
           "key_choose_language":"ભાષા પસંદ કરો",
@@ -1416,6 +1428,8 @@ class Languages extends Translations {
           "key_Select_Item_Image": "આઇટમ છબી પસંદ કરો",
           "key_What_type_of_dish_is_this": "આ કેવા પ્રકારની વાનગી છે?",
           "key_Veg_Only": "ફક્ત વેજ",
+          "key_Veg": "વેજ",
+          "key_Non_Veg": "માંસાહારી",
           "key_Add_Dish_Description": "ડિશ વર્ણન ઉમેરો",
           "key_Describe_what_is_included": "(એક વાનગી પીરસમાં શું સમાવવામાં આવેલ છે તેનું વર્ણન કરો)",
           "key_Describe_more_about_the_dish": "વાનગી વિશે વધુ વર્ણન કરો? (વૈકલ્પિક)",
@@ -1691,6 +1705,7 @@ class Languages extends Translations {
           "key_Yes_Close": "હા, બંધ",
           "key_Would_you_like_to_customize": "શું તમે તમારી સૂચના સેટિંગ્સને કસ્ટમાઇઝ કરવા માંગો છો?",
           "key_Logout?": "લૉગ આઉટ?",
+          'key_are_you_sure_logout':'શું તમે ખરેખર લોગઆઉટ કરવા માંગો છો?',
           "key_You_can_not_logout": "તમે અમારી સિસ્ટમમાંથી લોગઆઉટ કરી શકતા નથી, પહેલા તમારે સ્વીકૃત અથવા બાકી ઓર્ડર પૂર્ણ કરવા પડશે.",
           "key_You_will_get": "તમને મળશે",
 

@@ -256,6 +256,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                                       setState(() {
                                         menuItemList = [];
                                         menuData=[];
+                                        _checkAll = false;
                                         getMenuItem();
                                       });
                                     }
@@ -475,6 +476,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                                                             setState(() {
                                                               menuItemList = [];
                                                               menuData=[];
+                                                              _checkAll = false;
                                                               getMenuItem();
                                                             });
                                                           }

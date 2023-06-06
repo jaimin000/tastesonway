@@ -118,7 +118,7 @@ class ContactUs extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
-                            child: Text('key_Proceed'.tr, style: mTextStyle14(),),
+                            child: Text('key_Request_Callback'.tr, style: mTextStyle14(),),
                             onPressed: () async {
                               Navigator.of(context).pop(); // Close the dialog
                               await getCallback();

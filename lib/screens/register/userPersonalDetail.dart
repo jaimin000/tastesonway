@@ -87,14 +87,14 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
     print(number);
     String token = await Sharedprefrences.getToken();
     final response = await http.post(
-      Uri.parse('https://dev-api.tastesonway.com/api/v2/kitchen-owner-update-profile'),
+      Uri.parse('$baseUrl/kitchen-owner-update-profile'),
       headers: {'Authorization': 'Bearer $token',
       },
       body: {
         'language_id':"$id",
         'country_code':await Sharedprefrences.getCountryCode(),
         'short_code':await Sharedprefrences.getShortCode(),
-        //'mobile_number':'7069836196',
+        'mobile_number':number.toString(),
         //'avatar':await Sharedprefrences.getProfilePic().toString(),
          'name':name,
          'email':email,

@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 import 'package:intl/intl.dart';
-import 'discount_page.dart';
 
 class EditCoupon extends StatefulWidget {
   final isFixedData;
@@ -126,7 +125,7 @@ class _EditCouponState extends State<EditCoupon> {
       });
       final data = json.decode(response.body);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Coupon Edited Successfully!')),
+         SnackBar(content: Text(data['message'])),
       );
       print(data);
     }
@@ -219,17 +218,51 @@ class _EditCouponState extends State<EditCoupon> {
           isEditable
               ? IconButton(
                   onPressed: () {
-                    deleteCoupon();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Coupon Deleted Successfully!')),
+                    showDialog(
+                        context: context,
+                        builder:(BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: cardColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            title:Text('key_Delete_Item'.tr, style:cardTextStyle18()),
+                            content: Text('key_are_you_sure_delete'.tr, style:mTextStyle14() ),
+                            actions: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: fontColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                },
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  backgroundColor: orangeColor(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                child: Text('key_Proceed'.tr, style: mTextStyle14(),),
+                                onPressed: () async {
+                                  Navigator.of(context).pop(); // Close the dialog
+                                  deleteCoupon();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Coupon Deleted Successfully!')),
+                                  );
+                                  Navigator.pop(context,'true');
+                                },
+                              ),
+                            ],
+                          );
+                        }
                     );
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const DiscountPage()),
-                    // );
-                    Navigator.pop(context,'true');
                   },
                   icon: const Icon(Icons.delete),
                 )
@@ -289,6 +322,8 @@ class _EditCouponState extends State<EditCoupon> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'key_please_enter_coupan_name'.tr;
+                              }else if (RegExp(r'[^\w\s]').hasMatch(value)) {
+                                return 'key_Special_characters_not_allowed'.tr;
                               }
                               return null;
                             },
@@ -360,6 +395,7 @@ class _EditCouponState extends State<EditCoupon> {
                             : SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: TextFormField(
+                                  keyboardType: TextInputType.number,
                                   enabled: isEditable,
                                   controller: couponValueController,
                                   validator: (value) {
@@ -385,12 +421,14 @@ class _EditCouponState extends State<EditCoupon> {
                                   ),
                                 ),
                               ),
-                        const SizedBox(
+                        widget.isFixedData ?SizedBox():const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
+                        widget.isFixedData ?SizedBox():SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+
                             enabled: isEditable,
                             controller: couponUptoAmountController,
                             validator: (value) {
@@ -422,6 +460,8 @@ class _EditCouponState extends State<EditCoupon> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+
                             enabled: isEditable,
                             controller: perUserController,
                             validator: (value) {
@@ -453,6 +493,8 @@ class _EditCouponState extends State<EditCoupon> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+
                             enabled: isEditable,
                             controller: noUserController,
                             validator: (value) {
@@ -481,6 +523,8 @@ class _EditCouponState extends State<EditCoupon> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+
                             enabled: isEditable,
                             controller: minOrderController,
                             validator: (value) {
@@ -597,17 +641,6 @@ class _EditCouponState extends State<EditCoupon> {
                                   // } else {
                                   _formKey.currentState?.save();
                                   updateCoupon();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Coupon Updated Successfully!')),
-                                  );
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const DiscountPage()),
-                                  // );
                                   Navigator.pop(context,'true');
                                 }
                               },

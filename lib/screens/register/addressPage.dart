@@ -1,5 +1,4 @@
 import 'dart:convert';
- 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:tastesonway/screens/register/questions.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
-
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 
@@ -110,7 +108,7 @@ class _AddressPageState extends State<AddressPage> {
     }
     String token = await Sharedprefrences.getToken();
     final response = await http.post(
-        Uri.parse('https://dev-api.tastesonway.com/api/v2/create-or-update-address'),
+        Uri.parse('$baseUrl/create-or-update-address'),
         headers: {'Authorization': 'Bearer $token',
         },
         body: {

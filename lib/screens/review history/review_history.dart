@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
+import 'package:intl/intl.dart';
+import '../undermaintenance.dart';
 
 class ReviewHistory extends StatefulWidget {
   const ReviewHistory({Key? key}) : super(key: key);
@@ -16,8 +18,7 @@ class ReviewHistory extends StatefulWidget {
 
 class _ReviewHistoryState extends State<ReviewHistory> {
   int refreshCounter = 0;
-
-
+  bool isServicePresent = false;
   List orderHistory = [];
   bool isLoading = true;
 
@@ -36,11 +37,24 @@ class _ReviewHistoryState extends State<ReviewHistory> {
         orderHistory = data['data'].toList();
         print(orderHistory);
       });
-    } else if(response.statusCode == 401) {
-      print("refresh token called");if (refreshCounter == 0) {
-        refreshCounter++;
-      bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchHistory():null;}
+    } else if (response.statusCode == 401) {
+      final jsonData = json.decode(response.body);
+      if (jsonData['message']
+          .toString()
+          .contains('maintenance')) {
+        print('server is undermaintenance');
+        setState(() {
+          isServicePresent = true;
+        });
+      }
+      else if(!isServicePresent) {
+        print("refresh token called");
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? fetchHistory(): null;
+        }
+      }
     }else {
       setState(() {
         isLoading = false;
@@ -94,6 +108,14 @@ class _ReviewHistoryState extends State<ReviewHistory> {
     }
   }
 
+  String getFormatedDate(String date) {
+    DateFormat inputFormat = DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSSZ");
+    DateFormat outputFormat = DateFormat("dd-MM-yyyy");
+    DateTime dateTime = inputFormat.parse(date);
+    String formattedDate = outputFormat.format(dateTime);
+    return formattedDate;
+  }
+
   @override
   void initState() {
     fetchHistory();
@@ -114,77 +136,115 @@ class _ReviewHistoryState extends State<ReviewHistory> {
       ),
       body: isLoading?
       Center(child:CircularProgressIndicator(color:orangeColor()))
-          : Container(
+          : UnderMaintenanceWidget(
+        isShow: isServicePresent,
+        callback: () async {
+          await fetchHistory();
+        },
+            child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child:
         ListView.builder(
-          physics: BouncingScrollPhysics(),
-          itemCount: orderHistory.length,
-            itemBuilder:(BuildContext context, int index){
-            return Column(
-              children: [
-                SizedBox(
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: const Color.fromRGBO(64, 68, 81, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height:10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            physics: BouncingScrollPhysics(),
+            itemCount: orderHistory.length,
+              itemBuilder:(BuildContext context, int index){
+              return Column(
+                children: [
+                  Stack(
+                clipBehavior: Clip.none,
+                children: [
+                    SizedBox(
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: const Color.fromRGBO(64, 68, 81, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                getStatus(orderHistory[index]['review_status']),
-                                style: mTextStyle16(),
-                              ),
-                              InkWell(
-                                onTap: (){
-                                  deleteHistory(orderHistory[index]['id'].toString()).
-                                  then((value) => setState(() {
-                                  fetchHistory();
-                                  }));
+                              const SizedBox(height:10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    getStatus(orderHistory[index]['review_status']),
+                                    style: mTextStyle16(),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      deleteHistory(orderHistory[index]['id'].toString()).
+                                      then((value) => setState(() {
+                                      fetchHistory();
+                                      }));
 
-                                },
-                                  child: Icon(Icons.delete_rounded,color: orangeColor(),)),
+                                    },
+                                      child: Icon(Icons.delete_rounded,color: orangeColor(),)),
+                                ],
+                              ),
+                              const SizedBox(height:5),
+                              Text(
+                                '${'Your '+ orderHistory[index]['review_type']} is in ${getStatus(orderHistory[index]['review_status'])}',
+                                style: cTextStyle16(),
+                              ),
+                              const SizedBox(height:5),
+                              const Divider(
+                                height: 20,
+                                color: Colors.white,
+                                endIndent: 5,
+                                indent: 5,
+                              ),
+                              const SizedBox(height:5),
+                              orderHistory[index]['review_status'] == 1 ?
+                              Text(
+                                '${'You have changed '+ orderHistory[index]['review_type']} Details, our team will Review it and get back to you!',
+                                style: cTextStyle16(),
+                              )
+                              : Text(
+                                '${'You have changed '+ orderHistory[index]['review_type']} Details.',
+                                style: cTextStyle16(),
+                              ),
+                              const SizedBox(height:10),
+
                             ],
                           ),
-                          const SizedBox(height:5),
-                          Text(
-                            '${'Your '+ orderHistory[index]['review_type']} is in Review',
-                            style: cTextStyle16(),
-                          ),
-                          const SizedBox(height:5),
-                          const Divider(
-                            height: 20,
-                            color: Colors.white,
-                            endIndent: 5,
-                            indent: 5,
-                          ),
-                          const SizedBox(height:5),
-                          Text(
-                            '${'You have changed '+ orderHistory[index]['review_type']} Details, our team will Review it and get back to you!',
-                            style: cTextStyle16(),
-                          ),
-                          const SizedBox(height:10),
-
-                        ],
+                        ),
+                      ),
+                    ),
+                  Positioned(
+                    bottom: -10,
+                    right: 120,
+                    child: SizedBox(
+                      height: 35,
+                      width: 120,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        color: const Color.fromRGBO(53, 56, 66, 1),
+                        child: Center(
+                            child: Text(
+                              getFormatedDate(
+                                  orderHistory[index]['created_at']),
+                              style: cTextStyle12(),
+                              textAlign: TextAlign.center,
+                            )),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 25,),
-              ],
-            );
-            }
+                    ]
+                  ),
+                  const SizedBox(height: 25,),
+
+                ],
+              );
+              }
         ),
       ),
+          ),
     );
   }
 }

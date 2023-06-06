@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
+import 'package:tastesonway/screens/undermaintenance.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,6 +49,7 @@ class _SignupState extends State<Signup> {
   final _key = UniqueKey();
   late WebViewController webViewControllers;
   bool agree = false;
+  bool isUnderMaintenance = false;
   bool showAgreeMessage = false;
   int _selectedIndex = 0;
   int refreshCounter = 0;
@@ -259,78 +261,43 @@ class _SignupState extends State<Signup> {
     dynamic deviceToken = await FirebaseMessaging.instance.getToken();
     dynamic deviceId = getDeviceId();
 
-      final response = await http.post(
-          Uri.parse("$baseUrl/kitchen-owner-login-registration"),
-          body: {
-            "language_id": languageId.toString(),
-            "mobile_number": mobileNumber.toString(),
-            "short_code": shortCode.toString(),
-            "country_code": countryCode.toString(),
-            "device_token": deviceToken.toString(),
-            "device_id": deviceId.toString(),
-            "platform": "$platform",
-            "gender": "$gender",
-            "referral_code": "a5265bb5"
-          });
-
-      if (response.statusCode == 200) {
-        print(response.body);
-        final json = jsonDecode(response.body);
-        message = json['message'].toString();
-        var token = (json['data'][0]['token']).toString();
-        await Sharedprefrences.setToken(token);
-        var refreshToken = (json['data'][0]['refresh_token']).toString();
-        await Sharedprefrences.setRefreshToken(refreshToken);
-        var ownerId = json['data'][0]['id'];
-        await Sharedprefrences.setId(ownerId);
-        print("token: ${await Sharedprefrences
-            .getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
-      } else if (response.statusCode == 401) {
-        print("refresh token called in register owner");
-        if (refreshCounter == 0) {
-          refreshCounter++;
-        bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ? registerOwner() : null;
-        }
-      }
-      else {
-        final json = jsonDecode(response.body);
-        message = json['message'].toString();
-        print(response.body);
-        print('Request failed with status: ${response.statusCode}.');
-      }
-    }
-
-
-  Future<void> decidePath() async {
-    dynamic languageId = await Sharedprefrences.getLanguageId();
-    dynamic mobileNumber = await Sharedprefrences.getMobileNumber();
-    dynamic shortCode = await Sharedprefrences.getShortCode();
-    dynamic countryCode = await Sharedprefrences.getCountryCode();
-
-    final response = await http.post(
-      Uri.parse('$baseUrl/kitchen-owner-login-registration'),
-      body: {
-        "language_id": languageId.toString(),
-        "mobile_number": mobileNumber.toString(),
-        "short_code": shortCode.toString(),
-        "country_code": countryCode.toString()
-      },
-    );
+    final response = await http
+        .post(Uri.parse("$baseUrl/kitchen-owner-login-registration"), body: {
+      "language_id": languageId.toString(),
+      "mobile_number": mobileNumber.toString(),
+      "short_code": shortCode.toString(),
+      "country_code": countryCode.toString(),
+      "device_token": deviceToken.toString(),
+      "device_id": deviceId.toString(),
+      "platform": "$platform",
+      "gender": "$gender",
+      "referral_code": "a5265bb5"
+    });
 
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      profileStatus = jsonData['data'][0]['status'];
-      ownerAddress = jsonData['data'][0]['owner_address'];
-      print("aaaaaaaajlkjlkjalkjalaaajalkjdlkjalkfjlla");
+      print(response.body);
+      final json = jsonDecode(response.body);
+      message = json['message'].toString();
+      var token = json['data'][0]['token'];
+      if (token != null) {
+        await Sharedprefrences.setToken(token.toString());
+      }
+      var refreshToken = (json['data'][0]['refresh_token']).toString();
+      await Sharedprefrences.setRefreshToken(refreshToken);
+      var ownerId = json['data'][0]['id'];
+      await Sharedprefrences.setId(ownerId);
+      print(
+          "token: ${await Sharedprefrences.getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
+      profileStatus = json['data'][0]['status'];
+      ownerAddress = json['data'][0]['owner_address'];
       print("profile status: $profileStatus,address: $ownerAddress");
       if (profileStatus != 1 && ownerAddress != null) {
         // Navigator.pushReplacement(
         //   context,
         //   MaterialPageRoute(
         //     builder: (context) => const Home())
-          Get.offAll(Home());
-      }else {
+        Get.offAll(const Home());
+      } else {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -338,13 +305,23 @@ class _SignupState extends State<Signup> {
           ),
         );
       }
-    }else if(response.statusCode == 401) {
-      print("refresh token called");
+    } else if (response.statusCode == 401) {
+      final json = jsonDecode(response.body);
+      String message = json['message'].toString();
+      if (message.contains("maintenance")) {
+        setState(() {
+          isUnderMaintenance = true;
+        });
+      }
+      print("refresh token called in register owner");
       if (refreshCounter == 0) {
         refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?decidePath():null;}
-    }  else {
+        tokenRefreshed ? registerOwner() : null;
+      }
+    } else {
+      final json = jsonDecode(response.body);
+      message = json['message'].toString();
       print(response.body);
       print('Request failed with status: ${response.statusCode}.');
     }
@@ -365,258 +342,271 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor(),
-      appBar: AppBar(
-        elevation: 0,
         backgroundColor: backgroundColor(),
-        title: Text(
-          otpVisibility ? 'key_Enter_otp'.tr : 'key_register'.tr,
-          style: cardTitleStyle20(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: backgroundColor(),
+          title: Text(
+            otpVisibility ? 'key_Enter_otp'.tr : 'key_register'.tr,
+            style: cardTitleStyle20(),
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    height: 230,
-                    width: MediaQuery.of(context).size.width,
-                    child: otpVisibility
-                        ? Image.asset('assets/images/otp.png')
-                        : Image.asset('assets/images/mobile.png'),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  otpVisibility
-                      ? Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'key_Enter_your_security_code'.tr,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20.0),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Text(
-                                'key_OTP_has_been_sent_to_your_mobile'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )
-                      : Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'key_Enter_your_mobile_number'.tr,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20.0),
-                            ),
-                            Text(
-                              'key_to_create_account'.tr,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20.0),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: Text(
-                                'key_We_will_text_you'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )
-                          ],
-                        ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: cardColor(),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
+        body: UnderMaintenanceWidget(
+          callback: () {
+            registerOwner();
+          },
+          isShow: isUnderMaintenance,
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        height: 230,
+                        width: MediaQuery.of(context).size.width,
+                        child: otpVisibility
+                            ? Image.asset('assets/images/otp.png')
+                            : Image.asset('assets/images/mobile.png'),
                       ),
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        padding: const EdgeInsets.all(8),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              otpVisibility
-                                  ? PinCodeTextField(
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      appContext: context,
-                                      length: 6,
-                                      obscureText: false,
-                                      controller: otpController,
-                                      animationType: AnimationType.fade,
-                                      pinTheme: PinTheme(
-                                        shape: PinCodeFieldShape.box,
-                                        borderRadius: BorderRadius.circular(5),
-                                        fieldHeight: 60,
-                                        fieldWidth: 40,
-                                        activeFillColor: Colors.white,
-                                      ),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          otpCode = value;
-                                        });
-                                        if (value.length == 6) {
-                                          verifyOTP();
-                                        }
-                                      },
-                                    )
-                                  : IntlPhoneField(
-                                      initialCountryCode: 'IN',
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.all(10.0),
-                                        fillColor: inputColor(),
-                                        filled: true,
-                                        border: OutlineInputBorder(
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      otpVisibility
+                          ? Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'key_Enter_your_security_code'.tr,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 20.0),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    'key_OTP_has_been_sent_to_your_mobile'.tr,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )
+                          : Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'key_Enter_your_mobile_number'.tr,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 20.0),
+                                ),
+                                Text(
+                                  'key_to_create_account'.tr,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 20.0),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text(
+                                    'key_We_will_text_you'.tr,
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          shadowColor: Colors.black,
+                          color: cardColor(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  otpVisibility
+                                      ? PinCodeTextField(
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
+                                          appContext: context,
+                                          length: 6,
+                                          obscureText: false,
+                                          controller: otpController,
+                                          animationType: AnimationType.fade,
+                                          pinTheme: PinTheme(
+                                            shape: PinCodeFieldShape.box,
                                             borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: BorderSide.none),
-                                        hintText: 'Phone Number',
-                                        hintStyle: inputTextStyle16(),
-                                      ),
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      controller: phoneController,
-                                      // onCountryChanged: (country) {
-                                      //   phoneCode = country.dialCode;
-                                      // },
-                                      onChanged: (phone) {
-                                        phoneCode = phone.countryCode;
-                                        countryCode = phone.countryISOCode;
-                                      },
-                                    ),
-                              InkWell(
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    if (otpVisibility) {
-                                      verifyOTP();
-                                    } else {
-                                      login();
-                                    }
-                                  }
-                                },
-                                child: SizedBox(
-                                    height: 55,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Card(
-                                        shadowColor: Colors.black,
-                                        color: orangeColor(),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                        ),
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            otpVisibility
-                                                ? "key_Click_Verify_Button".tr
-                                                : "key_Verify_OTP".tr,
-                                            style: mTextStyle16(),
+                                                BorderRadius.circular(5),
+                                            fieldHeight: 60,
+                                            fieldWidth: 40,
+                                            activeFillColor: Colors.white,
                                           ),
-                                        ))),
+                                          onChanged: (value) {
+                                            setState(() {
+                                              otpCode = value;
+                                            });
+                                            if (value.length == 6) {
+                                              verifyOTP();
+                                            }
+                                          },
+                                        )
+                                      : IntlPhoneField(
+                                          initialCountryCode: 'IN',
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.all(10.0),
+                                            fillColor: inputColor(),
+                                            filled: true,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: BorderSide.none),
+                                            hintText: 'Phone Number',
+                                            hintStyle: inputTextStyle16(),
+                                          ),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
+                                          controller: phoneController,
+                                          // onCountryChanged: (country) {
+                                          //   phoneCode = country.dialCode;
+                                          // },
+                                          onChanged: (phone) {
+                                            phoneCode = phone.countryCode;
+                                            countryCode = phone.countryISOCode;
+                                          },
+                                        ),
+                                  InkWell(
+                                    onTap: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        if (otpVisibility) {
+                                          verifyOTP();
+                                        } else {
+                                          login();
+                                        }
+                                      }
+                                    },
+                                    child: SizedBox(
+                                        height: 55,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Card(
+                                            shadowColor: Colors.black,
+                                            color: orangeColor(),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                otpVisibility
+                                                    ? "key_Verify_OTP".tr
+                                                    : "key_SignIn/LogIn".tr,
+                                                style: mTextStyle16(),
+                                              ),
+                                            ))),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  otpVisibility
-                      ? const SizedBox()
-                      : Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 20),
-                              child: Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'key_By_completing_registration'.tr,
-                                      style: const TextStyle(
-                                          fontSize: 14, color: Colors.white),
-                                    ),
-                                    TextSpan(
-                                      text: 'key_Privacy_policy'.tr,
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          showPrivacyPolicyDialog(context);
-                                          _onItemTapped(0);
-                                        },
-                                      style: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                    ),
-                                    const TextSpan(text: ' & '),
-                                    TextSpan(
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          showPrivacyPolicyDialog(context);
-                                          _onItemTapped(1);
-                                        },
-                                      text: 'key_Terms_Of_service'.tr,
-                                      style: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ))),
-                ],
-              ),
-            ),
-            isLoading
-                ? Positioned.fill(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Center(
-                            child: CircularProgressIndicator(
-                          color: orangeColor(),
-                        )),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  )
-                : Container(),
-          ],
-        ),
-      ),
-    );
+                      otpVisibility
+                          ? const SizedBox()
+                          : Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 20, bottom: 20),
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'key_By_completing_registration'
+                                              .tr,
+                                          style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                        TextSpan(
+                                          text: 'key_Privacy_policy'.tr,
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              showPrivacyPolicyDialog(context);
+                                              _onItemTapped(0);
+                                            },
+                                          style: const TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                        const TextSpan(text: ' & '),
+                                        TextSpan(
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              showPrivacyPolicyDialog(context);
+                                              _onItemTapped(1);
+                                            },
+                                          text: 'key_Terms_Of_service'.tr,
+                                          style: const TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ))),
+                    ],
+                  ),
+                ),
+                isLoading
+                    ? Positioned.fill(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                          child: Container(
+                            color: Colors.transparent,
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: orangeColor(),
+                            )),
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ),
+        ));
   }
 
   void login() async {
@@ -648,7 +638,6 @@ class _SignupState extends State<Signup> {
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
-    registerOwner();
   }
 
   void verifyOTP() async {
@@ -674,7 +663,7 @@ class _SignupState extends State<Signup> {
         if (user != null) {
           registerOwner();
           Fluttertoast.showToast(
-            msg: message,
+            msg: "You have Successfully Signed In",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -682,7 +671,7 @@ class _SignupState extends State<Signup> {
             textColor: orangeColor(),
             fontSize: 16.0,
           );
-          await decidePath();
+          // await decidePath();
         } else {
           Fluttertoast.showToast(
             msg: "your login is failed",

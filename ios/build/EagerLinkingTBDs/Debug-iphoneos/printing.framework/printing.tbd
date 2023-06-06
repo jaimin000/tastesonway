@@ -98,9 +98,7 @@ exports:
                        '_$s8printing8PrintJobCAA5indexAcA14PrintingPluginC_Sitcfc', 
                        '_$s8printing8PrintJobCACycfC', '_$s8printing8PrintJobCACycfc', 
                        '_$s8printing8PrintJobCMa', '_$s8printing8PrintJobCMn', '_$s8printing8PrintJobCN', 
-                       '_$s8printing8PrintJobCfD', _Swift50Overrides, _Swift51Overrides, 
-                       __Z34_swiftoverride_class_getSuperclassPKN5swift14TargetMetadataINS_9InProcessEEE, 
-                       __ZN5swift34swift50override_conformsToProtocolEPKNS_14TargetMetadataINS_9InProcessEEEPKNS_24TargetProtocolDescriptorIS1_EEPFPKNS_18TargetWitnessTableIS1_EES4_S8_E, 
+                       '_$s8printing8PrintJobCfD', _Swift51Overrides, __Z34_swiftoverride_class_getSuperclassPKN5swift14TargetMetadataINS_9InProcessEEE, 
                        __ZN5swift39swift51override_conformsToSwiftProtocolEPKNS_14TargetMetadataINS_9InProcessEEEPKNS_24TargetProtocolDescriptorIS1_EEN7__swift9__runtime4llvm9StringRefEPFPKNS_35TargetProtocolConformanceDescriptorIS1_EES4_S8_SC_E, 
                        _net_nfet_printing_set_document, _net_nfet_printing_set_error, 
                        _printingVersionNumber, _printingVersionString ]

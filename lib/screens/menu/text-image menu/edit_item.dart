@@ -59,7 +59,7 @@ class _EditItemState extends State<EditItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: MediaQuery.of(context).size.width * 0.4,
               child: TextFormField(
                 controller: toppingNamecontroller,
                 style: const TextStyle(color: Colors.white),
@@ -114,6 +114,7 @@ class _EditItemState extends State<EditItem> {
                 },
               ),
             ),
+            IconButton(onPressed: removeToppingWidget, icon: Icon(Icons.delete,color: orangeColor(),),),
           ],
         ),
         const SizedBox(height:10),
@@ -125,6 +126,11 @@ class _EditItemState extends State<EditItem> {
   void addToppingWidget(){
     setState(() {
       Toppings.add(topping());
+    });
+  }
+  void removeToppingWidget(){
+    setState(() {
+      Toppings.removeAt(0);
     });
   }
 
@@ -304,12 +310,51 @@ class _EditItemState extends State<EditItem> {
               color: Colors.white,
             ),
             onPressed: () async {
-              await DeleteMenuItem();
-              ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
-              Navigator.pop(context,'true');
-              setState(() {
-                _isLoading = false;
-              });
+              showDialog(
+                  context: context,
+                  builder:(BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: cardColor(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      title:Text('key_Delete_Item'.tr, style:cardTextStyle18()),
+                      content: Text('key_are_you_sure_delete'.tr, style:mTextStyle14() ),
+                      actions: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: fontColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: orangeColor(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          child: Text('key_Proceed'.tr, style: mTextStyle14(),),
+                          onPressed: () async {
+                            Navigator.of(context).pop(); // Close the dialog
+                            await DeleteMenuItem();
+                            ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
+                            Navigator.pop(context,'true');
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  }
+              );
             },
           )
         ],
@@ -476,7 +521,7 @@ class _EditItemState extends State<EditItem> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'key_Veg_Only'.tr,
+                                    _switchValue ? 'key_Veg'.tr :'key_Non_Veg'.tr,
                                     textAlign: TextAlign.center,
                                     style: inputTextStyle16(),
                                   ),
@@ -486,6 +531,7 @@ class _EditItemState extends State<EditItem> {
                                   child: CupertinoSwitch(
                                       thumbColor: Colors.black,
                                       activeColor: Colors.green,
+                                      trackColor:Colors.red,
                                       value: _switchValue,
                                       onChanged: (bool? value) {
                                         setState(() {

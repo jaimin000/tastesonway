@@ -1,50 +1,50 @@
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/LastTouchedAnchorOrImageJS.swift":
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/LastTouchedAnchorOrImageJS.swiftdeps"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/LastTouchedAnchorOrImageJS.dia"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/LastTouchedAnchorOrImageJS.o"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/LastTouchedAnchorOrImageJS.d"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebViewStatic.swift":
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewStatic.dia"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewStatic.o"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewStatic.swiftdeps"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewStatic.d"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/JavaScriptBridgeJS.swift":
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/JavaScriptBridgeJS.swiftdeps"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/JavaScriptBridgeJS.dia"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/JavaScriptBridgeJS.o"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/JavaScriptBridgeJS.d"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserOptions.swift":
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserOptions.d"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserOptions.o"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserOptions.swiftdeps"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserOptions.dia"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/InAppWebViewOptions.swift":
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewOptions.d"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewOptions.dia"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewOptions.swiftdeps"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewOptions.o"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebViewMethodHandler.swift":
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewMethodHandler.o"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewMethodHandler.d"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewMethodHandler.swiftdeps"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebViewMethodHandler.dia"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserWebViewController.swift":
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserWebViewController.swiftdeps"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserWebViewController.o"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserWebViewController.dia"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserWebViewController.d"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/InAppWebView.swift":
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebView.o"
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebView.d"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebView.swiftdeps"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppWebView.dia"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/InterceptAjaxRequestJS.swift":
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptAjaxRequestJS.d"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptAjaxRequestJS.dia"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptAjaxRequestJS.o"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptAjaxRequestJS.swiftdeps"
-"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/PluginScriptsJS/InterceptFetchRequestJS.swift":
-  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptFetchRequestJS.d"
-  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptFetchRequestJS.dia"
-  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptFetchRequestJS.swiftdeps"
-  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InterceptFetchRequestJS.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/HeadlessInAppWebView/HeadlessInAppWebView.swift":
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebView.swiftdeps"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebView.o"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebView.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebView.d"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/Types/HitTestResult.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HitTestResult.o"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HitTestResult.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HitTestResult.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HitTestResult.swiftdeps"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/FlutterMethodCallDelegate.swift":
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterMethodCallDelegate.o"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterMethodCallDelegate.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterMethodCallDelegate.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterMethodCallDelegate.swiftdeps"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserDelegate.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserDelegate.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserDelegate.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserDelegate.swiftdeps"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserDelegate.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserManager.swift":
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserManager.d"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserManager.o"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserManager.swiftdeps"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserManager.dia"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppBrowser/InAppBrowserNavigationController.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserNavigationController.dia"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserNavigationController.o"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserNavigationController.swiftdeps"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/InAppBrowserNavigationController.d"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/FlutterWebViewController.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewController.dia"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewController.o"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewController.swiftdeps"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewController.d"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/HttpAuthenticationChallenge.swift":
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HttpAuthenticationChallenge.swiftdeps"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HttpAuthenticationChallenge.d"
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HttpAuthenticationChallenge.dia"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HttpAuthenticationChallenge.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/InAppWebView/FlutterWebViewFactory.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewFactory.dia"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewFactory.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewFactory.swiftdeps"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/FlutterWebViewFactory.o"
+"/Users/mac/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/ios/Classes/HeadlessInAppWebView/HeadlessInAppWebViewManager.swift":
+  diagnostics: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebViewManager.dia"
+  object: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebViewManager.o"
+  dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebViewManager.d"
+  swift-dependencies: "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/flutter_inappwebview.build/Objects-normal/x86_64/HeadlessInAppWebViewManager.swiftdeps"

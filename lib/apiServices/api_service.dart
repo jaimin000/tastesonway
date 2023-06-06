@@ -92,7 +92,7 @@ Future<bool> getNewToken(BuildContext context) async {
     return true;
   } else if (response.statusCode == 401) {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.remove('user');
+    sharedPreferences.clear();
     await FirebaseAuth.instance.signOut();
     print("refresh token failed");
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(

@@ -2,6 +2,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Sharedprefrences {
+
+  static Future setOwnerStatus(value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setInt('OwnerStatus', value);
+  }
+  static Future getOwnerStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('OwnerStatus');
+  }
+  static Future setRejectMessage(value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setString('RejectMsg', value);
+  }
+  static Future getRejectMessage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('RejectMsg');
+  }
+
+  static Future<bool> setProfileUpdatedTime(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('ProfileUpdate', value);
+  }
+  static Future<bool?> getProfileUpdatedTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('ProfileUpdate');
+  }
+
   static Future<bool> setToken(value) async {
     final prefs = await SharedPreferences.getInstance();
 

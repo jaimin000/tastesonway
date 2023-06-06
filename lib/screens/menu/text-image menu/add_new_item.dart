@@ -397,7 +397,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'key_Veg_Only'.tr,
+                                    _switchValue ? 'key_Veg'.tr :'key_Non_Veg'.tr,
                                     textAlign: TextAlign.center,
                                     style: inputTextStyle16(),
                                   ),
@@ -407,6 +407,7 @@ class _AddNewItemState extends State<AddNewItem> {
                                   child: CupertinoSwitch(
                                       thumbColor: Colors.black,
                                       activeColor: Colors.green,
+                                      trackColor:Colors.red,
                                       value: _switchValue,
                                       onChanged: (bool? value) {
                                         setState(() {
