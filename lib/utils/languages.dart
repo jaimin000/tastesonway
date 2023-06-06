@@ -5,6 +5,7 @@ class Languages extends Translations {
   Map<String, Map<String, String>> get keys =>
       {
         'en_US': {
+          "key_Please_Add_Bank_Details!":"Please Add Bank Details!",
           "key_SignIn/LogIn":"SignIn / LogIn",
           "key_Special_characters_not_allowed":"Special Characters not Allowed",
           "key_filter_order":"Filter Orders",
@@ -619,6 +620,7 @@ class Languages extends Translations {
           "key_select_issue_type": "Select Issue Type"
         },
         'hi_IN': {
+          "key_Please_Add_Bank_Details!":"कृपया बैंक विवरण जोड़ें!",
           "key_SignIn/LogIn":"साइन इन/लॉग इन",
           "key_Special_characters_not_allowed":"विशेष वर्णों की अनुमति नहीं है",
           "key_filter_order":"फ़िल्टर ऑर्डर",
@@ -1215,6 +1217,7 @@ class Languages extends Translations {
 
         },
         'gj_IN':{
+          "key_Please_Add_Bank_Details!":"કૃપા કરીને બેંક વિગતો ઉમેરો!",
           "key_SignIn/LogIn":"સાઇન ઇન/લોગ ઇન",
           "key_Special_characters_not_allowed":"વિશિષ્ટ પાત્રોને મંજૂરી નથી",
           "key_filter_order":"ફિલ્ટર ઓર્ડર",

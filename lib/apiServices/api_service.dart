@@ -15,7 +15,7 @@ const devUrl = "https://dev-api.tastesonway.com/api/v2";
 const storyUrl = "https://dev-api.tastesonway.com/api";
 const liveUrl = "https://api.tastesonway.com/api/v2";
 
-const baseUrl = localUrl;
+const baseUrl = liveUrl;
 
 String device_id = '';
 

@@ -93,7 +93,25 @@ class _CreateMenu1State extends State<CreateMenu1> {
         context: context,
         initialDate: menuExpiryDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 365)));
+        lastDate: DateTime.now().add(const Duration(days: 365)),
+        builder: (context, child) {
+      return Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.dark(
+            primary: orangeColor(),
+            brightness: Brightness.light,
+            onPrimary: Colors.white,
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: orangeColor(), // button text color
+            ),
+          ),
+        ),
+        child: child!,
+      );
+    },
+    );
     if (picked != null && picked != menuExpiryDate) {
       setState(() {
         menuExpiryDate = picked;

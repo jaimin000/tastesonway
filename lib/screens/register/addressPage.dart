@@ -10,6 +10,7 @@ import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
 import '../../utils/sharedpreferences.dart';
+import '../../utils/snackbar.dart';
 
 class AddressPage extends StatefulWidget {
   const AddressPage({Key? key}) : super(key: key);
@@ -32,6 +33,8 @@ class _AddressPageState extends State<AddressPage> {
   String pincode = "";
   String sublocality = "";
   String locality = "";
+  String message="";
+  bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   var addressType = [
     'Home',
@@ -122,19 +125,44 @@ class _AddressPageState extends State<AddressPage> {
           "longitude":"${latLng.longitude}"
         }
     );
+    print({
+      "city_name": locality,
+      "area":sublocality,
+      "address": address,
+      "land_mark": landmark,
+      "pin_code": pincode,
+      "address_type": "$type",
+      "latitude":"${latLng.latitude}",
+      "longitude":"${latLng.longitude}"
+    });
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
+      Sharedprefrences.setAddressDetailAdded(true);
         setState(() {
+          isLoading = false;
+          message = jsonData['message'];
           var data = jsonData['data'];
           print(data);
         });
+      ScaffoldSnackbar.of(context).show(message);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const Questions()));
     } else if(response.statusCode == 401) {
       print("refresh token called");if (refreshCounter == 0) {
         refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
       tokenRefreshed ?fetchData():null;}
     }else {
+      final jsonData = json.decode(response.body);
+      message = jsonData['message'];
+      setState(() {
+        isLoading = false;
+      });
       print('Request failed with status: ${response.statusCode}.');
+      ScaffoldSnackbar.of(context).show(message);
     }
   }
 
@@ -149,7 +177,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
+      body: isLoading ? Center(child: CircularProgressIndicator(color: orangeColor(),),):SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -465,12 +493,15 @@ class _AddressPageState extends State<AddressPage> {
                                       onTap: () async {
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState?.save();
+                                          setState(() {
+                                            isLoading = true;
+                                          });
                                           await fetchData();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Questions()));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             const Questions()));
                                         }
                                       },
                                       child: Card(

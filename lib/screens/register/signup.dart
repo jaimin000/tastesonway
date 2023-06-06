@@ -23,6 +23,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 import '../../main.dart';
 import '../../utils/sharedpreferences.dart';
+import '../../utils/snackbar.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -262,7 +263,8 @@ class _SignupState extends State<Signup> {
     dynamic deviceId = getDeviceId();
 
     final response = await http
-        .post(Uri.parse("$baseUrl/kitchen-owner-login-registration"), body: {
+        .post(Uri.parse("$baseUrl/kitchen-owner-login-registration"),
+        body: {
       "language_id": languageId.toString(),
       "mobile_number": mobileNumber.toString(),
       "short_code": shortCode.toString(),
@@ -271,13 +273,13 @@ class _SignupState extends State<Signup> {
       "device_id": deviceId.toString(),
       "platform": "$platform",
       "gender": "$gender",
-      "referral_code": "a5265bb5"
+      // "referral_code": "a5265bb5"
     });
-
     if (response.statusCode == 200) {
       print(response.body);
       final json = jsonDecode(response.body);
       message = json['message'].toString();
+      print('this is message $message');
       var token = json['data'][0]['token'];
       if (token != null) {
         await Sharedprefrences.setToken(token.toString());
@@ -286,16 +288,10 @@ class _SignupState extends State<Signup> {
       await Sharedprefrences.setRefreshToken(refreshToken);
       var ownerId = json['data'][0]['id'];
       await Sharedprefrences.setId(ownerId);
-      print(
-          "token: ${await Sharedprefrences.getToken()}, refreshToken: $refreshToken, ownerId : $ownerId");
       profileStatus = json['data'][0]['status'];
       ownerAddress = json['data'][0]['owner_address'];
-      print("profile status: $profileStatus,address: $ownerAddress");
+      ScaffoldSnackbar.of(context).show(message);
       if (profileStatus != 1 && ownerAddress != null) {
-        // Navigator.pushReplacement(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const Home())
         Get.offAll(const Home());
       } else {
         Navigator.pushReplacement(
@@ -305,9 +301,10 @@ class _SignupState extends State<Signup> {
           ),
         );
       }
-    } else if (response.statusCode == 401) {
+    }
+    else if (response.statusCode == 401) {
       final json = jsonDecode(response.body);
-      String message = json['message'].toString();
+      message = json['message'].toString();
       if (message.contains("maintenance")) {
         setState(() {
           isUnderMaintenance = true;
@@ -319,10 +316,13 @@ class _SignupState extends State<Signup> {
         bool tokenRefreshed = await getNewToken(context);
         tokenRefreshed ? registerOwner() : null;
       }
-    } else {
+    }
+    else {
       final json = jsonDecode(response.body);
       message = json['message'].toString();
-      print(response.body);
+      ScaffoldSnackbar.of(context).show(message);
+      setState(() {
+      });
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -642,7 +642,7 @@ class _SignupState extends State<Signup> {
 
   void verifyOTP() async {
     final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+    await SharedPreferences.getInstance();
     sharedPreferences.setString('user', phoneController.text);
 
     setState(() {
@@ -652,36 +652,17 @@ class _SignupState extends State<Signup> {
         verificationId: verificationID, smsCode: otpController.text);
 
     await auth.signInWithCredential(credential).then(
-      (value) {
+          (value) {
         setState(() {
           user = FirebaseAuth.instance.currentUser;
           isLoading = false;
         });
       },
     ).whenComplete(
-      () async {
+          () async {
         if (user != null) {
           registerOwner();
-          Fluttertoast.showToast(
-            msg: "You have Successfully Signed In",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.white,
-            textColor: orangeColor(),
-            fontSize: 16.0,
-          );
-          // await decidePath();
         } else {
-          Fluttertoast.showToast(
-            msg: "your login is failed",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
           setState(() {
             isLoading = false;
           });

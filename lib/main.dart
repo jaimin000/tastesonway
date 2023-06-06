@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
+import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
+import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/languages.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
@@ -33,16 +35,32 @@ void main() async {
     sound: true,
   );
 
+  var isAddressStored = await Sharedprefrences.getAddressDetailAdded() ?? false;
+  var isPersonalDetailStored =
+      await Sharedprefrences.getPersonalDetailAdded() ?? false;
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((value) => runApp(const MyApp()));
-  
-  runApp(const MyApp());
+  ]).then((value) => runApp(MyApp(
+        isAddressStored: isAddressStored,
+        isPersonalDetailStored: isPersonalDetailStored,
+      )));
+
+  runApp(MyApp(
+    isAddressStored: isAddressStored,
+    isPersonalDetailStored: isPersonalDetailStored,
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isPersonalDetailStored;
+  final bool isAddressStored;
+
+  const MyApp({
+    required this.isAddressStored,
+    required this.isPersonalDetailStored,
+  });
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -109,7 +127,13 @@ class _MyAppState extends State<MyApp> {
               fontFamily: 'Poppins',
               accentColor: orangeColor(),
             ),
-            home: isUser == "null" || isUser == ""   ? const LanguageScreen() : const Home(),
+            home: isUser == "null" || isUser == ""
+                ? const LanguageScreen()
+                : widget.isPersonalDetailStored
+                    ? widget.isAddressStored
+                        ? const Home()
+                        : const AddressPage()
+                    : const userPersonalDetail(),
           );
         } else {
           return const CircularProgressIndicator();
@@ -121,6 +145,7 @@ class _MyAppState extends State<MyApp> {
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -133,7 +158,8 @@ class _HomeState extends State<Home> {
   final GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> fourthTabNavKey = GlobalKey<NavigatorState>();
-  CupertinoTabController tabController = CupertinoTabController(initialIndex: 0);
+  CupertinoTabController tabController =
+      CupertinoTabController(initialIndex: 0);
   final int _currentIndex = 0;
 
   @override
@@ -163,7 +189,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final listOfKeys = [firstTabNavKey, secondTabNavKey, thirdTabNavKey,fourthTabNavKey];
+    final listOfKeys = [
+      firstTabNavKey,
+      secondTabNavKey,
+      thirdTabNavKey,
+      fourthTabNavKey
+    ];
     final List<Widget> homeScreenList = [
       const Dashboard(),
       const YourMenus(),
@@ -172,44 +203,51 @@ class _HomeState extends State<Home> {
     ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: orangeColor(),
-          brightness: Brightness.dark,
-          fontFamily: 'Poppins',
-        ),
-        home: WillPopScope(
+      theme: ThemeData(
+        primaryColor: orangeColor(),
+        brightness: Brightness.dark,
+        fontFamily: 'Poppins',
+      ),
+      home: WillPopScope(
         onWillPop: () async {
-      return !await listOfKeys[tabController.index].currentState!.maybePop();
-    },
-      child: CupertinoTabScaffold(
-          tabBar: CupertinoTabBar(
-            backgroundColor: const Color.fromRGBO(50, 54, 64, 1),
-            inactiveColor: const Color.fromRGBO(105, 111, 130, 1),
-            iconSize: 30,
-            activeColor: orangeColor(),
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home_rounded)),
-              BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu)),
-              BottomNavigationBarItem(icon: Icon(Icons.settings)),
-              BottomNavigationBarItem(icon: Icon(Icons.person_sharp)),
-            ],
-          ),
-          tabBuilder: (context, index) {
-            return CupertinoTabView(
-              navigatorKey: listOfKeys[index], //set navigatorKey here which was initialized before
-              builder: (context) {
-                return homeScreenList[index];
-              },
-            );
-          }),
-        ),
+          return !await listOfKeys[tabController.index]
+              .currentState!
+              .maybePop();
+        },
+        child: CupertinoTabScaffold(
+            tabBar: CupertinoTabBar(
+              backgroundColor: const Color.fromRGBO(50, 54, 64, 1),
+              inactiveColor: const Color.fromRGBO(105, 111, 130, 1),
+              iconSize: 30,
+              activeColor: orangeColor(),
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home_rounded)),
+                BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu)),
+                BottomNavigationBarItem(icon: Icon(Icons.settings)),
+                BottomNavigationBarItem(icon: Icon(Icons.person_sharp)),
+              ],
+            ),
+            tabBuilder: (context, index) {
+              return CupertinoTabView(
+                navigatorKey: listOfKeys[index],
+                //set navigatorKey here which was initialized before
+                builder: (context) {
+                  return homeScreenList[index];
+                },
+              );
+            }),
+      ),
     );
   }
 
   showDialogBox() => showCupertinoDialog<String>(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
-          title: Image.asset('assets/images/no_internet.png',width: 250,height: 400,),
+          title: Image.asset(
+            'assets/images/no_internet.png',
+            width: 250,
+            height: 400,
+          ),
           content: Text('key_No_Internet_connection_found'.tr),
           actions: <Widget>[
             TextButton(
@@ -223,12 +261,12 @@ class _HomeState extends State<Home> {
                   setState(() => isAlertSet = true);
                 }
               },
-              child: Text('key_Try_Again'.tr,style: const TextStyle(color: Color.fromRGBO(255, 114, 105, 1)),),
+              child: Text(
+                'key_Try_Again'.tr,
+                style: const TextStyle(color: Color.fromRGBO(255, 114, 105, 1)),
+              ),
             ),
           ],
         ),
       );
 }
-
-
-

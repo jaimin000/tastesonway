@@ -29,6 +29,24 @@ class Sharedprefrences {
     return prefs.getBool('ProfileUpdate');
   }
 
+  static Future<bool> setPersonalDetailAdded(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('PersonalDetail', value);
+  }
+  static Future<bool?> getPersonalDetailAdded() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('PersonalDetail');
+  }
+
+  static Future<bool> setAddressDetailAdded(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('AddressDetail', value);
+  }
+  static Future<bool?> getAddressDetailAdded() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('AddressDetail');
+  }
+
   static Future<bool> setToken(value) async {
     final prefs = await SharedPreferences.getInstance();
 

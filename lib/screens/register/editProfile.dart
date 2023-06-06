@@ -61,7 +61,24 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
         context: context,
         initialDate: currentDate,
         lastDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100))
+        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: orangeColor(),
+              brightness: Brightness.light,
+              onPrimary: Colors.white,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: orangeColor(), // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != currentDate) {
       setState(() {

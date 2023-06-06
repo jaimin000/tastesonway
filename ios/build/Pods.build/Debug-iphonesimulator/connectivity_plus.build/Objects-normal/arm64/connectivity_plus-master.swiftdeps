@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
 options: "84f3e745f763238a2d59e7bbbffdc0bd357eeb586330ba36342d55d1418432e5"
-build_start_time: [1685969922, 727170000]
-build_end_time: [1685969928, 66744000]
+build_start_time: [1686052790, 80976000]
+build_end_time: [1686052790, 602312000]
 inputs:
   "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.4/ios/Classes/ConnectivityProvider.swift": [1681898665, 449909135]
   "/Users/mac/.pub-cache/hosted/pub.dev/connectivity_plus-3.0.4/ios/Classes/PathMonitorConnectivityProvider.swift": [1681898665, 454879481]

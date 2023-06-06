@@ -9,6 +9,7 @@ import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart'as http;
 import '../../apiServices/api_service.dart';
+import '../../utils/snackbar.dart';
 
 class userPersonalDetail extends StatefulWidget {
   const userPersonalDetail({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class userPersonalDetail extends StatefulWidget {
 
 class _userPersonalDetailState extends State<userPersonalDetail> {
   int refreshCounter = 0;
-
+  bool isLoading = false;
   String name = "";
   String email = "";
   String pincode = "";
@@ -28,6 +29,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
   DateTime currentDate = DateTime.now();
   final _formKey = GlobalKey<FormState>();
   String gender = 'Male';
+  String message="";
 
   var items = [
     'Male',
@@ -47,17 +49,73 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
     });
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        lastDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100))
+  Future<DateTime?> _selectDate(BuildContext context) async {
+    final DateTime? currentDate = DateTime.now();
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: currentDate!,
+      firstDate: DateTime(currentDate.year - 100),
+      lastDate: currentDate,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: orangeColor(),
+              brightness: Brightness.light,
+              onPrimary: Colors.white,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: orangeColor(), // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
-    if (picked != null && picked != currentDate) {
-      setState(() {
-        selectedDate = picked;
-      });
+
+    if (pickedDate != null) {
+      final DateTime minimumDate = currentDate.subtract(const Duration(days: 365 * 10));
+      if (pickedDate.isAfter(minimumDate)) {
+        // Show an error message or handle the validation failure
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: cardColor(),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              title: Text('key_error'.tr,style: cardTextStyle18()),
+              content: Text('key_Please_Enter_Valid_DateOfBirth'.tr),
+              actions: <Widget>[
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: fontColor(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  child:
+                  Text('key_OKAY'.tr, style: mTextStyle14()),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the dialog
+                  },
+                ),
+              ],
+            );
+          },
+        );
+        return null;
+      }
+      else {
+        setState(() {
+          selectedDate = pickedDate;
+        });
+      }
+    } else {
+      return null; // User canceled the date picker
     }
   }
 
@@ -95,25 +153,55 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         'country_code':await Sharedprefrences.getCountryCode(),
         'short_code':await Sharedprefrences.getShortCode(),
         'mobile_number':number.toString(),
-        //'avatar':await Sharedprefrences.getProfilePic().toString(),
+       // 'avatar':await Sharedprefrences.getProfilePic().toString(),
          'name':name,
          'email':email,
          'pin_code':pincode,
         'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
       }
     );
+    print({
+      'language_id':"$id",
+      'country_code':await Sharedprefrences.getCountryCode(),
+      'short_code':await Sharedprefrences.getShortCode(),
+      'mobile_number':number.toString(),
+      'name':name,
+      'email':email,
+      'pin_code':pincode,
+      'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
+    });
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
+      Sharedprefrences.setPersonalDetailAdded(true);
         setState(() {
           var data = jsonData['data'];
+          message = jsonData['message'];
           print(data);
+          isLoading = false;
         });
+      ScaffoldSnackbar.of(context).show(message);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const AddressPage()));
     } else if(response.statusCode == 401) {
-      print("refresh token called");if (refreshCounter == 0) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
         refreshCounter++;
       bool tokenRefreshed = await getNewToken(context);
-      tokenRefreshed ?fetchData():null;}
+      tokenRefreshed ?fetchData():null;
+        isLoading = false;
+        setState(() {
+        });
+      }
     }else {
+      final jsonData = json.decode(response.body);
+      message = jsonData['message'];
+      isLoading = false;
+      setState(() {
+      });
+      ScaffoldSnackbar.of(context).show(message);
       print('Request failed with status: ${response.statusCode}.');
     }
   }
@@ -131,7 +219,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
           style: cardTitleStyle20(),
         ),
       ),
-      body: ListView(
+      body: isLoading? Center(child:CircularProgressIndicator(color: orangeColor(),)):ListView(
         scrollDirection: Axis.vertical,
         children: [
           const SizedBox(
@@ -380,6 +468,9 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                             }
                             else {
                               if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  isLoading = true;
+                                });
                                 _formKey.currentState?.save();
                                 Sharedprefrences.setFullName(name);
                                 Sharedprefrences.setProfilePic(_image.toString());
@@ -392,11 +483,11 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                                 //     "${await Sharedprefrences.getEmail()},${await Sharedprefrences.getProfilePic()},"
                                 //     "${await Sharedprefrences.getPincode()}, ${await Sharedprefrences.getBirthdate()}");
                                 await fetchData();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AddressPage()));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             const AddressPage()));
                               }
                             }
                           },

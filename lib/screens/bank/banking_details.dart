@@ -18,6 +18,7 @@ class BankingDetails extends StatefulWidget {
 }
 
 class _BankingDetailsState extends State<BankingDetails> {
+  var bankData;
   bool isServicePresent = false;
   int id = 0;
   int defaultTransaction = 1;
@@ -40,7 +41,7 @@ class _BankingDetailsState extends State<BankingDetails> {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      var bankData = jsonData['data'][0];
+      bankData = jsonData['data'][0];
       id = bankData['id'] == 0 ? '' : bankData['id'];
       upiId = bankData['upi_id'].toString() == "null" ? '' : bankData['upi_id'];
       bankName = bankData['bank_name'].toString() == "null"
@@ -106,8 +107,16 @@ class _BankingDetailsState extends State<BankingDetails> {
         tokenRefreshed ? updateDefaultBankOption(id):null;
       }
     } else {
-      ScaffoldSnackbar.of(context).show("Something Went Wrong Please Try Again!");
       print('Request failed with status: ${response.statusCode}.');
+      print('bankdata is $bankData');
+      if(bankData == null){
+        ScaffoldSnackbar.of(context).show(
+            "key_Please_Add_Bank_Details!".tr);
+      }
+      else {
+        ScaffoldSnackbar.of(context).show(
+            "Something Went Wrong Please Try Again!");
+      }
     }
   }
 
