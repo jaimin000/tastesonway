@@ -127,6 +127,7 @@ class _EditCouponState extends State<EditCoupon> {
       ScaffoldMessenger.of(context).showSnackBar(
          SnackBar(content: Text(data['message'])),
       );
+      Navigator.pop(context,'true');
       print(data);
     }
     else if(response.statusCode == 401) {
@@ -641,7 +642,6 @@ class _EditCouponState extends State<EditCoupon> {
                                   // } else {
                                   _formKey.currentState?.save();
                                   updateCoupon();
-                                  Navigator.pop(context,'true');
                                 }
                               },
                               child: Card(

@@ -242,8 +242,7 @@ class _DiscountPageState extends State<DiscountPage> {
                     apiData.isNotEmpty ?
                     CarouselSlider(
                       options: CarouselOptions(
-                        initialPage: 0,
-                        enableInfiniteScroll: false, // Set enableInfiniteScroll to false if there is only one item
+                        enableInfiniteScroll: false,
                         height: MediaQuery.of(context).size.height / 2.3,
                         onPageChanged: (i, r) {
                           setState(() {

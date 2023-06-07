@@ -707,11 +707,11 @@ class _AddressPageState extends State<AddressPage> {
                                             isLoading = true;
                                           });
                                           await fetchData();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Questions()));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             const Questions()));
                                         }
                                       },
                                       child: Card(

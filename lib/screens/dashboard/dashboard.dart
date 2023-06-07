@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
@@ -15,6 +18,7 @@ import '../../utils/snackbar.dart';
 import '../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../menu/text-image menu/create_menu1.dart';
+import '../register/language screen.dart';
 import '../undermaintenance.dart';
 
 class Dashboard extends StatefulWidget {
@@ -155,8 +159,44 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
+  Future updateDeviceToken(deviceToken,deviceId,platform) async {
+    String token = await Sharedprefrences.getToken() ?? "";
+    final response = await http.post(
+      Uri.parse("$baseUrl/update-user-device"),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },body: {
+      'device_token': deviceToken,
+      'device_id': deviceId,
+      'platform': platform,
+    }
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      print(jsonData);
+    } else if (response.statusCode == 401) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
+        refreshCounter++;
+        bool tokenRefreshed = await getNewToken(context);
+        tokenRefreshed ? updateDeviceToken(deviceToken,deviceId,platform) : null;
+      }
+    } else {
+      print('refresh token failed');
+      print('Request failed with status: ${response.statusCode}.');
+    }
+  }
+
+  initNotification() {
+    FirebaseMessaging.instance.getToken().then((token) async {
+      await updateDeviceToken(
+          token, await getDeviceId(), Platform.isAndroid ? '1' : '2');
+    });
+  }
+
   @override
   void initState() {
+    initNotification();
     fetchProfile();
     fetchData();
     super.initState();

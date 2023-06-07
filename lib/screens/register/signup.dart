@@ -292,6 +292,8 @@ class _SignupState extends State<Signup> {
       ownerAddress = json['data'][0]['owner_address'];
       ScaffoldSnackbar.of(context).show(message);
       if (profileStatus != 1 && ownerAddress != null) {
+        Sharedprefrences.setAddressDetailAdded(true);
+        Sharedprefrences.setPersonalDetailAdded(true);
         Get.offAll(const Home());
       } else {
         Navigator.pushReplacement(

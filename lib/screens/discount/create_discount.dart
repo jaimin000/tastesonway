@@ -110,14 +110,14 @@ class _CreateDiscountState extends State<CreateDiscount> {
     });
     print(response.body);
     if (response.statusCode == 200) {
-      setState(() {
-        isLoading = false;
-      });
       final data = json.decode(response.body);
       print(data);
       ScaffoldMessenger.of(context).showSnackBar(
          SnackBar(content: Text(data['message'])),
       );
+      setState(() {
+        isLoading = false;
+      });
     }
     else if(response.statusCode == 401) {
       print("refresh token called");
