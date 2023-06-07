@@ -9,6 +9,7 @@ import 'package:tastesonway/screens/register/questions.dart';
 import 'package:tastesonway/screens/register/searchLocation.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import '../../apiServices/api_service.dart';
+import '../../models/dropdown.dart';
 import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
 
@@ -21,7 +22,6 @@ class AddressPage extends StatefulWidget {
 
 class _AddressPageState extends State<AddressPage> {
   int refreshCounter = 0;
-
   late GoogleMapController _mapController;
   bool _isLoading = true;
   bool _isLocationConfirm = false;
@@ -34,6 +34,9 @@ class _AddressPageState extends State<AddressPage> {
   String sublocality = "";
   String locality = "";
   String message="";
+  String cityId = '';
+  String stateId = '';
+  String areaName = '';
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
   var addressType = [
@@ -42,6 +45,119 @@ class _AddressPageState extends State<AddressPage> {
     'Other',
   ];
   String selectedaddressType = 'Home';
+
+  List<DropdownItem> _dropdownStates = [];
+  List<DropdownItem> _dropdownCities = [];
+  // List<DropdownItem> _dropdownArea = [];
+
+  DropdownItem? _selectedState;
+  DropdownItem? _selectedCity;
+  // DropdownItem? _selectedArea;
+
+  Future<List<DropdownItem>> fetchStates() async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+    await http.post(Uri.parse("$baseUrl/get-states"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "country_id": "1"
+    });
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final statesData = data['data'];
+      List<DropdownItem> items = [];
+
+      if (statesData is List) {
+        // API response is an array
+        for (var item in statesData) {
+          items
+              .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+        }
+      } else if (statesData is Map<String, dynamic>) {
+        // API response is a single object
+        items.add(DropdownItem(
+            id: statesData['id'].toString(), name: statesData['name']));
+      }
+      return items;
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  Future<List<DropdownItem>> fetchCities(String stateId) async {
+    String token = await Sharedprefrences.getToken();
+    final response =
+    await http.post(Uri.parse("$baseUrl/get-cities"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
+      "state_id": stateId
+    });
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final cityData = data['data'];
+      List<DropdownItem> items = [];
+
+      if (cityData is List) {
+        // API response is an array
+        for (var item in cityData) {
+          items
+              .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+        }
+        setState(() {
+        });
+      } else if (cityData is Map<String, dynamic>) {
+        // API response is a single object
+        items.add(DropdownItem(
+            id: cityData['id'].toString(), name: cityData['name']));
+        setState(() {
+        });
+      }
+      print("items $items");
+      _dropdownCities = items;
+      setState(() {
+      });
+      return items;
+
+    } else {
+      throw Exception('Failed to fetch data from API');
+    }
+  }
+
+  // Future<List<DropdownItem>> fetchCityArea(String cityId) async {
+  //   String token = await Sharedprefrences.getToken();
+  //   final response =
+  //   await http.post(Uri.parse("$baseUrl/get-city-area"), headers: {
+  //     'Authorization': 'Bearer $token',
+  //   }, body: {
+  //     "city_id": cityId
+  //   });
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     final cityAreaData = data['data'];
+  //     print("cityAreaData: $cityAreaData");
+  //     List<DropdownItem> items = [];
+  //
+  //     if (cityAreaData is List) {
+  //       // API response is an array
+  //       for (var item in cityAreaData) {
+  //         items
+  //             .add(DropdownItem(id: item['id'].toString(), name: item['name']));
+  //       }
+  //     } else if (cityAreaData is Map<String, dynamic>) {
+  //       // API response is a single object
+  //       items.add(DropdownItem(
+  //           id: cityAreaData['id'].toString(), name: cityAreaData['name']));
+  //     }
+  //     // print("items $items");
+  //     setState(() {
+  //       // Update the city list in the UI
+  //       _dropdownArea = items;
+  //     });
+  //     return items;
+  //   } else {
+  //     throw Exception('Failed to fetch data from API');
+  //   }
+  // }
 
   void _getCurrentLocation() async {
     setState(() {
@@ -115,7 +231,10 @@ class _AddressPageState extends State<AddressPage> {
         headers: {'Authorization': 'Bearer $token',
         },
         body: {
-          "city_name": locality,
+          "office_name": ownerName ?? '',
+          "city_id": cityId ?? '',
+          "state_id": stateId ?? '',
+          // "area": areaName ?? '',
           "area":sublocality,
           "address": address,
           "land_mark": landmark,
@@ -125,16 +244,6 @@ class _AddressPageState extends State<AddressPage> {
           "longitude":"${latLng.longitude}"
         }
     );
-    print({
-      "city_name": locality,
-      "area":sublocality,
-      "address": address,
-      "land_mark": landmark,
-      "pin_code": pincode,
-      "address_type": "$type",
-      "latitude":"${latLng.latitude}",
-      "longitude":"${latLng.longitude}"
-    });
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       Sharedprefrences.setAddressDetailAdded(true);
@@ -171,103 +280,114 @@ class _AddressPageState extends State<AddressPage> {
   void initState() {
     super.initState();
     _getCurrentLocation();
+    fetchStates().then((items) {
+      setState(() {
+        _dropdownStates = items;
+        _dropdownCities = [];
+        // _dropdownArea=[];
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: isLoading ? Center(child: CircularProgressIndicator(color: orangeColor(),),):SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  _isLoading
-                      ? Center(
-                          child: CircularProgressIndicator(
-                          color: orangeColor(),
-                        ))
-                      : GoogleMap(
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId("user_location"),
-                              position:
-                                  LatLng(latLng.latitude, latLng.longitude),
-                            )
-                          },
-                          onMapCreated: (controller) =>
-                              _mapController = controller,
-                          mapType: MapType.normal,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(latLng.latitude, latLng.longitude),
-                            zoom: 15,
-                          ),
+      body: isLoading ? Center(child: CircularProgressIndicator(color: orangeColor(),),):
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                _isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: orangeColor(),
+                      ))
+                    : GoogleMap(
+                        markers: {
+                          Marker(
+                            markerId: const MarkerId("user_location"),
+                            position:
+                                LatLng(latLng.latitude, latLng.longitude),
+                          )
+                        },
+                        onMapCreated: (controller) =>
+                            _mapController = controller,
+                        mapType: MapType.normal,
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(latLng.latitude, latLng.longitude),
+                          zoom: 15,
                         ),
-                ],
+                      ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: cardColor(),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: cardColor(),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+            child: Column(
+              children: [
+                Text(
+                  "key_Select_delivery_location".tr,
+                  style: cardTextStyle16(),
                 ),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    "key_Select_delivery_location".tr,
-                    style: cardTextStyle16(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.location_pin,
-                        size: 25,
-                        color: orangeColor(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.location_pin,
+                      size: 25,
+                      color: orangeColor(),
+                    ),
+                    _isLoading
+                        ? SizedBox(
+                            width: 150,
+                            child: LinearProgressIndicator(
+                              color: orangeColor(),
+                            ))
+                        : Text(_currentAddress,
+                            overflow: TextOverflow.ellipsis,
+                            style: mTextStyle16()),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: orangeColor(),
                       ),
-                      _isLoading
-                          ? SizedBox(
-                              width: 150,
-                              child: LinearProgressIndicator(
-                                color: orangeColor(),
-                              ))
-                          : Text(_currentAddress,
-                              overflow: TextOverflow.ellipsis,
-                              style: mTextStyle16()),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: orangeColor(),
-                        ),
-                        child: Text(
-                          'key_Edit'.tr,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SearchLocation())).then((value) {
-                            if (value == 'true') {
-                              _getCurrentLocation();
-                            }
-                          });
-                        },
+                      child: Text(
+                        'key_Edit'.tr,
+                        style: const TextStyle(fontSize: 16),
                       ),
-                    ],
-                  ),
-                  _isLocationConfirm
-                      ? Form(
-                          key: _formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Column(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SearchLocation())).then((value) {
+                          if (value == 'true') {
+                            _getCurrentLocation();
+                          }
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                _isLocationConfirm
+                    ? Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: SizedBox(
+                            height: 300,
+                            child: ListView(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
                               children: [
                                 SizedBox(
                                   //height: 40,
@@ -412,6 +532,118 @@ class _AddressPageState extends State<AddressPage> {
                                 const SizedBox(
                                   height: 3,
                                 ),
+                                DropdownButtonFormField<DropdownItem>(
+                                  value: _selectedState,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      stateId = "${newValue?.id}";
+                                      _selectedState = newValue;
+                                      _dropdownCities =[];
+                                      // _dropdownArea =[];
+                                      cityId = "";
+                                      areaName = "";
+                                      print("stateId $stateId");
+                                    });
+
+                                    fetchCities(stateId).then((value) {
+                                      setState(() {});
+                                    });
+                                  },
+                                  items:_dropdownStates.isNotEmpty? _dropdownStates.map((item1) {
+                                    return DropdownMenuItem<DropdownItem>(
+                                      value: item1,
+                                      child: Text("${item1.name}"),
+                                    );
+                                  }).toList():[],
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide.none,
+                                    ), // Remove the border
+                                    filled: true,
+                                    hintText: "key_State".tr,
+                                    fillColor: inputColor(), // Set the background color
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0,
+                                      vertical: 12.0,
+                                    ), // Adjust the content padding
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                DropdownButtonFormField<DropdownItem>(
+                                  value:_selectedCity,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      cityId = "${newValue?.id}";
+                                      areaName = "";
+                                      _selectedCity = newValue;
+                                      print("cityId $cityId");
+                                    });
+                                    // fetchCityArea("${_selectedCity?.id}")
+                                    //     .then((value) => setState(() {}));
+                                  },
+                                  items: _dropdownCities.isNotEmpty
+                                  // No items in the dropdown
+                                      ? _dropdownCities.map((item2) {
+                                    return DropdownMenuItem<DropdownItem>(
+                                      value: item2,
+                                      child: Text("${item2.name}"),
+                                    );
+                                  }).toList() : [],
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide:
+                                        BorderSide.none), // Remove the border
+                                    filled: true,
+                                    hintText: "key_City".tr,
+                                    fillColor:
+                                    inputColor(), // Set the background color
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0,
+                                        vertical:
+                                        12.0), // Adjust the content padding
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                // DropdownButtonFormField<DropdownItem>(
+                                //   value: _selectedArea,
+                                //   onChanged: (newValue) {
+                                //     setState(() {
+                                //       areaName = "${newValue?.name}";
+                                //       _selectedArea = newValue;
+                                //       print("areaname $areaName ");
+                                //     });
+                                //   },
+                                //   items: _dropdownArea.isNotEmpty
+                                //       ? _dropdownArea.map((item3) {
+                                //     return DropdownMenuItem<DropdownItem>(
+                                //       value: item3,
+                                //       child: Text("${item3.name}"),
+                                //     );
+                                //   }).toList():[],
+                                //   decoration: InputDecoration(
+                                //     border: OutlineInputBorder(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         borderSide:
+                                //         BorderSide.none), // Remove the border
+                                //     filled: true,
+                                //     hintText: "key_Area".tr,
+                                //     fillColor:
+                                //     inputColor(), // Set the background color
+                                //     contentPadding: const EdgeInsets.symmetric(
+                                //         horizontal: 16.0,
+                                //         vertical:
+                                //         12.0), // Adjust the content padding
+                                //   ),
+                                // ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
                                 SizedBox(
                                   height: 45,
                                   width: MediaQuery.of(context).size.width,
@@ -462,28 +694,6 @@ class _AddressPageState extends State<AddressPage> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 3,
-                                ),
-                                // Padding(
-                                //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                //   child: SizedBox(
-                                //     width: MediaQuery.of(context).size.width,
-                                //     child: ElevatedButton(
-                                //       style: ElevatedButton.styleFrom(
-                                //         primary: orangeColor(),
-                                //       ),
-                                //       child: const Text(
-                                //         'Save Location',
-                                //         style: TextStyle(fontSize: 16),
-                                //       ),
-                                //       onPressed: () {
-                                //         Navigator.push(context,
-                                //             MaterialPageRoute(builder: (context) =>  const Question1()));
-                                //       },
-                                //     ),
-                                //   ),
-                                // ),
-                                const SizedBox(
                                   height: 5,
                                 ),
                                 SizedBox(
@@ -497,11 +707,11 @@ class _AddressPageState extends State<AddressPage> {
                                             isLoading = true;
                                           });
                                           await fetchData();
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             const Questions()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const Questions()));
                                         }
                                       },
                                       child: Card(
@@ -522,35 +732,35 @@ class _AddressPageState extends State<AddressPage> {
                               ],
                             ),
                           ),
-                        )
-                      : SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                _isLocationConfirm = true;
-                              });
-                            },
-                            child: Card(
-                                shadowColor: Colors.black,
-                                color: orangeColor(),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      )
+                    : SizedBox(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isLocationConfirm = true;
+                            });
+                          },
+                          child: Card(
+                              shadowColor: Colors.black,
+                              color: orangeColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'key_Confirm_Location'.tr,
+                                  style: mTextStyle14(),
                                 ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'key_Confirm_Location'.tr,
-                                    style: mTextStyle14(),
-                                  ),
-                                )),
-                          )),
-                ],
-              ),
+                              )),
+                        )),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

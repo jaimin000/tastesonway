@@ -148,7 +148,7 @@ class _ViewAddressState extends State<ViewAddress> {
         "address": address,
         "land_mark": landMark,
         "pin_code": "$pincode",
-        "address_type": "1",
+        // "address_type": "1",
         "latitude": latitude,
         "longitude": longitude,
         "address_type": "$type",
