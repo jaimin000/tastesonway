@@ -589,7 +589,7 @@ class _ProfileState extends State<Profile> {
                                   'com.testing.tastesonway.ios.android',
                             ),
                             iosParameters: const IOSParameters(
-                                bundleId: 'com.tastesonway.ownerapp.ios',
+                                bundleId: 'com.testing.tastesonway.ios.android.ios',
                                 appStoreId: '1581955986',
                                 minimumVersion: '1.0.0'),
                           );

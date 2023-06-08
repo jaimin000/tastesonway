@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
@@ -192,6 +193,39 @@ class _DashboardState extends State<Dashboard> {
       await updateDeviceToken(
           token, await getDeviceId(), Platform.isAndroid ? '1' : '2');
     });
+    // if (widget.isFromMain) {
+    //   init();
+    //   checkForInitialMessage();
+    //   registerNotification();
+    //   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //     print(message.notification!.title);
+    //     print(message.data['order_id']);
+    //     print(message.data['Bank_Status']);
+    //     print(message.data['notification_type']);
+    //     if (message != null) {
+    //       if (message.data != null) {
+    //         if (message.data['order_id'] != null) {
+    //           SchedulerBinding.instance.addPostFrameCallback((_) {
+    //             Navigator.of(GlobalVariable.navState.currentContext)
+    //                 .push(MaterialPageRoute(
+    //                 builder: (context) => OrderReceivedDetailsScreen(
+    //                   orderID: int.parse(
+    //                       message.data['order_id'].toString()),
+    //                 )))
+    //                 .whenComplete(getDashbaordDetails);
+    //           });
+    //         } else if (message.data['notification_type'] != null) {
+    //           SchedulerBinding.instance.addPostFrameCallback((_) {
+    //             Navigator.of(GlobalVariable.navState.currentContext)
+    //                 .push(MaterialPageRoute(
+    //                 builder: (context) => ReviewHistoryScreen()))
+    //                 .whenComplete(getDashbaordDetails);
+    //           });
+    //         }
+    //       }
+    //     }
+    //   });
+    // }
   }
 
   @override

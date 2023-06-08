@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
+import 'package:tastesonway/screens/notificationService.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
@@ -20,26 +22,38 @@ import 'screens/profile/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  print(message.notification!.title);
+  print(message.data['Bank_Status']);
+  print(message.data['notification_type']);  // await Navigator.push(
+  //     NavigationService.navigatorKey.currentContext,
+  //     MaterialPageRoute(
+  //         builder: (context) => NotificationScreen(isFromBackground: true)));
+  await NotificationService().setupFlutterNotifications();
+  NotificationService().showFlutterNotification(message);
+  NotificationService().onNotificationClick();
+}
+
+// Future<RemoteMessage> initialMessage;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseApi().initNotifications();
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
+  // await FirebaseApi().initNotifications();
+  // initialMessage = FirebaseMessaging.instance.getInitialMessage();
+  await NotificationService().init();
+  await NotificationService().setupFlutterNotifications();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // HttpOverrides.global = new MyHttpOverrides();
+  // var token = await SharedPrefrences.getToken();
+  NotificationService().onNotificationClick();
+
 
   var isAddressStored = await Sharedprefrences.getAddressDetailAdded() ?? false;
-  var isPersonalDetailStored =
-      await Sharedprefrences.getPersonalDetailAdded() ?? false;
+  var isPersonalDetailStored = await Sharedprefrences.getPersonalDetailAdded() ?? false;
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
