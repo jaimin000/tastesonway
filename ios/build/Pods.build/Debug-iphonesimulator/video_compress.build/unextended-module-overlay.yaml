@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/video_compress.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/video_compress/video_compress.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "video_compress-Swift.h",
+      'external-contents': "/Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/video_compress.build/unextended-interface-header.h",
+    }]
+    }]
+}
