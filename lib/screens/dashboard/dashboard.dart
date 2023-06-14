@@ -10,6 +10,7 @@ import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
+import 'package:tastesonway/screens/notificationService.dart';
 import 'package:tastesonway/screens/orders/history/orderhistory.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
@@ -23,7 +24,9 @@ import '../register/language screen.dart';
 import '../undermaintenance.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  final bool isFromMain;
+
+  const Dashboard({Key? key, this.isFromMain = false}) : super(key: key);
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -160,18 +163,16 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  Future updateDeviceToken(deviceToken,deviceId,platform) async {
+  Future updateDeviceToken(deviceToken, deviceId, platform) async {
     String token = await Sharedprefrences.getToken() ?? "";
-    final response = await http.post(
-      Uri.parse("$baseUrl/update-user-device"),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },body: {
+    final response =
+        await http.post(Uri.parse("$baseUrl/update-user-device"), headers: {
+      'Authorization': 'Bearer $token',
+    }, body: {
       'device_token': deviceToken,
       'device_id': deviceId,
       'platform': platform,
-    }
-    );
+    });
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
       print(jsonData);
@@ -180,7 +181,9 @@ class _DashboardState extends State<Dashboard> {
       if (refreshCounter == 0) {
         refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ? updateDeviceToken(deviceToken,deviceId,platform) : null;
+        tokenRefreshed
+            ? updateDeviceToken(deviceToken, deviceId, platform)
+            : null;
       }
     } else {
       print('refresh token failed');
@@ -189,10 +192,17 @@ class _DashboardState extends State<Dashboard> {
   }
 
   initNotification() {
+    print('init notification called');
     FirebaseMessaging.instance.getToken().then((token) async {
       await updateDeviceToken(
           token, await getDeviceId(), Platform.isAndroid ? '1' : '2');
     });
+    if (widget.isFromMain) {
+      NotificationService().init();
+      NotificationService().setupFlutterNotifications();
+      NotificationService().onMessageNotification();
+      NotificationService().onNotificationClick();
+    }
     // if (widget.isFromMain) {
     //   init();
     //   checkForInitialMessage();
@@ -1124,73 +1134,35 @@ class _DashboardState extends State<Dashboard> {
               child: SizedBox(
                 height: 130,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Card(
+                    color: const Color.fromRGBO(53, 56, 66, 1),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Container(
+                      width: 330,
+                      height: 130,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                              './assets/images/dashboard/Rectangle 39389-1.png'),
+                          fit: BoxFit.fill,
+                          alignment: Alignment.topCenter,
                         ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389-1.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: SizedBox(
-                                width: 150,
-                                child: Text("key_Earning_Summary".tr,
-                                    style: cardTextStyle20()),
-                              ),
-                            ),
-                          ),
-                        ), //
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Card(
-                        color: const Color.fromRGBO(53, 56, 66, 1),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: SizedBox(
+                            width: 150,
+                            child: Text("key_Earning_Summary".tr,
+                                style: cardTextStyle20()),
+                          ),
                         ),
-                        child: Container(
-                          width: 330,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                  './assets/images/dashboard/Rectangle 39389-1.png'),
-                              fit: BoxFit.fill,
-                              alignment: Alignment.topCenter,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: SizedBox(
-                                width: 150,
-                                child: Text("key_Expenses_Summary".tr,
-                                    style: cardTextStyle20()),
-                              ),
-                            ),
-                          ),
-                        ), //
                       ),
-                    ],
+                    ), //
                   ),
                 ),
               ),

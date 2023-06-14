@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/google_maps_flutter_ios.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/FLTGoogleMapJSONConversions.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/FLTGoogleMapJSONConversions.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/google_maps_flutter_ios/google_maps_flutter_ios-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/FLTGoogleMapJSONConversions.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/FLTGoogleMapJSONConversions.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \

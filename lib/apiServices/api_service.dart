@@ -10,13 +10,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/register/language screen.dart';
 import '../utils/sharedpreferences.dart';
 
-const localUrl = "http://192.168.1.26:24/api/v2";
+const localUrl = "https://9081dd1d636671.lhr.life/api/v2";
+const userUrl = "https://9081dd1d636671.lhr.life/api/users";
 const devUrl = "https://dev-api.tastesonway.com/api/v2";
-const storyUrl = "https://dev-api.tastesonway.com/api";
+const storyUrl = "https://api.tastesonway.com/api";
 const liveUrl = "https://api.tastesonway.com/api/v2";
 
 const baseUrl = liveUrl;
-
 String device_id = '';
 
 // Future<String> getToken() async {

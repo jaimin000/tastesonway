@@ -29,6 +29,7 @@ class _YourMenusState extends State<YourMenus> {
   bool isLoading = true;
   String searchQuery = '';
   bool isServicePresent = false;
+  String text = '';
 
   Future fetchMenu(int step) async {
     String token = await Sharedprefrences.getToken();
@@ -57,7 +58,7 @@ class _YourMenusState extends State<YourMenus> {
         setState(() {
           isServicePresent = true;
         });
-      } else if(!isServicePresent) {
+      } else if (!isServicePresent) {
         print("refresh token called");
         if (refreshCounter == 0) {
           refreshCounter++;
@@ -462,14 +463,13 @@ class _YourMenusState extends State<YourMenus> {
                                                                       GestureDetector(
                                                                           onTap:
                                                                               () async {
-                                                                            getMenuItem(filteredMenuList[index]['id']);
-                                                                            String
                                                                                 text =
-                                                                                "🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
-                                                                                "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
-                                                                                "📱 Sent from Tastes on Way app";
-                                                                            showTextMenuDialog(context,
-                                                                                text);
+                                                                                '';
+                                                                            await getMenuItem(filteredMenuList[index]['id']);
+                                                                              text = "🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
+                                                                                  "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                                                                                  "📱 Sent from Tastes on Way app";
+                                                                            showTextMenuDialog(context, text);
                                                                           },
                                                                           child:
                                                                               const Icon(Icons.remove_red_eye_sharp)),
@@ -631,14 +631,14 @@ class _YourMenusState extends State<YourMenus> {
                                                                       GestureDetector(
                                                                           onTap:
                                                                               () async {
-                                                                            getMenuItem(filteredMenuList[index]['id']);
-                                                                            String
+                                                                                text =
+                                                                                    '';
+                                                                            await getMenuItem(filteredMenuList[index]['id']);
                                                                                 text =
                                                                                 "🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
                                                                                 "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
                                                                                 "📱 Sent from Tastes on Way app";
-                                                                            showTextMenuDialog(context,
-                                                                                text);
+                                                                            showTextMenuDialog(context, text);
                                                                           },
                                                                           child:
                                                                               const Icon(Icons.remove_red_eye_sharp)),

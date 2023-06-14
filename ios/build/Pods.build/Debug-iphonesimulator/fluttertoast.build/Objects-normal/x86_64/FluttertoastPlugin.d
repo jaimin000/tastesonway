@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/fluttertoast.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/fluttertoast-8.2.1/ios/Classes/FluttertoastPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/ios/Classes/FluttertoastPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/fluttertoast/fluttertoast-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/fluttertoast-8.2.1/ios/Classes/FluttertoastPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/ios/Classes/FluttertoastPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \

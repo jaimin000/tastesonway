@@ -177,7 +177,7 @@ class _CreateMenu1State extends State<CreateMenu1> {
                         height: 25,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Card(
@@ -197,9 +197,7 @@ class _CreateMenu1State extends State<CreateMenu1> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                           Card(
                             shadowColor: Colors.black,
                             color: const Color.fromRGBO(53, 56, 66, 1),
@@ -217,9 +215,7 @@ class _CreateMenu1State extends State<CreateMenu1> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                           Card(
                             shadowColor: Colors.black,
                             color: const Color.fromRGBO(53, 56, 66, 1),
@@ -237,9 +233,7 @@ class _CreateMenu1State extends State<CreateMenu1> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                         ],
                       ),
                       const SizedBox(

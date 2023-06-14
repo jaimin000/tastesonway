@@ -151,7 +151,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                         height: 25,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Card(
@@ -171,9 +171,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                           Card(
                             shadowColor: Colors.black,
                             color: const Color.fromRGBO(53, 56, 66, 1),
@@ -191,9 +189,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                           Card(
                             shadowColor: Colors.black,
                             color: orangeColor(),
@@ -211,9 +207,7 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                                   )),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
+
                         ],
                       ),
                       const SizedBox(

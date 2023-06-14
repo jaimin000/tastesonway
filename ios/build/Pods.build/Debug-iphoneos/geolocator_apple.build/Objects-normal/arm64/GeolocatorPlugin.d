@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/geolocator_apple.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/GeolocatorPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/GeolocatorPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/geolocator_apple/geolocator_apple-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/GeolocatorPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/GeolocatorPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \
@@ -20,16 +20,16 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterViewController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/GeolocatorPlugin_Test.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Handlers/GeolocationHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Handlers/LocationAccuracyHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Handlers/PermissionHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Constants/ErrorCodes.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Handlers/PositionStreamHandler.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/ActivityTypeMapper.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/AuthorizationStatusMapper.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/LocationAccuracyMapper.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/LocationDistanceMapper.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/LocationMapper.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Utils/PermissionUtils.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.5/ios/Classes/Handlers/LocationServiceStreamHandler.h
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/GeolocatorPlugin_Test.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Handlers/GeolocationHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Handlers/LocationAccuracyHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Handlers/PermissionHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Constants/ErrorCodes.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Handlers/PositionStreamHandler.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/ActivityTypeMapper.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/AuthorizationStatusMapper.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/LocationAccuracyMapper.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/LocationDistanceMapper.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/LocationMapper.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Utils/PermissionUtils.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/geolocator_apple-2.2.7/ios/Classes/Handlers/LocationServiceStreamHandler.h

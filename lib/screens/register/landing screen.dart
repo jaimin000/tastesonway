@@ -188,12 +188,16 @@ class _LandingScreenState extends State<LandingScreen> {
                           );
                           //Sharedprefrences.isFirstTimeSet(false);
                         },
-                        child:  Text(
-                          'key_Get_Stated'.tr,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
+                        child:  FittedBox(
+                          fit:BoxFit.fitWidth,
+                          child: Text(
+                            'key_Get_Stated'.tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ))),
                 const SizedBox(

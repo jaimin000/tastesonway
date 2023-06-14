@@ -22,15 +22,15 @@ class Stories extends StatefulWidget {
 class _StoriesState extends State<Stories> {
   //create story
   late File _image;
-  late File _video;  int refreshCounter = 0;
-
+  late File _video;
+  int refreshCounter = 0;
 
 
   Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
       source: source,
-      imageQuality: 70,
+      imageQuality: 100,
       maxWidth: 800,
       maxHeight: 800,
     );
@@ -466,8 +466,7 @@ class _StoriesState extends State<Stories> {
                                   "Photos"
                               ? NetworkImage(data[reversedIndex - 1]['name'],
                                   scale: 0.5)
-                              : const NetworkImage(
-                                  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bW9kZWxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'),
+                              : null,
                           radius: 35,
                         ),
                       ),
@@ -475,10 +474,10 @@ class _StoriesState extends State<Stories> {
                     const SizedBox(
                       height: 2,
                     ),
-                    Text(
-                      data[reversedIndex - 1]['id'].toString(),
-                      style: mTextStyle14(),
-                    ),
+                    // Text(
+                    //   data[reversedIndex - 1]['id'].toString(),
+                    //   style: mTextStyle14(),
+                    // ),
                   ],
                 ),
               );

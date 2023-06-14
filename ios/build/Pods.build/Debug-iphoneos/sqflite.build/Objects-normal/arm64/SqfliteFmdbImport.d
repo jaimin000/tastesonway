@@ -1,6 +1,6 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/sqflite.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteFmdbImport.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteFmdbImport.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/sqflite/sqflite-prefix.pch \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FMDB/src/fmdb/FMDB.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/FMDB.build/module.modulemap \

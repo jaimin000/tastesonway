@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl/intl.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../utils/snackbar.dart';
 
@@ -17,9 +17,14 @@ class EditPersonalDetail extends StatefulWidget {
   final String profile;
   final String gender;
   final String dob;
-  const EditPersonalDetail({
-    required this.profile,required this.dob,required this.gender,
-    required this.name,required this.email,required this.pincode});
+
+  const EditPersonalDetail(
+      {required this.profile,
+      required this.dob,
+      required this.gender,
+      required this.name,
+      required this.email,
+      required this.pincode});
 
   @override
   State<EditPersonalDetail> createState() => _EditPersonalDetailState();
@@ -28,6 +33,7 @@ class EditPersonalDetail extends StatefulWidget {
 class _EditPersonalDetailState extends State<EditPersonalDetail> {
   int refreshCounter = 0;
   bool isEditable = false;
+  bool imagePicked = false;
   DateTime? selectedDate;
   File? _image;
   DateTime currentDate = DateTime.now();
@@ -58,10 +64,10 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: currentDate,
-        lastDate: DateTime.now(),
-        firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)),
+      context: context,
+      initialDate: currentDate,
+      lastDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(const Duration(days: 365 * 100)),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -109,34 +115,56 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
 
   Future updateProfile() async {
     String token = await Sharedprefrences.getToken();
-    final response = await http.post(
-        Uri.parse('$baseUrl/kitchen-owner-update-profile'),
-        headers: {'Authorization': 'Bearer $token',
-        },
-        body: {
-          'country_code':await Sharedprefrences.getCountryCode(),
-          'short_code':await Sharedprefrences.getShortCode(),
-          'name':nameController.text.toString(),
-          'email':emailController.text.toString(),
-          'pin_code':pincodeController.text.toString(),
-          'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
-          'gender': gender == 'Male'? '1' : '2',
-        }
+    final request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            '$baseUrl/kitchen-owner-update-profile'),
     );
+    request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+    request.fields['country_code'] = (await Sharedprefrences.getCountryCode())!;
+    request.fields['short_code'] = (await Sharedprefrences.getShortCode())!;
+    request.fields['name'] = nameController.text.toString();
+    request.fields['email'] = emailController.text.toString();
+    request.fields['pin_code'] = pincodeController.text.toString();
+    request.fields['date_of_birth'] = DateFormat('dd-MM-yyyy').format(selectedDate!);
+    request.fields['gender'] = gender == 'Male' ? '1' : '2';
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'avatar',
+        _image!.path,
+      ),
+    );
+    var response = await request.send();
+    final responseData = await response.stream.bytesToString();
+
+    // final response = await http
+    //     .post(Uri.parse('$baseUrl/kitchen-owner-update-profile'), headers: {
+    //   'Authorization': 'Bearer $token',
+    // }, body: {
+    //   'avatar': ,
+    //   'country_code': await Sharedprefrences.getCountryCode(),
+    //   'short_code': await Sharedprefrences.getShortCode(),
+    //   'name': nameController.text.toString(),
+    //   'email': emailController.text.toString(),
+    //   'pin_code': pincodeController.text.toString(),
+    //   'date_of_birth': DateFormat('dd-MM-yyyy').format(selectedDate!),
+    //   'gender': gender == 'Male' ? '1' : '2',
+    // });
+
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-        var message = jsonData['message'];
-        print(message);
-      ScaffoldSnackbar.of(context)
-          .show(message);
-      setState(() {
-      });
-    } else if(response.statusCode == 401) {
-      print("refresh token called");if (refreshCounter == 0) {
+      final jsonData = json.decode(responseData);
+      var message = jsonData['message'];
+      print(message);
+      ScaffoldSnackbar.of(context).show(message);
+      setState(() {});
+    } else if (response.statusCode == 401) {
+      print("refresh token called");
+      if (refreshCounter == 0) {
         refreshCounter++;
         bool tokenRefreshed = await getNewToken(context);
-        tokenRefreshed ?updateProfile():null;}
-    }else {
+        tokenRefreshed ? updateProfile() : null;
+      }
+    } else {
       ScaffoldSnackbar.of(context)
           .show("Something went wrong please try again!");
       print('Request failed with status: ${response.statusCode}.');
@@ -157,7 +185,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
     emailController.text = widget.email;
     pincodeController.text = widget.pincode;
     selectedDate = FormateDate(widget.dob.toString());
-    gender = widget.gender == '1'? 'Male':'Female';
+    gender = widget.gender == '1' ? 'Male' : 'Female';
     super.initState();
   }
 
@@ -173,11 +201,15 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
           style: cardTitleStyle20(),
         ),
         actions: [
-          !isEditable ? IconButton(onPressed: () {
-            isEditable = true;
-            setState(() {
-            });
-          },icon: const Icon(Icons.edit),) : SizedBox()
+          !isEditable
+              ? IconButton(
+                  onPressed: () {
+                    isEditable = true;
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.edit),
+                )
+              : SizedBox()
         ],
       ),
       body: ListView(
@@ -195,21 +227,32 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                 children: [
                   Center(
                     child: InkWell(
-                      child: CircleAvatar(
-                        radius: 80,
-                        backgroundColor: const Color.fromRGBO(53, 56, 66, 1),
-                        backgroundImage: NetworkImage(widget.profile),
-                         // _image != null ? FileImage(_image!) : null,
-                        child: widget.profile == null
-                            ? const Icon(
-                          Icons.camera_alt_rounded,
-                          color: Colors.red,
-                          size: 35,
-                        )
-                            : null,
-                      ),
+                      child: isEditable
+                          ? CircleAvatar(
+                              radius: 80,
+                              backgroundColor:
+                                  const Color.fromRGBO(53, 56, 66, 1),
+                              backgroundImage: _image != null ? FileImage(_image!) : null,
+                              child: const Icon(
+                                      Icons.camera_alt_rounded,
+                                      color: Colors.red,
+                                      size: 35,
+                                    ),
+                            )
+                          : CircleAvatar(
+                              radius: 80,
+                              backgroundColor:
+                                  const Color.fromRGBO(53, 56, 66, 1),
+                              backgroundImage: NetworkImage(widget.profile),
+                            ),
                       onTap: () async {
-                        isEditable ? await _pickImage(ImageSource.gallery) : null;
+                        _image != null
+                            ? imagePicked = true
+                            : imagePicked = false;
+                        isEditable
+                            ? await _pickImage(ImageSource.gallery)
+                            : null;
+                        setState(() {});
                       },
                     ),
                   ),
@@ -281,7 +324,8 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                           if (value == null || value.isEmpty) {
                             return 'key_Please_Enter_Email'.tr;
                           }
-                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                              .hasMatch(value)) {
                             return 'key_Please_Enter_Valid_Email'.tr;
                           }
                           return null;
@@ -294,6 +338,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         enabled: isEditable,
                         style: const TextStyle(color: Colors.white),
                         cursorColor: Colors.white,
@@ -351,15 +396,20 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                                   return DropdownMenuItem(
                                     value: items,
                                     child: Text(
-                                      items == "Male"? 'key_male'.tr:'key_female'.tr,
+                                      items == "Male"
+                                          ? 'key_male'.tr
+                                          : 'key_female'.tr,
                                       style: inputTextStyle16(),
                                     ),
                                   );
                                 }).toList(),
-                                onChanged: isEditable ? (String? newValue) {
-                                   setState(() { gender = newValue!;
-                                  });
-                                } : null,
+                                onChanged: isEditable
+                                    ? (String? newValue) {
+                                        setState(() {
+                                          gender = newValue!;
+                                        });
+                                      }
+                                    : null,
                               ),
                             ],
                           ),
@@ -371,7 +421,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                       width: MediaQuery.of(context).size.width,
                       child: InkWell(
                         onTap: () {
-                          isEditable? _selectDate(context) : null;
+                          isEditable ? _selectDate(context) : null;
                         },
                         child: SizedBox(
                           height: 45,
@@ -385,7 +435,7 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     'key_Select_Your_Birth_Date'.tr,
@@ -394,8 +444,8 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                                   Text(
                                     selectedDate == null
                                         ? ''
-                                        :DateFormat('dd-MM-yyyy')
-                                        .format(selectedDate!),
+                                        : DateFormat('dd-MM-yyyy')
+                                            .format(selectedDate!),
                                     style: inputTextStyle16(),
                                   ),
                                 ],
@@ -414,24 +464,27 @@ class _EditPersonalDetailState extends State<EditPersonalDetail> {
                             // if (_image == null) {
                             //   _showErrorDialog(context);
                             // }else
-                              if(selectedDate == null){
+                            if (selectedDate == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("key_Please_Enter_DateOfBirth".tr),
+                                  content:
+                                      Text("key_Please_Enter_DateOfBirth".tr),
                                 ),
                               );
-                            }
-                            else {
+                            } else {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState?.save();
                                 print({
-                                  'country_code':await Sharedprefrences.getCountryCode(),
-                                  'short_code':await Sharedprefrences.getShortCode(),
-                                  'name':nameController.text.toString(),
-                                  'email':emailController.text.toString(),
-                                  'pin_code':pincodeController.text.toString(),
-                                  'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
-                                  'gender': gender == 'Male'? '1' : '2',
+                                  'country_code':
+                                      await Sharedprefrences.getCountryCode(),
+                                  'short_code':
+                                      await Sharedprefrences.getShortCode(),
+                                  'name': nameController.text.toString(),
+                                  'email': emailController.text.toString(),
+                                  'pin_code': pincodeController.text.toString(),
+                                  'date_of_birth': DateFormat('dd-MM-yyyy')
+                                      .format(selectedDate!),
+                                  'gender': gender == 'Male' ? '1' : '2',
                                 });
                                 // Sharedprefrences.setFullName(name);
                                 // Sharedprefrences.setProfilePic(_image.toString());

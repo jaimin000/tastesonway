@@ -1,13 +1,19 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:tastesonway/screens/orders/order_details.dart';
+import 'package:tastesonway/screens/review%20history/review_history.dart';
+import 'package:tastesonway/utils/global_variable.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
 // import '../screens/notification/notification_screen.dart';
 // import 'navigation_service.dart';
 
 class NotificationService {
   static final NotificationService _notificationService =
-  NotificationService._internal();
+      NotificationService._internal();
 
   factory NotificationService() {
     return _notificationService;
@@ -16,12 +22,12 @@ class NotificationService {
   NotificationService._internal();
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
   final AndroidNotificationChannel channel = AndroidNotificationChannel(
     'Tastesonway Owner', // id
-    'Importance Notifications', // title
+    'High Importance Notifications', // title
     description:
-    'This channel is used for important notifications.', // description
+        'This channel is used for important notifications.', // description
     importance: Importance.high,
   );
 
@@ -29,6 +35,7 @@ class NotificationService {
 
   Future<String?> getFirebaseToken() async {
     String? firebaseToken = await FirebaseMessaging.instance.getToken();
+    print("this is firebase token:    $firebaseToken");
     return firebaseToken;
   }
 
@@ -38,7 +45,7 @@ class NotificationService {
     }
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     /// Update the iOS foreground notification presentation options to allow
@@ -69,6 +76,7 @@ class NotificationService {
             //      one that already exists in example app.
             icon: '@mipmap/ic_launcher',
           ),
+          iOS: const DarwinNotificationDetails(),
         ),
       );
     }
@@ -76,14 +84,98 @@ class NotificationService {
 
   void onMessageNotification() async {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      print("onMessage: $message");
-      showNotifications(message);
-      onNotificationClick();
+      if(message.notification != null) {
+        print("onMessage: $message");
+        showNotifications(message);
+      }
+      // onNotificationClick(message);
+      // onNotificationClick();
     });
   }
 
+  // navigateOnNotificationCLick(RemoteMessage message) {
+  //   print(message.data.toString());
+  //   print(message.notification!.title);
+  //   print(message.data['order_id']);
+  //   print(message.data['Bank_Status']);
+  //   print(message.data['notification_type']);
+  //   if (message != null) {
+  //     if (message.data != null) {
+  //       if (message.data['order_id'] != null) {
+  //         SchedulerBinding.instance.addPostFrameCallback((_) {
+  //           Navigator.push(
+  //               GlobalVariable.navState.currentContext!,
+  //               MaterialPageRoute(
+  //                   builder: (context) => OrderDetails(
+  //                         id: int.parse(message.data['order_id'].toString()),
+  //                       )));
+  //           // .whenComplete(getDashbaordDetails);
+  //         });
+  //       } else if (message.data['notification_type'] != null) {
+  //         print("dfdfddfdfd");
+  //         SchedulerBinding.instance.addPostFrameCallback((_) {
+  //           Navigator.push(GlobalVariable.navState.currentContext!,
+  //               MaterialPageRoute(builder: (context) => const ReviewHistory()));
+  //           // .whenComplete(getDashbaordDetails);
+  //         });
+  //       } else {
+  //         SchedulerBinding.instance.addPostFrameCallback((_) {
+  //           Navigator.push(GlobalVariable.navState.currentContext!,
+  //               MaterialPageRoute(builder: (context) => ReviewHistory()));
+  //           // .whenComplete(getDashbaordDetails);
+  //         });
+  //       }
+  //     }else {
+  //       SchedulerBinding.instance.addPostFrameCallback((_) {
+  //         Navigator.push(GlobalVariable.navState.currentContext!,
+  //             MaterialPageRoute(builder: (context) => ReviewHistory()));
+  //         // .whenComplete(getDashbaordDetails);
+  //       });
+  //     }
+  //   }
+  // }
+
   Future<void> onNotificationClick() async {
+    print("over here");
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      // FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      print(message);
+
+      if (message != null) {
+        if (message.data != null) {
+          print(message.data.toString());
+          print(message.notification!.title);
+          print(message.data['order_id']);
+          print(message.data['Bank_Status']);
+          print(message.data['notification_type']);
+          if (message.data['order_id'] != null) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.push(
+                  GlobalVariable.navState.currentContext!,
+                  MaterialPageRoute(
+                      builder: (context) => OrderDetails(
+                            id: int.parse(message.data['order_id'].toString()),
+                          )));
+              // .whenComplete(getDashbaordDetails);
+            });
+          } else if (message.data['notification_type'] != null) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.push(
+                  GlobalVariable.navState.currentContext!,
+                  MaterialPageRoute(
+                      builder: (context) => const ReviewHistory()));
+              // .whenComplete(getDashbaordDetails);
+            });
+          } else {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.push(GlobalVariable.navState.currentContext!,
+                  MaterialPageRoute(builder: (context) => ReviewHistory()));
+              // .whenComplete(getDashbaordDetails);
+            });
+          }
+        }
+      }
       // await Navigator.push(NavigationService.navigatorKey.currentContext,
       //     MaterialPageRoute(builder: (context) => NotificationScreen()));
     });
@@ -91,20 +183,20 @@ class NotificationService {
 
   Future<void> init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    // final IOSInitializationSettings initializationSettingsIOS =
-    // IOSInitializationSettings(
-    //   requestSoundPermission: false,
-    //   requestBadgePermission: false,
-    //   requestAlertPermission: false,
-    // );
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
 
     final InitializationSettings initializationSettings =
-    InitializationSettings(
-        android: initializationSettingsAndroid,
-        // iOS: initializationSettingsIOS,
-        macOS: null);
+        InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsIOS,
+            macOS: null);
 
     tz.initializeTimeZones();
 
@@ -113,12 +205,13 @@ class NotificationService {
         onDidReceiveBackgroundNotificationResponse: selectNotification);
   }
 
-  AndroidNotificationDetails _androidNotificationDetails =
-  AndroidNotificationDetails(
+  final AndroidNotificationDetails _androidNotificationDetails =
+      const AndroidNotificationDetails(
     'channel ID',
     'channel name',
+    // icon: '@mipmap/ic_launcher',
     playSound: true,
-    priority: Priority.high,
+    // priority: Priority.high,
     importance: Importance.high,
   );
 
@@ -127,7 +220,7 @@ class NotificationService {
       0,
       message.notification?.title,
       message.notification?.body,
-      NotificationDetails(android: _androidNotificationDetails),
+      NotificationDetails(android: _androidNotificationDetails,iOS: const DarwinNotificationDetails()),
     );
   }
 
@@ -140,7 +233,7 @@ class NotificationService {
         NotificationDetails(android: _androidNotificationDetails),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<void> cancelNotifications(int id) async {
@@ -152,34 +245,50 @@ class NotificationService {
   }
 }
 
-selectNotification(NotificationResponse message) async {
-  if (message != null) {
-    // print(message.payload['order_id']);
-    // print(message.data['Bank_Status']);
-    // print(message.data['notification_type']);
-    // if (message != null) {
-    //   if (message.data != null) {
-    //     if (message.data['order_id'] != null) {
-    //       SchedulerBinding.instance.addPostFrameCallback((_) {
-    //         Navigator.of(GlobalVariable.navState.currentContext)
-    //             .push(MaterialPageRoute(
-    //             builder: (context) => OrderReceivedDetailsScreen(
-    //               orderID: int.parse(
-    //                   message.data['order_id'].toString()),
-    //             )))
-    //             .whenComplete(getDashbaordDetails);
-    //       });
-    //     } else if (message.data['notification_type'] != null) {
-    //       SchedulerBinding.instance.addPostFrameCallback((_) {
-    //         Navigator.of(GlobalVariable.navState.currentContext)
-    //             .push(MaterialPageRoute(
-    //             builder: (context) => ReviewHistoryScreen()))
-    //             .whenComplete(getDashbaordDetails);
-    //       });
-    //     }
-    //   }
-    // }
-    // await Navigator.push(NavigationService.navigatorKey.currentContext,
-    //     MaterialPageRoute(builder: (context) => NotificationScreen()));
+selectNotification(NotificationResponse notificationResponse) async {
+  if (notificationResponse != null) {
+    print(notificationResponse.payload);
+    print("hereeee2");
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      // FirebaseMessaging.instance.getInitialMessage().then((message) {
+      print("hereeee3");
+      if (message != null) {
+        // print(message.data.toString());
+        if (message!.data != null) {
+          if(message.notification != null) {
+            print(message.notification!.title);
+            print(message.data['order_id']);
+            print(message.data['Bank_Status']);
+            print(message.data['notification_type']);
+
+            if (message.data['order_id'] != null) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.push(
+                    GlobalVariable.navState.currentContext!,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            OrderDetails(
+                              id: int.parse(message.data['order_id']
+                                  .toString()),
+                            )));
+                // .whenComplete(getDashbaordDetails);
+              });
+            } else if (message.data['notification_type'] != null) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.push(GlobalVariable.navState.currentContext!,
+                    MaterialPageRoute(builder: (context) => ReviewHistory()));
+                // .whenComplete(getDashbaordDetails);
+              });
+            } else {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.push(GlobalVariable.navState.currentContext!,
+                    MaterialPageRoute(builder: (context) => ReviewHistory()));
+                // .whenComplete(getDashbaordDetails);
+              });
+            }
+          }
+        }
+      }
+    });
   }
 }

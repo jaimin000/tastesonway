@@ -72,6 +72,7 @@ class _AddNewItemState extends State<AddNewItem> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
               child: TextFormField(
+                keyboardType: TextInputType.number,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 decoration: InputDecoration(
@@ -313,6 +314,7 @@ class _AddNewItemState extends State<AddNewItem> {
                           // height: 45,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
                             decoration: InputDecoration(
@@ -443,9 +445,9 @@ class _AddNewItemState extends State<AddNewItem> {
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'key_Please_enter_dish_description'.tr;
-                              }
+                              // if (value == null || value.isEmpty) {
+                              //   return 'key_Please_enter_dish_description'.tr;
+                              // }
                               return null;
                             },
                             onSaved: (value) {

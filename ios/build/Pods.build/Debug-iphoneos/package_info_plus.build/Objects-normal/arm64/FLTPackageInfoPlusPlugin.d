@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/package_info_plus.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/package_info_plus-3.1.0/ios/Classes/FLTPackageInfoPlusPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/package_info_plus-3.1.2/ios/Classes/FLTPackageInfoPlusPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/package_info_plus/package_info_plus-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/package_info_plus-3.1.0/ios/Classes/FLTPackageInfoPlusPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/package_info_plus-3.1.2/ios/Classes/FLTPackageInfoPlusPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \

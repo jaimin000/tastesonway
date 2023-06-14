@@ -10,14 +10,14 @@ import '../../utils/sharedpreferences.dart';
 import '../../utils/snackbar.dart';
 import 'package:collection/collection.dart';
 
-class ViewAddress extends StatefulWidget {
-  const ViewAddress({Key? key}) : super(key: key);
+class EditAddress extends StatefulWidget {
+  const EditAddress({Key? key}) : super(key: key);
 
   @override
-  State<ViewAddress> createState() => _ViewAddressState();
+  State<EditAddress> createState() => _EditAddressState();
 }
 
-class _ViewAddressState extends State<ViewAddress> {
+class _EditAddressState extends State<EditAddress> {
   int refreshCounter = 0;
 
   Map addressData = {};
@@ -723,6 +723,7 @@ class _ViewAddressState extends State<ViewAddress> {
                           height: 45,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             enabled: isEditable,
                             controller: pincodeController,
                             validator: (value) {

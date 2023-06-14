@@ -1,6 +1,6 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/image_picker_ios.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/FLTPHPickerSaveImageToPathOperation.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/FLTPHPickerSaveImageToPathOperation.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/image_picker_ios/image_picker_ios-prefix.pch \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
@@ -19,7 +19,7 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterViewController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/FLTPHPickerSaveImageToPathOperation.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/FLTImagePickerImageUtil.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/FLTImagePickerMetaDataUtil.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/FLTImagePickerPhotoAssetUtil.h
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/FLTPHPickerSaveImageToPathOperation.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/FLTImagePickerImageUtil.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/FLTImagePickerMetaDataUtil.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/FLTImagePickerPhotoAssetUtil.h

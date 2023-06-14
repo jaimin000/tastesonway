@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/image_picker_ios.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/messages.g.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/messages.g.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/image_picker_ios/image_picker_ios-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+3/ios/Classes/messages.g.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.7+4/ios/Classes/messages.g.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \

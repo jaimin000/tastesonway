@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "87087f77533492bb0db2c22bb8888a8c266f563f1515694e6df6a17b5e5e36a1"
+build_start_time: [1686304698, 202156000]
+build_end_time: [1686304698, 243426000]
+inputs:
+  "/Users/mac/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2/ios/Classes/PathProviderPlugin.swift": !private [1681898665, 496682768]
+  "/Users/mac/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2/ios/Classes/messages.g.swift": !private [1681898665, 497199844]

@@ -260,6 +260,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 @import CoreFoundation;
 @import Flutter;
+@import Foundation;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -289,7 +290,7 @@ SWIFT_CLASS("_TtC8printing8PrintJob")
 @interface PrintJob : UIPrintPageRenderer <UIPrintInteractionControllerDelegate>
 - (void)drawPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)_;
 @property (nonatomic, readonly) NSInteger numberOfPages;
-- (CGFloat)printInteractionController:(UIPrintInteractionController * _Nonnull)printInteractionController cutLengthForPaper:(UIPrintPaper * _Nonnull)paper SWIFT_WARN_UNUSED_RESULT;
+- (UIPrintPaper * _Nonnull)printInteractionController:(UIPrintInteractionController * _Nonnull)_ choosePaper:(NSArray<UIPrintPaper *> * _Nonnull)paperList SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end

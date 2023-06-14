@@ -13,6 +13,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
 import 'package:tastesonway/screens/undermaintenance.dart';
+import 'package:tastesonway/utils/global_variable.dart';
 import 'package:tastesonway/utils/theme_data.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -262,8 +263,7 @@ class _SignupState extends State<Signup> {
     dynamic deviceToken = await FirebaseMessaging.instance.getToken();
     dynamic deviceId = getDeviceId();
 
-    final response = await http
-        .post(Uri.parse("$baseUrl/kitchen-owner-login-registration"),
+    final response = await http.post(Uri.parse("$baseUrl/kitchen-owner-login-registration"),
         body: {
       "language_id": languageId.toString(),
       "mobile_number": mobileNumber.toString(),
@@ -275,6 +275,7 @@ class _SignupState extends State<Signup> {
       "gender": "$gender",
       // "referral_code": "a5265bb5"
     });
+    print("deviceToken is $deviceToken");
     if (response.statusCode == 200) {
       print(response.body);
       final json = jsonDecode(response.body);
@@ -290,7 +291,7 @@ class _SignupState extends State<Signup> {
       await Sharedprefrences.setId(ownerId);
       profileStatus = json['data'][0]['status'];
       ownerAddress = json['data'][0]['owner_address'];
-      ScaffoldSnackbar.of(context).show(message);
+      ScaffoldSnackbar.of(GlobalVariable.navState.currentContext!).show(message);
       if (profileStatus != 1 && ownerAddress != null) {
         Sharedprefrences.setAddressDetailAdded(true);
         Sharedprefrences.setPersonalDetailAdded(true);

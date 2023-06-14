@@ -8,14 +8,16 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
 import 'package:tastesonway/screens/notificationService.dart';
+import 'package:tastesonway/screens/orders/order_details.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
+import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
+import 'package:tastesonway/utils/global_variable.dart';
 import 'package:tastesonway/utils/languages.dart';
 import 'package:tastesonway/utils/sharedpreferences.dart';
 import 'package:tastesonway/utils/theme_data.dart';
-import 'apiServices/firebaseapi.dart';
 import 'screens/menu/your menu/your_menus.dart';
 import 'package:flutter/services.dart';
 import 'screens/profile/profile.dart';
@@ -25,35 +27,30 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-
-  print(message.notification!.title);
-  print(message.data['Bank_Status']);
-  print(message.data['notification_type']);  // await Navigator.push(
-  //     NavigationService.navigatorKey.currentContext,
-  //     MaterialPageRoute(
-  //         builder: (context) => NotificationScreen(isFromBackground: true)));
+  await NotificationService().init();
   await NotificationService().setupFlutterNotifications();
-  NotificationService().showFlutterNotification(message);
-  NotificationService().onNotificationClick();
+  // NotificationService().showFlutterNotification(message);
+  // NotificationService().navigateOnNotificationCLick(message);
 }
 
-// Future<RemoteMessage> initialMessage;
+// RemoteMessage? initialMessage;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // await FirebaseApi().initNotifications();
-  // initialMessage = FirebaseMessaging.instance.getInitialMessage();
+  // initialMessage = await FirebaseMessaging.instance.getInitialMessage();
   await NotificationService().init();
   await NotificationService().setupFlutterNotifications();
+  NotificationService().onMessageNotification();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   // HttpOverrides.global = new MyHttpOverrides();
   // var token = await SharedPrefrences.getToken();
-  NotificationService().onNotificationClick();
-
+  // NotificationService().onNotificationClick();
 
   var isAddressStored = await Sharedprefrences.getAddressDetailAdded() ?? false;
-  var isPersonalDetailStored = await Sharedprefrences.getPersonalDetailAdded() ?? false;
+  var isPersonalDetailStored =
+      await Sharedprefrences.getPersonalDetailAdded() ?? false;
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -86,9 +83,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     getValidationData();
+    // getIntialMsg();
     super.initState();
     initDynamicLinks();
   }
+
+  // getIntialMsg() async {
+  //   initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+  // }
 
   Future<void> initDynamicLinks() async {
     // await Future.delayed(Duration(seconds: 3));
@@ -132,6 +134,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, AsyncSnapshot<Locale> snapshot) {
         if (snapshot.hasData) {
           return GetMaterialApp(
+            navigatorKey: GlobalVariable.navState,
             debugShowCheckedModeBanner: false,
             title: "Taste On Way",
             locale: snapshot.data,
@@ -147,7 +150,9 @@ class _MyAppState extends State<MyApp> {
                 ? const LanguageScreen()
                 : widget.isPersonalDetailStored
                     ? widget.isAddressStored
-                        ? const Home()
+                        ? const Home(
+                            isFromMain: true,
+                          )
                         : const AddressPage()
                     : const userPersonalDetail(),
           );
@@ -160,7 +165,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final bool isFromMain;
+
+  const Home({Key? key, this.isFromMain = false}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();

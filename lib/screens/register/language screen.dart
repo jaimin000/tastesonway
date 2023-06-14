@@ -336,17 +336,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             onPressed: () async{
                               int languageId;
                               if (selectedHindi == true) {
-                                languageId = 1;
+                                languageId = 2;
                                 languageCode = 'hi';
                                 countryCode = 'IN';
                               }
                               else if (selectedGujarati == true) {
-                                languageId = 2;
+                                languageId = 3;
                                 languageCode = 'gj';
                                 countryCode = 'IN';
 
                               } else {
-                                languageId = 3;
+                                languageId = 1;
                                 languageCode = 'en';
                                 countryCode = 'US';
                               }

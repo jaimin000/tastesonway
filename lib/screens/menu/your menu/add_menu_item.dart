@@ -496,9 +496,9 @@ class _AddMenuItemState extends State<AddMenuItem> {
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'key_Please_enter_dish_description'.tr;
-                              }
+                              // if (value == null || value.isEmpty) {
+                              //   return 'key_Please_enter_dish_description'.tr;
+                              // }
                               return null;
                             },
                             onSaved: (value) {

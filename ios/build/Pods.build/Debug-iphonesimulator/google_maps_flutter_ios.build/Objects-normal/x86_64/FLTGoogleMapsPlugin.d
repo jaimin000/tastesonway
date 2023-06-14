@@ -1,8 +1,8 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/google_maps_flutter_ios.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/FLTGoogleMapsPlugin.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/FLTGoogleMapsPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/google_maps_flutter_ios/google_maps_flutter_ios-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/FLTGoogleMapsPlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/FLTGoogleMapsPlugin.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64_x86_64-simulator/Flutter.framework/Headers/FlutterAppDelegate.h \
@@ -73,8 +73,8 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSPanoramaSource.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSPanoramaView.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Headers/GMSAccessibilityLabels.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/GoogleMapCircleController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/GoogleMapController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/GoogleMapMarkerController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/GoogleMapPolygonController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1/ios/Classes/GoogleMapPolylineController.h
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/GoogleMapCircleController.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/GoogleMapController.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/GoogleMapMarkerController.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/GoogleMapPolygonController.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.3/ios/Classes/GoogleMapPolylineController.h

@@ -554,7 +554,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Step 1',
+                          'key_step1'.tr,
                           style: mTextStyle16(),
                         )),
                   ),
@@ -571,7 +571,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Step 2',
+                          'key_step2'.tr,
                           style: mTextStyle16(),
                         )),
                   ),
@@ -588,7 +588,7 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                     child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Step 3',
+                          'key_step3'.tr,
                           style: mTextStyle16(),
                         )),
                   ),

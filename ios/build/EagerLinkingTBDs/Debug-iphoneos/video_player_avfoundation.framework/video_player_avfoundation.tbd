@@ -12,5 +12,6 @@ exports:
                        FLTAVFoundationVideoPlayerApiCodecWriter, FLTCreateMessage, 
                        FLTFrameUpdater, FLTLoopingMessage, FLTMixWithOthersMessage, 
                        FLTPlaybackSpeedMessage, FLTPositionMessage, FLTTextureMessage, 
-                       FLTVideoPlayer, FLTVideoPlayerPlugin, FLTVolumeMessage, PodsDummy_video_player_avfoundation ]
+                       FLTVideoPlayer, FLTVideoPlayerPlugin, FLTVolumeMessage, FVPDefaultPlayerFactory, 
+                       PodsDummy_video_player_avfoundation ]
 ...

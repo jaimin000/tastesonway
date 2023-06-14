@@ -144,34 +144,50 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
     dynamic number = await Sharedprefrences.getMobileNumber();
     print(number);
     String token = await Sharedprefrences.getToken();
-    final response = await http.post(
-      Uri.parse('$baseUrl/kitchen-owner-update-profile'),
-      headers: {'Authorization': 'Bearer $token',
-      },
-      body: {
-        'language_id':"$id",
-        'country_code':await Sharedprefrences.getCountryCode(),
-        'short_code':await Sharedprefrences.getShortCode(),
-        'mobile_number':number.toString(),
-       // 'avatar':await Sharedprefrences.getProfilePic().toString(),
-         'name':name,
-         'email':email,
-         'pin_code':pincode,
-        'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
-      }
+
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse(
+          '$baseUrl/kitchen-owner-update-profile'),
     );
-    print({
-      'language_id':"$id",
-      'country_code':await Sharedprefrences.getCountryCode(),
-      'short_code':await Sharedprefrences.getShortCode(),
-      'mobile_number':number.toString(),
-      'name':name,
-      'email':email,
-      'pin_code':pincode,
-      'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
-    });
+    request.headers[HttpHeaders.authorizationHeader] = 'Bearer $token';
+    request.fields['language_id'] = "$id";
+    request.fields['country_code'] = (await Sharedprefrences.getCountryCode())!;
+    request.fields['short_code'] = (await Sharedprefrences.getShortCode())!;
+    request.fields['name'] = name;
+    request.fields['email'] = email;
+    request.fields['mobile_number'] = number.toString();
+    request.fields['pin_code'] = pincode;
+    request.fields['date_of_birth'] = DateFormat('dd-MM-yyyy').format(selectedDate!);
+    request.fields['gender'] = gender == 'Male' ? '1' : '2';
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'avatar',
+        _image!.path,
+      ),
+    );
+    var response = await request.send();
+    final responseData = await response.stream.bytesToString();
+
+    // final response = await http.post(
+    //   Uri.parse('$baseUrl/kitchen-owner-update-profile'),
+    //   headers: {'Authorization': 'Bearer $token',
+    //   },
+    //   body: {
+    //     'language_id':"$id",
+    //     'country_code':await Sharedprefrences.getCountryCode(),
+    //     'short_code':await Sharedprefrences.getShortCode(),
+    //     'mobile_number':number.toString(),
+    //     //'avatar':await Sharedprefrences.getProfilePic().toString(),
+    //      'name':name,
+    //      'email':email,
+    //      'pin_code':pincode,
+    //     'date_of_birth':DateFormat('dd-MM-yyyy').format(selectedDate!),
+    //   }
+    // );
+
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
+      final jsonData = json.decode(responseData);
       Sharedprefrences.setPersonalDetailAdded(true);
         setState(() {
           var data = jsonData['data'];
@@ -196,7 +212,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
         });
       }
     }else {
-      final jsonData = json.decode(response.body);
+      final jsonData = json.decode(responseData);
       message = jsonData['message'];
       isLoading = false;
       setState(() {
@@ -337,6 +353,7 @@ class _userPersonalDetailState extends State<userPersonalDetail> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         style: const TextStyle(color: Colors.white),
                         cursorColor: Colors.white,
                         decoration: InputDecoration(

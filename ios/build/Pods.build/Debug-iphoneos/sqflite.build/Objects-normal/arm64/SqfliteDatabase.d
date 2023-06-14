@@ -1,11 +1,11 @@
 dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/sqflite.build/module.modulemap \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteDatabase.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteDatabase.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/sqflite/sqflite-prefix.pch \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteDatabase.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteCursor.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteOperation.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteImport.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteDatabase.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteCursor.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteOperation.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteImport.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \
@@ -23,8 +23,8 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterViewController.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqflitePlugin.h \
-  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.6/ios/Classes/SqfliteFmdbImport.m \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqflitePlugin.h \
+  /Users/mac/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/ios/Classes/SqfliteFmdbImport.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FMDB/src/fmdb/FMDB.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/FMDB.build/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/FMDB/FMDB-umbrella.h \

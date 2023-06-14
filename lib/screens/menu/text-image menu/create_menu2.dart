@@ -154,7 +154,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                 height: 25,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Card(
@@ -174,9 +174,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                           )),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+
                   Card(
                     shadowColor: Colors.black,
                     color: orangeColor(),
@@ -194,9 +192,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                           )),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+
                   Card(
                     shadowColor: Colors.black,
                     color: const Color.fromRGBO(53, 56, 66, 1),
@@ -214,9 +210,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
                           )),
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+
                 ],
               ),
               const SizedBox(
@@ -422,39 +416,41 @@ class _CreateMenu2State extends State<CreateMenu2> {
                                                     color: orangeColor(),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.5,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      FittedBox(
-                                                        fit: BoxFit.fitWidth,
-                                                        child: Text(
-                                                          menuItemList[index]
-                                                              .name,
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          style:
-                                                              inputTextStyle14(),
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    // width: MediaQuery.of(context)
+                                                    //         .size
+                                                    //         .width *
+                                                    //     0.5,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      children: [
+                                                        FittedBox(
+                                                          fit: BoxFit.fitWidth,
+                                                          child: Text(
+                                                            menuItemList[index]
+                                                                .name,
+                                                            overflow:
+                                                                TextOverflow.clip,
+                                                            style:
+                                                                inputTextStyle14(),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      FittedBox(
-                                                        fit: BoxFit.fitWidth,
-                                                        child: Text(
-                                                          "₹ ${menuItemList[index].price}",
-                                                          overflow:
-                                                              TextOverflow.clip,
-                                                          style:
-                                                              inputTextStyle14(),
+                                                        FittedBox(
+                                                          fit: BoxFit.fitWidth,
+                                                          child: Text(
+                                                            "₹ ${menuItemList[index].price}",
+                                                            overflow:
+                                                                TextOverflow.clip,
+                                                            style:
+                                                                inputTextStyle14(),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                                 InkWell(

@@ -89,6 +89,7 @@ class _EditItemState extends State<EditItem> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
               child: TextFormField(
+                keyboardType: TextInputType.number,
                 controller: toppingPricecontroller,
                 style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
@@ -443,6 +444,7 @@ class _EditItemState extends State<EditItem> {
                           // height: 45,
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: pricecontroller,
                             style: const TextStyle(color: Colors.white),
                             cursorColor: Colors.white,
@@ -568,9 +570,9 @@ class _EditItemState extends State<EditItem> {
                               hintStyle: inputTextStyle16(),
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'key_Please_enter_dish_description'.tr;
-                              }
+                              // if (value == null || value.isEmpty) {
+                              //   return 'key_Please_enter_dish_description'.tr;
+                              // }
                               return null;
                             },
                           ),

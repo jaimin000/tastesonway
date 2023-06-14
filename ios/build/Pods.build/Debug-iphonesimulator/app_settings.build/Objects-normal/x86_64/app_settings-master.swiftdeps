@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
 options: "8c82b21a8db1785a1671a6009373e18cd883efdfb649d729cd3dba89a39ce365"
-build_start_time: [1686303701, 782833000]
-build_end_time: [1686303714, 128408000]
+build_start_time: [1686731526, 878408000]
+build_end_time: [1686731536, 492043000]
 inputs:
   "/Users/mac/.pub-cache/hosted/pub.dev/app_settings-4.2.0/ios/Classes/SwiftAppSettingsPlugin.swift": [1686202117, 179357353]
