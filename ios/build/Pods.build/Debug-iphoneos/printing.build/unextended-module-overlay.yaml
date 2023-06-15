@@ -4,7 +4,7 @@
   'case-sensitive': 'false',
   'roots': [{
     'type': 'directory',
-    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphoneos/printing/printing.framework/Modules"
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/printing/printing.framework/Modules"
     'contents': [{
       'type': 'file',
       'name': "module.modulemap",
@@ -13,7 +13,7 @@
     },
     {
     'type': 'directory',
-    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphoneos/printing/printing.framework/Headers"
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/printing/printing.framework/Headers"
     'contents': [{
       'type': 'file',
       'name': "printing-Swift.h",

@@ -27,10 +27,13 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  await NotificationService().init();
+  // await Navigator.push(
+  //     GlobalVariable.navState.currentContext!,
+  //     MaterialPageRoute(
+  //         builder: (context) => NotificationScreen(isFromBackground: true)));
   await NotificationService().setupFlutterNotifications();
-  // NotificationService().showFlutterNotification(message);
-  // NotificationService().navigateOnNotificationCLick(message);
+  NotificationService().showFlutterNotification(message);
+  NotificationService().onNotificationClick();
 }
 
 // RemoteMessage? initialMessage;
@@ -82,6 +85,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    NotificationService().onMessageNotification();
     getValidationData();
     // getIntialMsg();
     super.initState();
