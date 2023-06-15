@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuthDataResult.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseAuth.build/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Auth/FIRAuthDataResult.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAdditionalUserInfo.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIROAuthCredential.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseAuth/FirebaseAuth/Sources/Public/FirebaseAuth/FIRAuthCredential.h \

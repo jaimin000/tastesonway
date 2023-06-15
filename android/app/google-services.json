@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:823346082634:android:73fc3e2ec96a55967607b3",
+        "mobilesdk_app_id": "1:823346082634:android:014ab98c2dec4a447607b3",
         "android_client_info": {
-          "package_name": "com.example.tasteonway"
+          "package_name": "com.testing.tastesonway.ios.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "823346082634-d9pqbbfde2as7ug4115l579l93986eqm.apps.googleusercontent.com",
+          "client_id": "823346082634-brs93pcuq6i5pfbnbgsaqlbpk15uhbbs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.tasteonway",
+            "package_name": "com.testing.tastesonway.ios.android",
             "certificate_hash": "b776fe6ab72b10060f4dee20efd205cac1401487"
           }
         },
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "823346082634-m2asrbhn03n5jiq575odd3fltgkek68j.apps.googleusercontent.com",
+              "client_id": "823346082634-ik11id54f52bumadup4bt7fusbhsv8hq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.testing.tastesonway"
+                "bundle_id": "com.testing.tastesonway.ios"
               }
             }
           ]

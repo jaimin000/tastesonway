@@ -1,503 +1,529 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tastesonway/screens/earning%20summary/payment_received.dart';
-import '../../theme_data.dart';
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
+import '../../utils/theme_data.dart';
+import 'package:http/http.dart' as http;
+
+import '../undermaintenance.dart';
 
 class PaymentDetails extends StatefulWidget {
-  const PaymentDetails({Key? key}) : super(key: key);
+  final int step;
+
+  PaymentDetails({required this.step});
 
   @override
   State<PaymentDetails> createState() => _PaymentDetailsState();
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  int step = 0;
+  bool isServicePresent = false;
+  int button = 0;
+  bool isLoading = true;
+  int refreshCounter = 0;
+  List earningData = [];
+  List filteredEarningData = [];
+  String date = '';
+  String filterOption = 'pending';
+  Map<String, dynamic> data = {};
+
+  String url = '';
+  String name = '';
+  String paymentStatus = '';
+  String address = '';
+  String deliveryTime = '';
+  String orderAmount = '';
+  String tax = '';
+  String payment = '';
+
+  Future fetchData(int step) async {
+    print("step is ${widget.step}");
+    String token = await Sharedprefrences.getToken();
+    final response = await http
+        .post(Uri.parse("$baseUrl/kitchen-Owner-earning-summary"), headers: {
+      'Authorization': 'Bearer $token'
+    }, body: {
+      "day": widget.step == 2
+          ? "total"
+          : widget.step == 1
+              ? "month"
+              : "week"
+    });
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+
+      earningData = widget.step == 2
+          ? jsonData['data']['kitchenOwnerEarningAmountsListsTotal'] as List
+          : jsonData['data']['kitchenOwnerEarningAmountsList']['data'] as List;
+
+      widget.step != 2
+          ? filteredEarningData = earningData
+              .where((data) =>
+                  data['order_earning_summary']['payment_status'] == 'pending')
+              .toList()
+          : filteredEarningData = earningData;
+
+      if (widget.step == 2) {
+        if (filteredEarningData[0] != '' && filteredEarningData[0].isNotEmpty) {
+          data = Map.from(filteredEarningData[0]!);
+          // The exclamation mark (!) is used to assert that filteredEarningData[0] is not null
+        } else {
+          data = {};
+        }
+      }
+    } else if (response.statusCode == 401) {
+      final jsonData = json.decode(response.body);
+      if (jsonData['message'].toString().contains('maintenance')) {
+        print('server is undermaintenance');
+        setState(() {
+          isServicePresent = true;
+        });
+      } else if(!isServicePresent) {
+        print("refresh token called");
+        if (refreshCounter == 0) {
+          refreshCounter++;
+          bool tokenRefreshed = await getNewToken(context);
+          tokenRefreshed ? fetchData(widget.step) : null;
+        }
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  String _formatMonth(String month) {
+    final parts = month.split(',');
+    final monthName = parts[0];
+    final year = parts[1];
+    return '$monthName $year';
+  }
+
+  static String formatDateString(String date) {
+    DateTime parsedDate = DateTime.parse(date);
+    String formattedDate = DateFormat("d MMM").format(parsedDate);
+    return formattedDate;
+  }
+
+  Widget buildNoData() => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Image.asset(
+                'assets/images/dataNotFound.png',
+                width: 251,
+                height: 221,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'key_Data_Not_Found'.tr,
+              style: mTextStyle16(),
+            ),
+          ],
+        ),
+      );
+
+  @override
+  void initState() {
+    fetchData(widget.step);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetList = [
-      //pending payment
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  Card(
-                    shadowColor: Colors.black,
-                    color: Color.fromRGBO(64, 68, 81, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: Container(
-                      height: 70,
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Order Received',style: mTextStyle16(),),
-                              Text('1 Order',style: cTextStyle16(),),
-                            ],
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-
-                            children: [
-                              Text('Order Amount',style: mTextStyle16(),),
-                              Text('₹ 50',style: cTextStyle16(),),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentReceived()),
-                        );
-                      },
-                      child: SizedBox(
-                        height: 30,
-                        width: 120,
-                        child: Card(
-                          color: Color.fromRGBO(53, 56, 66, 1),
-                          child: Center(
-                              child: Text(
-                            '5th Dec 2022',
-                            style: TextStyle(
-                              fontSize: 12,
-                                fontFamily: 'Poppins', color: orangeColor()),
-                            textAlign: TextAlign.center,
-                          )),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      //payment received
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Container(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 25),
-              Stack(
-                overflow: Overflow.visible,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                      shadowColor: Colors.black,
-                      color: Color.fromRGBO(64, 68, 81, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Container(
-                        height: 70,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Received',style: mTextStyle16(),),
-                                Text('1 Order',style: cTextStyle16(),),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-
-                              children: [
-                                Text('Order Amount',style: mTextStyle16(),),
-                                Text('₹ 50',style: cTextStyle16(),),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -10,
-                    right: 110,
-                    child: SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Card(
-                        color: Color.fromRGBO(53, 56, 66, 1),
-                        child: Center(
-                            child: Text(
-                              '5th Dec 2022',
-                              style: TextStyle(fontSize: 12,
-                                  fontFamily: 'Poppins', color: orangeColor()),
-                              textAlign: TextAlign.center,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    ];
-
     return Scaffold(
       backgroundColor: backgroundColor(),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundColor(),
+        title: widget.step == 0
+            ? Text(
+                'key_Orders_Captured_this_week'.tr,
+                style: cardTitleStyle20(),
+              )
+            : widget.step == 1
+                ? Text(
+                    'key_Orders_Captured_this_month'.tr,
+                    style: cardTitleStyle20(),
+                  )
+                : Text(
+                    'key_Orders_Captured_total'.tr,
+                    style: cardTitleStyle20(),
+                  ),
+      ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+                color: orangeColor(),
+              ),
+            )
+          : widget.step == 2
+              ? data.isNotEmpty
+                  ? UnderMaintenanceWidget(
+                      isShow: isServicePresent,
+                      callback: () async {
+                        await fetchData(widget.step);
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                final month = data.keys.toList()[index];
+                                final value = data.values.toList()[index];
+                                return Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Card(
+                                      shadowColor: Colors.black,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      color: cardColor(),
+                                      child: SizedBox(
+                                        height: 60,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(15.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                _formatMonth(month),
+                                                style: mTextStyle16(),
+                                              ),
+                                              Text(
+                                                '₹ $value',
+                                                style: mTextStyle16(),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              })),
+                    )
+                  : UnderMaintenanceWidget(
+                      isShow: isServicePresent,
+                      callback: () async {
+                        await fetchData(widget.step);
+                      },
+                      child: buildNoData())
+              : UnderMaintenanceWidget(
+                  isShow: isServicePresent,
+                  callback: () async {
+                    await fetchData(widget.step);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                button = 0;
+                                filterOption = 'pending';
+                                filteredEarningData = earningData
+                                    .where((data) =>
+                                        data['order_earning_summary']
+                                            ['payment_status'] ==
+                                        'pending')
+                                    .toList();
+                                setState(() {});
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: button == 0
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.3,
+                                  height: 45,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Pending_Payment'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                button = 1;
+                                filterOption = 'accepted';
+                                filteredEarningData = earningData
+                                    .where((data) =>
+                                        data['order_earning_summary']
+                                            ['payment_status'] ==
+                                        'accepted')
+                                    .toList();
+                                setState(() {});
+                              },
+                              child: Card(
+                                shadowColor: Colors.black,
+                                color: button == 1
+                                    ? orangeColor()
+                                    : const Color.fromRGBO(53, 56, 66, 1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.3,
+                                  height: 45,
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'key_Payment_Received'.tr,
+                                        style: mTextStyle16(),
+                                      )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        filteredEarningData.isNotEmpty
+                            ? ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: filteredEarningData.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  DateTime dateTime = DateFormat('yyyy-MM-dd')
+                                      .parse(filteredEarningData[index]
+                                          ['date_for_incoming_order']);
+                                  String date =
+                                      DateFormat('dd-MM-yyyy').format(dateTime);
 
-        title: Text(
-          'Order From This Week',
-          style: cardTitleStyle20(),
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      step = 0;
-                    });
-                  },
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: step == 0
-                        ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.3,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Pending Payment',
-                            style: mTextStyle16(),
-                          )),
+                                  return Column(
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Stack(
+                                                clipBehavior: Clip.none,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                PaymentReceived(
+                                                                  date: date,
+                                                                  deliveryDate: (formatDateString(filteredEarningData[0]
+                                                                              [
+                                                                              'date_for_incoming_order']) +
+                                                                          ', ' +
+                                                                          filteredEarningData[0]
+                                                                              [
+                                                                              'time_for_incoming_order'])
+                                                                      .toString(),
+                                                                  quantity: (filteredEarningData[index]
+                                                                              [
+                                                                              'order_detail']
+                                                                          .length)
+                                                                      .toString(),
+                                                                  name: filteredEarningData[
+                                                                              index]
+                                                                          [
+                                                                          'user']
+                                                                      ['name'],
+                                                                  paymentStatus:
+                                                                      filteredEarningData[index]
+                                                                              [
+                                                                              'order_earning_summary']
+                                                                          [
+                                                                          'payment_status'],
+                                                                  address:
+                                                                      "${filteredEarningData[index]['user_address']['address']} ${filteredEarningData[index]['user_address']['area']}, ${filteredEarningData[index]['user_address']['land_mark']} ${filteredEarningData[index]['user_address']['city']['name']}, ${filteredEarningData[index]['user_address']['pin_code']}",
+                                                                  orderTotal: filteredEarningData[
+                                                                              index]
+                                                                          [
+                                                                          'order_total']
+                                                                      .toString(),
+                                                                  orderDetail:
+                                                                      filteredEarningData[
+                                                                              index]
+                                                                          [
+                                                                          'order_detail'],
+                                                                  discount: filteredEarningData[index]
+                                                                              [
+                                                                              'coupon_amount'] ==
+                                                                          null
+                                                                      ? "0"
+                                                                      : filteredEarningData[index]
+                                                                              [
+                                                                              'coupon_amount']
+                                                                          .toString(),
+                                                                  yourEarning: filteredEarningData[index]
+                                                                              [
+                                                                              'order_earning_summary']
+                                                                          [
+                                                                          'owner_earning_amount']
+                                                                      .toString(),
+                                                                )),
+                                                      );
+                                                    },
+                                                    child: Card(
+                                                      shadowColor: Colors.black,
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              64, 68, 81, 1),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                      child: Container(
+                                                        height: 100,
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'key_Orders_Received'
+                                                                      .tr,
+                                                                  style:
+                                                                      mTextStyle16(),
+                                                                ),
+                                                                Text(
+                                                                  '${filteredEarningData[index]['order_detail'].length} ${'key_order'.tr}',
+                                                                  style:
+                                                                      cTextStyle16(),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  'key_ORDER_AMOUNT'
+                                                                      .tr,
+                                                                  style:
+                                                                      mTextStyle16(),
+                                                                ),
+                                                                Text(
+                                                                  '₹ ${filteredEarningData[index]['order_total']}',
+                                                                  style:
+                                                                      cTextStyle16(),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    bottom: -10,
+                                                    right: 110,
+                                                    child: SizedBox(
+                                                      height: 30,
+                                                      width: 120,
+                                                      child: Card(
+                                                        color: const Color
+                                                                .fromRGBO(
+                                                            53, 56, 66, 1),
+                                                        child: Center(
+                                                            child: Text(
+                                                          date,
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color:
+                                                                  orangeColor()),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        )),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 15),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  );
+                                })
+                            : Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 120,
+                                  ),
+                                  buildNoData(),
+                                ],
+                              ),
+                      ],
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      step = 1;
-                    });
-                  },
-                  child: Card(
-                    shadowColor: Colors.black,
-                    color: step == 1
-                        ? orangeColor()
-                        : Color.fromRGBO(53, 56, 66, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 2.3,
-                      height: 45,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Payment Received',
-                            style: mTextStyle16(),
-                          )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _widgetList[step],
-            SizedBox(
-              height: 10,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Sources/FIRCoreDiagnosticsConnector.m \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphonesimulator/FirebaseCore.build/module.modulemap \
+  /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Sources/FIRCoreDiagnosticsConnector.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/FirebaseCore/Extension/FIRCoreDiagnosticsConnector.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/Interop/CoreDiagnostics/Public/FIRCoreDiagnosticsInterop.h \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/FirebaseCore/Interop/CoreDiagnostics/Public/FIRCoreDiagnosticsData.h \

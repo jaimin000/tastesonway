@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:get/get.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class Fssai extends StatefulWidget {
@@ -26,7 +27,7 @@ class _FssaiState extends State<Fssai> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         title: Text(
-          'My Website',
+          'key_Fssai_Registration'.tr,
           style: cardTitleStyle20(),
         ),
         elevation: 0,

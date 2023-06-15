@@ -1,0 +1,20 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64-ios ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/app_settings.framework/app_settings'
+swift-abi-version: 7
+exports:
+  - targets:         [ arm64-ios ]
+    symbols:         [ '_$s12app_settings22SwiftAppSettingsPluginC04openE033_7831E2E1B657F8DCD24A6A4BDC7DD395LLyyF', 
+                       '_$s12app_settings22SwiftAppSettingsPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF', 
+                       '_$s12app_settings22SwiftAppSettingsPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctFTq', 
+                       '_$s12app_settings22SwiftAppSettingsPluginC8register4withySo07FlutterF9Registrar_p_tFZ', 
+                       '_$s12app_settings22SwiftAppSettingsPluginCACycfC', '_$s12app_settings22SwiftAppSettingsPluginCACycfc', 
+                       '_$s12app_settings22SwiftAppSettingsPluginCMa', '_$s12app_settings22SwiftAppSettingsPluginCMn', 
+                       '_$s12app_settings22SwiftAppSettingsPluginCN', '_$s12app_settings22SwiftAppSettingsPluginCfD', 
+                       _Swift51Overrides, __Z34_swiftoverride_class_getSuperclassPKN5swift14TargetMetadataINS_9InProcessEEE, 
+                       __ZN5swift39swift51override_conformsToSwiftProtocolEPKNS_14TargetMetadataINS_9InProcessEEEPKNS_24TargetProtocolDescriptorIS1_EEN7__swift9__runtime4llvm9StringRefEPFPKNS_35TargetProtocolConformanceDescriptorIS1_EES4_S8_SC_E, 
+                       _app_settingsVersionNumber, _app_settingsVersionString ]
+    objc-classes:    [ AppSettingsPlugin, PodsDummy_app_settings, _TtC12app_settings22SwiftAppSettingsPlugin ]
+...

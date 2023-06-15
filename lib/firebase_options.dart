@@ -65,6 +65,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'tastesonway-51bec.appspot.com',
     androidClientId: '823346082634-d9pqbbfde2as7ug4115l579l93986eqm.apps.googleusercontent.com',
     iosClientId: '823346082634-m2asrbhn03n5jiq575odd3fltgkek68j.apps.googleusercontent.com',
-    iosBundleId: 'com.testing.tastesonway',
+    iosBundleId: 'com.testing.tastesonway.ios',
   );
 }

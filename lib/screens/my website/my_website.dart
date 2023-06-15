@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:tastesonway/utils/theme_data.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 
 class MyWebsite extends StatefulWidget {
   const MyWebsite({Key? key}) : super(key: key);
@@ -24,19 +26,20 @@ class _MyWebsiteState extends State<MyWebsite> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         title: Text(
-          'My Website',
+          'key_My_Website'.tr,
           style: cardTitleStyle20(),
         ),
         elevation: 0,
       ),
       body: Stack(
         children: [
-          WebView(
+            WebView(
             initialUrl: 'https://www.tastesonway.com',
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (WebViewController webViewController) {
               _controller.complete(webViewController);
             },
+
             onProgress: (int progress) {
               print("WebView is loading (progress : $progress%)");
             },

@@ -1,8 +1,33 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:tastesonway/theme_data.dart';
+import 'package:get/get_utils/get_utils.dart';
+import 'package:tastesonway/utils/theme_data.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import '../../apiServices/api_service.dart';
+import '../../utils/sharedpreferences.dart';
+import '../../utils/snackbar.dart';
 
 class ContactUs extends StatelessWidget {
-  const ContactUs({Key? key}) : super(key: key);
+  ContactUs({Key? key}) : super(key: key);
+
+  String message = "";
+
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'tastesonway@gmail.com',
+  );
+
+  Future<String> getCallback() async {
+    var token = await Sharedprefrences.getToken();
+    const url = "$baseUrl/create-request-callback";
+    final tokenResponse = await http.post(Uri.parse(url),headers: {
+      'Authorization': 'Bearer $token'
+    },);
+    final json = jsonDecode(tokenResponse.body);
+    message = (json['message']).toString();
+    return message;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,83 +37,131 @@ class ContactUs extends StatelessWidget {
         elevation: 0,
         backgroundColor: backgroundColor(),
         title: Text(
-          'Contact Us',
+          'key_Contact_Us'.tr,
           style: cardTitleStyle20(),
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: [
-
-            SizedBox(height:25),
-            Card(
-              shadowColor: Colors.black,
-              color: cardColor(),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      child: Image.asset(
-                        './assets/images/profile/mail.png',
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.fill,
+            const SizedBox(height:25),
+            InkWell(
+              onTap: (){
+                launchUrl(emailLaunchUri);
+              },
+              child: Card(
+                shadowColor: Colors.black,
+                color: cardColor(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        child: Image.asset(
+                          './assets/images/profile/mail.png',
+                          height: 40,
+                          width: 40,
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: Text(
-                        'Email Us',
-                        style: mTextStyle18(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: Text(
+                          'key_Email_Us'.tr,
+                          style: mTextStyle18(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-            SizedBox(height:10),
-            Card(
-              shadowColor: Colors.black,
-              color: cardColor(),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Container(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-
-                      child: Image.asset(
-                        './assets/images/profile/Contact Us.png',
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.fill,
+            const SizedBox(height:10),
+            InkWell(
+              onTap: () async {
+                showDialog(
+                    context: context,
+                    builder:(BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: cardColor(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        title:Text('key_Request_a_Callback'.tr, style:cardTextStyle18()),
+                        content: Text('key_Request_Callback_desc'.tr, style:mTextStyle14() ),
+                        actions: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: fontColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Close the dialog
+                            },
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              backgroundColor: orangeColor(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Text('key_Request_Callback'.tr, style: mTextStyle14(),),
+                            onPressed: () async {
+                              Navigator.of(context).pop(); // Close the dialog
+                              await getCallback();
+                              ScaffoldSnackbar.of(context).show(message.toString());
+                            },
+                          ),
+                        ],
+                      );
+                    }
+                );
+              },
+              child: Card(
+                shadowColor: Colors.black,
+                color: cardColor(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        child: Image.asset(
+                          './assets/images/profile/Contact Us.png',
+                          height: 40,
+                          width: 40,
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15.0),
-                      child: Text(
-                        'Request Call Back',
-                        style: mTextStyle18(),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: Text(
+                          'key_Request_Callback'.tr,
+                          style: mTextStyle18(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-
           ],
         ),
       ),
