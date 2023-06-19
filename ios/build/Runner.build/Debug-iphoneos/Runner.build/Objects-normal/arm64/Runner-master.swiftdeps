@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "dae29f0c3e19fb5c493bcd3ad0dc3895cb29980637d8e0f02710f0d99f09c4e0"
-build_start_time: [1687175395, 838476000]
-build_end_time: [1687175415, 506061000]
+options: "5affca8e03723826e07a9661f938dbd0350182f3818e634593dd5af0b8b03d37"
+build_start_time: [1687177391, 240334000]
+build_end_time: [1687177392, 55116000]
 inputs:
   "/Users/mac/Desktop/work/tastesonway/ios/Runner/AppDelegate.swift": [1686916461, 716912211]

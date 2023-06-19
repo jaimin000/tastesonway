@@ -99,7 +99,7 @@ class _EarningSummaryState extends State<EarningSummary> {
                       child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            'key_This_Month'.tr,
+                            'key_this_month'.tr,
                             style: mTextStyle16(),
                           )),
                     ),

@@ -2,7 +2,7 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Pods.build/Debug-iphoneos/printing.build/module.modulemap \
   /Users/mac/.pub-cache/hosted/pub.dev/printing-5.10.4/ios/Classes/PrintingPlugin.m \
   /Users/mac/Desktop/work/tastesonway/ios/Pods/Target\ Support\ Files/printing/printing-prefix.pch \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphoneos/printing/printing.framework/Headers/printing-Swift.h \
+  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/printing/printing.framework/Headers/printing-Swift.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Modules/module.modulemap \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/Flutter.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterAppDelegate.h \

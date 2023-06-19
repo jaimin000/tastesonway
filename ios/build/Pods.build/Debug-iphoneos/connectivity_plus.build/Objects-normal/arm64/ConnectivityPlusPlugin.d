@@ -20,4 +20,4 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterViewController.h \
-  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphoneos/connectivity_plus/connectivity_plus.framework/Headers/connectivity_plus-Swift.h
+  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/connectivity_plus/connectivity_plus.framework/Headers/connectivity_plus-Swift.h

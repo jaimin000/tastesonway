@@ -19,6 +19,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
+import '../my_menu_design.dart';
+
 class CreateImgMenu3 extends StatefulWidget {
   final int imageMenuId;
 
@@ -927,20 +929,28 @@ class _CreateImgMenu3State extends State<CreateImgMenu3> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Themes", style: mTextStyle20()),
+                        Text("key_theme".tr, style: mTextStyle20()),
                         Padding(
                           padding: const EdgeInsets.only(right: 10.0),
-                          child: Row(
-                            children: [
-                              Text("All", style: mTextStyle14()),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Image.asset(
-                                './assets/images/Arrow - Right.png',
-                                height: 20,
-                              ),
-                            ],
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MenuDesign()));
+                            },
+                            child: Row(
+                              children: [
+                                Text("key_all".tr, style: mTextStyle14()),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Image.asset(
+                                  './assets/images/Arrow - Right.png',
+                                  height: 20,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

@@ -233,6 +233,7 @@ class Languages extends Translations {
 
           "key_please_Select_Theme": "please select theme!",
           "key_My_Themes": "My Themes",
+          "key_theme": "Themes",
           "key_New": "New",
           "key_Recommended": "Recommended",
           "key_Whatsapp": "Whatsapp",
@@ -856,6 +857,7 @@ class Languages extends Translations {
           "key_Creating_text_Menu_3_3": "टेक्स्ट मेनू 3/3 बना रहें हैं",
           "key_Creating_image_Menu_3_3": "छवि मेनू 3/3 बना रहें हैं",
           "key_please_Select_Theme": "थीम का चयन करें!",
+          "key_theme":"थीम",
           "key_My_Themes": "मेरे विषय",
           "key_New": "नवीन व",
           "key_Recommended": "सिफारिश की",
@@ -1466,6 +1468,7 @@ class Languages extends Translations {
           "key_Creating_image_Menu_3_3": "છબી મેનૂ 3/3 બનાવી રહ્યા છીએ",
           "key_please_Select_Theme": "થીમ પસંદ કરો!",
           "key_My_Themes": "મારા થીમ્સ",
+          "key_theme": "થીમ્સ",
           "key_New": "નવું",
           "key_Recommended": "ભલામણ કરેલ",
           "key_Whatsapp": "વોટ્સેપ",
