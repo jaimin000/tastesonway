@@ -1,8 +1,7 @@
 import 'dart:convert';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
- 
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import '../../../utils/sharedpreferences.dart';
 import '../../../utils/snackbar.dart';
@@ -19,6 +18,7 @@ class CreateTextMenu3 extends StatefulWidget {
 
 class _CreateTextMenu3State extends State<CreateTextMenu3> {
   int refreshCounter = 0;
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
   var menuId;
 
@@ -270,9 +270,39 @@ class _CreateTextMenu3State extends State<CreateTextMenu3> {
                       ),
                       InkWell(
                         onTap: () async {
+                          dynamic id = await Sharedprefrences.getId();
+                          var fullName = await Sharedprefrences.getFullName();
+                          var menuName = await Sharedprefrences.getMenuName();
+                          var profileImage = await Sharedprefrences.getProfilePic();
+                          var parameters = DynamicLinkParameters(
+                            uriPrefix: "https://tastesonway.page.link",
+                            link: Uri.parse(
+                                'https://www.tastesonway.com/welcome?menuId=$menuId&buissnessownerId=$id&chefName=$menuName&profileImage=$profileImage'),
+                            navigationInfoParameters:
+                            const NavigationInfoParameters(
+                                forcedRedirectEnabled: true),
+                            androidParameters: const AndroidParameters(
+                              packageName: 'com.testing.tastesonway.ios.android',
+                            ),
+                            iosParameters: const IOSParameters(
+                                bundleId: 'com.testing.tastesonway.ios',
+                                appStoreId: '123456789',
+                                minimumVersion: '1.0.0'),
+                          );
+                          // var dynamicUrl = await parameters.buildUrl();
+                          // var shortLink = await parameters.buildShortLink();
+                          // var shortUrl = shortLink.shortUrl;
+                          final ShortDynamicLink shortLink =
+                          await dynamicLinks.buildShortLink(parameters);
+                          // final ShortDynamicLink shortLink = await DynamicLinkParameters.shortenUrl(
+                          //     Uri.parse('https://example.page.link/?link=https://example.com/&apn=com.example.android&ibn=com.example.ios'),
+                          //     DynamicLinkParametersOptions(ShortDynamicLinkPathLength.unguessable),
+                          // );
+
+                          var shortUrl = shortLink.shortUrl;
                           await Share.share(
                               "🍴👨‍🍳 MENU BY ${menuList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
-                              "${menuList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                              "${menuList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()} \n\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n\n"
                               "📱 Sent from Tastes on Way app");
                         },
                         child: SizedBox(

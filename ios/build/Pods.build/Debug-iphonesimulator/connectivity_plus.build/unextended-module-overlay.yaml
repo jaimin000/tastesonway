@@ -4,7 +4,7 @@
   'case-sensitive': 'false',
   'roots': [{
     'type': 'directory',
-    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Modules"
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Modules"
     'contents': [{
       'type': 'file',
       'name': "module.modulemap",
@@ -13,7 +13,7 @@
     },
     {
     'type': 'directory',
-    'name': "/Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Headers"
+    'name': "/Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphonesimulator/connectivity_plus/connectivity_plus.framework/Headers"
     'contents': [{
       'type': 'file',
       'name': "connectivity_plus-Swift.h",

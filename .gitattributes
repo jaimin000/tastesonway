@@ -1,0 +1,4 @@
+.csv filter=lfs diff=lfs merge=lfs -text
+*.nc filter=lfs diff=lfs merge=lfs -text
+ios/build/Debug-iphoneos/App.framework/flutter_assets/kernel_blob.bin filter=lfs diff=lfs merge=lfs -text
+ios/build/XCBuildData/build.db filter=lfs diff=lfs merge=lfs -text

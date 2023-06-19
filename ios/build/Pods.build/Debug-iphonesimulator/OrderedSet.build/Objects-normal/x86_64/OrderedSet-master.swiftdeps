@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
-options: "fc6cfd997662f0d138ec7bd5000f4b707ad9212b9c5d435e471eae9c1fb42422"
-build_start_time: [1686731526, 900386000]
-build_end_time: [1686731538, 87961000]
+options: "46138ccf2cf373574feb2c66cf163f0f74bdc5f30fe2b965eab5e60e26d9de4d"
+build_start_time: [1686891754, 608731000]
+build_end_time: [1686891758, 559851000]
 inputs:
-  "/Users/mac/Desktop/work/tastesonway/ios/Pods/OrderedSet/Sources/OrderedSet.swift": [1686731508, 644508443]
+  "/Users/mac/Desktop/work/tastesonway/ios/Pods/OrderedSet/Sources/OrderedSet.swift": [1686835493, 54220626]

@@ -495,11 +495,9 @@ class _CreateMenu2State extends State<CreateMenu2> {
                                                                   Object exception,
                                                                   StackTrace?
                                                                       stackTrace) {
-                                                            return Image.asset(
-                                                              'assets/images/tea.jpg',
+                                                            return SizedBox(
                                                               height: 60,
                                                               width: 65,
-                                                              fit: BoxFit.fill,
                                                             );
                                                           },
                                                         ),

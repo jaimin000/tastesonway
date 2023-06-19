@@ -276,10 +276,10 @@ class _ViewMenuState extends State<ViewMenu> {
                                 onPressed: () async {
                                   Navigator.of(context).pop(); // Close the dialog
                                   await deleteMenuItem(widget.menuId.toString());
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Menu Deleted Successfully!')),
-                                  );
+                                  // ScaffoldMessenger.of(context).showSnackBar(
+                                  //   const SnackBar(
+                                  //       content: Text('Menu Deleted Successfully!')),
+                                  // );
                                   Navigator.pop(context, "true");
                                 },
                               ),

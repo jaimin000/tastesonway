@@ -122,9 +122,6 @@ dependencies: \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_local_notifications/flutter_local_notifications.framework/Headers/ActionEventSink.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_local_notifications/flutter_local_notifications.framework/Headers/Converters.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_local_notifications/flutter_local_notifications.framework/Headers/FlutterEngineManager.h \
-  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_native_splash/flutter_native_splash.framework/Headers/FlutterNativeSplashPlugin.h \
-  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_native_splash/flutter_native_splash.framework/Modules/module.modulemap \
-  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/flutter_native_splash/flutter_native_splash.framework/Headers/flutter_native_splash-umbrella.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/fluttertoast/fluttertoast.framework/Headers/FluttertoastPlugin.h \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/fluttertoast/fluttertoast.framework/Modules/module.modulemap \
   /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/fluttertoast/fluttertoast.framework/Headers/fluttertoast-umbrella.h \

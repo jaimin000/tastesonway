@@ -4,15 +4,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/screens/dashboard/dashboard.dart';
-import 'package:tastesonway/screens/notificationService.dart';
-import 'package:tastesonway/screens/orders/order_details.dart';
+import 'package:tastesonway/utils/notificationService.dart';
 import 'package:tastesonway/screens/register/addressPage.dart';
 import 'package:tastesonway/screens/register/language%20screen.dart';
 import 'package:tastesonway/screens/register/userPersonalDetail.dart';
-import 'package:tastesonway/screens/review%20history/review_history.dart';
 import 'package:tastesonway/screens/setting/setting.dart';
 import 'package:tastesonway/utils/global_variable.dart';
 import 'package:tastesonway/utils/languages.dart';
@@ -25,31 +22,25 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   await NotificationService().init();
+//   await NotificationService().setupFlutterNotifications();
+// }
+
+Future<void> myBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  // await Navigator.push(
-  //     GlobalVariable.navState.currentContext!,
-  //     MaterialPageRoute(
-  //         builder: (context) => NotificationScreen(isFromBackground: true)));
-  await NotificationService().setupFlutterNotifications();
-  NotificationService().showFlutterNotification(message);
-  NotificationService().onNotificationClick();
+  return NotificationService().showNotification(message);
 }
+
 
 // RemoteMessage? initialMessage;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await FirebaseApi().initNotifications();
-  // initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-  await NotificationService().init();
-  await NotificationService().setupFlutterNotifications();
-  NotificationService().onMessageNotification();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // HttpOverrides.global = new MyHttpOverrides();
-  // var token = await SharedPrefrences.getToken();
-  // NotificationService().onNotificationClick();
+  FirebaseMessaging.onBackgroundMessage(myBackgroundHandler);
+
 
   var isAddressStored = await Sharedprefrences.getAddressDetailAdded() ?? false;
   var isPersonalDetailStored =
@@ -85,13 +76,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    NotificationService().onMessageNotification();
+    NotificationService().init();
+    NotificationService().onNotificationClick();
     getValidationData();
     // getIntialMsg();
     super.initState();
     initDynamicLinks();
   }
-
   // getIntialMsg() async {
   //   initialMessage = await FirebaseMessaging.instance.getInitialMessage();
   // }

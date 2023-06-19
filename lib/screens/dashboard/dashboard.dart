@@ -10,7 +10,7 @@ import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
-import 'package:tastesonway/screens/notificationService.dart';
+import 'package:tastesonway/utils/notificationService.dart';
 import 'package:tastesonway/screens/orders/history/orderhistory.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
@@ -198,10 +198,10 @@ class _DashboardState extends State<Dashboard> {
           token, await getDeviceId(), Platform.isAndroid ? '1' : '2');
     });
     if (widget.isFromMain) {
-      NotificationService().init();
-      NotificationService().setupFlutterNotifications();
-      NotificationService().onMessageNotification();
-      NotificationService().onNotificationClick();
+      // NotificationService().init();
+      // NotificationService().setupFlutterNotifications();
+      // NotificationService().onMessageNotification();
+      // NotificationService().onNotificationClick();
     }
     // if (widget.isFromMain) {
     //   init();

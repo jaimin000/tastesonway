@@ -288,13 +288,26 @@ class _SignupState extends State<Signup> {
       var refreshToken = (json['data'][0]['refresh_token']).toString();
       await Sharedprefrences.setRefreshToken(refreshToken);
       var ownerId = json['data'][0]['id'];
-      await Sharedprefrences.setId(ownerId);
+      var name = json['data'][0]['name'];
+      var profilePic = json['data'][0]['avatar'];
+      var email = json['data'][0]['email'];
+      var pincode = json['data'][0]['pin_code'];
+      var birthdate = json['data'][0]['date_of_birth'];
+      var gender = json['data'][0]['gender'];
+
       profileStatus = json['data'][0]['status'];
       ownerAddress = json['data'][0]['owner_address'];
       ScaffoldSnackbar.of(GlobalVariable.navState.currentContext!).show(message);
       if (profileStatus != 1 && ownerAddress != null) {
-        Sharedprefrences.setAddressDetailAdded(true);
-        Sharedprefrences.setPersonalDetailAdded(true);
+        await Sharedprefrences.setAddressDetailAdded(true);
+        await Sharedprefrences.setPersonalDetailAdded(true);
+        await Sharedprefrences.setId(ownerId);
+        await Sharedprefrences.setFullName(name.toString());
+        await Sharedprefrences.setProfilePic(profilePic.toString());
+        await Sharedprefrences.setEmail(email.toString());
+        await Sharedprefrences.setPincode(pincode.toString());
+        await Sharedprefrences.setBirthdate(birthdate.toString());
+        await Sharedprefrences.setGender(gender.toString());
         Get.offAll(const Home());
       } else {
         Navigator.pushReplacement(

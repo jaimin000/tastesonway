@@ -273,9 +273,13 @@ class _EditMenuItemState extends State<EditMenuItem> {
       final response = await request.send();
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);
-      print(responseData);
+      print(json);
+      ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
+      Navigator.pop(context,'true');
     } catch (e) {
       print(e);
+      ScaffoldSnackbar.of(context).show('Something Went Wrong Please Try Again!');
+      Navigator.pop(context,'true');
     }
   }
 
@@ -326,7 +330,7 @@ class _EditMenuItemState extends State<EditMenuItem> {
                           ),
                           child: Text('key_CANCEL'.tr, style:  mTextStyle14()),
                           onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.pop(context); // Close the dialog
                           },
                         ),
                         TextButton(
@@ -338,13 +342,13 @@ class _EditMenuItemState extends State<EditMenuItem> {
                           ),
                           child: Text('key_Proceed'.tr, style: mTextStyle14(),),
                           onPressed: () async {
-                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.pop(context); // Close the dialog
                             await DeleteMenuItem();
-                            ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
-                            Navigator.pop(context,'true');
-                            setState(() {
-                              _isLoading = false;
-                            });
+                            if (mounted) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            }
                           },
                         ),
                       ],

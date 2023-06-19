@@ -1,7 +1,10 @@
+import 'dart:collection';
 import 'dart:convert';
+import 'dart:io';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tastesonway/screens/menu/your%20menu/view_menu.dart';
 import '../../../apiServices/api_service.dart';
@@ -30,6 +33,14 @@ class _YourMenusState extends State<YourMenus> {
   String searchQuery = '';
   bool isServicePresent = false;
   String text = '';
+  String fullName = '';
+  String imageMenuLink ="";
+  String profileImage='';
+  int imageMenuId=0;
+  List<dynamic> imageMenuList = <dynamic>[];
+  Map<String, List<int>> createDoc = HashMap();
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+
 
   Future fetchMenu(int step) async {
     String token = await Sharedprefrences.getToken();
@@ -171,6 +182,109 @@ class _YourMenusState extends State<YourMenus> {
           ),
         ],
       );
+
+  // shareImageMenu(List<dynamic> imageMenuList, int index) async {
+  //   fullName = (await Sharedprefrences.getFullName())!;
+  //   var menuName = await Sharedprefrences.getMenuName();
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   // print(imageMenuList[index]['image_menu_link'].toString());
+  //
+  //   if (!imageMenuList[index]['image_menu_link']
+  //       .toString()
+  //       .contains('https://via.placeholder.com/150x150?text=Default%20Image')) {
+  //     dynamic id = await Sharedprefrences.getId();
+  //     dynamic addressId = await Sharedprefrences.getAddressID();
+  //     var menuId = int.tryParse(imageMenuList[index]['id'].toString());
+  //     profileImage = (await Sharedprefrences.getProfilePic())!;
+  //
+  //     var parameters = DynamicLinkParameters(
+  //       uriPrefix: "https://tastesonway.page.link",
+  //       link: Uri.parse(
+  //           'https://www.tastesonway.com/welcome?menuId=$menuId&buissnessownerId=$id&chefName=$menuName&profileImage=$profileImage'),
+  //       navigationInfoParameters:
+  //       const NavigationInfoParameters(
+  //           forcedRedirectEnabled: true),
+  //       androidParameters: const AndroidParameters(
+  //         packageName: 'com.testing.tastesonway.ios.android',
+  //       ),
+  //       iosParameters: const IOSParameters(
+  //           bundleId: 'com.testing.tastesonway.ios',
+  //           appStoreId: '123456789',
+  //           minimumVersion: '1.0.0'),
+  //       socialMetaTagParameters: SocialMetaTagParameters(
+  //           title: 'Tastes On Way',
+  //           description: 'Menu by Chef $fullName',
+  //           imageUrl: Uri.parse(imageMenuLink)),
+  //     );
+  //     final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters);
+  //     // var dynamicUrl = await parameters.buildUrl();
+  //     // var shortLink = await parameters.buildShortLink();
+  //     // var shortUrl = shortLink.shortUrl;
+  //     var shortUrl = shortLink.shortUrl;
+  //
+  //     var images = <String>[];
+  //
+  //     var data = imageMenuList[index]['image_menu_link'] as List;
+  //     createDoc.clear();
+  //     // for (int i = 0; i < data.length; i++) {
+  //     //   images.add(data[i].toString());
+  //     //   var request = await HttpClient().getUrl(Uri.parse('${data[i]}'));
+  //     //   var response = await request.close();
+  //     //   createDoc['${imageMenuList[index]['name']}$i.png'] =
+  //     //       await consolidateHttpClientResponseBytes(response);
+  //     // }
+  //     for (var i = 0; i < data.length; i++) {
+  //       // images.add(data[i].toString());
+  //       // var request = await HttpClient().getUrl(Uri.parse('${data[i]}'));
+  //       // var response = await request.close();
+  //       // createDoc['${imageMenuList[index]['name']}$i.png'] =
+  //       // await consolidateHttpClientResponseBytes(response);
+  //       // final response = await get(data[i].toString());
+  //       // final Directory temp = await getTemporaryDirectory();
+  //       // final File imageFile = File('${temp.path}/tempImage$i');
+  //       // imageFile.writeAsBytesSync(response.bodyBytes);
+  //       // images.add('${temp.path}/tempImage$i');
+  //       var url = data[i].toString();
+  //       var response = await http.get(Uri.parse(url));
+  //       final documentDirectory = Platform.isAndroid
+  //           ? (await getExternalStorageDirectory())!.path //FOR ANDROID
+  //           : (await getApplicationSupportDirectory()).path;
+  //       var imgFile = File('$documentDirectory/image$i.png');
+  //       imgFile.writeAsBytesSync(response.bodyBytes);
+  //       images.add('$documentDirectory/image$i.png');
+  //     }
+  //     if (Platform.isIOS) {
+  //       // await Share.files(
+  //       //   'Share Menu Image', createDoc, 'image/png',
+  //       //   // text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n'
+  //       // );
+  //       await Share.shareFiles(images,
+  //           text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n',
+  //           subject: 'Share Menu Image');
+  //       // await Share.share('\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n',
+  //       //     subject: 'Share Menu Image');
+  //
+  //       // await Share.text('Share Menu Image',
+  //       //     '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n', 'text/*');
+  //     } else {
+  //       // await Share.files('Share Menu Image', createDoc, 'image/png',
+  //       //     text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n');
+  //       await Share.shareFiles(images,
+  //           text: '\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n',
+  //           subject: 'Share Menu Image');
+  //     }
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //   } else {
+  //     // SnackBarWidget.show(
+  //     //     context,
+  //     //     AppTranslations.of(context)
+  //     //         .text('key_you_have_not_created_any_image_Menu'));
+  //   }
+  // }
 
   @override
   void initState() {
@@ -440,7 +554,7 @@ class _YourMenusState extends State<YourMenus> {
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                      SizedBox(
+                                                                      const SizedBox(
                                                                         width:
                                                                             10,
                                                                       ),
@@ -479,15 +593,48 @@ class _YourMenusState extends State<YourMenus> {
                                                                       ),
                                                                       filteredMenuList[index]['menu_review_status'].toString() ==
                                                                               '1'
-                                                                          ? SizedBox()
+                                                                          ? const SizedBox()
                                                                           : GestureDetector(
                                                                               onTap: () async {
                                                                                 setState(() {
                                                                                   isLoading = true;
                                                                                 });
                                                                                 await getMenuItem(filteredMenuList[index]['id']);
+                                                                                dynamic id = await Sharedprefrences.getId();
+                                                                                var menuName = await Sharedprefrences.getMenuName();
+                                                                                dynamic addressId = await Sharedprefrences.getAddressID();
+                                                                                var menuId = int.tryParse(filteredMenuList[index]['id'].toString());
+
+                                                                                profileImage = (await Sharedprefrences.getProfilePic())!;
+                                                                                print("menuItemList "+menuItemList.length.toString());
+
+                                                                                var parameters = DynamicLinkParameters(
+                                                                                  uriPrefix: "https://tastesonway.page.link",
+                                                                                  link: Uri.parse(
+                                                                                      'https://www.tastesonway.com/welcome?menuId=$menuId&buissnessownerId=$id&chefName=$menuName&profileImage=$profileImage'),
+                                                                                  navigationInfoParameters:
+                                                                                  const NavigationInfoParameters(
+                                                                                      forcedRedirectEnabled: true),
+                                                                                  androidParameters: const AndroidParameters(
+                                                                                    packageName: 'com.testing.tastesonway.ios.android',
+                                                                                  ),
+                                                                                  iosParameters: const IOSParameters(
+                                                                                      bundleId: 'com.testing.tastesonway.ios',
+                                                                                      appStoreId: '123456789',
+                                                                                      minimumVersion: '1.0.0'),
+                                                                                  socialMetaTagParameters: SocialMetaTagParameters(
+                                                                                      title: 'Tastes On Way',
+                                                                                      description: 'Menu by Chef $fullName',
+                                                                                      imageUrl: Uri.parse(imageMenuLink)),
+                                                                                );
+                                                                                final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters);
+                                                                                // var dynamicUrl = await parameters.buildUrl();
+                                                                                // var shortLink = await parameters.buildShortLink();
+                                                                                // var shortUrl = shortLink.shortUrl;
+                                                                                var shortUrl = shortLink.shortUrl;
+                                                                                print("menuItemList "+menuItemList.length.toString());
                                                                                 await Share.share("🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
-                                                                                    "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                                                                                    "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}  \n\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n\n"
                                                                                     "📱 Sent from Tastes on Way app");
                                                                               },
                                                                               child: const Icon(
@@ -654,11 +801,44 @@ class _YourMenusState extends State<YourMenus> {
                                                                                 setState(() {
                                                                                   isLoading = true;
                                                                                 });
-                                                                                print(filteredMenuList[index]['id']);
                                                                                 await getMenuItem(filteredMenuList[index]['id']);
+                                                                                dynamic id = await Sharedprefrences.getId();
+                                                                                var menuName = await Sharedprefrences.getMenuName();
+                                                                                dynamic addressId = await Sharedprefrences.getAddressID();
+                                                                                var menuId = int.tryParse(filteredMenuList[index]['id'].toString());
+
+                                                                                profileImage = (await Sharedprefrences.getProfilePic())!;
+                                                                                print("menuItemList "+menuItemList.length.toString());
+
+                                                                                var parameters = DynamicLinkParameters(
+                                                                                  uriPrefix: "https://tastesonway.page.link",
+                                                                                  link: Uri.parse(
+                                                                                      'https://www.tastesonway.com/welcome?menuId=$menuId&buissnessownerId=$id&chefName=$menuName&profileImage=$profileImage'),
+                                                                                  navigationInfoParameters:
+                                                                                  const NavigationInfoParameters(
+                                                                                      forcedRedirectEnabled: true),
+                                                                                  androidParameters: const AndroidParameters(
+                                                                                    packageName: 'com.testing.tastesonway.ios.android',
+                                                                                  ),
+                                                                                  iosParameters: const IOSParameters(
+                                                                                      bundleId: 'com.testing.tastesonway.ios',
+                                                                                      appStoreId: '123456789',
+                                                                                      minimumVersion: '1.0.0'),
+                                                                                  socialMetaTagParameters: SocialMetaTagParameters(
+                                                                                      title: 'Tastes On Way',
+                                                                                      description: 'Menu by Chef $fullName',
+                                                                                      imageUrl: Uri.parse(imageMenuLink)),
+                                                                                );
+                                                                                final ShortDynamicLink shortLink = await dynamicLinks.buildShortLink(parameters);
+                                                                                // var dynamicUrl = await parameters.buildUrl();
+                                                                                // var shortLink = await parameters.buildShortLink();
+                                                                                // var shortUrl = shortLink.shortUrl;
+                                                                                var shortUrl = shortLink.shortUrl;
+                                                                                print("menuItemList "+menuItemList.length.toString());
                                                                                 await Share.share("🍴👨‍🍳 MENU BY ${menuItemList[0]?['business_owner_address']?['office_name']} 👨‍🍳🍴\n\n"
-                                                                                    "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}"
+                                                                                    "${menuItemList.map((menu) => "MENU & PRICE\n🍛 ${menu['name']}: ₹ ${menu['amount']} 💰\n\n").join().toString()}  \n\n🔗ℚ𝕦𝕚𝕔𝕜 𝕆𝕣𝕕𝕖𝕣 𝕃𝕚𝕟𝕜 : 👉 $shortUrl 🔗\n\n"
                                                                                     "📱 Sent from Tastes on Way app");
+
                                                                               },
                                                                               child: const Icon(
                                                                                 Icons.share,
