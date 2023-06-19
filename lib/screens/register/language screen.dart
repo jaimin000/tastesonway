@@ -53,29 +53,38 @@ class _LanguageScreenState extends State<LanguageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: cardColor(),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: cardColor(),
+          title: Center(
+            child: Text(
+                'key_choose_language'.tr,
+              style: cTextStyle20(),
+            ),
+          ),
+        ),
         body: SingleChildScrollView(
             controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                 Padding(
-                  padding: const EdgeInsets.only(top: 55),
-                  child: Center(
-                      child: Text(
-                    'key_choose_language'.tr,
-                    style: const TextStyle(
-                      fontSize: 23,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  )),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
+                //  Padding(
+                //   padding: const EdgeInsets.only(top: 55),
+                //   child: Center(
+                //       child: Text(
+                //     'key_choose_language'.tr,
+                //     style: const TextStyle(
+                //       fontSize: 20,
+                //       color: Colors.white,
+                //       fontWeight: FontWeight.w700,
+                //     ),
+                //   )),
+                // ),
+                
                 Image.asset(
                   './assets/images/language.png',
-                  width: 160,
-                  height: 160,
+                  width: 180,
+                  height: 180,
                 ),
                 const SizedBox(
                   height: 25,
@@ -86,7 +95,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 25, left: 15, right: 15),
+                      const EdgeInsets.only(top: 25, left: 25, right: 25,bottom: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -243,9 +252,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
                 InkWell(
                     onTap: () async {
                       await _setLanguagePreference(const Locale('hi', 'IN'));
@@ -314,12 +320,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
                                         fontWeight: FontWeight.bold),
                                   ))
                                 ])))),
-                const SizedBox(
-                  height: 45,
+                  SizedBox(
+                  height: MediaQuery.of(context).size.height*0.06,
                 ),
                 Padding(
                     padding: const EdgeInsets.only(
-                        bottom: 20, left: 15, right: 15),
+                        bottom: 20, left: 25, right: 25),
                     child: Container(
                         key: _key4,
                         decoration: const BoxDecoration(

@@ -618,7 +618,7 @@ class _ProfileState extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Image.asset(
-                                './assets/images/profile/Share.png',
+                                './assets/images/profile/share.png',
                                 height: 55,
                                 width: 55,
                               ),

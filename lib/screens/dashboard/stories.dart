@@ -466,7 +466,7 @@ class _StoriesState extends State<Stories> {
                                   "Photos"
                               ? NetworkImage(data[reversedIndex - 1]['name'],
                                   scale: 0.5)
-                              : null,
+                              : NetworkImage(widget.photoUrl),
                           radius: 35,
                         ),
                       ),

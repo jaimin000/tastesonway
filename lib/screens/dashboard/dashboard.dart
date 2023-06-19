@@ -3,14 +3,11 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tastesonway/apiServices/api_service.dart';
 import 'package:tastesonway/screens/dashboard/stories.dart';
 import 'package:tastesonway/screens/earning%20summary/earning_summary.dart';
 import 'package:tastesonway/screens/menu/your%20menu/your_menus.dart';
-import 'package:tastesonway/utils/notificationService.dart';
 import 'package:tastesonway/screens/orders/history/orderhistory.dart';
 import 'package:tastesonway/screens/profile/profile.dart';
 import 'package:tastesonway/screens/orders/yourorders.dart';
@@ -20,7 +17,6 @@ import '../../utils/snackbar.dart';
 import '../../utils/theme_data.dart';
 import 'package:http/http.dart' as http;
 import '../menu/text-image menu/create_menu1.dart';
-import '../register/language screen.dart';
 import '../undermaintenance.dart';
 
 class Dashboard extends StatefulWidget {
@@ -48,6 +44,7 @@ class _DashboardState extends State<Dashboard> {
   String greeting = "";
   int refreshCounter = 0;
   bool isServicePresent = false;
+  bool status = false;
   String profileRejectMessage = '';
 
   bool is_profile_updated_first_time = false;
@@ -197,45 +194,6 @@ class _DashboardState extends State<Dashboard> {
       await updateDeviceToken(
           token, await getDeviceId(), Platform.isAndroid ? '1' : '2');
     });
-    if (widget.isFromMain) {
-      // NotificationService().init();
-      // NotificationService().setupFlutterNotifications();
-      // NotificationService().onMessageNotification();
-      // NotificationService().onNotificationClick();
-    }
-    // if (widget.isFromMain) {
-    //   init();
-    //   checkForInitialMessage();
-    //   registerNotification();
-    //   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    //     print(message.notification!.title);
-    //     print(message.data['order_id']);
-    //     print(message.data['Bank_Status']);
-    //     print(message.data['notification_type']);
-    //     if (message != null) {
-    //       if (message.data != null) {
-    //         if (message.data['order_id'] != null) {
-    //           SchedulerBinding.instance.addPostFrameCallback((_) {
-    //             Navigator.of(GlobalVariable.navState.currentContext)
-    //                 .push(MaterialPageRoute(
-    //                 builder: (context) => OrderReceivedDetailsScreen(
-    //                   orderID: int.parse(
-    //                       message.data['order_id'].toString()),
-    //                 )))
-    //                 .whenComplete(getDashbaordDetails);
-    //           });
-    //         } else if (message.data['notification_type'] != null) {
-    //           SchedulerBinding.instance.addPostFrameCallback((_) {
-    //             Navigator.of(GlobalVariable.navState.currentContext)
-    //                 .push(MaterialPageRoute(
-    //                 builder: (context) => ReviewHistoryScreen()))
-    //                 .whenComplete(getDashbaordDetails);
-    //           });
-    //         }
-    //       }
-    //     }
-    //   });
-    // }
   }
 
   @override
@@ -315,10 +273,28 @@ class _DashboardState extends State<Dashboard> {
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              height: 105,
-              child: Stories(
-                photoUrl: profilePhoto,
+            GestureDetector(
+              onTap: () {
+                if ((owner_status == OWNER_PROFILE_STATUS_IN_REVIEW &&
+                        !is_profile_updated_first_time) ||
+                    owner_status == OWNER_PROFILE_STATUS_APPROVED ||
+                    (owner_status == OWNER_PROFILE_STATUS_REJECTED &&
+                        !is_profile_updated_first_time)) {
+                 status = true;
+                 setState(() {
+                 });
+                } else {
+                  status = false;
+                }
+              },
+              child: IgnorePointer(
+                ignoring: !status,
+                child: SizedBox(
+                  height: 105,
+                  child: Stories(
+                    photoUrl: profilePhoto,
+                  ),
+                ),
               ),
             ),
             const SizedBox(

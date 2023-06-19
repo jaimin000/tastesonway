@@ -21,13 +21,11 @@ class _MenuDesignState extends State<MenuDesign> {
   bool isServicePresent = false;
   bool _isLoading = true;
   int selectedIndex = 0;
-  String name = "";
   int selectedBackgroundIndex = 0;
   List<ThemeCategoryModel> themeCategoryList = [];
   List<ThemeImageModel> image = <ThemeImageModel>[];
 
   Future getTheme(BuildContext context, int index) async {
-    // name = await Sharedprefrences.getMenuName();
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-theme'),

@@ -20,4 +20,4 @@ dependencies: \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterHeadlessDartRunner.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterPluginAppLifeCycleDelegate.h \
   /Users/mac/Downloads/flutter/bin/cache/artifacts/engine/ios/Flutter.xcframework/ios-arm64/Flutter.framework/Headers/FlutterViewController.h \
-  /Users/mac/Desktop/work/tastesonway/ios/build/Debug-iphoneos/video_compress/video_compress.framework/Headers/video_compress-Swift.h
+  /Users/mac/Desktop/work/tastesonway/build/ios/Debug-iphoneos/video_compress/video_compress.framework/Headers/video_compress-Swift.h

@@ -11,7 +11,9 @@ import 'package:http/http.dart' as http;
 import '../../apiServices/api_service.dart';
 import '../../models/coupon.dart';
 import '../../utils/sharedpreferences.dart';
+import '../../utils/snackbar.dart';
 import '../undermaintenance.dart';
+import 'package:intl/intl.dart';
 
 class DiscountPage extends StatefulWidget {
   const DiscountPage({Key? key}) : super(key: key);
@@ -25,7 +27,10 @@ class _DiscountPageState extends State<DiscountPage> {
   int _current = 0;
   List apiData = [];
   int couponStatus = 2;
-  bool isLoading = true;  int refreshCounter = 0;
+  bool isLoading = true;
+  int refreshCounter = 0;
+  DateFormat dateFormat = DateFormat("dd-MM-yyyy");
+
 
   void fetchCoupon() async {
     String token = await Sharedprefrences.getToken();
@@ -106,6 +111,8 @@ class _DiscountPageState extends State<DiscountPage> {
       });
       final data = json.decode(response.body);
       print(data);
+      ScaffoldSnackbar.of(context).show(data['message']);
+
     } else if(response.statusCode == 401) {
       print("refresh token called");
       if (refreshCounter == 0) {
@@ -288,11 +295,38 @@ class _DiscountPageState extends State<DiscountPage> {
                                               constraints:  BoxConstraints(
                                                 maxWidth: MediaQuery.of(context).size.width*0.5, // Set the maximum width as desired
                                               ),
-                                              child: Text(
-                                                item.type == "% Off"
-                                                    ? "${item.couponValue} ${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}" : "${item.type} Upto ₹ ${item.couponUptoAmount} \nUse Code ${item.name}",
-                                                  style: cTextStyle18(),
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: item.type == "% Off"
+                                                          ? "${item.couponValue} ${item.type} Upto "
+                                                          : "${item.type} Upto ",
+                                                      style: cTextStyle18(),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "₹ ${item.couponUptoAmount}",
+                                                      style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: "\nUse Code ",
+                                                      style: cTextStyle16(),
+                                                    ),
+                                                    TextSpan(
+                                                      text: item.name,
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
+                                              ),
                                             ),
                                           ),
                                           Transform.scale(
@@ -300,8 +334,8 @@ class _DiscountPageState extends State<DiscountPage> {
                                             child: CupertinoSwitch(
                                                 thumbColor: Colors.black,
                                                 activeColor: orangeColor(),
-                                                value: couponActive,
-                                                onChanged: (bool value) async {
+                                                value:dateFormat.parse(item.validTillDate).isBefore(DateTime.now()) ? false : couponActive,
+                                                onChanged: dateFormat.parse(item.validTillDate).isBefore(DateTime.now()) ? null :(bool value) async {
                                                   setState(() {
                                                     couponActive = value;
                                                     print(couponActive);
@@ -321,18 +355,72 @@ class _DiscountPageState extends State<DiscountPage> {
                                     indent: 5,
                                     color: Colors.white,
                                   ),
-                                  Text(
-                                      "Valid On Orders Above ₹ ${item.minimumOrderValue}",
-                                      style: cTextStyle14()),
-                                  Text(
-                                      "You can use this ${item.name} code only ${item.validPerUser} times ",
-                                      style: cTextStyle14()),
-                                  Text(
-                                      "Applicable for maximum ${item.totalNoUser} users ",
-                                      style: cTextStyle14()),
-                                  Text(
-                                    "Valid from ${item.startDate} till ${item.validTillDate}",
-                                    style: cTextStyle14(),
+                                  Text.rich(
+                                    TextSpan(
+                                      text: 'Valid On Orders Above ',
+                                      style: cTextStyle14(),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '₹ ${item.minimumOrderValue}',
+                                          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                      text: 'You can use this ${item.name} code only ',
+                                      style: cTextStyle14(),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '${item.validPerUser}',
+                                          style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                                        ),
+                                        TextSpan(
+                                          text: ' times',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                      text: 'Applicable for maximum ',
+                                      style: cTextStyle14(),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '${item.totalNoUser}',
+                                          style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                                        ),
+                                        const TextSpan(
+                                          text: ' users',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                      text: 'Valid from ',
+                                      style: cTextStyle14(),
+                                      children: [
+                                        TextSpan(
+                                          text: '${item.startDate}',
+                                          style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                                        ),
+                                      ]
+                                    ),
+
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                        text: 'till ',
+                                        style: cTextStyle14(),
+                                        children: [
+                                          TextSpan(
+                                            text: ' ${item.validTillDate}',
+                                            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                                          ),
+                                        ]
+                                    ),
                                   ),
                                   const SizedBox(height: 10),
                                   SizedBox(
@@ -342,13 +430,17 @@ class _DiscountPageState extends State<DiscountPage> {
                                       color:
                                           const Color.fromRGBO(105, 111, 130, 1),
                                       child: Center(
-                                        child: Text(
+                                        child:
+                                        dateFormat.parse(item.validTillDate).isBefore(DateTime.now()) ? Text('key_Expired'.tr,
+                                          textAlign: TextAlign.center,
+                                          style: cardTextStyle16())
+                                            : Text(
                                           item.status == 1
                                               ? "key_in_review".tr
                                               : item.status == 2
                                                   ? "key_accepted".tr
                                                   : "key_rejected".tr,
-                                          textAlign: TextAlign.center,
+                                         textAlign: TextAlign.center,
                                           style: mTextStyle16(),
                                         ),
                                       ),

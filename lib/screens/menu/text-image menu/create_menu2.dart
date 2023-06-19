@@ -133,8 +133,7 @@ class _CreateMenu2State extends State<CreateMenu2> {
           type==1 ? 'key_Create_Text_Menu'.tr:'key_Create_Image_Menu'.tr,
           style: cardTitleStyle20(),
         ),
-      ),
-      body: SingleChildScrollView(
+      ),body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(

@@ -297,7 +297,7 @@ class _SignupState extends State<Signup> {
 
       profileStatus = json['data'][0]['status'];
       ownerAddress = json['data'][0]['owner_address'];
-      ScaffoldSnackbar.of(GlobalVariable.navState.currentContext!).show(message);
+      // ScaffoldSnackbar.of(GlobalVariable.navState.currentContext!).show(message);
       if (profileStatus != 1 && ownerAddress != null) {
         await Sharedprefrences.setAddressDetailAdded(true);
         await Sharedprefrences.setPersonalDetailAdded(true);
@@ -530,7 +530,7 @@ class _SignupState extends State<Signup> {
                                           MediaQuery.of(context).size.width,
                                       child: Card(
                                           shadowColor: Colors.black,
-                                          color: orangeColor(),
+                                          color: const Color(0xFFF85649),
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -676,7 +676,7 @@ class _SignupState extends State<Signup> {
           () async {
         if (user != null) {
           Fluttertoast.showToast(
-            msg: message,
+            msg: "key_login_success".tr,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,

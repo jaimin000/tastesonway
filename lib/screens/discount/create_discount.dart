@@ -128,7 +128,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
       }
     }else {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Something Went Wrong Please Try Again!'),
+          const SnackBar(content: Text('Something Went Wrong Please Try Again!'),
           ));
       setState(() {
         isLoading = true;
@@ -153,7 +153,7 @@ class _CreateDiscountState extends State<CreateDiscount> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
             const SizedBox(
               height: 25,
@@ -289,10 +289,10 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             ),
                           ),
                         ),
-                        widget.isFixedData ?SizedBox(): const SizedBox(
+                        widget.isFixedData ?const SizedBox(): const SizedBox(
                           height: 10,
                         ),
-                        widget.isFixedData ? SizedBox(): SizedBox(
+                        widget.isFixedData ? const SizedBox(): SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -487,18 +487,6 @@ class _CreateDiscountState extends State<CreateDiscount> {
                             width: MediaQuery.of(context).size.width,
                             child: InkWell(
                               onTap: () {
-                                // if (_formKey.currentState!.validate()) {
-                                // if(!isEndDateSelected || !isStartDateSelected) {
-                                //   ScaffoldMessenger.of(context)
-                                //       .showSnackBar(const SnackBar(content: Text(
-                                //       'Please select Start Date and End Date')));
-                                // }
-                                // _formKey.currentState?.save();
-                                // CreateCoupon();
-                                // ScaffoldMessenger.of(context)
-                                //     .showSnackBar(const SnackBar(content: Text(
-                                //     'Coupon added Successfully!')));
-                                // }
                                 if (_formKey.currentState!.validate()) {
                                   if (!isEndDateSelected || !isStartDateSelected) {
                                     ScaffoldMessenger.of(context).showSnackBar(

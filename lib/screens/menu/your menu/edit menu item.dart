@@ -274,11 +274,11 @@ class _EditMenuItemState extends State<EditMenuItem> {
       final responseData = await response.stream.bytesToString();
       final json = jsonDecode(responseData);
       print(json);
-      ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
+      //ScaffoldSnackbar.of(context).show('Menu item deleted successfully');
       Navigator.pop(context,'true');
     } catch (e) {
       print(e);
-      ScaffoldSnackbar.of(context).show('Something Went Wrong Please Try Again!');
+     // ScaffoldSnackbar.of(context).show('Something Went Wrong Please Try Again!');
       Navigator.pop(context,'true');
     }
   }
