@@ -191,7 +191,7 @@ class _UPIDetailsState extends State<UPIDetails> {
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Proceed',
+                                      'key_Proceed'.tr,
                                       style: mTextStyle14(),
                                     ),
                                   )),

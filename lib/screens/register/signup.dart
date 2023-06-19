@@ -375,235 +375,233 @@ class _SignupState extends State<Signup> {
           child: SingleChildScrollView(
             child: Stack(
               children: [
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        height: 230,
-                        width: MediaQuery.of(context).size.width,
-                        child: otpVisibility
-                            ? Image.asset('assets/images/otp.png')
-                            : Image.asset('assets/images/mobile.png'),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      otpVisibility
-                          ? Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  'key_Enter_your_security_code'.tr,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 20.0),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text(
-                                    'key_OTP_has_been_sent_to_your_mobile'.tr,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            )
-                          : Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  'key_Enter_your_mobile_number'.tr,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 20.0),
-                                ),
-                                Text(
-                                  'key_to_create_account'.tr,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 20.0),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text(
-                                    'key_We_will_text_you'.tr,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shadowColor: Colors.black,
-                          color: cardColor(),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: Container(
-                            margin: const EdgeInsets.all(8),
-                            padding: const EdgeInsets.all(8),
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  otpVisibility
-                                      ? PinCodeTextField(
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          appContext: context,
-                                          length: 6,
-                                          obscureText: false,
-                                          controller: otpController,
-                                          animationType: AnimationType.fade,
-                                          pinTheme: PinTheme(
-                                            shape: PinCodeFieldShape.box,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            fieldHeight: 60,
-                                            fieldWidth: 40,
-                                            activeFillColor: Colors.white,
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              otpCode = value;
-                                            });
-                                            if (value.length == 6) {
-                                              verifyOTP();
-                                            }
-                                          },
-                                        )
-                                      : IntlPhoneField(
-                                          initialCountryCode: 'IN',
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.all(10.0),
-                                            fillColor: inputColor(),
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: BorderSide.none),
-                                            hintText: 'Phone Number',
-                                            hintStyle: inputTextStyle16(),
-                                          ),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly
-                                          ],
-                                          controller: phoneController,
-                                          // onCountryChanged: (country) {
-                                          //   phoneCode = country.dialCode;
-                                          // },
-                                          onChanged: (phone) {
-                                            phoneCode = phone.countryCode;
-                                            countryCode = phone.countryISOCode;
-                                          },
-                                        ),
-                                  InkWell(
-                                    onTap: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        if (otpVisibility) {
-                                          verifyOTP();
-                                        } else {
-                                          login();
-                                        }
-                                      }
-                                    },
-                                    child: SizedBox(
-                                        height: 55,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Card(
-                                            shadowColor: Colors.black,
-                                            color: orangeColor(),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                otpVisibility
-                                                    ? "key_Verify_OTP".tr
-                                                    : "key_SignIn/LogIn".tr,
-                                                style: mTextStyle16(),
-                                              ),
-                                            ))),
-                                  ),
-                                ],
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 230,
+                      width: MediaQuery.of(context).size.width,
+                      child: otpVisibility
+                          ? Image.asset('assets/images/otp.png')
+                          : Image.asset('assets/images/mobile.png'),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    otpVisibility
+                        ? Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'key_Enter_your_security_code'.tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20.0),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Text(
+                                  'key_OTP_has_been_sent_to_your_mobile'.tr,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              )
+                            ],
+                          )
+                        : Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'key_Enter_your_mobile_number'.tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20.0),
+                              ),
+                              Text(
+                                'key_to_create_account'.tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20.0),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Text(
+                                  'key_We_will_text_you'.tr,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              )
+                            ],
+                          ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        shadowColor: Colors.black,
+                        color: cardColor(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                otpVisibility
+                                    ? PinCodeTextField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly
+                                        ],
+                                        appContext: context,
+                                        length: 6,
+                                        obscureText: false,
+                                        controller: otpController,
+                                        animationType: AnimationType.fade,
+                                        pinTheme: PinTheme(
+                                          shape: PinCodeFieldShape.box,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          fieldHeight: 60,
+                                          fieldWidth: 40,
+                                          activeFillColor: Colors.white,
+                                        ),
+                                        onChanged: (value) {
+                                          setState(() {
+                                            otpCode = value;
+                                          });
+                                          if (value.length == 6) {
+                                            verifyOTP();
+                                          }
+                                        },
+                                      )
+                                    : IntlPhoneField(
+                                        initialCountryCode: 'IN',
+                                        decoration: InputDecoration(
+                                          contentPadding:
+                                              const EdgeInsets.all(10.0),
+                                          fillColor: inputColor(),
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide.none),
+                                          hintText: 'Phone Number',
+                                          hintStyle: inputTextStyle16(),
+                                        ),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly
+                                        ],
+                                        controller: phoneController,
+                                        // onCountryChanged: (country) {
+                                        //   phoneCode = country.dialCode;
+                                        // },
+                                        onChanged: (phone) {
+                                          phoneCode = phone.countryCode;
+                                          countryCode = phone.countryISOCode;
+                                        },
+                                      ),
+                                InkWell(
+                                  onTap: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      if (otpVisibility) {
+                                        verifyOTP();
+                                      } else {
+                                        login();
+                                      }
+                                    }
+                                  },
+                                  child: SizedBox(
+                                      height: 55,
+                                      width:
+                                          MediaQuery.of(context).size.width,
+                                      child: Card(
+                                          shadowColor: Colors.black,
+                                          color: orangeColor(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              otpVisibility
+                                                  ? "key_Verify_OTP".tr
+                                                  : "key_SignIn/LogIn".tr,
+                                              style: mTextStyle16(),
+                                            ),
+                                          ))),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      otpVisibility
-                          ? const SizedBox()
-                          : Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20, right: 20, bottom: 20),
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: 'key_By_completing_registration'
-                                              .tr,
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white),
-                                        ),
-                                        TextSpan(
-                                          text: 'key_Privacy_policy'.tr,
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              showPrivacyPolicyDialog(context);
-                                              _onItemTapped(0);
-                                            },
-                                          style: const TextStyle(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              fontSize: 14,
-                                              color: Colors.white),
-                                        ),
-                                        const TextSpan(text: ' & '),
-                                        TextSpan(
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              showPrivacyPolicyDialog(context);
-                                              _onItemTapped(1);
-                                            },
-                                          text: 'key_Terms_Of_service'.tr,
-                                          style: const TextStyle(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              fontSize: 14,
-                                              color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ))),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    otpVisibility
+                        ? const SizedBox()
+                        : Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20, right: 20, bottom: 20),
+                                child: Text.rich(
+                                  TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'key_By_completing_registration'
+                                            .tr,
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white),
+                                      ),
+                                      TextSpan(
+                                        text: 'key_Privacy_policy'.tr,
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            showPrivacyPolicyDialog(context);
+                                            _onItemTapped(0);
+                                          },
+                                        style: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontSize: 14,
+                                            color: Colors.white),
+                                      ),
+                                      const TextSpan(text: ' & '),
+                                      TextSpan(
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            showPrivacyPolicyDialog(context);
+                                            _onItemTapped(1);
+                                          },
+                                        text: 'key_Terms_Of_service'.tr,
+                                        style: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontSize: 14,
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ))),
+                  ],
                 ),
                 isLoading
                     ? Positioned.fill(
@@ -677,8 +675,26 @@ class _SignupState extends State<Signup> {
     ).whenComplete(
           () async {
         if (user != null) {
+          Fluttertoast.showToast(
+            msg: message,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: orangeColor(),
+            fontSize: 16.0,
+          );
           registerOwner();
         } else {
+          Fluttertoast.showToast(
+            msg: "key_Invalid_OTP".tr,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
           setState(() {
             isLoading = false;
           });

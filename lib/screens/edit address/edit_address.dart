@@ -383,7 +383,7 @@ class _EditAddressState extends State<EditAddress> {
                           padding:
                           const EdgeInsets.symmetric(horizontal: 5.0),
                           child: Text(
-                            'Basic Details',
+                            'key_Basic_Details'.tr,
                             style: mTextStyle18(),
                           ),
                         ),

@@ -1225,7 +1225,7 @@ class _DashboardState extends State<Dashboard> {
                                   width: 10,
                                 ),
                                 Text(
-                                  'key_This_Month'.tr,
+                                  'key_this_month'.tr,
                                   style: cTextStyle18(),
                                   overflow: TextOverflow.ellipsis,
                                 )

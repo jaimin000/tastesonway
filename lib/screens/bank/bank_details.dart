@@ -411,7 +411,7 @@ class _BankDetailsState extends State<BankDetails> {
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      'Proceed',
+                                      'key_Proceed'.tr,
                                       style: mTextStyle14(),
                                     ),
                                   )),

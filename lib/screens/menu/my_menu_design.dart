@@ -27,7 +27,7 @@ class _MenuDesignState extends State<MenuDesign> {
   List<ThemeImageModel> image = <ThemeImageModel>[];
 
   Future getTheme(BuildContext context, int index) async {
-    name = await Sharedprefrences.getMenuName();
+    // name = await Sharedprefrences.getMenuName();
     String token = await Sharedprefrences.getToken();
     final response = await http.get(
       Uri.parse('$baseUrl/get-theme'),
